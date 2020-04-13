@@ -1,0 +1,70 @@
+.floor h2 {
+    position: relative;
+    overflow: hidden;
+    height: 0.7rem;
+    margin: 0.1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.floor h2 .tuangou-title{
+	font-family: "Microsoft YaHei" ! important;
+	padding-top: 5px;
+	border:1px solid #eeeee;
+	float: left;
+	width: 45%;
+	margin-left: 5px;
+	font-size: 16px;
+}
+.floor h2 .tuangou{
+    position: relative;
+    overflow: hidden;
+    margin: 0.05rem;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 10px;
+}
+
+.floor h2 .tuangou-more{
+	font-family: "Microsoft YaHei" ! important;
+    float: right;
+    font-size: 12px;
+    color: #e3164f;
+    margin-right: 0.2rem;
+    margin-top: 0.1rem;
+}
+.floor h2 .nor-title{
+	font-family: "Microsoft YaHei" ! important;
+	padding-top: 5px;
+	height: 0.7rem;
+	float: left;
+	width: 45%;
+	margin-left: 5px;font-size: 16px;
+}
+	
+.more{
+	font-family: "Times New Roman", Times, serif;
+	float: right;
+	font-size: 20px;
+	color: #e3164f;
+	margin-right: 0.2rem;
+	margin-top: 0.1rem;
+	}
+	
+.lazy{
+	height: initial;
+	}
+	
+.name_my{
+	font-size: 14px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	margin-right: 5px;
+	line-height: 15px;
+	overflow:hidden;
+	height: 15px;
+	color: #4d525d;
+	}
+    
+.qiang_buy{
+	color: red;
+	float: right; 
+ }

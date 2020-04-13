@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MSG_RECEIVER">
+
+	<typeAlias alias="msgReceiver" type="com.ebiz.webapp.domain.MsgReceiver" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertMsgReceiver" />
+		<flushOnExecute statement="updateMsgReceiver" />
+		<flushOnExecute statement="deleteMsgReceiver" />
+	</cacheModel>
+
+	<cacheModel id="oneDayCacheForMsg" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertMsgReceiver" />
+		<flushOnExecute statement="updateMsgReceiver" />
+		<flushOnExecute statement="deleteMsgReceiver" />
+		<flushOnExecute statement="insertMsg" />
+		<flushOnExecute statement="updateMsg" />
+		<flushOnExecute statement="deleteMsg" />
+	</cacheModel>
+
+	<resultMap id="msgReceiverResultForList" class="msgReceiver">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="MSG_ID" property="msg_id" jdbcType="INTEGER" />
+		<result column="RECEIVER_USER_ID" property="receiver_user_id" jdbcType="INTEGER" />
+		<result column="RECEIVER_USER_MOBILE" property="receiver_user_mobile" jdbcType="VARCHAR" />
+		<result column="IS_READ" property="is_read" jdbcType="INTEGER" />
+		<result column="IS_REPLY" property="is_reply" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="USER_ID" property="user_id" jdbcType="INTEGER" />
+		<result column="MSG_TITLE" property="msg_title" jdbcType="VARCHAR" />
+		<result column="SEND_TIME" property="send_time" jdbcType="DATE" />
+		<result column="INFO_STATE" property="info_state" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="IS_SEND_ALL" property="is_send_all" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="msgReceiverResultForUserList" class="msgReceiver">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="MSG_ID" property="msg_id" jdbcType="INTEGER" />
+		<result column="RECEIVER_USER_ID" property="receiver_user_id" jdbcType="INTEGER" />
+		<result column="RECEIVER_USER_MOBILE" property="receiver_user_mobile" jdbcType="VARCHAR" />
+		<result column="IS_READ" property="is_read" jdbcType="INTEGER" />
+		<result column="IS_REPLY" property="is_reply" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="msgReceiverResult" class="msgReceiver" extends="msgReceiverResultForList">
+		<result column="MSG_CONTENT" property="msg_content" jdbcType="CLOB" />
+	</resultMap>
+
+	<sql id="sf-msgReceiver">
+		<isNotEmpty prepend=" and " property="id">r.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="msg_id">r.MSG_ID = #msg_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="receiver_user_id">
+			r.RECEIVER_USER_ID = #receiver_user_id:INTEGER#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="receiver_user_mobile">r.RECEIVER_USER_MOBILE = #receiver_user_mobile:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">r.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">r.USER_ID = #user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_read">r.is_read = #is_read:INTEGER#</isNotEmpty>
+	</sql>
+
+	<sql id="sf-msgRec">
+		<isNotEmpty prepend=" and " property="msg_id">r.MSG_ID = #msg_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="receiver_user_id">
+<!-- 			(m.IS_SEND_ALL = 1 or r.RECEIVER_USER_ID = #receiver_user_id:INTEGER#) -->
+			r.RECEIVER_USER_ID = #receiver_user_id:INTEGER#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_not_read">
+			r.IS_READ = 0
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="receiver_user_mobile">r.RECEIVER_USER_MOBILE = #receiver_user_mobile:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="msg_title">MSG_TITLE like '%' #msg_title:VARCHAR# '%'</isNotEmpty>
+		<isNotEmpty property="map.st_pub_date">
+			<isNotEmpty prepend=" and " property="map.en_pub_date">
+				<![CDATA[ SEND_TIME >= to_date(#map.st_pub_date#, 'yyyy-mm-dd') and SEND_TIME <= to_date(#map.en_pub_date# || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')]]>
+			</isNotEmpty>
+			<isEmpty prepend=" and " property="map.en_pub_date">
+				SEND_TIME >= to_date(#map.st_pub_date#, 'yyyy-mm-dd')
+			</isEmpty>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_date"><![CDATA[m.SEND_TIME >= str_to_date(concat(#map.st_date:VARCHAR#,'00:00:00'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_date"><![CDATA[m.SEND_TIME <= str_to_date(concat(#map.en_date:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+		<isEmpty property="map.st_pub_date">
+			<isNotEmpty prepend=" and " property="map.en_pub_date">
+				<![CDATA[ 
+				SEND_TIME <= to_date(#map.en_pub_date# || ' 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+				]]>
+			</isNotEmpty>
+		</isEmpty>
+		<isNotEmpty prepend=" and " property="user_id">r.USER_ID = #user_id:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectMsgReceiver" resultMap="msgReceiverResult" parameterClass="msgReceiver"
+		cacheModel="oneDayCache">
+		select * from MSG_RECEIVER r where 1=1
+		<include refid="sf-msgReceiver" />
+		order by id DESC
+	</select>
+
+	<select id="selectMsgReceiverList" resultMap="msgReceiverResultForUserList" parameterClass="msgReceiver"
+		cacheModel="oneDayCache">
+		select * from MSG_RECEIVER r where IS_DEL=0
+		<include refid="sf-msgReceiver" />
+		order by id DESC
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+
+	<select id="selectMsgReceiverCount" resultClass="int" parameterClass="msgReceiver" cacheModel="oneDayCacheForMsg">
+	
+		<isNotEmpty prepend="  " property="map.select_only_msg_re">
+			select count(1) from msg_receiver r where 1=1
+			<include refid="sf-msgReceiver" />
+		</isNotEmpty>
+		
+		<isEmpty prepend="  " property="map.select_only_msg_re">
+			select count(1) from msg m left join msg_receiver r on m.id = r.msg_id where 1 = 1
+			<include refid="sf-msgRec" />
+			<isNotEmpty prepend=" and " property="is_read">r.IS_READ = #is_read:INTEGER#</isNotEmpty>
+		</isEmpty>
+	
+	</select>
+
+	<select id="selectMsgReceiverPaginatedList" resultClass="msgReceiver" parameterClass="msgReceiver"
+		cacheModel="oneDayCacheForMsg">
+		
+		<isNotEmpty prepend="  " property="map.select_only_msg_re">
+		select r.*, '' as msg_title ,  '' as info_state from
+		msg_receiver r where 1 = 1 
+		<include refid="sf-msgRec" />
+		order by r.id DESC
+		</isNotEmpty>
+		
+		<isEmpty prepend="  " property="map.select_only_msg_re">
+		select r.id, m.id msg_id, r.RECEIVER_USER_ID, r.RECEIVER_USER_MOBILE, r.IS_READ, r.IS_REPLY, r.IS_DEL, m.user_id,m.user_name,m.is_send_all,  m.msg_title, m.send_time, m.info_state from
+		msg m left join msg_receiver r on m.id = r.msg_id where 2 = 2
+		<include refid="sf-msgRec" />
+		<isNotEmpty prepend=" and " property="is_read">r.IS_READ = #is_read:INTEGER#</isNotEmpty>
+		order by m.SEND_TIME DESC, r.id DESC
+		</isEmpty>
+		
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertMsgReceiver" parameterClass="msgReceiver">
+		<![CDATA[insert into MSG_RECEIVER (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="user_id">USER_ID</isNotNull>
+			<isNotNull prepend="," property="msg_id">MSG_ID</isNotNull>	
+			<isNotNull prepend="," property="receiver_user_id">RECEIVER_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="receiver_user_mobile">RECEIVER_USER_MOBILE</isNotNull>	
+			<isNotNull prepend="," property="is_read">IS_READ</isNotNull>	
+			<isNotNull prepend="," property="is_reply">IS_REPLY</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="user_name">USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="send_time">SEND_TIME</isNotNull>
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">#user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="msg_id">#msg_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="receiver_user_id">#receiver_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="receiver_user_mobile">#receiver_user_mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_read">#is_read:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_reply">#is_reply:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">#user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="send_time">#send_time:TIMESTAMP#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateMsgReceiver" parameterClass="msgReceiver">
+		update MSG_RECEIVER 
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="msg_id">MSG_ID = #msg_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">USER_ID = #user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="receiver_user_id">RECEIVER_USER_ID = #receiver_user_id:INTEGER#</isNotNull>
+	        <isNotNull prepend="," property="receiver_user_mobile">RECEIVER_USER_MOBILE = #receiver_user_mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_read">IS_READ = #is_read:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_reply">IS_REPLY = #is_reply:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+	        <isNotNull prepend="," property="user_name">USER_NAME = #user_name:VARCHAR#</isNotNull>
+	        <isNotNull prepend="," property="send_time"> SEND_TIME = #send_time:DATETIME#</isNotNull>
+		</dynamic>
+		where 1 = 1 
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_id">USER_ID = #map.user_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.receiver_user_id">RECEIVER_USER_ID = #map.receiver_user_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.receiver_user_mobile">RECEIVER_USER_MOBILE = #"map.receiver_user_mobile"#</isNotEmpty>
+	</update>
+
+	<update id="deleteMsgReceiver" parameterClass="msgReceiver">
+		delete from MSG_RECEIVER where 1 = 1 
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="msg_id">MSG_ID = #msg_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" and " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+</sqlMap>

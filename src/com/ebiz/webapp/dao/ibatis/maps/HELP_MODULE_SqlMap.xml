@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="HELP_MODULE">
+
+	<typeAlias alias="helpModule" type="com.ebiz.webapp.domain.HelpModule" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertHelpModule" />
+		<flushOnExecute statement="updateHelpModule" />
+		<flushOnExecute statement="deleteHelpModule" />
+	</cacheModel>
+
+	<resultMap id="helpModuleResultForList" class="helpModule">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="H_MOD_ID" property="h_mod_id" jdbcType="INTEGER" />
+		<result column="PAR_ID" property="par_id" jdbcType="INTEGER" />
+		<result column="MOD_NAME" property="mod_name" jdbcType="VARCHAR" />
+		<result column="MOD_DESC" property="mod_desc" jdbcType="VARCHAR" />
+		<result column="MOD_URL" property="mod_url" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="DEL_MARK" property="del_mark" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="helpModuleResult" class="helpModule" extends="helpModuleResultForList">
+	</resultMap>
+
+	<sql id="sf-helpModule">
+		<isNotEmpty prepend=" and " property="id">ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="h_mod_id">H_MOD_ID = #h_mod_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="par_id">PAR_ID = #par_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mod_name">MOD_NAME = #mod_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mod_desc">MOD_DESC = #mod_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mod_url">MOD_URL = #mod_url:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_mark">DEL_MARK = #del_mark:INTEGER#</isNotEmpty>
+		
+	</sql>
+
+	<select id="selectHelpModule" resultMap="helpModuleResult" parameterClass="helpModule" cacheModel="oneDayCache">
+		select * from HELP_MODULE where 1 = 1
+		<include refid="sf-helpModule" />
+	</select>
+
+	<select id="selectHelpModuleList" resultMap="helpModuleResultForList" parameterClass="helpModule" cacheModel="oneDayCache">
+		select * from HELP_MODULE a where 1 = 1
+		<include refid="sf-helpModule" />
+		 order by ORDER_VALUE desc, H_MOD_ID, ID asc
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectHelpModuleCount" resultClass="int" parameterClass="helpModule" cacheModel="oneDayCache">
+		select count(*) from HELP_MODULE where 1 = 1
+		<include refid="sf-helpModule" />
+	</select>
+	
+	<select id="selectHelpModuleWithLevelNumber" resultClass="int" parameterClass="helpModule" cacheModel="oneDayCache">
+		select (case
+         when ISNULL(cast(SUBSTRING(max(h_mod_id), #map.start_index#, #map.setp#) as signed)) then
+          0
+         else
+          cast(SUBSTRING(max(h_mod_id), #map.start_index#, #map.setp#) as signed)
+       end) + 1 as LEVEL_NUBMER
+		from HELP_MODULE  where 1 = 1
+		<include refid="sf-helpModule" />
+	</select>
+
+	<select id="selectHelpModulePaginatedList" resultMap="helpModuleResult" parameterClass="helpModule" cacheModel="oneDayCache">
+		select * from HELP_MODULE a where 1 = 1
+		<include refid="sf-helpModule" />
+		 order by ORDER_VALUE desc, H_MOD_ID, ID asc 
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectHelpModuleParentList" resultMap="helpModuleResult" parameterClass="helpModule" cacheModel="oneDayCache">
+		{call procedureGetHelpModelParentList(#h_mod_id:INTEGER#)} 
+	</select>
+	
+	<insert id="insertHelpModule" parameterClass="helpModule">
+		<![CDATA[insert into HELP_MODULE (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="h_mod_id">H_MOD_ID</isNotNull>	
+			<isNotNull prepend="," property="par_id">PAR_ID</isNotNull>	
+			<isNotNull prepend="," property="mod_name">MOD_NAME</isNotNull>	
+			<isNotNull prepend="," property="mod_desc">MOD_DESC</isNotNull>	
+			<isNotNull prepend="," property="mod_url">MOD_URL</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_lock">IS_LOCK</isNotNull>	
+			<isNotNull prepend="," property="del_mark">DEL_MARK</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="h_mod_id">#h_mod_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="par_id">#par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="mod_name">#mod_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mod_desc">#mod_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mod_url">#mod_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">#is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_mark">#del_mark:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateHelpModule" parameterClass="helpModule">
+		update HELP_MODULE
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="h_mod_id">H_MOD_ID = #h_mod_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="par_id">PAR_ID = #par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="mod_name">MOD_NAME = #mod_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mod_desc">MOD_DESC = #mod_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mod_url">MOD_URL = #mod_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_mark">DEL_MARK = #del_mark:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="h_mod_id">H_MOD_ID = #h_mod_id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteHelpModule" parameterClass="helpModule">
+		delete from HELP_MODULE where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="par_id">PAR_ID = #par_id:INTEGER#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

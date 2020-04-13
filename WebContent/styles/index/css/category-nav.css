@@ -1,0 +1,60 @@
+.categorys .cate-nav{
+	    border: none!important;
+	    width: 176px!important;
+}
+.categorys{ float:left; position:relative; z-index:88; width:230px; height:44px; overflow:visible;}
+.categorys .dd{ height:auto;  margin-top:1px;z-index:99;
+    background-color: #000;
+    filter: "alpha(opacity=35)";
+    background-color: rgba(0,0,0,.55);
+}
+.categorys .dd .cata-nav{ position:relative; top:-1px; padding-top:1px; height:auto;}
+.categorys .dd .cata-nav .item{ height:10%;}
+.woman.categorys .dd .cata-nav .item,.electronic.categorys .dd .cata-nav .item,.food.categorys .dd .cata-nav .item{ position:relative; height:auto;}
+.categorys .dd .cata-nav .item.fore15,.categorys .dd .cata-nav .item.fore16{ *height:34px;}
+.categorys .dd .cata-nav .item-left{ position:relative;}
+.categorys .item i{ position:absolute; width:18px; height:18px; top:7px; left:18px;}
+.categorys .item b{ position:absolute; top:9px; right:23px; color:#fff; width:4px; height:14px; font: 400 9px/14px consolas;}
+.cata-nav .selected .item-left{ background:#fff; border-left:1px solid #e23435; position:relative; z-index:9;}
+.categorys .cata-nav-name{ padding:12px 20px 12px; overflow:hidden; color:#FFF;}
+.categorys .cata-nav-name *{ line-height:20px;}
+.categorys .cata-nav-name a{ font:14px/150% Arial,Verdana,Microsoft YaHei,"微软雅黑"; color:#fff;} 
+.categorys .cata-nav-name h3{ font-weight:400; font-family: "microsoft yahei"; width:100%;}
+.categorys .cata-nav-name h3 a{ font-size:14px; padding-right:5px;}
+.cata-nav .selected h3 a,.cata-nav .selected h3{ color:#e23435;}
+.categorys .cata-nav-name span a{ font-size:12px; display:inline-block; float:left;}
+.categorys .cata-nav-layer{ width:774px; height:auto !important; min-height:465px; height:465px; border:1px solid #444444;border-left: none;position:absolute; top:0; left:229px; background:#f9f9f9; display:none;z-index:999;}
+
+/*.categorys .cata-nav-name h3 a:hover,*/.categorys .cata-nav-name h3 a.division_cat:hover{ text-decoration:unset}
+
+.home_categorys .cata-nav-layer{ left:175px;}
+.home_categorys .dd{ padding-top:1px; margin-top:0;}
+
+.categorys .cata-nav-layer .cata-nav-left{ width: 782px; float:left;}
+.categorys .cata-nav-layer .cata-nav-rigth{ width: 188px; float:left;}
+.categorys .item-channels { float: left;display: inline;width: 762px;height: 24px;padding: 20px 0 0 20px;background: #f9f9f9;overflow: hidden;}
+.categorys .item-channels a { float: left;display: inline;display: inline-block;padding: 0 0 0 8px;margin-right: 10px;line-height: 24px;background: #7C7171;color: #fff;white-space: nowrap;}
+.categorys .item-channels i { display: inline-block;_display: inline;margin-left: 8px;width: 23px;height: 24px;font: 400 9px/24px consolas;background: #5c5251;text-align: center;cursor: pointer; position:static;}
+.categorys .item-channels a:hover { background: #ec5051;}
+.categorys .item-channels a:hover i { background: #e23435;}
+.categorys .subitems{width:762px; min-height:453px; padding:6px 0px 6px 20px; /*background:#fff;*/ float:left;}
+.categorys .subitems dl{ width: 100%;overflow: hidden;line-height: 2em;}
+.categorys .subitems dt{ position: relative;float: left;width: 54px;padding: 8px 30px 0 0;text-align: right;font-weight: 700;}
+.categorys .subitems dt a{ color:#666;}
+.categorys .subitems dt i{ position: absolute;top: 13px;right: 18px;width: 4px;height: 14px;font: 400 9px/14px consolas; left:auto;}
+.categorys .subitems dd{ float:left; width: 620px; padding: 6px 0; line-height:20px; border-top: 1px solid #eee;}
+.categorys .subitems dd a{ float: left;padding: 0 8px;margin: 4px 0;line-height: 16px;height: 16px;border-left: 1px solid #e0e0e0;white-space: nowrap;color:#ec5051!important;}
+.categorys .subitems dl.dl_fore1 dd{ border-top:0;}
+.categorys .item-promotions{ float: right;display: inline;width: 168px;margin-right: 20px;}
+.categorys .item-promotions a{ display: block;margin-bottom: 1px; float:left;}
+.categorys .item-brands{width: 188px; overflow: hidden; margin: 19px 0px 5px 0; float:left;}
+.categorys .item-brands ul{ overflow:hidden;}
+.categorys .item-brands li{ float: left;display: inline;margin: 1px 0 0 1px;}
+
+
+.navitems{ float:left; position:relative; height:44px; width:970px;}
+.navitems ul{ margin-left:20px; height:44px;}
+.navitems li{ float:left;}
+.navitems li a{ font:400 16px/34px "microsoft yahei"; display:inline-block; padding:0 20px; color:#333;}
+.navitems li a.selected,.navitems li.channel-now a{ color:#ec5151;}
+.navitems .wrap-line{ width:100%; position:absolute; height:2px; bottom:0; background:#ec5151;}

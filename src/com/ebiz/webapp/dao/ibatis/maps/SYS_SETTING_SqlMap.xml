@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SYS_SETTING">
+
+	<typeAlias alias="sysSetting" type="com.ebiz.webapp.domain.SysSetting" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertSysSetting" />
+		<flushOnExecute statement="updateSysSetting" />
+		<flushOnExecute statement="deleteSysSetting" />
+	</cacheModel>
+
+	<resultMap id="sysSettingResultForList" class="sysSetting">
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="sysSettingResult" class="sysSetting" extends="sysSettingResultForList">
+	</resultMap>
+
+	<sql id="sf-sysSetting">
+		<isNotEmpty prepend=" and " property="title">TITLE = #title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="memo">MEMO = #memo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="content">CONTENT = #content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.dataSrc_like">TITLE like '%' #map.dataSrc_like# '%'</isNotEmpty>
+	</sql>
+
+    <!-- 	<select id="selectSysSetting" resultMap="sysSettingResult" parameterClass="sysSetting" cacheModel="oneDayCache"> -->
+	<select id="selectSysSetting" resultMap="sysSettingResult" parameterClass="sysSetting">
+		select * from SYS_SETTING where 1 = 1
+		<include refid="sf-sysSetting" />
+	</select>
+
+	<select id="selectSysSettingList" resultMap="sysSettingResultForList" parameterClass="sysSetting" cacheModel="oneDayCache">
+		
+		select * from SYS_SETTING where 1 = 1
+		<include refid="sf-sysSetting" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectSysSettingCount" resultClass="int" parameterClass="sysSetting" cacheModel="oneDayCache">
+		select count(*) from SYS_SETTING where 1 = 1
+		<include refid="sf-sysSetting" />
+	</select>
+
+	<select id="selectSysSettingPaginatedList" resultMap="sysSettingResult" parameterClass="sysSetting" cacheModel="oneDayCache">
+		
+		select * from SYS_SETTING where 1 = 1
+		<include refid="sf-sysSetting" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertSysSetting" parameterClass="sysSetting">
+		
+		<![CDATA[insert into SYS_SETTING (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="title">TITLE</isNotNull>	
+			<isNotNull prepend="," property="memo">MEMO</isNotNull>	
+			<isNotNull prepend="," property="content">CONTENT</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="title">#title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="memo">#memo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="content">#content:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateSysSetting" parameterClass="sysSetting">
+		update sys_setting
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="title">TITLE = #title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="content">CONTENT = #content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="memo">MEMO = #memo:VARCHAR#</isNotNull>
+		</dynamic>
+		where 
+		<isNotEmpty prepend=" " property="title">TITLE = #title:VARCHAR#</isNotEmpty>
+	</update>
+
+	<delete id="deleteSysSetting" parameterClass="sysSetting">
+		delete from SYS_SETTING where
+		<isNotEmpty prepend=" " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BASE_CLASS">
+
+	<typeAlias alias="baseClass" type="com.ebiz.webapp.domain.BaseClass" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertBaseClass" />
+		<flushOnExecute statement="updateBaseClass" />
+		<flushOnExecute statement="deleteBaseClass" />
+	</cacheModel>
+
+	<resultMap id="baseClassResultForList" class="baseClass">
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_SCOPE" property="cls_scope" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="PAR_ID" property="par_id" jdbcType="INTEGER" />
+		<result column="ROOT_ID" property="root_id" jdbcType="INTEGER" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="TEMPLATE_TYPE" property="template_type" jdbcType="INTEGER" />
+		<result column="LINK_ID" property="link_id" jdbcType="INTEGER" />
+		<result column="CLS_LEVEL" property="cls_level" jdbcType="INTEGER" />
+		<result column="CLS_CODE" property="cls_code" jdbcType="VARCHAR" />
+		<result column="CLS_URL" property="cls_url" jdbcType="VARCHAR" />
+		<result column="IS_SHOW" property="is_show" jdbcType="INTEGER" />
+		<result column="IMAGE_PATH" property="image_path" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="baseClassResult" class="baseClass" extends="baseClassResultForList">
+	</resultMap>
+	
+	<resultMap id="baseClassWithSonResult" class="baseClass" >
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_SCOPE" property="cls_scope" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="PAR_ID" property="par_id" jdbcType="INTEGER" />
+		<result column="ROOT_ID" property="root_id" jdbcType="INTEGER" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="TEMP_LEVEL" property="map.temp_level" jdbcType="INTEGER" />
+		<result column="CLS_NAME_TREE" property="map.cls_name_tree" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="baseClassWithParentResult" class="baseClass" >
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_SCOPE" property="cls_scope" jdbcType="INTEGER" />
+		<result column="CLS_LEVEL" property="cls_level" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="PAR_ID" property="par_id" jdbcType="INTEGER" />
+		<result column="ROOT_ID" property="root_id" jdbcType="INTEGER" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+	</resultMap>
+	
+
+	<sql id="sf-baseClass">
+		<isNotEmpty prepend=" and " property="cls_id">a.CLS_ID = #cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_scope">a.CLS_SCOPE = #cls_scope:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_name">a.CLS_NAME = #cls_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="par_id">a.PAR_ID = #par_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="root_id">a.ROOT_ID = #root_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lock">a.IS_LOCK = #is_lock:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="template_type">a.TEMPLATE_TYPE = #template_type:INTEGER#</isNotEmpty>
+        <isNotEmpty prepend=" and " property="link_id">a.LINK_ID = #link_id:INTEGER#</isNotEmpty>
+        <isNotEmpty prepend=" and " property="cls_level">a.CLS_LEVEL = #cls_level:INTEGER#</isNotEmpty>
+        <isNotEmpty prepend=" and " property="cls_code">a.CLS_CODE = #cls_code:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" and " property="cls_url">a.CLS_URL = #cls_url:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" and " property="is_show">a.IS_SHOW = #is_show:INTEGER#</isNotEmpty>
+        <isNotEmpty prepend=" and " property="image_path">a.IMAGE_PATH = #image_path:VARCHAR#</isNotEmpty>
+        
+        <isNotEmpty prepend=" and " property="map.cls_levels">a.CLS_LEVEL in ($map.cls_levels$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.cls_ids">a.CLS_ID in ($map.cls_ids$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.par_ids">a.PAR_ID in ($map.par_ids$)</isNotEmpty>
+        <isNotEmpty prepend=" and " property="map.cls_name_like">a.CLS_NAME like '%' #map.cls_name_like# '%'</isNotEmpty>	
+        <isNotEmpty prepend=" and " property="map.cls_code_is_not_null">a.CLS_CODE is not null</isNotEmpty>
+        <isNotEmpty prepend=" and " property="map.no_have_self">a.cls_id != #map.no_have_self:DECIMAL#</isNotEmpty>
+        <isNotEmpty prepend=" and " property="map.cls_id_not_in">a.CLS_ID not in ($map.cls_id_not_in$)</isNotEmpty>
+        <isNotEmpty prepend=" and " property="map.cls_id_in">a.CLS_ID in ($map.cls_id_in$)</isNotEmpty>
+        <isNotEmpty prepend=" and " property="map.form_indexEntpInfo_par_cls_id">
+		  	a.cls_id in(
+		  	select distinct t.par_cls_id
+			  from comm_info t
+			 where 1 = 1 and t.OWN_ENTP_ID = #map.own_entp_id:DECIMAL# and t.is_del = 0 and t.audit_state = 1
+		  	)
+		</isNotEmpty>
+		
+         <isNotEmpty prepend=" and " property="map.form_indexEntpInfo_cls_id">
+		  	a.cls_id in(
+		  	select distinct t.cls_id
+			  from comm_info t
+			 where 1 = 1 and t.OWN_ENTP_ID = #map.own_entp_id:DECIMAL# and t.is_del = 0 and t.audit_state = 1
+		  	)
+		</isNotEmpty>
+          
+	</sql>
+
+	<select id="selectBaseClass" resultMap="baseClassResult" parameterClass="baseClass" cacheModel="oneDayCache">
+		select * from BASE_CLASS a where 1 = 1
+		<include refid="sf-baseClass" />
+	</select>
+
+	<select id="selectBaseClassList" resultMap="baseClassResultForList" parameterClass="baseClass" cacheModel="oneDayCache">
+		
+		select * from BASE_CLASS a where 1 = 1
+		<include refid="sf-baseClass" />
+		order by a.order_value desc, a.CLS_ID 
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectBaseClassCount" resultClass="int" parameterClass="baseClass" cacheModel="oneDayCache">
+		select count(*) from BASE_CLASS a where 1 = 1
+		<include refid="sf-baseClass" />
+	</select>
+
+	<select id="selectBaseClassPaginatedList" resultMap="baseClassResult" parameterClass="baseClass" cacheModel="oneDayCache">
+		
+		select * from BASE_CLASS a where 1 = 1
+		<include refid="sf-baseClass" />
+		order by a.order_value desc, a.CLS_ID asc 
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+    <!-- @author Wu,Yang @desc 调研更新类别的存储过程 -->
+	<procedure id="procedureUpdateClass" resultMap="baseClassResult" parameterClass="baseClass" cacheModel="oneDayCache">
+		<isNotEmpty property="map.pd">
+			{call p_base_pd_clazz()} 
+		</isNotEmpty>
+		<isNotEmpty property="map.bm">
+			{call p_base_bm_clazz()} 
+		</isNotEmpty>
+	</procedure>
+	
+	
+	<!-- @author Wu,Yang @desc 取父节点list -->
+	<procedure id="procedureGetBaseClassParentList" resultMap="baseClassWithParentResult" parameterClass="baseClass" cacheModel="oneDayCache">
+		{call procedureGetBaseClassParentList(#cls_scope:INTEGER#, #cls_id:INTEGER#)} 
+	</procedure>
+	
+	<!-- @author Wu,Yang @desc 取子节点list  -->
+	<procedure id="procedureGetBaseClassSonList" resultMap="baseClassWithSonResult" parameterClass="baseClass" cacheModel="oneDayCache">
+		{call procedureGetBaseClassSonList(#cls_scope:INTEGER#, #par_id:INTEGER#)} 
+	</procedure>
+	
+
+	<insert id="insertBaseClass" parameterClass="baseClass">
+		<![CDATA[insert into BASE_CLASS (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="cls_id">CLS_ID</isNotNull>	
+			<isNotNull prepend="," property="cls_scope">CLS_SCOPE</isNotNull>	
+			<isNotNull prepend="," property="cls_name">CLS_NAME</isNotNull>	
+			<isNotNull prepend="," property="par_id">PAR_ID</isNotNull>	
+			<isNotNull prepend="," property="root_id">ROOT_ID</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_lock">IS_LOCK</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="template_type">TEMPLATE_TYPE</isNotNull>	
+			<isNotNull prepend="," property="link_id">LINK_ID</isNotNull>	
+			<isNotNull prepend="," property="cls_level">CLS_LEVEL</isNotNull>	
+			<isNotNull prepend="," property="cls_code">CLS_CODE</isNotNull>	
+			<isNotNull prepend="," property="cls_url">CLS_URL</isNotNull>	
+			<isNotNull prepend="," property="is_show">IS_SHOW</isNotNull>	
+			<isNotNull prepend="," property="image_path">IMAGE_PATH</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="cls_id">#cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_scope">#cls_scope:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">#cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="par_id">#par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="root_id">#root_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">#is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="template_type">#template_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">#link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_level">#cls_level:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_code">#cls_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cls_url">#cls_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_show">#is_show:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="image_path">#image_path:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="cls_id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateBaseClass" parameterClass="baseClass">
+		update BASE_CLASS
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="cls_id">CLS_ID = #cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_scope">CLS_SCOPE = #cls_scope:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">CLS_NAME = #cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="par_id">PAR_ID = #par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="root_id">ROOT_ID = #root_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="template_type">TEMPLATE_TYPE = #template_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">LINK_ID = #link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_level">CLS_LEVEL = #cls_level:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_code">CLS_CODE = #cls_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cls_url">CLS_URL = #cls_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_show">IS_SHOW = #is_show:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="image_path">IMAGE_PATH = #image_path:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="cls_id">CLS_ID = #cls_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="cls_id">
+			<isNotEmpty prepend=" " property="map.pks">
+				CLS_ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteBaseClass" parameterClass="baseClass">
+		delete from BASE_CLASS where 1 = 1
+		<isNotEmpty prepend=" and " property="cls_id">CLS_ID = #cls_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="cls_id">
+			<isNotEmpty prepend=" " property="map.pks">
+				CLS_ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

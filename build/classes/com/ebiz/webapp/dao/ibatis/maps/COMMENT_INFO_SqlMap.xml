@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="COMMENT_INFO">
+
+	<typeAlias alias="commentInfo" type="com.ebiz.webapp.domain.CommentInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCommentInfo" />
+		<flushOnExecute statement="updateCommentInfo" />
+		<flushOnExecute statement="deleteCommentInfo" />
+	</cacheModel>
+
+	<resultMap id="commentInfoResultForList" class="commentInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="LINK_ID" property="link_id" jdbcType="INTEGER" />
+		<result column="COMM_TYPE" property="comm_type" jdbcType="INTEGER" />
+		<result column="COMM_TITLE" property="comm_title" jdbcType="VARCHAR" />
+		<result column="COMM_CONTENT" property="comm_content" jdbcType="VARCHAR" />
+		<result column="COMM_REPLY" property="comm_reply" jdbcType="VARCHAR" />
+		<result column="COMM_TIME" property="comm_time" jdbcType="TIMESTAMP" />
+		<result column="COMM_IP" property="comm_ip" jdbcType="VARCHAR" />
+		<result column="COMM_UID" property="comm_uid" jdbcType="INTEGER" />
+		<result column="COMM_UNAME" property="comm_uname" jdbcType="VARCHAR" />
+		<result column="COMM_SCORE" property="comm_score" jdbcType="INTEGER" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="COMM_STATE" property="comm_state" jdbcType="INTEGER" />
+		<result column="COMM_TAG" property="comm_tag" jdbcType="VARCHAR" />
+		<result column="COMM_GOOD" property="comm_good" jdbcType="VARCHAR" />
+		<result column="COMM_BAD" property="comm_bad" jdbcType="VARCHAR" />
+		<result column="COMM_EXPERIENCE" property="comm_experience" jdbcType="VARCHAR" />
+		<result column="BUY_DATE" property="buy_date" jdbcType="TIMESTAMP" />
+		<result column="COMM_LEVEL" property="comm_level" jdbcType="INTEGER" />
+		<result column="ORDER_ID" property="order_id" jdbcType="INTEGER" />
+		<result column="ORDER_DETAILS_ID" property="order_details_id" jdbcType="INTEGER" />
+		<result column="LINK_F_ID" property="link_f_id" jdbcType="INTEGER" />
+		<result column="COMM_TCZH_ID" property="comm_tczh_id" jdbcType="INTEGER" />
+		<result column="HAS_PIC" property="has_pic" jdbcType="INTEGER" />
+		<result column="REPLY_UID" property="reply_uid" jdbcType="INTEGER" />
+		<result column="REPLY_CONTENT" property="reply_content" jdbcType="VARCHAR" />
+		<result column="REPLY_DATE" property="reply_date" jdbcType="TIMESTAMP" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="COMM_TCZH_NAME" property="comm_tczh_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="commentInfoResult" class="commentInfo" extends="commentInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-commentInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_id">a.LINK_ID = #link_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_type">a.COMM_TYPE = #comm_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_title">a.COMM_TITLE = #comm_title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_content">a.COMM_CONTENT = #comm_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_reply">a.COMM_REPLY = #comm_reply:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_time">a.COMM_TIME = #comm_time:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_ip">a.COMM_IP = #comm_ip:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_uid">a.COMM_UID = #comm_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_uname">a.COMM_UNAME = #comm_uname:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_score">a.COMM_SCORE = #comm_score:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_state">a.COMM_STATE = #comm_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tag">a.COMM_TAG = #comm_tag:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_good">a.COMM_GOOD = #comm_good:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_bad">a.COMM_BAD = #comm_bad:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_experience">a.COMM_EXPERIENCE = #comm_experience:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="buy_date">a.BUY_DATE = #buy_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_level">a.COMM_LEVEL = #comm_level:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_id">a.order_id = #order_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_details_id">a.order_details_id = #order_details_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_f_id">a.link_f_id = #link_f_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_id">a.comm_tczh_id = #comm_tczh_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="has_pic">a.has_pic = #has_pic:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="reply_uid">a.REPLY_UID = #reply_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="reply_content">a.REPLY_CONTENT = #reply_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="reply_date">a.REPLY_DATE = #reply_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME = #comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_name">a.COMM_TCZH_NAME = #comm_tczh_name:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.comm_title_like">a.comm_title like '%'  #map.comm_title_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.type in">a.comm_type in  
+		<iterate close=")" open="(" conjunction="," property="map.type in">#map.type in[]#</iterate>
+		</isNotEmpty>
+	</sql>
+
+	<select id="selectCommentInfo" resultMap="commentInfoResult" parameterClass="commentInfo" cacheModel="oneDayCache">
+		select * from COMMENT_INFO a where 1 = 1
+		<include refid="sf-commentInfo" />
+	</select>
+
+	<select id="selectCommentInfoList" resultMap="commentInfoResultForList" parameterClass="commentInfo" cacheModel="oneDayCache">
+		
+		select * from COMMENT_INFO a where 1 = 1
+		<include refid="sf-commentInfo" />
+		 order by a.COMM_TIME desc, a.ID desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectCommentInfoAvgCommSore" resultClass="int" parameterClass="commentInfo" cacheModel="oneDayCache">
+		select if(ISNULL(round(avg(a.COMM_SCORE)))=1,0,round(avg(a.COMM_SCORE))) from COMMENT_INFO a where 1 = 1
+		<include refid="sf-commentInfo" />
+	</select>
+	
+	<select id="selectCommentInfoSumCommSore" resultClass="int" parameterClass="commentInfo" cacheModel="oneDayCache">
+		select if(ISNULL(sum(a.comm_score))=1,0,sum(a.comm_score)) from COMMENT_INFO a where 1 = 1
+		<include refid="sf-commentInfo" />
+	</select>
+	
+	<select id="selectCommentInfoCount" resultClass="int" parameterClass="commentInfo" cacheModel="oneDayCache">
+ 		select count(1) from COMMENT_INFO a where 1 = 1
+		<include refid="sf-commentInfo" />
+	</select>
+
+	<select id="selectCommentInfoPaginatedList" resultMap="commentInfoResult" parameterClass="commentInfo" cacheModel="oneDayCache">
+		
+		select * from COMMENT_INFO a where 1 = 1
+		<include refid="sf-commentInfo" />
+		order by a.COMM_TIME desc, a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCommentInfo" parameterClass="commentInfo">
+		
+		<![CDATA[insert into COMMENT_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="link_id">LINK_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_type">COMM_TYPE</isNotNull>	
+			<isNotNull prepend="," property="comm_title">COMM_TITLE</isNotNull>	
+			<isNotNull prepend="," property="comm_content">COMM_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="comm_reply">COMM_REPLY</isNotNull>	
+			<isNotNull prepend="," property="comm_time">COMM_TIME</isNotNull>	
+			<isNotNull prepend="," property="comm_ip">COMM_IP</isNotNull>	
+			<isNotNull prepend="," property="comm_uid">COMM_UID</isNotNull>	
+			<isNotNull prepend="," property="comm_uname">COMM_UNAME</isNotNull>	
+			<isNotNull prepend="," property="comm_score">COMM_SCORE</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="comm_state">COMM_STATE</isNotNull>	
+			<isNotNull prepend="," property="comm_tag">COMM_TAG</isNotNull>	
+			<isNotNull prepend="," property="comm_good">COMM_GOOD</isNotNull>	
+			<isNotNull prepend="," property="comm_bad">COMM_BAD</isNotNull>	
+			<isNotNull prepend="," property="comm_experience">COMM_EXPERIENCE</isNotNull>	
+			<isNotNull prepend="," property="buy_date">BUY_DATE</isNotNull>	
+			<isNotNull prepend="," property="comm_level">COMM_LEVEL</isNotNull>	
+			<isNotNull prepend="," property="order_id">ORDER_ID</isNotNull>	
+			<isNotNull prepend="," property="order_details_id">ORDER_DETAILS_ID</isNotNull>	
+			<isNotNull prepend="," property="link_f_id">LINK_F_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID</isNotNull>	
+			<isNotNull prepend="," property="has_pic">HAS_PIC</isNotNull>	
+			<isNotNull prepend="," property="reply_uid">REPLY_UID</isNotNull>	
+			<isNotNull prepend="," property="reply_content">REPLY_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="reply_date">REPLY_DATE</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>	
+			<isNotNull prepend="," property="comm_tczh_name">COMM_TCZH_NAME</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">#link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_type">#comm_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_title">#comm_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_content">#comm_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_reply">#comm_reply:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_time">#comm_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="comm_ip">#comm_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_uid">#comm_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_uname">#comm_uname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_score">#comm_score:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_state">#comm_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tag">#comm_tag:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_good">#comm_good:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_bad">#comm_bad:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_experience">#comm_experience:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="buy_date">#buy_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="comm_level">#comm_level:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_id">#order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_details_id">#order_details_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_f_id">#link_f_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">#comm_tczh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="has_pic">#has_pic:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="reply_uid">#reply_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="reply_content">#reply_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="reply_date">#reply_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_name">#comm_tczh_name:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCommentInfo" parameterClass="commentInfo">
+		update COMMENT_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">LINK_ID = #link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_type">COMM_TYPE = #comm_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_title">COMM_TITLE = #comm_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_content">COMM_CONTENT = #comm_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_reply">COMM_REPLY = #comm_reply:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_time">COMM_TIME = #comm_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="comm_ip">COMM_IP = #comm_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_uid">COMM_UID = #comm_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_uname">COMM_UNAME = #comm_uname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_score">COMM_SCORE = #comm_score:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_state">COMM_STATE = #comm_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tag">COMM_TAG = #comm_tag:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_good">COMM_GOOD = #comm_good:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_bad">COMM_BAD = #comm_bad:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_experience">COMM_EXPERIENCE = #comm_experience:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="buy_date">BUY_DATE = #buy_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="comm_level">COMM_LEVEL = #comm_level:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_id">ORDER_ID = #order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_details_id">order_details_id = #order_details_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_f_id">LINK_F_ID = #link_f_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID = #comm_tczh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="has_pic">HAS_PIC = #has_pic:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="reply_uid">REPLY_UID = #reply_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="reply_content">REPLY_CONTENT = #reply_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="reply_date">REPLY_DATE = #reply_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME = #comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_name">COMM_TCZH_NAME = #comm_tczh_name:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCommentInfo" parameterClass="commentInfo">
+		delete from COMMENT_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

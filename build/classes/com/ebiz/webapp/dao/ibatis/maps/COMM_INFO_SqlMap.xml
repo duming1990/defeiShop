@@ -1,0 +1,1227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="COMM_INFO">
+
+	<typeAlias alias="commInfo" type="com.ebiz.webapp.domain.CommInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCommInfo" />
+		<flushOnExecute statement="updateCommInfo" />
+		<flushOnExecute statement="deleteCommInfo" />
+	</cacheModel>
+
+	<resultMap id="commInfoResultForList" class="commInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PD_ID" property="pd_id" jdbcType="INTEGER" />
+		<result column="PD_NAME" property="pd_name" jdbcType="VARCHAR" />
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="PAR_CLS_ID" property="par_cls_id" jdbcType="INTEGER" />
+		<result column="COMM_NO" property="comm_no" jdbcType="VARCHAR" />
+		<result column="COMM_TYPE" property="comm_type" jdbcType="INTEGER" />
+		<result column="SUB_TITLE" property="sub_title" jdbcType="VARCHAR" />
+		<result column="OWN_ENTP_ID" property="own_entp_id" jdbcType="INTEGER" />
+		<result column="MAIN_PIC" property="main_pic" jdbcType="VARCHAR" />
+		<result column="PRICE_REF" property="price_ref" jdbcType="INTEGER" />
+		<result column="SALE_PRICE" property="sale_price" jdbcType="INTEGER" />
+		<result column="IS_SELL" property="is_sell" jdbcType="INTEGER" />
+		<result column="UP_DATE" property="up_date" jdbcType="TIMESTAMP" />
+		<result column="DOWN_DATE" property="down_date" jdbcType="TIMESTAMP" />
+		<result column="P_INDEX" property="p_index" jdbcType="INTEGER" />
+		<result column="COMM_DESC" property="comm_desc" jdbcType="VARCHAR" />
+		<result column="PROM_TYPE" property="prom_type" jdbcType="INTEGER" />
+		<result column="PROM_INFO" property="prom_info" jdbcType="VARCHAR" />
+		<result column="PROM_URL" property="prom_url" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_ZP" property="is_zp" jdbcType="INTEGER" />
+		<result column="SAVE_STEP" property="save_step" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />
+		<result column="AUDIT_USER_ID" property="audit_user_id" jdbcType="INTEGER" />
+		<result column="AUDIT_DATE" property="audit_date" jdbcType="TIMESTAMP" />
+		<result column="AUDIT_DESC" property="audit_desc" jdbcType="VARCHAR" />
+		<result column="AUDIT_SERVICE_DESC" property="audit_service_desc" jdbcType="VARCHAR" />
+		<result column="IS_LOCKED" property="is_locked" jdbcType="INTEGER" />
+		<result column="LOCK_USER_ID" property="lock_user_id" jdbcType="INTEGER" />
+		<result column="BRAND_ID" property="brand_id" jdbcType="INTEGER" />
+
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="COMM_BARCODE" property="comm_barcode" jdbcType="VARCHAR" />
+		<result column="COMM_WEIGHT" property="comm_weight" jdbcType="INTEGER" />
+		<result column="IS_FREESHIP" property="is_freeship" jdbcType="INTEGER" />
+		<result column="KEY_WORD" property="key_word" jdbcType="VARCHAR" />
+		<result column="SEO_TITLE" property="seo_title" jdbcType="VARCHAR" />
+		<result column="SEO_KEYWORD" property="seo_keyword" jdbcType="VARCHAR" />
+		<result column="SEO_DESC" property="seo_desc" jdbcType="VARCHAR" />
+		<result column="VIEW_COUNT" property="view_count" jdbcType="INTEGER" />
+		<result column="GN_TYPE" property="gn_type" jdbcType="INTEGER" />
+		<result column="IS_SYNC_JXC" property="is_sync_jxc" jdbcType="INTEGER" />
+		<result column="FREIGHT_ID" property="freight_id" jdbcType="INTEGER" />
+		<result column="COMM_VOLUME" property="comm_volume" jdbcType="INTEGER" />
+		<result column="COMMENT_COUNT" property="comment_count" jdbcType="INTEGER" />
+		<result column="SALE_COUNT" property="sale_count" jdbcType="INTEGER" />
+		<result column="SALE_COUNT_UPDATE" property="sale_count_update" jdbcType="INTEGER" />
+		<result column="INVENTORY" property="inventory" jdbcType="INTEGER" />
+		<result column="IS_SELF_SUPPORT" property="is_self_support" jdbcType="INTEGER" />
+		<result column="PRICE_REF_DESC" property="price_ref_desc" jdbcType="VARCHAR" />
+		<result column="IS_COMMEND" property="is_commend" jdbcType="INTEGER" />
+		<result column="TB_ID" property="tb_id" jdbcType="DECIMAL" />
+		<result column="TB_URL" property="tb_url" jdbcType="VARCHAR" />
+		<result column="COST_PRICE" property="cost_price" jdbcType="INTEGER" />
+		<result column="LINE_TYPE" property="line_type" jdbcType="INTEGER" />
+		<result column="FANXIAN_RULE" property="fanxian_rule" jdbcType="INTEGER" />
+		<result column="IS_HAS_TC" property="is_has_tc" jdbcType="INTEGER" />
+		<result column="COMM_NOTES" property="comm_notes" jdbcType="VARCHAR" />
+		<result column="SHOW_NOTES" property="show_notes" jdbcType="INTEGER" />
+		<result column="ROOT_CLS_ID" property="root_cls_id" jdbcType="INTEGER" />
+		<result column="RED_SCALE" property="red_scale" jdbcType="INTEGER" />
+		<result column="LAST_INPUT_DATE" property="last_input_date" jdbcType="TIMESTAMP" />
+		<result column="IS_REBATE" property="is_rebate" jdbcType="INTEGER" />
+		<result column="REBATE_SCALE" property="rebate_scale" jdbcType="DECIMAL" />
+		<result column="IS_AID" property="is_aid" jdbcType="INTEGER" />
+		<result column="AID_SCALE" property="aid_scale" jdbcType="DECIMAL" />
+		<result column="SUM_REBATE_MONEY" property="sum_rebate_money" jdbcType="DECIMAL" />
+		<result column="SUM_AID_MONEY" property="sum_aid_money" jdbcType="DECIMAL" />
+		<result column="IS_ZINGYING" property="is_zingying" jdbcType="INTEGER" />
+		<result column="IS_JD" property="is_jd" jdbcType="INTEGER" />
+		<result column="JD_AGENT_PRICE" property="jd_agent_price" jdbcType="DECIMAL" />
+		<result column="JD_SKUID" property="jd_skuid" jdbcType="VARCHAR" />
+		<result column="IS_FAPIAO" property="is_fapiao" jdbcType="INTEGER" />
+		<result column="COMM_QRCODE_PATH" property="comm_qrcode_path" jdbcType="VARCHAR" />
+		<result column="IS_ZITI" property="is_ziti" jdbcType="INTEGER" />
+		<result column="MULTIPLE_ORDER_VALUE" property="multiple_order_value" jdbcType="INTEGER" />
+		<result column="ENTP_COMM_CLASS_ID" property="entp_comm_class_id" jdbcType="INTEGER" />
+		<result column="MARK_COMM_ID" property="mark_comm_id" jdbcType="INTEGER" />
+		<result column="IS_TEMP" property="is_temp" jdbcType="INTEGER" />
+		<result column="PRESELL_DATE" property="presell_date" jdbcType="TIMESTAMP" />
+		<result column="GROUP_COUNT" property="group_count" jdbcType="INTEGER" />
+		<result column="GROUP_TYPE" property="group_type" jdbcType="INTEGER" />
+		<result column="GROUP_TIME" property="group_time" jdbcType="INTEGER" />
+		<result column="IS_ACTIVITY_DEFAULT" property="is_activity_default" jdbcType="INTEGER" />
+		<result column="COPY_ID" property="copy_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="commInfoResult" class="commInfo" extends="commInfoResultForList">
+
+	</resultMap>
+	<resultMap id="commInfoResultFullName" class="commInfo" extends="commInfoResultForList">
+		<result column="PROM_NAME" property="map.prom_name" jdbcType="VARCHAR" />
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" />
+		<result column="SUUID" property="map.suuid" jdbcType="VARCHAR" />
+		<result column="ENTP_LOGO" property="map.entp_logo" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="commInfoResultForListTwo" class="commInfo">
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="COMM_BARCODE" property="comm_barcode" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="INVENTORY" property="inventory" jdbcType="INTEGER" />
+		<result column="PRICE_REF" property="price_ref" jdbcType="INTEGER" />
+		<result column="SALE_PRICE" property="sale_price" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="commImgsResultForList" class="pdImgs">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PD_ID" property="pd_id" jdbcType="INTEGER" />
+		<result column="FILE_PATH" property="file_path" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="CommInfoRootClsId" class="commInfo">
+		<result column="cls_id" property="map.cls_id" jdbcType="INTEGER" />
+		<result column="cls_name" property="map.cls_name" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap class="commInfo" id="classRankList">
+		<result column="cls_id" property="map.cls_id" jdbcType="INTEGER" />
+		<result column="full_name" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="cls_num" property="map.cls_num" jdbcType="INTEGER" />
+		<result column="cls_name" property="map.cls_name" jdbcType="VARCHAR" />
+		<result column="sum_money" property="map.sum_money" jdbcType="DECIMAL" />
+	</resultMap>
+	<resultMap id="commInfoWithPdContentResult" class="commInfo" extends="commInfoResultFullName">
+		<result column="COMM_CONTENT" property="comm_content" jdbcType="VARCHAR" />
+		<result column="COMM_PARAMENTER" property="comm_paramenter" jdbcType="VARCHAR" />
+		<result column="COMM_ASRC_CONTENT" property="comm_asrc_content" jdbcType="VARCHAR" />
+		<result column="id" property="commImgsList" select="selectCommImgsListWithPdId" />
+	</resultMap>
+
+	<resultMap id="commInfoForDistinct" class="commInfo">
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="sf-commInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_id">a.PD_ID = #pd_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_name">a.PD_NAME = #pd_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_id">a.CLS_ID = #cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_name">a.CLS_NAME = #cls_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="par_cls_id">a.PAR_CLS_ID = #par_cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_no">a.COMM_NO = #comm_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_type">a.COMM_TYPE = #comm_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sub_title">a.SUB_TITLE = #sub_title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_entp_id">a.OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="main_pic">a.MAIN_PIC = #main_pic:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_ref">a.PRICE_REF = #price_ref:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sale_price">a.SALE_PRICE = #sale_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_sell">a.IS_SELL = #is_sell:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="up_date">a.UP_DATE = #up_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="down_date">a.DOWN_DATE =#down_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX =#p_index:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_desc">a.COMM_DESC =#comm_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="prom_type">a.PROM_TYPE =#prom_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="prom_info">a.PROM_INFO =#prom_info:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="prom_url">a.PROM_URL =#prom_url:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE =#order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_zp">a.IS_ZP =#is_zp:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="save_step">a.SAVE_STEP =#save_step:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL =#is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE =#add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID =#add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME =#add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE =#update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID =#update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE =#del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID =#del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE =#audit_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_id">a.AUDIT_USER_ID =#audit_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_date">a.AUDIT_DATE =#audit_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_desc">a.AUDIT_DESC =#audit_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_service_desc">a.AUDIT_SERVICE_DESC =#audit_service_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_locked">a.IS_LOCKED =#is_locked:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="lock_user_id">a.LOCK_USER_ID =#lock_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brand_id">a.BRAND_ID =#brand_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME =#comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_barcode">a.COMM_BARCODE =#comm_barcode:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_weight">a.COMM_WEIGHT =#comm_weight:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_freeship">a.IS_FREESHIP =#is_freeship:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="key_word">a.KEY_WORD =#key_word:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="seo_title">a.SEO_TITLE =#seo_title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="seo_keyword">a.SEO_KEYWORD =#seo_keyword:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="seo_desc">a.SEO_DESC =#seo_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="view_count">a.VIEW_COUNT =#view_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="gn_type">a.GN_TYPE =#gn_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_sync_jxc">a.IS_SYNC_JXC =#is_sync_jxc:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="freight_id">a.FREIGHT_ID =#freight_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_volume">a.COMM_VOLUME =#comm_volume:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comment_count">a.COMMENT_COUNT =#comment_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sale_count">a.SALE_COUNT =#sale_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sale_count_update">a.SALE_COUNT_UPDATE =#sale_count_update:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="inventory">a.INVENTORY =#inventory:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_self_support">a.IS_SELF_SUPPORT =#is_self_support:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_ref_desc">a.PRICE_REF_DESC =#price_ref_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_commend">a.IS_COMMEND =#is_commend:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tb_id">a.TB_ID =#tb_id:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tb_url">a.TB_URL =#tb_url:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cost_price">a.COST_PRICE =#cost_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="line_type">a.LINE_TYPE =#line_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fanxian_rule">a.FANXIAN_RULE =#fanxian_rule:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_has_tc">a.IS_HAS_TC =#is_has_tc:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_notes">a.COMM_NOTES =#comm_notes:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="show_notes">a.SHOW_NOTES =#show_notes:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="root_cls_id">a.ROOT_CLS_ID =#root_cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="red_scale">a.RED_SCALE =#red_scale:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="last_input_date">a.LAST_INPUT_DATE =#last_input_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_rebate">a.IS_REBATE =#is_rebate:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rebate_scale">a.REBATE_SCALE =#rebate_scale:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_aid">a.IS_AID =#is_aid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="aid_scale">a.AID_SCALE =#aid_scale:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sum_rebate_money">a.SUM_REBATE_MONEY =#sum_rebate_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sum_aid_money">a.SUM_AID_MONEY =#sum_aid_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_zingying">a.IS_ZINGYING =#is_zingying:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_jd">a.IS_JD =#is_jd:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="jd_agent_price">a.JD_AGENT_PRICE =#jd_agent_price:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="jd_skuid">a.JD_SKUID =#jd_skuid:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_fapiao">a.IS_FAPIAO =#is_fapiao:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_qrcode_path">a.COMM_QRCODE_PATH =#comm_qrcode_path:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_ziti">a.IS_ZITI =#is_ziti:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="multiple_order_value">a.MULTIPLE_ORDER_VALUE= #multiple_order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_comm_class_id">a.ENTP_COMM_CLASS_ID= #entp_comm_class_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mark_comm_id">a.MARK_COMM_ID= #mark_comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_temp">a.IS_TEMP= #is_temp:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="presell_date">a.PRESELL_DATE = #presell_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="group_count">a.GROUP_COUNT = #group_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="group_type">a.GROUP_TYPE = #group_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="group_time">a.GROUP_TIME = #group_time:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_activity_default">a.IS_ACTIVITY_DEFAULT = #is_activity_default:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="copy_id">a.COPY_ID = #"copy_id":INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.entp_id_in">own_entp_id in($map.entp_id_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.keyword">(a.comm_name like '%' #map.keyword# '%' or a.sub_title like '%' #map.keyword# '%' or a.key_word like '%' #map.keyword# '%')</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pd_name_like">a.pd_name like '%' #map.pd_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_name_like">a.comm_name like '%' #map.comm_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sale_price"><![CDATA[a.PRICE_REF >= #map.sale_price:INTEGER#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.max_price"><![CDATA[a.PRICE_REF <= #map.max_price:INTEGER#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_no_like">a.comm_no like '%' #map.comm_no_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_city">substr(a.p_index,1,4) = #map.p_index_city#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_province">substr(a.p_index,1,2)= #map.p_index_province#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.province_index">a.P_INDEX like '%' #map.province_index# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like '%' #map.p_index_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_type_in">COMM_TYPE in ($map.comm_type_in$)</isNotEmpty>
+
+
+		<isNotEmpty prepend=" and " property="map.cls_ids">a.CLS_ID in ($map.cls_ids$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.allPd">
+		(a.cls_id = #map.par_cls_id:INTEGER# or a.par_cls_id = #map.par_cls_id:INTEGER#
+			or a.root_cls_id = #map.par_cls_id:INTEGER#)
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_out_sell_time"><![CDATA[sysdate() between a.up_date and a.down_date]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.allPds">
+			(a.cls_id in
+			($map.par_cls_ids_forDiscountStores$))
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.par_cls_ids">a.par_cls_id in ($map.par_cls_ids$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.commId_not_in">a.id not in ($map.commId_not_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_id_in">a.id in (select COMM_ID from ORDER_INFO_DETAILS where ORDER_ID = #map.comm_id_in#)</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.comm_barcode_not_in_for_query_two_entp_diffents">
+			a.COMM_BARCODE not in (select b.COMM_BARCODE from COMM_INFO
+			b where b.comm_type=3 and b.own_entp_id = #map.own_entp_id#)
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.comm_ids_in">a.id in ($map.comm_ids_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.commIdsIn">a.id in
+			<iterate close=")" open="(" conjunction="," property="map.commIdsIn">#map.commIdsIn[]#
+			</iterate>
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.today_date"><![CDATA[
+			str_to_date(#map.today_date:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= a.add_date  
+			and a.add_date <= str_to_date(concat(#map.today_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.down_date_le">
+			<![CDATA[a.DOWN_DATE <= str_to_date(#map.down_date_le:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_show_yiliaobaojian">a.par_cls_id != 6001
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.begin_date"><![CDATA[
+			a.ADD_DATE >= str_to_date(#map.begin_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.end_date"><![CDATA[
+	     	a.ADD_DATE <= str_to_date(concat(#map.end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	     
+	     <isNotEmpty prepend=" and " property="map.village_id">v.id =#map.village_id:INTEGER#</isNotEmpty>
+	     
+	     <isNotEmpty prepend=" and " property="map.st_down_date"><![CDATA[
+			a.DOWN_DATE >= str_to_date(#map.st_down_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_down_date"><![CDATA[
+	     	a.DOWN_DATE <= str_to_date(concat(#map.en_down_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	     
+	     <isNotEmpty prepend=" and " property="map.comm_type_not_in">a.comm_type not in ($map.comm_type_not_in$)</isNotEmpty>
+	</sql>
+	
+	<select id="selectCommInfoByOrderId" resultMap="commInfoResultForList" parameterClass="INTEGER" cacheModel="oneDayCache">
+		select a.*
+		from comm_info a
+		LEFT JOIN order_info_details b on b.COMM_ID = a.ID
+		where b.ORDER_ID = #value#
+	</select>
+
+	<select id="selectCommImgsListWithPdId" resultMap="commImgsResultForList" parameterClass="DECIMAL" cacheModel="oneDayCache">
+		select * from PD_IMGS t
+		where 1 = 1
+		and t.pd_id = #value#
+		order by t.id
+		asc
+		 <![CDATA[limit 0, 5 ]]>
+	</select>
+
+	<select id="selectCommInfoNameCount" resultClass="int" parameterClass="commInfo" cacheModel="oneDayCache">
+		select count(*) from COMM_INFO a
+		
+		where 1 = 1
+		<include refid="sf-commInfo" />
+		<isNotEmpty prepend=" and " property="map.id_not_in">a.id not in
+			($map.id_not_in$)
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectCommInfoRootClsId" resultMap="CommInfoRootClsId" parameterClass="commInfo" cacheModel="oneDayCache">
+	  select DISTINCT
+	    <isNotEmpty property="map.root_cls_group">a.root_cls_id as cls_id, </isNotEmpty>
+	    <isNotEmpty property="map.root_cls_id">a.par_cls_id as cls_id, </isNotEmpty>
+	    <isNotEmpty property="map.par_cls_id">a.cls_id as cls_id,</isNotEmpty>
+	    	t2.cls_name
+	    FROM comm_info a 
+	    LEFT JOIN base_class t2 ON 
+	    <isNotEmpty property="map.root_cls_group"> a.ROOT_CLS_ID = t2.CLS_ID  </isNotEmpty>
+	    <isNotEmpty property="map.root_cls_id"> a.PAR_CLS_ID = t2.CLS_ID  </isNotEmpty>
+	    <isNotEmpty property="map.par_cls_id"> a.CLS_ID = t2.CLS_ID  </isNotEmpty>
+	    where 1 = 1 
+	    <include refid="sf-commInfo" />
+	    and a.ROOT_CLS_ID is  not null
+	    and t2.is_del = 0
+		<isNotEmpty prepend=" and " property="map.own_entp_id">a.own_entp_id  = #map.own_entp_id# </isNotEmpty>
+		<isNotEmpty property="map.root_cls_group">group by a.root_cls_id</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.root_cls_id">a.root_cls_id = #map.root_cls_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.par_cls_id">a.par_cls_id = #map.par_cls_id#</isNotEmpty>
+	</select>
+
+	<select id="selectCommInfo" resultMap="commInfoWithPdContentResult" parameterClass="commInfo" cacheModel="oneDayCache">
+		select
+		a.*,
+		(select f.content from pd_content f where a.id=f.pd_id and f.type=1) as comm_content,
+		(select f.content from pd_content f where a.id=f.pd_id and f.type=2) as comm_asrc_content,
+		(select f.content from pd_content f where a.id=f.pd_id and f.type=3) as comm_paramenter,
+		b.full_name,c.entp_name,c.uuid as suuid,c.entp_logo,'' as prom_name
+		from
+		COMM_INFO a
+		left join BASE_PROVINCE b on b.p_index = a.p_index
+		left join entp_info c on a.own_entp_id = c.id
+		where 1 = 1
+		<include refid="sf-commInfo" />
+	</select>
+
+	<select id="selectCommInfoList" resultMap="commInfoResultFullName" parameterClass="commInfo" cacheModel="oneDayCache">
+
+		select distinct a.*,b.full_name,c.entp_name,c.uuid as
+		suuid,c.entp_logo,'' as prom_name from COMM_INFO a left join
+		BASE_PROVINCE b on b.p_index = a.p_index
+		left join entp_info c on
+		a.own_entp_id=c.id
+		<isNotEmpty property="map.rec_id">
+			left join Comm_put_price s on
+			a.id=s.comm_id
+		</isNotEmpty>
+		<isNotEmpty prepend="  " property="map.is_select">
+			RIGHT JOIN comm_info_tags
+			h on h.comm_id = a.id
+		</isNotEmpty>
+
+		where 1 = 1 and c.is_del = 0
+		<include refid="sf-commInfo" />
+		<isNotEmpty prepend=" and " property="map.tag_id">h.TAG_ID =
+			#map.tag_id:INTEGER#
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.rec_id">
+			<isNotEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER#)
+			</isEmpty>
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.put_p_index">
+			<isNotEmpty prepend="  " property="map.rec_id">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.rec_id">(s.PUT_P_INDEX
+				in($map.put_p_index$))
+			</isEmpty>
+		</isNotEmpty>
+
+		order by
+		<isNotEmpty property="map.order_value">a.order_value desc,</isNotEmpty>
+		a.ADD_DATE desc , a.pd_id desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectWelfareCommInfoList" resultMap="commInfoResult" parameterClass="commInfo" cacheModel="oneDayCache">
+		SELECT
+			a.*
+		FROM
+			comm_info a
+		LEFT JOIN comm_welfare_detail b ON a.id=b.COMM_ID
+		LEFT JOIN comm_welfare_apply c on c.id=b.COMM_WELFARE_ID
+		WHERE 1=1 
+		AND c.AUDIT_STATE=1
+		AND c.IS_DEL=0
+		AND b.AUDIT_STATE=1
+		AND b.IS_DEL=0
+		<include refid="sf-commInfo" />
+		<isNotEmpty prepend=" and " property="map.service_id_in">c.service_id in ($map.service_id_in$)</isNotEmpty>
+		order by
+		<isNotEmpty property="map.order_value">a.order_value desc,</isNotEmpty>
+		a.ADD_DATE desc , a.pd_id desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+
+	<select id="selectCommInfoListTwo" resultMap="commInfoResultForListTwo"
+		parameterClass="commInfo" cacheModel="oneDayCache">
+
+		select * from COMM_INFO a where 1 = 1
+		<include refid="sf-commInfo" />
+		and a.COMM_TYPE=3 and a.own_entp_id=#map.own_entp_id#
+		order by a.ID
+		desc
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+
+	<!-- 首页查询 产品 多个属性 公用查询条件 -->
+	<sql id="sf-commInfoForSearchAttr">
+		<isNotEmpty prepend=" AND " property="map.searchParams">
+			attr_id in
+			<iterate close=")" open="(" conjunction="," property="map.searchParams">#map.searchParams[]#
+			</iterate>
+		</isNotEmpty>
+		<isNotEmpty prepend=" " property="map.searchSize">
+			having count(attr_id) =
+			#map.searchSize:INTEGER#
+			GROUP BY pd_id
+		</isNotEmpty>
+	</sql>
+
+	<!-- 查询企业产品类别 add by Li,Yuan at 2013-06-01 begin -->
+	<select id="selectCommInfoForDistinct" resultMap="commInfoForDistinct" parameterClass="commInfo" cacheModel="oneDayCache">
+		select distinct t.cls_id,
+		t.cls_name
+		from comm_info t
+		where 1 = 1 and t.OWN_ENTP_ID =
+		#own_entp_id:INTEGER# and t.is_del = 0 and
+		t.audit_state = 1
+	</select>
+	<!-- 查询企业产品类别 add by Li,Yuan at 2013-06-01 end -->
+
+	<select id="selectCommInfoCount" resultClass="int" parameterClass="commInfo" cacheModel="oneDayCache">
+		select count(*) from COMM_INFO a
+		left join entp_info c on
+		a.own_entp_id=c.id
+		<isNotEmpty property="map.rec_id">
+			left join Comm_put_price s on
+			a.id=s.comm_id
+		</isNotEmpty>
+
+		<isNotEmpty prepend="  " property="map.is_select">
+			RIGHT JOIN comm_info_tags
+			h on h.comm_id = a.id
+		</isNotEmpty>
+		
+		<isNotEmpty property="map.village_id">
+			left join comm_info_poors cip on a.id = cip.comm_id
+			left join poor_info poor on poor.id = cip.poor_id
+			left join village_info v on v.id = poor.village_id
+		</isNotEmpty>
+
+		where 1 = 1 and c.is_del = 0
+		<include refid="sf-commInfo" />
+		<isNotEmpty prepend=" and " property="map.rec_id">
+			<isNotEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER#)
+			</isEmpty>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.put_p_index">
+			<isNotEmpty prepend="  " property="map.rec_id">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.rec_id">(s.PUT_P_INDEX
+				in($map.put_p_index$))
+			</isEmpty>
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.tag_id">h.TAG_ID =
+			#map.tag_id:INTEGER#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.id_not_in">a.id not in
+			($map.id_not_in$)
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.not_select">
+			a.ID NOT IN (
+			<isNotEmpty prepend="  " property="map.tag_id_not_in">
+				SELECT d.comm_id FROM
+				comm_info_tags d WHERE d.tag_id =
+				#map.tag_id_not_in:INTEGER#
+			</isNotEmpty>
+			)
+		</isNotEmpty>
+	</select>
+
+	<!-- 首页查询 产品 多个属性 count -->
+	<select id="selectCommInfoForSearchAttrCount" resultClass="int" parameterClass="commInfo" cacheModel="oneDayCache">
+		select count(a.pd_id) from (select distinct pd_id
+		from
+		pd_info_custom_attr_content
+		where 1 = 1
+		<include refid="sf-commInfoForSearchAttr" />
+		) b
+		left join COMM_INFO a on a.pd_id = b.pd_id
+		<isNotEmpty property="map.rec_id">
+			left join Comm_put_price s on
+			a.id=s.comm_id
+		</isNotEmpty>
+		where 1 = 1
+		<include refid="sf-commInfo" />
+		<isNotEmpty prepend=" and " property="map.rec_id">
+			<isNotEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER#)
+			</isEmpty>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.put_p_index">
+			<isNotEmpty prepend="  " property="map.rec_id">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.rec_id">(s.PUT_P_INDEX
+				in($map.put_p_index$))
+			</isEmpty>
+		</isNotEmpty>
+	</select>
+
+	<!-- 首页查询 产品 多个属性 分页 -->
+	<select id="selectCommInfoForSearchAttrPaginatedList" resultMap="commInfoResultFullName" parameterClass="commInfo" cacheModel="oneDayCache">
+
+		select a.*,c.full_name,d.uuid as suuid,c.entp_logo,'' as
+		prom_name,d.entp_name from (SELECT distinct pd_id
+		FROM
+		pd_info_custom_attr_content
+		WHERE 1 = 1
+
+		<include refid="sf-commInfoForSearchAttr" />
+		) b
+		left join COMM_INFO a on a.pd_id = b.pd_id
+		left join BASE_PROVINCE c
+		on c.p_index = a.p_index
+		left join entp_info d on a.own_entp_id=d.id
+		<isNotEmpty property="map.rec_id">
+			left join Comm_put_price s on
+			a.id=s.comm_id
+		</isNotEmpty>
+		where 1 = 1
+		<include refid="sf-commInfo" />
+		<isNotEmpty prepend=" and " property="map.rec_id">
+			<isNotEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER#)
+			</isEmpty>
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.put_p_index">
+			<isNotEmpty prepend="  " property="map.rec_id">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.rec_id">(s.PUT_P_INDEX
+				in($map.put_p_index$))
+			</isEmpty>
+		</isNotEmpty>
+		order by
+		<isNotEmpty property="map.orderByCommentAsc"><![CDATA[a.comment_count asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByAddDateDesc"><![CDATA[a.add_date desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleAsc"><![CDATA[a.sale_count asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleDesc"><![CDATA[a.sale_count desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleCountUpdateAsc"><![CDATA[a.sale_count_update asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleCountUpdateDesc"><![CDATA[a.sale_count_update desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByPriceDesc"><![CDATA[a.sale_price desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByPriceAsc"><![CDATA[a.sale_price asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByUpDateDesc"><![CDATA[a.up_date desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByViewCountDesc"><![CDATA[a.view_count desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByAidScaleDesc"><![CDATA[a.aid_scale desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByRebateScaleDesc"><![CDATA[a.rebate_scale desc,]]></isNotEmpty>
+		a.order_value desc, a.ADD_DATE desc , a.pd_id desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectCommInfoPageList" resultMap="commInfoResult" parameterClass="commInfo" cacheModel="oneDayCache">
+		select
+		a.*
+		from
+		comm_info a
+		where 1 = 1
+		<include refid="sf-commInfo" />
+		order by
+		a.order_value desc, a.ADD_DATE desc ,a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectCommInfoPaginatedList" resultMap="commInfoResultFullName" parameterClass="commInfo" cacheModel="oneDayCache">
+
+		select 
+			a.*,b.full_name,c.entp_name,c.uuid as suuid,c.entp_logo,'' as prom_name
+		from 
+			COMM_INFO a 
+		left join 
+			BASE_PROVINCE b on b.p_index = a.p_index
+		left join 
+			entp_info c on a.own_entp_id = c.id
+		<isNotEmpty property="map.rec_id">
+			left join Comm_put_price s on a.id=s.comm_id
+		</isNotEmpty>
+
+		<isNotEmpty prepend="  " property="map.is_select">
+			RIGHT JOIN comm_info_tags h on h.comm_id = a.id
+		</isNotEmpty>
+		
+		<isNotEmpty property="map.village_id">
+			left join comm_info_poors cip on a.id = cip.comm_id
+			left join poor_info poor on poor.id = cip.poor_id
+			left join village_info v on v.id = poor.village_id
+		</isNotEmpty>
+		
+		where 1 = 1 and c.is_del = 0
+		
+		<include refid="sf-commInfo" />
+		<isNotEmpty prepend=" and " property="map.rec_id">
+			<isNotEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.put_p_index">(s.rec_id =
+				#map.rec_id:INTEGER#)
+			</isEmpty>
+		</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.put_p_index">
+			<isNotEmpty prepend="  " property="map.rec_id">(s.rec_id =
+				#map.rec_id:INTEGER# or s.PUT_P_INDEX in($map.put_p_index$))
+			</isNotEmpty>
+			<isEmpty prepend="  " property="map.rec_id">(s.PUT_P_INDEX
+				in($map.put_p_index$))
+			</isEmpty>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.tag_id">h.TAG_ID =#map.tag_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.id_not_in">a.id not in($map.id_not_in$)</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.not_select">
+			a.ID NOT IN (
+			<isNotEmpty prepend="  " property="map.tag_id_not_in">
+				SELECT d.comm_id FROM
+				comm_info_tags d WHERE d.tag_id =
+				#map.tag_id_not_in:INTEGER#
+			</isNotEmpty>
+			)
+		</isNotEmpty>
+		
+		order by
+		<isNotEmpty property="map.orderByMultipleOrderValueDesc"><![CDATA[a.is_jd asc,a.MULTIPLE_ORDER_VALUE desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByCommentAsc"><![CDATA[a.comment_count asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleAsc"><![CDATA[a.sale_count asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleDesc"><![CDATA[a.sale_count desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleCountUpdateAsc"><![CDATA[a.sale_count_update asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleCountUpdateDesc"><![CDATA[a.sale_count_update desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByPriceDesc"><![CDATA[a.sale_price desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByPriceAsc"><![CDATA[a.sale_price asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByUpDateDesc"><![CDATA[a.up_date desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByViewCountDesc"><![CDATA[a.view_count desc,]]></isNotEmpty>
+		<isNotEmpty property="map.update"><![CDATA[a.up_date desc,]]></isNotEmpty>
+		<isNotEmpty property="map.price"><![CDATA[a.sale_price asc,]]></isNotEmpty>
+		<isNotEmpty property="map.isHot"><![CDATA[a.view_count desc,]]></isNotEmpty>
+		<isNotEmpty property="map.order_value">a.order_value desc, </isNotEmpty>
+		<isNotEmpty property="map.comm_info_tags_order_value">h.order_value desc, </isNotEmpty>
+		<isNotEmpty property="map.orderByAidScaleDesc"><![CDATA[a.aid_scale desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByRebateScaleDesc"><![CDATA[a.rebate_scale desc,]]></isNotEmpty>
+
+		a.order_value desc, a.ADD_DATE desc ,a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectCommInfoCountForFuPin" resultClass="int" parameterClass="commInfo" cacheModel="oneDayCache">
+		select count(distinct a.id) from COMM_INFO a
+		left join entp_info c on
+		a.own_entp_id=c.id
+		
+		<isNotEmpty property="map.village_id">
+			left join comm_info_poors cip on a.id = cip.comm_id
+			left join poor_info poor on poor.id = cip.poor_id
+			left join village_info v on v.id = poor.village_id
+		</isNotEmpty>
+
+		where 1 = 1 and c.is_del = 0
+		<include refid="sf-commInfo" />
+	</select>
+	
+	<select id="selectCommInfoPaginatedListForFuPin" resultMap="commInfoResultFullName" parameterClass="commInfo" cacheModel="oneDayCache">
+
+		select 
+			distinct a.*,'' as full_name,c.entp_name,c.uuid as suuid,c.entp_logo,'' as prom_name
+		from 
+			COMM_INFO a 
+		left join 
+			entp_info c on a.own_entp_id = c.id
+		
+		<isNotEmpty property="map.village_id">
+			left join comm_info_poors cip on a.id = cip.comm_id
+			left join poor_info poor on poor.id = cip.poor_id
+			left join village_info v on v.id = poor.village_id
+		</isNotEmpty>
+		
+		where 1 = 1 and c.is_del = 0
+		
+		<include refid="sf-commInfo" />
+		order by
+		<isNotEmpty property="map.orderByMultipleOrderValueDesc"><![CDATA[a.is_jd asc,a.MULTIPLE_ORDER_VALUE desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByCommentAsc"><![CDATA[a.comment_count asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleAsc"><![CDATA[a.sale_count asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleDesc"><![CDATA[a.sale_count desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleCountUpdateAsc"><![CDATA[a.sale_count_update asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderBySaleCountUpdateDesc"><![CDATA[a.sale_count_update desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByPriceDesc"><![CDATA[a.sale_price desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByPriceAsc"><![CDATA[a.sale_price asc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByUpDateDesc"><![CDATA[a.up_date desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByViewCountDesc"><![CDATA[a.view_count desc,]]></isNotEmpty>
+		<isNotEmpty property="map.update"><![CDATA[a.up_date desc,]]></isNotEmpty>
+		<isNotEmpty property="map.price"><![CDATA[a.sale_price asc,]]></isNotEmpty>
+		<isNotEmpty property="map.isHot"><![CDATA[a.view_count desc,]]></isNotEmpty>
+		<isNotEmpty property="map.order_value">a.order_value desc, </isNotEmpty>
+		<isNotEmpty property="map.comm_info_tags_order_value">h.order_value desc, </isNotEmpty>
+		<isNotEmpty property="map.orderByAidScaleDesc"><![CDATA[a.aid_scale desc,]]></isNotEmpty>
+		<isNotEmpty property="map.orderByRebateScaleDesc"><![CDATA[a.rebate_scale desc,]]></isNotEmpty>
+
+		a.order_value desc, a.ADD_DATE desc ,a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectClassRankingListCount" resultClass="int"
+		parameterClass="commInfo" cacheModel="oneDayCache">
+		select count(1)
+		from(
+		select a.cls_id,a.full_name,ifnull(b.cls_num,0) as
+		cls_num,a.cls_name,ifnull(b.sum_money,0) as sum_money,a.p_index
+		from (
+		select cls_id,cls_name,bp.full_name,ci.p_index
+		from comm_info ci left join
+		base_province bp on ci.p_index=bp.p_index
+		where ci.comm_type=2
+		and ci.IS_DEL=0
+		group by
+		cls_id
+		)a
+		left join (
+		select count(1) as
+		cls_num,cls_id,cls_name,sum(good_sum_price) as sum_money
+		from
+		order_info_details oid left join order_info oi on
+		oid.order_id=oi.id
+		group by cls_id
+		)b on a.cls_id=b.cls_id
+		where 1=1
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like
+			#map.p_index_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.cls_num"> cls_num>#map.cls_num#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sum_money">
+			sum_money>#map.sum_money#</isNotEmpty>
+		order by b.sum_money desc
+		) aa
+	</select>
+	<select id="selectClassRankList" resultMap="classRankList"
+		parameterClass="commInfo" cacheModel="oneDayCache">
+		select a.cls_id,a.full_name,ifnull(b.cls_num,0) as
+		cls_num,a.cls_name,ifnull(b.sum_money,0) as sum_money,a.p_index
+		from (
+		select cls_id,cls_name,bp.full_name,ci.p_index
+		from comm_info ci left join
+		base_province bp on ci.p_index=bp.p_index
+		where ci.comm_type=2
+		and ci.IS_DEL=0
+		group by
+		cls_id
+		)a
+		left join (
+		select count(1) as
+		cls_num,cls_id,cls_name,sum(good_sum_price) as sum_money
+		from
+		order_info_details oid left join order_info oi on
+		oid.order_id=oi.id
+		group by cls_id
+		)b on a.cls_id=b.cls_id
+		where 1=1
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like
+			#map.p_index_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.cls_num"> cls_num>#map.cls_num#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sum_money">
+			sum_money>#map.sum_money#</isNotEmpty>
+		order by b.sum_money desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+	<insert id="insertCommInfo" parameterClass="commInfo">
+		<![CDATA[insert into COMM_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>
+			<isNotNull prepend="," property="pd_id">PD_ID</isNotNull>
+			<isNotNull prepend="," property="pd_name">PD_NAME</isNotNull>
+			<isNotNull prepend="," property="cls_id">CLS_ID</isNotNull>
+			<isNotNull prepend="," property="cls_name">CLS_NAME</isNotNull>
+			<isNotNull prepend="," property="par_cls_id">PAR_CLS_ID</isNotNull>
+			<isNotNull prepend="," property="comm_no">COMM_NO</isNotNull>
+			<isNotNull prepend="," property="comm_type">COMM_TYPE</isNotNull>
+			<isNotNull prepend="," property="sub_title">SUB_TITLE</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID</isNotNull>
+			<isNotNull prepend="," property="main_pic">MAIN_PIC</isNotNull>
+			<isNotNull prepend="," property="price_ref">PRICE_REF</isNotNull>
+			<isNotNull prepend="," property="sale_price">SALE_PRICE</isNotNull>
+			<isNotNull prepend="," property="is_sell">IS_SELL</isNotNull>
+			<isNotNull prepend="," property="up_date">UP_DATE</isNotNull>
+			<isNotNull prepend="," property="down_date">DOWN_DATE</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>
+			<isNotNull prepend="," property="comm_desc">COMM_DESC</isNotNull>
+			<isNotNull prepend="," property="prom_type">PROM_TYPE</isNotNull>
+			<isNotNull prepend="," property="prom_info">PROM_INFO</isNotNull>
+			<isNotNull prepend="," property="prom_url">PROM_URL</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>
+			<isNotNull prepend="," property="is_zp">IS_ZP</isNotNull>
+			<isNotNull prepend="," property="save_step">SAVE_STEP</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE</isNotNull>
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC</isNotNull>
+			<isNotNull prepend="," property="audit_service_desc">AUDIT_SERVICE_DESC</isNotNull>
+			<isNotNull prepend="," property="is_locked">IS_LOCKED</isNotNull>
+			<isNotNull prepend="," property="lock_user_id">LOCK_USER_ID</isNotNull>
+			<isNotNull prepend="," property="brand_id">BRAND_ID</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>
+			<isNotNull prepend="," property="comm_barcode">COMM_BARCODE</isNotNull>
+			<isNotNull prepend="," property="comm_weight">COMM_WEIGHT</isNotNull>
+			<isNotNull prepend="," property="is_freeship">IS_FREESHIP</isNotNull>
+			<isNotNull prepend="," property="key_word">KEY_WORD</isNotNull>
+			<isNotNull prepend="," property="seo_title">SEO_TITLE</isNotNull>
+			<isNotNull prepend="," property="seo_keyword">SEO_KEYWORD</isNotNull>
+			<isNotNull prepend="," property="seo_desc">SEO_DESC</isNotNull>
+			<isNotNull prepend="," property="view_count">VIEW_COUNT</isNotNull>
+			<isNotNull prepend="," property="gn_type">GN_TYPE</isNotNull>
+			<isNotNull prepend="," property="is_sync_jxc">IS_SYNC_JXC</isNotNull>
+			<isNotNull prepend="," property="freight_id">FREIGHT_ID</isNotNull>
+			<isNotNull prepend="," property="comm_volume">COMM_VOLUME</isNotNull>
+			<isNotNull prepend="," property="comment_count">COMMENT_COUNT</isNotNull>
+			<isNotNull prepend="," property="sale_count">SALE_COUNT</isNotNull>
+			<isNotNull prepend="," property="sale_count_update">SALE_COUNT_UPDATE</isNotNull>
+			<isNotNull prepend="," property="inventory">INVENTORY</isNotNull>
+			<isNotNull prepend="," property="is_self_support">IS_SELF_SUPPORT</isNotNull>
+			<isNotNull prepend="," property="price_ref_desc">PRICE_REF_DESC</isNotNull>
+			<isNotNull prepend="," property="is_commend">IS_COMMEND</isNotNull>
+			<isNotNull prepend="," property="tb_url">TB_URL</isNotNull>
+			<isNotNull prepend="," property="tb_id">TB_ID</isNotNull>
+			<isNotNull prepend="," property="cost_price">COST_PRICE</isNotNull>
+			<isNotNull prepend="," property="line_type">LINE_TYPE</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule">FANXIAN_RULE</isNotNull>
+			<isNotNull prepend="," property="is_has_tc">IS_HAS_TC</isNotNull>
+			<isNotNull prepend="," property="show_notes">SHOW_NOTES</isNotNull>
+			<isNotNull prepend="," property="comm_notes">COMM_NOTES</isNotNull>
+			<isNotNull prepend="," property="root_cls_id">ROOT_CLS_ID</isNotNull>
+			<isNotNull prepend="," property="red_scale">RED_SCALE</isNotNull>
+			<isNotNull prepend="," property="last_input_date">LAST_INPUT_DATE</isNotNull>
+			<isNotNull prepend="," property="is_rebate">IS_REBATE</isNotNull>
+			<isNotNull prepend="," property="rebate_scale">REBATE_SCALE</isNotNull>
+			<isNotNull prepend="," property="is_aid">IS_AID</isNotNull>
+			<isNotNull prepend="," property="aid_scale">AID_SCALE</isNotNull>
+			<isNotNull prepend="," property="sum_rebate_money">SUM_REBATE_MONEY</isNotNull>
+			<isNotNull prepend="," property="sum_aid_money">SUM_AID_MONEY</isNotNull>
+			<isNotNull prepend="," property="is_zingying">IS_ZINGYING</isNotNull>
+			<isNotNull prepend="," property="is_jd">IS_JD</isNotNull>
+			<isNotNull prepend="," property="jd_agent_price">JD_AGENT_PRICE</isNotNull>
+			<isNotNull prepend="," property="jd_skuid">JD_SKUID</isNotNull>
+			<isNotNull prepend="," property="is_fapiao">IS_FAPIAO</isNotNull>
+			<isNotNull prepend="," property="comm_qrcode_path">COMM_QRCODE_PATH</isNotNull>
+			<isNotNull prepend="," property="is_ziti">IS_ZITI</isNotNull>
+			<isNotNull prepend="," property="multiple_order_value">MULTIPLE_ORDER_VALUE</isNotNull>
+			<isNotNull prepend="," property="entp_comm_class_id">ENTP_COMM_CLASS_ID</isNotNull>
+			<isNotNull prepend="," property="mark_comm_id">MARK_COMM_ID</isNotNull>
+			<isNotNull prepend="," property="is_temp">IS_TEMP</isNotNull>
+			<isNotNull prepend="," property="presell_date">PRESELL_DATE</isNotNull>
+			<isNotNull prepend="," property="group_count">GROUP_COUNT</isNotNull>
+			<isNotNull prepend="," property="group_type">GROUP_TYPE</isNotNull>
+			<isNotNull prepend="," property="group_time">GROUP_TIME</isNotNull>
+			<isNotNull prepend="," property="is_activity_default">IS_ACTIVITY_DEFAULT</isNotNull>
+			<isNotNull prepend="," property="copy_id">COPY_ID</isNotNull>
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_id">#pd_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_name">#pd_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cls_id">#cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">#cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="par_cls_id">#par_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_no">#comm_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_type">#comm_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sub_title">#sub_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">#own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="main_pic">#main_pic:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="price_ref">#price_ref:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sale_price">#sale_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_sell">#is_sell:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="up_date">#up_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="down_date">#down_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_desc">#comm_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="prom_type">#prom_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="prom_info">#prom_info:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="prom_url">#prom_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_zp">#is_zp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="save_step">#save_step:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">#audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">#audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_service_desc">#audit_service_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_locked">#is_locked:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="lock_user_id">#lock_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="brand_id">#brand_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_barcode">#comm_barcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_weight">#comm_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_freeship">#is_freeship:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="key_word">#key_word:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_title">#seo_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_keyword">#seo_keyword:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_desc">#seo_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="view_count">#view_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gn_type">#gn_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_sync_jxc">#is_sync_jxc:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="freight_id">#freight_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_volume">#comm_volume:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comment_count">#comment_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sale_count">#sale_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sale_count_update">#sale_count_update:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="inventory">#inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_self_support">#is_self_support:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_ref_desc">#price_ref_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_commend">#is_commend:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="tb_url">#tb_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tb_id">#tb_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="cost_price">#cost_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="line_type">#line_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule">#fanxian_rule:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_has_tc">#is_has_tc:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="show_notes">#show_notes:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_notes">#comm_notes:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="root_cls_id">#root_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="red_scale">#red_scale:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="last_input_date">#last_input_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_rebate">#is_rebate:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rebate_scale">#rebate_scale:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_aid">#is_aid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="aid_scale">#aid_scale:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="sum_rebate_money">#sum_rebate_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="sum_aid_money">#sum_aid_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_zingying">#is_zingying:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_jd">#is_jd:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="jd_agent_price">#jd_agent_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="jd_skuid">#jd_skuid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_fapiao">#is_fapiao:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_qrcode_path">#COMM_QRCODE_PATH:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_ziti">#is_ziti:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="multiple_order_value">#multiple_order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_comm_class_id">#entp_comm_class_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="mark_comm_id">#mark_comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_temp">#is_temp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="presell_date">#presell_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="group_count">#group_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="group_type">#group_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="group_time">#group_time:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_activity_default">#is_activity_default:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="copy_id">#copy_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="updateCommInfo" parameterClass="commInfo">
+		update COMM_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_id">PD_ID = #pd_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_name">PD_NAME = #pd_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cls_id">CLS_ID = #cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">CLS_NAME =#cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="par_cls_id">PAR_CLS_ID =#par_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_no">COMM_NO = #comm_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_type">COMM_TYPE =#comm_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sub_title">SUB_TITLE =#sub_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID =#own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="main_pic">MAIN_PIC =#main_pic:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="price_ref">PRICE_REF =#price_ref:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sale_price">SALE_PRICE =#sale_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_sell">IS_SELL = #is_sell:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="up_date">UP_DATE =#up_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="down_date">DOWN_DATE =#down_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_desc">COMM_DESC =#comm_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="prom_type">PROM_TYPE =#prom_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="prom_info">PROM_INFO =#prom_info:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="prom_url">PROM_URL =#prom_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE =#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_zp">IS_ZP = #is_zp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="save_step">SAVE_STEP =#save_step:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE =#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID =#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME =#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE =#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID =#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE =#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID =#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE =#audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID =#audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE =#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC =#audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_service_desc">AUDIT_SERVICE_DESC =#audit_service_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_locked">IS_LOCKED =#is_locked:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="lock_user_id">LOCK_USER_ID =#lock_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="brand_id">BRAND_ID =#brand_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME =#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_barcode">COMM_BARCODE =#comm_barcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_weight">COMM_WEIGHT =#comm_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_freeship">IS_FREESHIP =#is_freeship:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="key_word">KEY_WORD =#key_word:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_title">SEO_TITLE =#seo_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_keyword">SEO_KEYWORD =#seo_keyword:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_desc">SEO_DESC =#seo_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="view_count">VIEW_COUNT =#view_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gn_type">GN_TYPE = #gn_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_sync_jxc">IS_SYNC_JXC =#is_sync_jxc:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="freight_id">FREIGHT_ID =#freight_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_volume">COMM_VOLUME =#comm_volume:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comment_count">COMMENT_COUNT =#comment_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sale_count">SALE_COUNT =#sale_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sale_count_update">SALE_COUNT_UPDATE =#sale_count_update:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="inventory">INVENTORY =#inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_self_support">IS_SELF_SUPPORT =#is_self_support:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_ref_desc">PRICE_REF_DESC =#price_ref_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_commend">IS_COMMEND =#is_commend:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="tb_id">TB_ID = #tb_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tb_url">TB_URL = #tb_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cost_price">COST_PRICE =#cost_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.freight_id_is_null">freight_id = null</isNotNull>
+			<isNotNull prepend="," property="line_type">LINE_TYPE =#line_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule">FANXIAN_RULE =#fanxian_rule:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_has_tc">IS_HAS_TC =#is_has_tc:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="show_notes">SHOW_NOTES =#show_notes:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_notes">COMM_NOTES =#comm_notes:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="root_cls_id">ROOT_CLS_ID =#root_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="red_scale">RED_SCALE =#red_scale:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="last_input_date">LAST_INPUT_DATE =#last_input_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_rebate">IS_REBATE =#is_rebate:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rebate_scale">REBATE_SCALE =#rebate_scale:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_aid">IS_AID = #is_aid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="aid_scale">AID_SCALE =#aid_scale:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="sum_rebate_money">SUM_REBATE_MONEY =#sum_rebate_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="sum_aid_money">SUM_AID_MONEY =#sum_aid_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_zingying">IS_ZINGYING =#is_zingying:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_jd">IS_JD = #is_jd:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="jd_agent_price">JD_AGENT_PRICE =#jd_agent_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="jd_skuid">JD_SKUID =#jd_skuid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_fapiao">IS_FAPIAO =#is_fapiao:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_qrcode_path">COMM_QRCODE_PATH =#comm_qrcode_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_ziti">IS_ZITI = #is_ziti:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="multiple_order_value">MULTIPLE_ORDER_VALUE =#multiple_order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_comm_class_id">ENTP_COMM_CLASS_ID =#entp_comm_class_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="mark_comm_id">MARK_COMM_ID =#mark_comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_temp">IS_TEMP =#is_temp:INTEGER#</isNotNull>
+            <isNotNull prepend="," property="presell_date">presell_date = #presell_date:TIMESTAMP#</isNotNull>
+            <isNotNull prepend="," property="group_count">GROUP_COUNT = #group_count:INTEGER#</isNotNull>
+            <isNotNull prepend="," property="group_type">GROUP_TYPE = #group_type:INTEGER#</isNotNull>
+            <isNotNull prepend="," property="group_time">GROUP_TIME = #group_time:INTEGER#</isNotNull>
+            <isNotNull prepend="," property="is_activity_default">IS_ACTIVITY_DEFAULT = #is_activity_default:INTEGER#</isNotNull>
+            <isNotNull prepend="," property="copy_id">COPY_ID = #copy_id:INTEGER#</isNotNull>
+
+			<isNotNull prepend="," property="map.add_sale_count">SALE_COUNT = SALE_COUNT + #map.add_sale_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.sub_sale_count">SALE_COUNT = SALE_COUNT - #map.sub_sale_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.add_sale_count_update">SALE_COUNT_UPDATE =SALE_COUNT_UPDATE + #map.add_sale_count_update:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.sub_sale_count_update">SALE_COUNT_UPDATE =SALE_COUNT_UPDATE - #map.sub_sale_count_update:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.add_inventory">INVENTORY = INVENTORY +#map.add_inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.sub_inventory">INVENTORY = INVENTORY -#map.sub_inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.add_sum_rebate_money">SUM_REBATE_MONEY =SUM_REBATE_MONEY + #map.add_sum_rebate_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="map.add_sum_aid_money">SUM_AID_MONEY =SUM_AID_MONEY + #map.add_sum_aid_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="map.add_comment_count">COMMENT_COUNT = COMMENT_COUNT + #map.add_comment_count:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pd_id">pd_id = #map.pd_id#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.own_entp_id">OWN_ENTP_ID =
+			#map.own_entp_id#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.jd_skuid">JD_SKUID =#map.jd_skuid#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_zingying">IS_ZINGYING =#map.jd_skuid#
+		</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#
+				</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<update id="updateCommInfoInventory" parameterClass="commInfo">
+		update
+		COMM_INFO set INVENTORY = INVENTORY - #inventory:INTEGER# where ID =
+		#id#
+	</update>
+
+	<update id="updateCommInfoMinPrice" parameterClass="commInfo">
+		update COMM_INFO a set a.sale_price =
+		(
+		select
+		ifnull(min(t.comm_price),a.price_ref)
+		from comm_tczh_price t
+		where
+		t.comm_id = a.id
+		)
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pd_id">pd_id = #map.pd_id#
+		</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#
+				</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCommInfo" parameterClass="commInfo">
+		delete from COMM_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#
+				</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

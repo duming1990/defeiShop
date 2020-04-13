@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="CARD_P_INDEX">
+
+	<typeAlias alias="cardPIndex" type="com.ebiz.webapp.domain.CardPIndex" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCardPIndex" />
+		<flushOnExecute statement="updateCardPIndex" />
+		<flushOnExecute statement="deleteCardPIndex" />
+	</cacheModel>
+
+	<resultMap id="cardPIndexResultForList" class="cardPIndex">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="CARD_APPLY_ID" property="card_apply_id" jdbcType="INTEGER" />
+		<result column="SERVICE_ID" property="service_id" jdbcType="INTEGER" />
+		<result column="P_INDEX" property="p_index" jdbcType="BIGINT" />
+		<result column="P_NAME" property="p_name" jdbcType="VARCHAR" />
+		<result column="SERVICE_NAME" property="service_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cardPIndexResult" class="cardPIndex" extends="cardPIndexResultForList">
+	</resultMap>
+
+	<sql id="sf-cardPIndex">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_apply_id">a.CARD_APPLY_ID = #card_apply_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="service_id">a.SERVICE_ID = #service_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX = #p_index:BIGINT#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_name">a.P_NAME = #p_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="service_name">a.SERVICE_NAME = #service_name:VARCHAR#</isNotEmpty>
+	</sql>
+
+	<select id="selectCardPIndex" resultMap="cardPIndexResult" parameterClass="cardPIndex" cacheModel="oneDayCache">
+		select * from CARD_P_INDEX a where 1 = 1
+		<include refid="sf-cardPIndex" />
+	</select>
+
+	<select id="selectCardPIndexList" resultMap="cardPIndexResultForList" parameterClass="cardPIndex" cacheModel="oneDayCache">
+		select * from CARD_P_INDEX a where 1 = 1
+		<include refid="sf-cardPIndex" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectCardPIndexCount" resultClass="int" parameterClass="cardPIndex" cacheModel="oneDayCache">
+		select count(*) from CARD_P_INDEX a where 1 = 1
+		<include refid="sf-cardPIndex" />
+	</select>
+
+	<select id="selectCardPIndexPaginatedList" resultMap="cardPIndexResult" parameterClass="cardPIndex" cacheModel="oneDayCache">
+		select * from CARD_P_INDEX a where 1 = 1
+		<include refid="sf-cardPIndex" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCardPIndex" parameterClass="cardPIndex">
+		<![CDATA[insert into CARD_P_INDEX (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="card_apply_id">CARD_APPLY_ID</isNotNull>	
+			<isNotNull prepend="," property="service_id">SERVICE_ID</isNotNull>	
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>	
+			<isNotNull prepend="," property="p_name">P_NAME</isNotNull>	
+			<isNotNull prepend="," property="service_name">SERVICE_NAME</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_apply_id">#card_apply_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="service_id">#service_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="p_name">#p_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="service_name">#service_name:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCardPIndex" parameterClass="cardPIndex">
+		update CARD_P_INDEX
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_apply_id">CARD_APPLY_ID = #card_apply_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="service_id">SERVICE_ID = #service_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="p_name">P_NAME = #p_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="service_name">SERVICE_NAME = #service_name:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCardPIndex" parameterClass="cardPIndex">
+		delete from CARD_P_INDEX where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.card_apply_id">CARD_APPLY_ID = #map.card_apply_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

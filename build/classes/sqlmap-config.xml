@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig 
+		PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" 
+		"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<!-- @author Wu,Yang -->
+<!-- @version 2011-04-20 02:13:04 -->
+<sqlMapConfig>
+	<settings cacheModelsEnabled="false" enhancementEnabled="true" lazyLoadingEnabled="true"
+		useStatementNamespaces="false" statementCachingEnabled="true" classInfoCacheEnabled="true" />
+
+	<typeHandler jdbcType="BLOB" javaType="[B" callback="org.springframework.orm.ibatis.support.BlobByteArrayTypeHandler" />
+	<typeHandler jdbcType="CLOB" javaType="java.lang.String" callback="org.springframework.orm.ibatis.support.ClobStringTypeHandler" />
+
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_DATA_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_PROVINCE_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/MOD_POPEDOM_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_POPEDOM_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ROLE_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ROLE_USER_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SYS_MODULE_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SYS_SETTING_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/USER_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/MAIL_SERVER_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/MSG_SqlMap.xml" />
+    <sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/MSG_RECEIVER_SqlMap.xml" />
+	<!-- 新闻模块  -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/NEWS_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/NEWS_CONTENT_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/NEWS_ATTACHMENT_SqlMap.xml" />
+	<!-- 新增数据库设计表  -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/PD_CONTENT_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/PD_IMGS_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ENTP_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ENTP_CONTENT_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/QA_INFO_SqlMap.xml" />
+	
+	<!-- 品牌表 add 2012-05-18  -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_BRAND_INFO_SqlMap.xml" />
+	<!-- 帮助中心 add 2012-05-28  -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/HELP_CONTENT_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/HELP_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/HELP_MODULE_SqlMap.xml" />
+	<!-- 基础类别 基础属性 add 2012-05-30  -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_CLASS_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_CLASS_LINK_ATTRIBUTE_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_ATTRIBUTE_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_ATTRIBUTE_SON_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_CONTENT_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_IMGS_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMMENT_INFO_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/CART_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SHIPPING_ADDRESS_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_INFO_DETAILS_SqlMap.xml" />
+	
+    <sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_LINK_SqlMap.xml" />
+    <sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/INVOICE_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RETURNS_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_FILES_SqlMap.xml" />
+	
+	<!-- 找回密码  add 2013-7-23   -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RESET_PASSWORD_RECORD_SqlMap.xml" />
+	<!-- 操作日志  add 2013-12-5   -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SYS_OPER_LOG_SqlMap.xml" />
+	
+	<!-- 商品 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMM_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMM_TCZH_ATTRIBUTE_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMM_TCZH_PRICE_SqlMap.xml" />
+	
+	<!-- 运费 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/FREIGHT_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/FREIGHT_DETAIL_SqlMap.xml" />
+	
+	<!-- 2014-1-7-->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/WL_COMP_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/WL_COMP_MATFLOW_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/WL_ORDER_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_LINK_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_MERGER_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RETURNS_INFO_FJ_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/USER_SCORE_RECORD_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SC_ENTP_COMM_SqlMap.xml" />
+	
+	<!-- 退换货以及异常订单 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SWAPS_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RETURNS_INFO_ORDER_RELATION_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RETURNS_SWAP_DETAIL_SqlMap.xml" />
+	<!-- 优惠 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/DISCOUNT_STORES_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RANK_TOP_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/WL_WH_INFO_SqlMap.xml" />
+	
+	<!-- 触屏版 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/M_BASE_LINK_SqlMap.xml" />
+	
+	<!---->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/USER_SECURITY_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/USER_BI_RECORD_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/USER_MONEY_APPLY_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/USER_RELATION_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/USER_RELATION_PAR_SqlMap.xml" />
+	
+	<!--运营中心-->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SERVICE_CENTER_INFO_SqlMap.xml" />
+	<!--统计表-->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/TONGJI_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/USER_JIFEN_RECORD_SqlMap.xml" />
+	<!--审核记录表-->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_AUDIT_RECORD_SqlMap.xml" />
+	
+    <!-- 红包相关功能 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RW_HB_RULE_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RW_HB_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RW_YHQ_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/RW_YHQ_RULE_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_RETURN_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_RETURN_AUDIT_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_RETURN_MONEY_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_RETURN_MSG_SqlMap.xml" />
+	
+    <!--标签管理 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/BASE_COMMINFO_TAGS_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMM_INFO_TAGS_SqlMap.xml" />
+    <!--限时团购 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMM_INFO_PROMOTION_SqlMap.xml" />
+	
+	<!-- 优惠券 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/YHQ_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/YHQ_INFO_SON_SqlMap.xml" />
+	<!-- 评论回复 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMMENT_INFO_SON_SqlMap.xml" />
+	
+	<!-- 订单审核 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ORDER_AUDIT_SqlMap.xml" />
+	<!-- 驿站 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_INFO_SqlMap.xml"/>
+	<!-- 贫困户 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/POOR_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/POOR_CUO_SHI_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/POOR_ZE_REN_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/POOR_FAMILY_SqlMap.xml"/>
+	<!-- 商品扶贫对象 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMM_INFO_POORS_SqlMap.xml" />
+	<!-- 村圈子 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_CONTACT_GROUP_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_CONTACT_LIST_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_DYNAMIC_COMMENT_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_DYNAMIC_RECORD_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_DYNAMIC_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_MEMBER_SqlMap.xml"/>
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_DYNAMIC_REPORT_SqlMap.xml" />
+	<!-- 敏感词 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SENSITIVE_WORD_SqlMap.xml" />
+	<!-- 京东地区库 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/JD_AREAS_SqlMap.xml" />
+	<!-- 第三方APP认证 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/APP_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/APP_TOKENS_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SERVICE_BASE_LINK_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ENTP_BASE_LINK_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/YHQ_LINK_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/M_SERVICE_BASE_LINK_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ENTP_COMM_CLASS_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ENTP_DUI_ZHANG_SqlMap.xml" />
+	
+	<!-- 短信群发 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SHORT_MESSAGE_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/SHORT_MESSAGE_RECEIVER_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/VILLAGE_TOUR_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/IMPORT_BI_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/IMPORT_BI_SON_SqlMap.xml" />
+	
+	<!--福利卡 -->
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/CARD_INFO_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/CARD_P_INDEX_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/CARD_APPLY_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/CARD_GEN_HIS_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMM_WELFARE_APPLY_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/COMM_WELFARE_DETAIL_SqlMap.xml" />
+	
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ACTIVITY_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ACTIVITY_APPLY_SqlMap.xml" />
+	<sqlMap resource="com/ebiz/webapp/dao/ibatis/maps/ACTIVITY_APPLY_COMM_SqlMap.xml" />
+</sqlMapConfig>

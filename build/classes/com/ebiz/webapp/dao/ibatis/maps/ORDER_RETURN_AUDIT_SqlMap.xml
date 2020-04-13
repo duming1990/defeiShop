@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="ORDER_RETURN_AUDIT">
+
+	<typeAlias alias="orderReturnAudit" type="com.ebiz.webapp.domain.OrderReturnAudit" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertOrderReturnAudit" />
+		<flushOnExecute statement="updateOrderReturnAudit" />
+		<flushOnExecute statement="deleteOrderReturnAudit" />
+	</cacheModel>
+
+	<resultMap id="orderReturnAuditResultForList" class="orderReturnAudit">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ORDER_RETURN_ID" property="order_return_id" jdbcType="INTEGER" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="user_id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ORDER_STATE" property="order_state" jdbcType="INTEGER" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="orderReturnAuditResult" class="orderReturnAudit" extends="orderReturnAuditResultForList">
+	</resultMap>
+
+	<sql id="sf-orderReturnAudit">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_return_id">a.ORDER_RETURN_ID = #order_return_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">a.REMARK = #remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">a.USER_ID = #user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_name">a.USER_NAME = #user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_state">a.ORDER_STATE = #order_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectOrderReturnAudit" resultMap="orderReturnAuditResult" parameterClass="orderReturnAudit" cacheModel="oneDayCache">
+		select * from ORDER_RETURN_AUDIT a where 1 = 1
+		<include refid="sf-orderReturnAudit" />
+	</select>
+
+	<select id="selectOrderReturnAuditList" resultMap="orderReturnAuditResultForList" parameterClass="orderReturnAudit" cacheModel="oneDayCache">
+		select * from ORDER_RETURN_AUDIT a where 1 = 1
+		<include refid="sf-orderReturnAudit" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectOrderReturnAuditCount" resultClass="int" parameterClass="orderReturnAudit" cacheModel="oneDayCache">
+		select count(*) from ORDER_RETURN_AUDIT a where 1 = 1
+		<include refid="sf-orderReturnAudit" />
+	</select>
+
+	<select id="selectOrderReturnAuditPaginatedList" resultMap="orderReturnAuditResult" parameterClass="orderReturnAudit" cacheModel="oneDayCache">
+		select * from ORDER_RETURN_AUDIT a where 1 = 1
+		<include refid="sf-orderReturnAudit" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertOrderReturnAudit" parameterClass="orderReturnAudit">
+		<![CDATA[insert into ORDER_RETURN_AUDIT (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="order_return_id">ORDER_RETURN_ID</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+			<isNotNull prepend="," property="user_id">USER_ID</isNotNull>	
+			<isNotNull prepend="," property="user_name">USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="order_state">ORDER_STATE</isNotNull>	
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_return_id">#order_return_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_id">#user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">#user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_state">#order_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateOrderReturnAudit" parameterClass="orderReturnAudit">
+		update ORDER_RETURN_AUDIT
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_return_id">ORDER_RETURN_ID = #order_return_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_id">USER_ID = #user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">USER_NAME = #user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_state">ORDER_STATE = #order_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteOrderReturnAudit" parameterClass="orderReturnAudit">
+		delete from ORDER_RETURN_AUDIT where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

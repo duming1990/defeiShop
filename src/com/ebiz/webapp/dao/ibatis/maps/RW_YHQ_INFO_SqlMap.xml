@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="RW_YHQ_INFO">
+
+	<typeAlias alias="rwYhqInfo" type="com.ebiz.webapp.domain.RwYhqInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertRwYhqInfo" />
+		<flushOnExecute statement="updateRwYhqInfo" />
+		<flushOnExecute statement="deleteRwYhqInfo" />
+	</cacheModel>
+
+	<resultMap id="rwYhqInfoResultForList" class="rwYhqInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="ORIGIN_TYPE" property="origin_type" jdbcType="INTEGER" />
+		<result column="HB_CLASS" property="hb_class" jdbcType="INTEGER" />
+		<result column="MIN_MONEY" property="min_money" jdbcType="INTEGER" />
+		<result column="AMOUNT" property="amount" jdbcType="INTEGER" />
+		<result column="RUEL_TYPE" property="ruel_type" jdbcType="INTEGER" />
+		<result column="EFFECT_START_DATE" property="effect_start_date" jdbcType="TIMESTAMP" />
+		<result column="EFFECT_END_DATE" property="effect_end_date" jdbcType="TIMESTAMP" />
+		<result column="IS_USED" property="is_used" jdbcType="INTEGER" />
+		<result column="USED_DATE" property="used_date" jdbcType="TIMESTAMP" />
+		<result column="LINK_ID" property="link_id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_UID" property="add_uid" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_UID" property="del_uid" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="rwYhqInfoResult" class="rwYhqInfo" extends="rwYhqInfoResultForList">
+	</resultMap>
+	
+	<resultMap id="rwYhqInfoStatisticaSumResult" class="rwYhqInfo" >
+		<result column="SUM_MONEY" property="map.sum_money" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="sf-rwYhqInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title">a.TITLE = #title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="origin_type">a.ORIGIN_TYPE = #origin_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hb_class">a.HB_CLASS = #hb_class:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="min_money">a.MIN_MONEY = #min_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="amount">a.AMOUNT = #amount:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="ruel_type">a.RUEL_TYPE = #ruel_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="effect_start_date">a.EFFECT_START_DATE = #effect_start_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="effect_end_date">a.EFFECT_END_DATE = #effect_end_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_used">a.IS_USED = #is_used:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="used_date">a.USED_DATE = #used_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_id">a.LINK_ID = #link_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_uid">a.ADD_UID = #add_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_uid">a.DEL_UID = #del_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">a.REMARK = #remark:VARCHAR#</isNotEmpty>
+	</sql>
+
+	<select id="selectRwYhqInfo" resultMap="rwYhqInfoResult" parameterClass="rwYhqInfo" cacheModel="oneDayCache">
+		select * from RW_YHQ_INFO a where 1 = 1
+		<include refid="sf-rwYhqInfo" />
+	</select>
+
+	<select id="selectRwYhqInfoList" resultMap="rwYhqInfoResultForList" parameterClass="rwYhqInfo" cacheModel="oneDayCache">
+		select * from RW_YHQ_INFO a where 1 = 1
+		<include refid="sf-rwYhqInfo" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectRwYhqInfoCount" resultClass="int" parameterClass="rwYhqInfo" cacheModel="oneDayCache">
+		select count(*) from RW_YHQ_INFO a where 1 = 1
+		<include refid="sf-rwYhqInfo" />
+	</select>
+
+	<select id="selectRwYhqInfoPaginatedList" resultMap="rwYhqInfoResult" parameterClass="rwYhqInfo" cacheModel="oneDayCache">
+		select * from RW_YHQ_INFO a where 1 = 1
+		<include refid="sf-rwYhqInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectRwYhqInfoStatisticaSum" resultMap="rwYhqInfoStatisticaSumResult" parameterClass="rwYhqInfo" cacheModel="oneDayCache">
+		select sum(a.amount) as sum_money from RW_YHQ_INFO a where 1 = 1
+		<include refid="sf-rwYhqInfo" />
+	</select>
+
+	<insert id="insertRwYhqInfo" parameterClass="rwYhqInfo">
+		<![CDATA[insert into RW_YHQ_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="title">TITLE</isNotNull>	
+			<isNotNull prepend="," property="origin_type">ORIGIN_TYPE</isNotNull>	
+			<isNotNull prepend="," property="hb_class">HB_CLASS</isNotNull>	
+			<isNotNull prepend="," property="min_money">MIN_MONEY</isNotNull>	
+			<isNotNull prepend="," property="amount">AMOUNT</isNotNull>	
+			<isNotNull prepend="," property="ruel_type">RUEL_TYPE</isNotNull>	
+			<isNotNull prepend="," property="effect_start_date">EFFECT_START_DATE</isNotNull>	
+			<isNotNull prepend="," property="effect_end_date">EFFECT_END_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_used">IS_USED</isNotNull>	
+			<isNotNull prepend="," property="used_date">USED_DATE</isNotNull>	
+			<isNotNull prepend="," property="link_id">LINK_ID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_uid">ADD_UID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_uid">DEL_UID</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title">#title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="origin_type">#origin_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_class">#hb_class:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="min_money">#min_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="amount">#amount:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="ruel_type">#ruel_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="effect_start_date">#effect_start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="effect_end_date">#effect_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_used">#is_used:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="used_date">#used_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="link_id">#link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_uid">#add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">#del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateRwYhqInfo" parameterClass="rwYhqInfo">
+		update RW_YHQ_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title">TITLE = #title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="origin_type">ORIGIN_TYPE = #origin_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_class">HB_CLASS = #hb_class:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="min_money">MIN_MONEY = #min_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="amount">AMOUNT = #amount:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="ruel_type">RUEL_TYPE = #ruel_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="effect_start_date">EFFECT_START_DATE = #effect_start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="effect_end_date">EFFECT_END_DATE = #effect_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_used">IS_USED = #is_used:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="used_date">USED_DATE = #used_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="link_id">LINK_ID = #link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_uid">ADD_UID = #add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">DEL_UID = #del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteRwYhqInfo" parameterClass="rwYhqInfo">
+		delete from RW_YHQ_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

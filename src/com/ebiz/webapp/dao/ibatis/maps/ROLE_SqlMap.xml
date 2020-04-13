@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ROLE">
+
+	<typeAlias alias="role" type="com.ebiz.webapp.domain.Role" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertRole" />
+		<flushOnExecute statement="updateRole" />
+		<flushOnExecute statement="deleteRole" />
+	</cacheModel>
+
+	<resultMap id="roleResultForList" class="role">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ROLE_NAME" property="role_name" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="roleResult" class="role" extends="roleResultForList">
+	</resultMap>
+
+	<sql id="sf-role">
+		<isNotEmpty prepend=" and " property="id">ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="role_name">ROLE_NAME = #role_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">ADD_DATE = #add_date:DATE#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">UPDATE_DATE = #update_date:DATE#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">DEL_DATE = #del_date:DATE#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.not_in_id">id not in($map.not_in_id$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.role_name_like">ROLE_NAME like '%' #map.role_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.role_id_gt"><![CDATA[ID > #map.role_id_gt#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_id_has_set">ID in (select t.ROLE_ID  from role_user t where t.USER_ID = #map.user_id_has_set#)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_id_not_set">ID not in (select t.ROLE_ID  from role_user t where t.USER_ID = #map.user_id_not_set#)</isNotEmpty>
+	</sql>
+
+	<select id="selectRole" resultMap="roleResult" parameterClass="role" cacheModel="oneDayCache">
+		select * from ROLE where 1 = 1
+		<include refid="sf-role" />
+	</select>
+
+	<select id="selectRoleList" resultMap="roleResultForList" parameterClass="role" cacheModel="oneDayCache">
+		
+		select * from ROLE where 1 = 1
+		<include refid="sf-role" />
+		order by ORDER_VALUE desc, ID desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectRoleCount" resultClass="int" parameterClass="role" cacheModel="oneDayCache">
+		select count(*) from ROLE where 1 = 1
+		<include refid="sf-role" />
+	</select>
+
+	<select id="selectRolePaginatedList" resultMap="roleResult" parameterClass="role" cacheModel="oneDayCache">
+		
+		select * from ROLE where 1 = 1
+		<include refid="sf-role" />
+		order by ORDER_VALUE desc, ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertRole" parameterClass="role">
+		<![CDATA[insert into ROLE (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="role_name">ROLE_NAME</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_lock">IS_LOCK</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="role_name">#role_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">#is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateRole" parameterClass="role">
+		update ROLE
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="role_name">ROLE_NAME = #role_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+		</dynamic>
+		where
+		<isNotEmpty prepend=" " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteRole" parameterClass="role">
+		delete from ROLE where
+		<isNotEmpty prepend=" " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

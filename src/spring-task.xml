@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<bean id="autoRunService" class="com.ebiz.webapp.service.impl.AutoRunServiceImpl" />
+
+	<!-- 1、确认收货7天后，关闭订单并发放奖励，每天晚上1点10分执行 -->
+<!-- 	<bean id="modifyAutoCloseOrderJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject" ref="autoRunService" /> -->
+<!-- 		<property name="targetMethod" value="modifyAutoCloseOrder" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="modifyAutoCloseOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> -->
+<!-- 		<property name="jobDetail" ref="modifyAutoCloseOrderJob" /> -->
+<!-- 		<property name="cronExpression" value="0 10 1 * * ?" /> -->
+<!-- 	</bean> -->
+	<!-- 1、确认收货7天后，关闭订单并发放奖励，每天晚上3点半执行  -->
+	
+	
+	<!-- 5、自动确认收货更新，每天晚上3点半执行 -->
+	<bean id="autoConfirmReceiptJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoRunService" />
+		<property name="targetMethod" value="autoConfirmReceipt" />
+	</bean>
+
+	<bean id="autoConfirmReceiptTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="autoConfirmReceiptJob" />
+		<property name="cronExpression" value="0 30 3 * * ?" />
+	</bean>
+	<!-- 5、自动确认收货更新，每天晚上3点半执行 END -->
+
+	<!--  6、自动取消订单更新，每1小时执行一次 BEGIN -->
+	<bean id="autoOrderCancelJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoRunService" />
+		<property name="targetMethod" value="autoOrderCancel" />
+	</bean>
+
+	<bean id="autoOrderCancelTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="autoOrderCancelJob" />
+		<property name="cronExpression" value="0 0 */1 * * ?" />
+	</bean>
+	<!--  6、自动取消订单更新，每1小时执行一次 END -->
+	
+	<!-- 10、自动退款，每天5:30执行-->
+<!-- 	<bean id="autoTuiKuanAuditJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject" ref="autoRunService" /> -->
+<!-- 		<property name="targetMethod" value="autoTuiKuanAudit" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="autoTuiKuanAuditTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> -->
+<!-- 		<property name="jobDetail" ref="autoTuiKuanAuditJob" /> -->
+<!-- 		<property name="cronExpression" value="0 0 1 * * ?" /> -->
+<!-- 	</bean> -->
+	<!-- 10、自动退款，每天5:30执行 -->
+	
+	<!-- 12、检测新订单 推送消息-->
+	<bean id="newOrderTipJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoRunService" />
+		<property name="targetMethod" value="newOrderTip" />
+	</bean>
+
+	<bean id="newOrderTipTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="newOrderTipJob" />
+		<property name="cronExpression" value="0 */5 * * * ?" />
+	</bean>
+	<!-- 12、检测新订单 推送消息 -->
+	
+	
+	<!-- 18、商家订单12小时未发货提醒-->
+	<bean id="autoOrderInfoFhTipJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoRunService" />
+		<property name="targetMethod" value="autoOrderInfoFhTip" />
+	</bean>
+
+	<bean id="autoOrderInfoFhTipTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="autoOrderInfoFhTipJob" />
+		<property name="cronExpression" value="0 0 11,16 * * ?" />
+	</bean>
+	<!-- 18、商家订单12小时未发货提醒-->
+	
+	<!-- 19、订单交易完成后，用户未评价，则系统默认生成好评，每天晚上1点50执行 start -->
+	<bean id="autoCommentByOrderJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoRunService" />
+		<property name="targetMethod" value="autoCommentByOrder" />
+	</bean>
+
+	<bean id="autoCommentByOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="autoCommentByOrderJob" />
+		<property name="cronExpression" value="0 50 1 * * ?" />
+	</bean>
+	<!-- 19、订单交易完成后，用户未评价，则系统默认生成好评 end -->
+	
+	<!-- 更新拼团商品订单状态 -->
+<!-- 	<bean id="autoUpdatePtOrderJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject" ref="autoRunService" /> -->
+<!-- 		<property name="targetMethod" value="autoSyncUpdateAllPtOrder" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="autoUpdatePtOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> -->
+<!-- 		<property name="jobDetail" ref="autoUpdatePtOrderJob" /> -->
+<!-- 		<property name="cronExpression" value="0 0 */1 * * ?" /> -->
+<!-- 	</bean> -->
+	<!-- 更新拼团商品订单状态 -->
+	
+	<!--  自动获取微信token   BEGIN -->
+<!-- 	<bean id="autoGetWeixinTokenJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject" ref="autoRunService" /> -->
+<!-- 		<property name="targetMethod" value="autoGetWeixinToken" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="autoGetWeixinTokenTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> -->
+<!-- 		<property name="jobDetail" ref="autoGetWeixinTokenJob" /> -->
+<!-- 		<property name="cronExpression" value="0 */20 * * * ?" /> -->
+<!-- 	</bean> -->
+	<!--  自动获取微信token END -->
+	
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="autoConfirmReceiptTrigger" />
+				<ref bean="autoOrderCancelTrigger" />
+<!-- 				<ref bean="autoTuiKuanAuditTrigger" /> -->
+<!-- 				<ref bean="newOrderTipTrigger" /> -->
+<!-- 				<ref bean="autoSyncUploadJdOrderTrigger" /> -->
+<!--  				<ref bean="autoSyncConfirmJdOrderTrigger" />  -->
+<!-- 				<ref bean="modifyAutoCloseOrderTrigger" />   -->
+				<ref bean="autoOrderInfoFhTipTrigger" />
+				<ref bean="autoCommentByOrderTrigger" />
+<!-- 				<ref bean="autoUpdatePtOrderTrigger" /> -->
+<!-- 				<ref bean="autoGetWeixinTokenTrigger" /> -->
+			</list>
+		</property>
+	</bean>
+</beans>

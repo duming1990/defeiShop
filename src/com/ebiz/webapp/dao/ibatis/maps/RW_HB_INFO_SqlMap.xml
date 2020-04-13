@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="RW_HB_INFO">
+
+	<typeAlias alias="rwHbInfo" type="com.ebiz.webapp.domain.RwHbInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertRwHbInfo" />
+		<flushOnExecute statement="updateRwHbInfo" />
+		<flushOnExecute statement="deleteRwHbInfo" />
+	</cacheModel>
+
+	<resultMap id="rwHbInfoResultForList" class="rwHbInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="HB_CLASS" property="hb_class" jdbcType="INTEGER" />
+		<result column="HB_TYPE" property="hb_type" jdbcType="INTEGER" />
+		<result column="SHARE_USER_MONEY" property="share_user_money" jdbcType="INTEGER" />
+		<result column="HB_MONEY" property="hb_money" jdbcType="INTEGER" />
+		<result column="MIN_MONEY" property="min_money" jdbcType="INTEGER" />
+		<result column="MAX_MONEY" property="max_money" jdbcType="INTEGER" />
+		<result column="HB_MAX_COUNT" property="hb_max_count" jdbcType="INTEGER" />
+		<result column="HB_REC_COUNT" property="hb_rec_count" jdbcType="INTEGER" />
+		<result column="LINK_ID" property="link_id" jdbcType="INTEGER" />
+		<result column="EFFECT_START_DATE" property="effect_start_date" jdbcType="TIMESTAMP" />
+		<result column="EFFECT_END_DATE" property="effect_end_date" jdbcType="TIMESTAMP" />
+		<result column="IS_END" property="is_end" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_UID" property="add_uid" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_UID" property="del_uid" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="rwHbInfoResult" class="rwHbInfo" extends="rwHbInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-rwHbInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title">a.TITLE = #title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hb_class">a.HB_CLASS = #hb_class:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hb_type">a.HB_TYPE = #hb_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="share_user_money">a.SHARE_USER_MONEY = #share_user_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hb_money">a.HB_MONEY = #hb_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="min_money">a.MIN_MONEY = #min_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="max_money">a.MAX_MONEY = #max_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hb_max_count">a.HB_MAX_COUNT = #hb_max_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hb_rec_count">a.HB_REC_COUNT = #hb_rec_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_id">a.LINK_ID = #link_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="effect_start_date">a.EFFECT_START_DATE = #effect_start_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="effect_end_date">a.EFFECT_END_DATE = #effect_end_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_end">a.IS_END = #is_end:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_uid">a.ADD_UID = #add_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_uid">a.DEL_UID = #del_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">a.REMARK = #remark:VARCHAR#</isNotEmpty>
+	</sql>
+
+	<select id="selectRwHbInfo" resultMap="rwHbInfoResult" parameterClass="rwHbInfo" cacheModel="oneDayCache">
+		select * from RW_HB_INFO a where 1 = 1
+		<include refid="sf-rwHbInfo" />
+	</select>
+
+	<select id="selectRwHbInfoList" resultMap="rwHbInfoResultForList" parameterClass="rwHbInfo" cacheModel="oneDayCache">
+		select * from RW_HB_INFO a where 1 = 1
+		<include refid="sf-rwHbInfo" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectRwHbInfoCount" resultClass="int" parameterClass="rwHbInfo" cacheModel="oneDayCache">
+		select count(*) from RW_HB_INFO a where 1 = 1
+		<include refid="sf-rwHbInfo" />
+	</select>
+
+	<select id="selectRwHbInfoPaginatedList" resultMap="rwHbInfoResult" parameterClass="rwHbInfo" cacheModel="oneDayCache">
+		select * from RW_HB_INFO a where 1 = 1
+		<include refid="sf-rwHbInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertRwHbInfo" parameterClass="rwHbInfo">
+		<![CDATA[insert into RW_HB_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="title">TITLE</isNotNull>	
+			<isNotNull prepend="," property="hb_class">HB_CLASS</isNotNull>	
+			<isNotNull prepend="," property="hb_type">HB_TYPE</isNotNull>	
+			<isNotNull prepend="," property="share_user_money">SHARE_USER_MONEY</isNotNull>	
+			<isNotNull prepend="," property="hb_money">HB_MONEY</isNotNull>	
+			<isNotNull prepend="," property="min_money">MIN_MONEY</isNotNull>	
+			<isNotNull prepend="," property="max_money">MAX_MONEY</isNotNull>	
+			<isNotNull prepend="," property="hb_max_count">HB_MAX_COUNT</isNotNull>	
+			<isNotNull prepend="," property="hb_rec_count">HB_REC_COUNT</isNotNull>	
+			<isNotNull prepend="," property="link_id">LINK_ID</isNotNull>	
+			<isNotNull prepend="," property="effect_start_date">EFFECT_START_DATE</isNotNull>	
+			<isNotNull prepend="," property="effect_end_date">EFFECT_END_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_end">IS_END</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_uid">ADD_UID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_uid">DEL_UID</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title">#title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="hb_class">#hb_class:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_type">#hb_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="share_user_money">#share_user_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_money">#hb_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="min_money">#min_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="max_money">#max_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_max_count">#hb_max_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_rec_count">#hb_rec_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">#link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="effect_start_date">#effect_start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="effect_end_date">#effect_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_end">#is_end:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_uid">#add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">#del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateRwHbInfo" parameterClass="rwHbInfo">
+		update RW_HB_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title">TITLE = #title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="hb_class">HB_CLASS = #hb_class:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_type">HB_TYPE = #hb_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="share_user_money">SHARE_USER_MONEY = #share_user_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_money">HB_MONEY = #hb_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="min_money">MIN_MONEY = #min_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="max_money">MAX_MONEY = #max_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_max_count">HB_MAX_COUNT = #hb_max_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_rec_count">HB_REC_COUNT = #hb_rec_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">LINK_ID = #link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="effect_start_date">EFFECT_START_DATE = #effect_start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="effect_end_date">EFFECT_END_DATE = #effect_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_end">IS_END = #is_end:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_uid">ADD_UID = #add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">DEL_UID = #del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteRwHbInfo" parameterClass="rwHbInfo">
+		delete from RW_HB_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

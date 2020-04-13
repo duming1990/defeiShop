@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BASE_BRAND_INFO">
+
+	<typeAlias alias="baseBrandInfo" type="com.ebiz.webapp.domain.BaseBrandInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertBaseBrandInfo" />
+		<flushOnExecute statement="updateBaseBrandInfo" />
+		<flushOnExecute statement="deleteBaseBrandInfo" />
+	</cacheModel>
+
+	<resultMap id="baseBrandInfoResultForList" class="baseBrandInfo">
+		<result column="BRAND_ID" property="brand_id" jdbcType="INTEGER" />
+		<result column="BRAND_NAME" property="brand_name" jdbcType="VARCHAR" />
+		<result column="BRAND_NAME_CN" property="brand_name_cn" jdbcType="VARCHAR" />
+		<result column="BRAND_NAME_EN" property="brand_name_en" jdbcType="VARCHAR" />
+		<result column="BRAND_LOGO" property="brand_logo" jdbcType="VARCHAR" />
+		<result column="ORDER_SORT" property="order_sort" jdbcType="INTEGER" />
+		<result column="IS_HAVE_STORES" property="is_have_stores" jdbcType="INTEGER" />
+		<result column="STORES_URL" property="stores_url" jdbcType="VARCHAR" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="BRAND_LABEL" property="brand_label" jdbcType="VARCHAR" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />		
+	</resultMap>
+
+	<resultMap id="baseBrandInfoResult" class="baseBrandInfo" extends="baseBrandInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-baseBrandInfo">
+		<isNotEmpty prepend=" and " property="brand_id">a.BRAND_ID = #brand_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brand_name">a.BRAND_NAME = #brand_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brand_name_cn">a.BRAND_NAME_CN = #brand_name_cn:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brand_name_en">a.BRAND_NAME_EN = #brand_name_en:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brand_logo">a.BRAND_LOGO = #brand_logo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_sort">a.ORDER_SORT = #order_sort:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_have_stores">a.IS_HAVE_STORES = #is_have_stores:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="stores_url">a.STORES_URL = #stores_url:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lock">a.IS_LOCK = #is_lock:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brand_label">a.BRAND_LABEL = #brand_label:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.brand_name_like">UPPER(a.BRAND_NAME) like CONCAT('%',UPPER(#map.brand_name_like#),'%')</isNotEmpty>
+	</sql>
+
+	<select id="selectBaseBrandInfo" resultMap="baseBrandInfoResult" parameterClass="baseBrandInfo" cacheModel="oneDayCache">
+		select * from BASE_BRAND_INFO a where 1 = 1
+		<include refid="sf-baseBrandInfo" />
+	</select>
+
+	<select id="selectBaseBrandInfoList" resultMap="baseBrandInfoResultForList" parameterClass="baseBrandInfo" cacheModel="oneDayCache">
+		
+		select * from BASE_BRAND_INFO a where 1 = 1
+		<include refid="sf-baseBrandInfo" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectBaseBrandInfoCount" resultClass="int" parameterClass="baseBrandInfo" cacheModel="oneDayCache">
+		select count(*) from BASE_BRAND_INFO a where 1 = 1
+		<include refid="sf-baseBrandInfo" />
+	</select>
+
+	<select id="selectBaseBrandInfoPaginatedList" resultMap="baseBrandInfoResult" parameterClass="baseBrandInfo" cacheModel="oneDayCache">
+		
+		select * from BASE_BRAND_INFO a where 1 = 1
+		<include refid="sf-baseBrandInfo" />
+		<isNotEmpty prepend=" " property="map.order_sort_asc">
+		and a.order_sort is not null
+				order by a.ORDER_SORT desc
+			</isNotEmpty>
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertBaseBrandInfo" parameterClass="baseBrandInfo">
+		<![CDATA[insert into BASE_BRAND_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="brand_id">BRAND_ID</isNotNull>	
+			<isNotNull prepend="," property="brand_name">BRAND_NAME</isNotNull>	
+			<isNotNull prepend="," property="brand_name_cn">BRAND_NAME_CN</isNotNull>	
+			<isNotNull prepend="," property="brand_name_en">BRAND_NAME_EN</isNotNull>	
+			<isNotNull prepend="," property="brand_logo">BRAND_LOGO</isNotNull>	
+			<isNotNull prepend="," property="order_sort">ORDER_SORT</isNotNull>	
+			<isNotNull prepend="," property="is_have_stores">IS_HAVE_STORES</isNotNull>	
+			<isNotNull prepend="," property="stores_url">STORES_URL</isNotNull>	
+			<isNotNull prepend="," property="is_lock">IS_LOCK</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="brand_label">BRAND_LABEL</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="brand_id">#brand_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="brand_name">#brand_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brand_name_cn">#brand_name_cn:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brand_name_en">#brand_name_en:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brand_logo">#brand_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_sort">#order_sort:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_have_stores">#is_have_stores:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="stores_url">#stores_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_lock">#is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="brand_label">#brand_label:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="brand_id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateBaseBrandInfo" parameterClass="baseBrandInfo">
+		update BASE_BRAND_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="brand_id">BRAND_ID = #brand_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="brand_name">BRAND_NAME = #brand_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brand_name_cn">BRAND_NAME_CN = #brand_name_cn:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brand_name_en">BRAND_NAME_EN = #brand_name_en:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brand_logo">BRAND_LOGO = #brand_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_sort">ORDER_SORT = #order_sort:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_have_stores">IS_HAVE_STORES = #is_have_stores:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="stores_url">STORES_URL = #stores_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="brand_label">BRAND_LABEL = #brand_label:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="brand_id">BRAND_ID = #brand_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="brand_id">
+			<isNotEmpty prepend=" " property="map.pks">
+				BRAND_ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteBaseBrandInfo" parameterClass="baseBrandInfo">
+		delete from BASE_BRAND_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="brand_id">BRAND_ID = #brand_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="brand_id">
+			<isNotEmpty prepend=" " property="map.pks">
+				BRAND_ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

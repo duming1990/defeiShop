@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="COMMENT_INFO_SON">
+
+	<typeAlias alias="commentInfoSon" type="com.ebiz.webapp.domain.CommentInfoSon" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCommentInfoSon" />
+		<flushOnExecute statement="updateCommentInfoSon" />
+		<flushOnExecute statement="deleteCommentInfoSon" />
+	</cacheModel>
+
+	<resultMap id="commentInfoSonResultForList" class="commentInfoSon">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TYPE" property="type" jdbcType="INTEGER" />
+		<result column="PAR_ID" property="par_id" jdbcType="INTEGER" />
+		<result column="SON_ID" property="son_id" jdbcType="INTEGER" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		<result column="TOP_COUNT" property="top_count" jdbcType="INTEGER" />
+		<result column="DOWN_COUNT" property="down_count" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="ADD_USER_LOGO" property="add_user_logo" jdbcType="VARCHAR" />
+		<result column="ADD_USER_IP" property="add_user_ip" jdbcType="VARCHAR" />
+		<result column="TO_USER_ID" property="to_user_id" jdbcType="INTEGER" />
+		<result column="TO_USER_NAME" property="to_user_name" jdbcType="VARCHAR" />
+		<result column="TO_USER_LOGO" property="to_user_logo" jdbcType="VARCHAR" />
+		<result column="UP_DATE" property="up_date" jdbcType="TIMESTAMP" />
+		<result column="UP_USER_ID" property="up_user_id" jdbcType="INTEGER" />
+		<result column="UP_USER_NAME" property="up_user_name" jdbcType="VARCHAR" />
+		<result column="UP_USER_LOGO" property="up_user_logo" jdbcType="VARCHAR" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="DEL_USER_NAME" property="del_user_name" jdbcType="VARCHAR" />
+		<result column="IS_ENTP" property="is_entp" jdbcType="INTEGER" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ENTP_NAME" property="entp_name" jdbcType="VARCHAR" />
+		<result column="ENTP_LOGO" property="entp_logo" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="commentInfoSonResult" class="commentInfoSon" extends="commentInfoSonResultForList">
+	</resultMap>
+
+	<sql id="sf-commentInfoSon">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="type">a.TYPE = #type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="par_id">a.PAR_ID = #par_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="son_id">a.SON_ID = #son_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="content">a.CONTENT = #content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="top_count">a.TOP_COUNT = #top_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="down_count">a.DOWN_COUNT = #down_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_logo">a.ADD_USER_LOGO = #add_user_logo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_ip">a.ADD_USER_IP = #add_user_ip:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="to_user_id">a.TO_USER_ID = #to_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="to_user_name">a.TO_USER_NAME = #to_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="to_user_logo">a.TO_USER_LOGO = #to_user_logo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="up_date">a.UP_DATE = #up_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="up_user_id">a.UP_USER_ID = #up_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="up_user_name">a.UP_USER_NAME = #up_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="up_user_logo">a.UP_USER_LOGO = #up_user_logo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_name">a.DEL_USER_NAME = #del_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_entp">a.IS_ENTP = #is_entp:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_name">a.ENTP_NAME = #entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_logo">a.ENTP_LOGO = #entp_logo:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.user_name_like">a.ADD_USER_NAME like '%'  #map.user_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.to_user_name_like">a.TO_USER_NAME like '%'  #map.user_name_like#  '%'</isNotEmpty>
+	
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			a.add_date <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+	</sql>
+
+	<select id="selectCommentInfoSon" resultMap="commentInfoSonResult" parameterClass="commentInfoSon" cacheModel="oneDayCache">
+		select * from COMMENT_INFO_SON a where 1 = 1
+		<include refid="sf-commentInfoSon" />
+	</select>
+
+	<select id="selectCommentInfoSonList" resultMap="commentInfoSonResultForList" parameterClass="commentInfoSon" cacheModel="oneDayCache">
+		select * from COMMENT_INFO_SON a where 1 = 1
+		<include refid="sf-commentInfoSon" />
+		order by 
+		
+		<isNotEmpty prepend ="" property ="map.group_by_id_asc">a.ID asc,</isNotEmpty>
+		a.ID desc
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectCommentInfoSonCount" resultClass="int" parameterClass="commentInfoSon" cacheModel="oneDayCache">
+		select count(*) from COMMENT_INFO_SON a where 1 = 1
+		<include refid="sf-commentInfoSon" />
+	
+	</select>
+
+	<select id="selectCommentInfoSonPaginatedList" resultMap="commentInfoSonResult" parameterClass="commentInfoSon" cacheModel="oneDayCache">
+		select * from COMMENT_INFO_SON a where 1 = 1
+		<include refid="sf-commentInfoSon" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCommentInfoSon" parameterClass="commentInfoSon">
+		<![CDATA[insert into COMMENT_INFO_SON (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="type">TYPE</isNotNull>	
+			<isNotNull prepend="," property="par_id">PAR_ID</isNotNull>	
+			<isNotNull prepend="," property="son_id">SON_ID</isNotNull>	
+			<isNotNull prepend="," property="content">CONTENT</isNotNull>	
+			<isNotNull prepend="," property="top_count">TOP_COUNT</isNotNull>	
+			<isNotNull prepend="," property="down_count">DOWN_COUNT</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_user_logo">ADD_USER_LOGO</isNotNull>	
+			<isNotNull prepend="," property="add_user_ip">ADD_USER_IP</isNotNull>	
+			<isNotNull prepend="," property="to_user_id">TO_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="to_user_name">TO_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="to_user_logo">TO_USER_LOGO</isNotNull>	
+			<isNotNull prepend="," property="up_date">UP_DATE</isNotNull>	
+			<isNotNull prepend="," property="up_user_id">UP_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="up_user_name">UP_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="up_user_logo">UP_USER_LOGO</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_user_name">DEL_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="is_entp">IS_ENTP</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="entp_name">ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="entp_logo">ENTP_LOGO</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">#type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="par_id">#par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="son_id">#son_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="content">#content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="top_count">#top_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="down_count">#down_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_user_logo">#add_user_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_user_ip">#add_user_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="to_user_id">#to_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="to_user_name">#to_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="to_user_logo">#to_user_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="up_date">#up_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="up_user_id">#up_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="up_user_name">#up_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="up_user_logo">#up_user_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_user_name">#del_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_entp">#is_entp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_name">#entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_logo">#entp_logo:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCommentInfoSon" parameterClass="commentInfoSon">
+		update COMMENT_INFO_SON
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">TYPE = #type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="par_id">PAR_ID = #par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="son_id">SON_ID = #son_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="content">CONTENT = #content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="top_count">TOP_COUNT = #top_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="down_count">DOWN_COUNT = #down_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_user_logo">ADD_USER_LOGO = #add_user_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_user_ip">ADD_USER_IP = #add_user_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="to_user_id">TO_USER_ID = #to_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="to_user_name">TO_USER_NAME = #to_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="to_user_logo">TO_USER_LOGO = #to_user_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="up_date">UP_DATE = #up_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="up_user_id">UP_USER_ID = #up_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="up_user_name">UP_USER_NAME = #up_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="up_user_logo">UP_USER_LOGO = #up_user_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_user_name">DEL_USER_NAME = #del_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_entp">IS_ENTP = #is_entp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_name">ENTP_NAME = #entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_logo">ENTP_LOGO = #entp_logo:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCommentInfoSon" parameterClass="commentInfoSon">
+		delete from COMMENT_INFO_SON where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

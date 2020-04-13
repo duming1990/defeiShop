@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="VILLAGE_DYNAMIC">
+
+	<typeAlias alias="villageDynamic" type="com.ebiz.webapp.domain.VillageDynamic" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertVillageDynamic" />
+		<flushOnExecute statement="updateVillageDynamic" />
+		<flushOnExecute statement="deleteVillageDynamic" />
+	</cacheModel>
+
+	<resultMap id="villageDynamicResultForList" class="villageDynamic">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="VILLAGE_ID" property="village_id" jdbcType="INTEGER" />
+		<result column="VILLAGE_NAME" property="village_name" jdbcType="VARCHAR" />
+		<result column="P_INDEX" property="p_index" jdbcType="BIGINT" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="IMAGE_PATH" property="image_path" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		<result column="COMMENT_COUNT" property="comment_count" jdbcType="INTEGER" />
+		<result column="LIKE_COUNT" property="like_count" jdbcType="INTEGER" />
+		<result column="TYPE" property="type" jdbcType="INTEGER" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />
+		<result column="AUDIT_DATE" property="audit_date" jdbcType="TIMESTAMP" />
+		<result column="AUDIT_USER_ID" property="audit_user_id" jdbcType="INTEGER" />
+		<result column="AUDIT_USER_NAME" property="audit_user_name" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="DEL_USER_NAME" property="del_user_name" jdbcType="VARCHAR" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_USER_NAME" property="update_user_name" jdbcType="VARCHAR" />
+		<result column="AUDIT_DESC" property="audit_desc" jdbcType="VARCHAR" />
+		<result column="IS_PUBLIC" property="is_public" jdbcType="INTEGER" />
+		<result column="QRCODE_IMAGE_PATH" property="qrcode_image_path" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="villageDynamicResult" class="villageDynamic" extends="villageDynamicResultForList">
+	
+	</resultMap>
+	<resultMap id="villageDynamicResultUser" class="villageDynamic" extends="villageDynamicResultForList">
+		<result column="USER_LOGO" property="map.user_logo" jdbcType="VARCHAR" />
+		<result column="USER_NAME" property="map.user_name" jdbcType="VARCHAR" />
+		<result column="REAL_NAME" property="map.real_name" jdbcType="VARCHAR" />
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="VILLAGE_LOGO" property="map.village_logo" jdbcType="VARCHAR" />
+		<result column="VILLAGE_NAME" property="map.village_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="sf-villageDynamic">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_id">a.VILLAGE_ID = #village_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_name">a.VILLAGE_NAME = #village_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX = #p_index:BIGINT#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME = #comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_id">a.CLS_ID = #cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_name">a.CLS_NAME = #cls_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="image_path">a.IMAGE_PATH = #image_path:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="content">a.CONTENT = #content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comment_count">a.COMMENT_COUNT = #comment_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="like_count">a.LIKE_COUNT = #like_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="type">a.TYPE = #type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_date">a.AUDIT_DATE = #audit_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_id">a.AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_name">a.AUDIT_USER_NAME = #audit_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_name">a.DEL_USER_NAME = #del_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_name">a.UPDATE_USER_NAME = #update_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_desc">a.AUDIT_DESC = #audit_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qrcode_image_path">a.QRCODE_IMAGE_PATH = #qrcode_image_path:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="is_public">a.IS_PUBLIC = #is_public:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_name_like">a.ADD_USER_NAME like '%'  #map.add_user_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like #map.p_index_like:VARCHAR# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.id_not_in">a.ID not in ($map.id_not_in$)</isNotEmpty>
+	</sql>
+
+	<select id="selectVillageDynamic" resultMap="villageDynamicResult" parameterClass="villageDynamic" cacheModel="oneDayCache">
+		select a.* from VILLAGE_DYNAMIC a 
+		<isNotEmpty property="map.left_join_comm_info">
+		 	left join comm_info e on a.comm_id = e.id
+		</isNotEmpty>
+		where 1 = 1
+		<include refid="sf-villageDynamic" />
+		<isNotEmpty prepend=" and " property="map.not_out_sell_time"><![CDATA[sysdate() between e.up_date and e.down_date]]></isNotEmpty>
+	</select>
+
+	<select id="selectVillageDynamicList" resultMap="villageDynamicResultUser" parameterClass="villageDynamic" cacheModel="oneDayCache">
+		select 
+			a.*,b.user_name,b.real_name,b.user_logo,
+			d.full_name,c.village_logo,c.village_name
+		from 
+			VILLAGE_DYNAMIC a 
+		left join user_info b on a.add_user_id = b.id 
+		left join VILLAGE_INFO c on c.id = a.VILLAGE_ID 
+		left join base_province d on d.p_index = a.p_index
+		<isNotEmpty property="map.left_join_comm_info">
+		 	left join comm_info e on a.comm_id = e.id
+		</isNotEmpty>
+		where 1 = 1
+		<include refid="sf-villageDynamic" />
+		<isNotEmpty prepend=" and " property="map.not_out_sell_time"><![CDATA[sysdate() between e.up_date and e.down_date]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index">c.P_INDEX like #map.p_index# '%'</isNotEmpty>
+		<isNotEmpty prepend=" " property="map.order_by_id_desc">order by a.ID desc</isNotEmpty>
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectVillageDynamicCount" resultClass="int" parameterClass="villageDynamic" cacheModel="oneDayCache">
+		select 
+			count(a.id) 
+		from 
+			VILLAGE_DYNAMIC a 
+		left join user_info b on a.add_user_id = b.id 
+		left join VILLAGE_INFO c on c.id = a.VILLAGE_ID 
+		left join base_province d on d.p_index = a.p_index
+		<isNotEmpty property="map.left_join_comm_info">
+		 	left join comm_info e on a.comm_id = e.id
+		</isNotEmpty>
+		where 1 = 1
+		<include refid="sf-villageDynamic" />
+		<isNotEmpty prepend=" and " property="map.not_out_sell_time"><![CDATA[sysdate() between e.up_date and e.down_date]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index">c.P_INDEX like #map.p_index# '%'</isNotEmpty>
+	</select>
+
+	<select id="selectVillageDynamicPaginatedList" resultMap="villageDynamicResultUser" parameterClass="villageDynamic" cacheModel="oneDayCache">
+		select 
+			a.*,b.user_name,b.real_name,b.user_logo,
+			d.full_name,c.village_logo,c.village_name
+		from 
+			VILLAGE_DYNAMIC a 
+		left join user_info b on a.add_user_id = b.id 
+		left join VILLAGE_INFO c on c.id = a.VILLAGE_ID 
+		left join base_province d on d.p_index = a.p_index
+		
+		<isNotEmpty property="map.left_join_comm_info">
+		 	left join comm_info e on a.comm_id = e.id
+		</isNotEmpty>
+		where 1 = 1
+		<include refid="sf-villageDynamic" />
+		<isNotEmpty prepend=" and " property="map.not_out_sell_time"><![CDATA[sysdate() between e.up_date and e.down_date]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.left_join_comm_info">e.is_del = 0 and e.audit_state = 1 and e.is_has_tc = 1</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index">c.P_INDEX like #map.p_index# '%'</isNotEmpty>
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertVillageDynamic" parameterClass="villageDynamic">
+		<![CDATA[insert into VILLAGE_DYNAMIC (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="village_id">VILLAGE_ID</isNotNull>	
+			<isNotNull prepend="," property="village_name">VILLAGE_NAME</isNotNull>	
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>	
+			<isNotNull prepend="," property="cls_id">CLS_ID</isNotNull>	
+			<isNotNull prepend="," property="cls_name">CLS_NAME</isNotNull>	
+			<isNotNull prepend="," property="image_path">IMAGE_PATH</isNotNull>	
+			<isNotNull prepend="," property="content">CONTENT</isNotNull>	
+			<isNotNull prepend="," property="comment_count">COMMENT_COUNT</isNotNull>	
+			<isNotNull prepend="," property="like_count">LIKE_COUNT</isNotNull>	
+			<isNotNull prepend="," property="type">TYPE</isNotNull>	
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>	
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE</isNotNull>	
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_user_name">AUDIT_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_user_name">DEL_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_user_name">UPDATE_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC</isNotNull>	
+			<isNotNull prepend="," property="is_public">IS_PUBLIC</isNotNull>	
+			<isNotNull prepend="," property="qrcode_image_path">QRCODE_IMAGE_PATH</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_id">#village_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_name">#village_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cls_id">#cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">#cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="image_path">#image_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="content">#content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comment_count">#comment_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="like_count">#like_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">#type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">#audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_name">#audit_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_user_name">#del_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_user_name">#update_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">#audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_public">#is_public:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateVillageDynamic" parameterClass="villageDynamic">
+		update VILLAGE_DYNAMIC
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_id">VILLAGE_ID = #village_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_name">VILLAGE_NAME = #village_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME = #comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cls_id">CLS_ID = #cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">CLS_NAME = #cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="image_path">IMAGE_PATH = #image_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="content">CONTENT = #content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comment_count">COMMENT_COUNT = #comment_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="like_count">LIKE_COUNT = #like_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">TYPE = #type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE = #audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_name">AUDIT_USER_NAME = #audit_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_user_name">DEL_USER_NAME = #del_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_user_name">UPDATE_USER_NAME = #update_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC = #audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_public">IS_PUBLIC = #is_public:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qrcode_image_path">QRCODE_IMAGE_PATH= #qrcode_image_path:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.add_comment_count">COMMENT_COUNT = COMMENT_COUNT + #map.add_comment_count#</isNotNull>
+			<isNotNull prepend="," property="map.add_like_count">LIKE_COUNT = LIKE_COUNT + #map.add_like_count#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_id">COMM_ID = #map.comm_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteVillageDynamic" parameterClass="villageDynamic">
+		delete from VILLAGE_DYNAMIC where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

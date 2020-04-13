@@ -1,0 +1,223 @@
+.choosecities {
+	border: 1px #ddd solid;
+	box-shadow: 0 0 1px #d3ebee;
+	background: #fff;
+	padding-bottom: 60px
+}
+
+.choosecities a:hover {
+	text-decoration: none
+}
+
+.city_list {
+	padding: 20px;
+	border-bottom: 1px #E5E5E5 solid;
+	font-weight: 700
+}
+
+.city_list a {
+	margin: 0 17px 0 0;
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	width: 4.5em
+}
+
+.city_list a:hover {
+	text-decoration: underline
+}
+
+.city_list h3 {
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	vertical-align: top
+}
+
+.city_list p {
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	vertical-align: top;
+	width: 840px
+}
+
+.city_province {
+	border-bottom: 1px #eee solid;
+	padding: 16px 20px;
+}
+
+.city_province h2 {
+	display: inline-block;
+	font-size: 20px;
+	vertical-align: middle;
+	padding: 0 20px 0 0;
+	margin: 0 20px 0 0;
+	border-right: 1px #ddd solid
+}
+
+.city_province h2 a {
+	font-size: 30px;
+	vertical-align: middle;
+	color: #ec5051!important;
+}
+
+.city_province h2 span {
+	vertical-align: middle;
+	margin: 0 4px 0 0
+}
+
+.city_province form {
+	display: inline-block;
+	vertical-align: middle
+}
+
+.city_province .label {
+	font-weight: 700;
+	vertical-align: middle;
+	color: #666;
+}
+
+.citieslist h2 {
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	height: 32px;
+	margin: 20px 20px 12px;
+	padding: 0 14px;
+	line-height: 30px;
+	border-radius: 0;
+	background: #ec5051;
+	position: relative;
+	color: #fff
+}
+
+.citieslist h2 span {
+	float: none;
+	display: block;
+	position: absolute;
+	top: 32px;
+	left: 20px;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	border-style: solid;
+	border-width: 6px;
+	border-color: #ec5051 #fff #fff
+}
+
+.citieslist li {
+	border-top: 1px #fff solid;
+	border-bottom: 1px #fff solid
+}
+
+.citieslist p {
+	padding: 6px 10px 6px 30px;
+	border-top: 1px #fff solid;
+	border-bottom: 1px #fff solid
+}
+
+.citieslist .label {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	vertical-align: top;
+	border: 1px #ddd solid;
+	margin-right: 5px;
+	*display: inline;
+	zoom: 1;
+	border-radius: 0;
+	color: #666;
+	line-height: 24px;
+	padding: 0px; 
+}
+
+.citieslist .label strong {
+	display: block;
+	width: 28px;
+	height: 28px;
+	text-align: center;
+	background: #eee;
+	border: 1px #F7F7F7 solid;
+	border-radius: 0;
+	font-size: 16px
+}
+
+.citieslist span {
+	display: inline-block;
+	width: 880px;
+	vertical-align: top;
+	*display: inline;
+	zoom: 1
+}
+
+.citieslist span i {
+	color: #CCC;
+	font-style: normal;
+	margin: 0 3px
+}
+
+.citieslist .hover {
+	border-color: #E5E5E5
+}
+
+.citieslist .hover p {
+	background: #F7F7F7
+}
+
+.citieslist .hover .label {
+	border-color: #ec5051
+}
+
+.citieslist .hover .label strong {
+	background: #ec5051;
+	color: #fff;
+	border-color: #ec5051
+}
+
+.citieslist a {
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	height: 20px;
+	padding: 0 2px 1px;
+	margin: 5px 10px;
+	border-radius: 0;
+	line-height: 20px;
+	color: #ec5051!important;
+}
+
+.citieslist a:hover {
+	background: #ec5051;
+	border-radius: 2px;
+	color: #fff!important
+}
+
+.citieslist .isonline {
+	font-weight: 700
+}
+
+.city-subscription {
+	padding: 20px;
+	border-top: 1px #E5E5E5 solid
+}
+
+.f-text {
+	border: 1px solid #ddd;
+	border-radius: 2px 0 0 2px;
+	font-size: 12px;
+	height: 18px;
+	line-height: 18px;
+	background: #fff;
+	outline: 0
+}
+
+.widget-autocomplete {
+	border: 1px solid #ddd
+}
+
+.widget-autocomplete .widget-autocomplete-list .current,.widget-autocomplete .widget-autocomplete-list .current .extra {
+	background-color: #d3ebee;
+	color: #333
+}

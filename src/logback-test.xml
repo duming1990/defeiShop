@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>
+		</layout>
+	</appender>
+
+
+	<logger name="com.ibatis.sqlmap.engine.cache.CacheModel" level="DEBUG" />
+	<logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG" />
+	<logger name="java.sql.Connection" level="DEBUG" />
+	<logger name="com.ibatis" level="DEBUG" />
+	<logger name="com.ibatis.common.util.StopWatch" level="DEBUG" />
+	<logger name="java.sql.Statement" level="DEBUG" />
+	<logger name="java.sql.ResultSet" level="DEBUG" />
+	<logger name="com.ibatis.sqlmap.engine.builder.xml.SqlMapParser" level="DEBUG" />
+	<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientImpl" level="DEBUG" />
+	<logger name="java.sql.PreparedStatement" level="DEBUG" />
+	<logger name="org.springframework.ui.freemarker" level="DEBUG" />
+	<!--
+	<logger name="org.apache.commons" level="DEBUG" />
+	<logger name="org.apache.struts" level="DEBUG" />
+	-->
+
+	<root level="INFO">
+		<appender-ref ref="stdout" />
+	</root>
+</configuration>

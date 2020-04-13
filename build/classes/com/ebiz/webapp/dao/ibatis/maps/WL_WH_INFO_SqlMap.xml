@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WL_WH_INFO">
+
+	<typeAlias alias="wlWhInfo" type="com.ebiz.webapp.domain.WlWhInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertWlWhInfo" />
+		<flushOnExecute statement="updateWlWhInfo" />
+		<flushOnExecute statement="deleteWlWhInfo" />
+	</cacheModel>
+
+	<resultMap id="wlWhInfoResultForList" class="wlWhInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WAYBILL_NO" property="waybill_no" jdbcType="VARCHAR" />
+		<result column="ORDER_ID" property="order_id" jdbcType="INTEGER" />
+		<result column="WL_ZT" property="wl_zt" jdbcType="VARCHAR" />
+		<result column="WL_ZT_DESC" property="wl_zt_desc" jdbcType="VARCHAR" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="LINK_MAN" property="link_man" jdbcType="VARCHAR" />
+		<result column="TEL" property="tel" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="wlWhInfoResult" class="wlWhInfo" extends="wlWhInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-wlWhInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="waybill_no">a.WAYBILL_NO = #waybill_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_id">a.ORDER_ID = #order_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_zt">a.WL_ZT = #wl_zt:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_zt_desc">a.WL_ZT_DESC = #wl_zt_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME = #comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_man">a.LINK_MAN = #link_man:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tel">a.TEL = #tel:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectWlWhInfo" resultMap="wlWhInfoResult" parameterClass="wlWhInfo" cacheModel="oneDayCache">
+		select * from WL_WH_INFO a where 1 = 1
+		<include refid="sf-wlWhInfo" />
+	</select>
+
+	<select id="selectWlWhInfoList" resultMap="wlWhInfoResultForList" parameterClass="wlWhInfo" cacheModel="oneDayCache">
+		
+		select * from WL_WH_INFO a where 1 = 1
+		<include refid="sf-wlWhInfo" />
+		 order by a.ID 
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectWlWhInfoCount" resultClass="int" parameterClass="wlWhInfo" cacheModel="oneDayCache">
+		select count(*) from WL_WH_INFO a where 1 = 1
+		<include refid="sf-wlWhInfo" />
+	</select>
+
+	<select id="selectWlWhInfoPaginatedList" resultMap="wlWhInfoResult" parameterClass="wlWhInfo" cacheModel="oneDayCache">
+		
+		select * from WL_WH_INFO a where 1 = 1
+		<include refid="sf-wlWhInfo" />
+		order by a.ID 
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertWlWhInfo" parameterClass="wlWhInfo">
+		
+		<![CDATA[insert into WL_WH_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="waybill_no">WAYBILL_NO</isNotNull>	
+			<isNotNull prepend="," property="order_id">ORDER_ID</isNotNull>	
+			<isNotNull prepend="," property="wl_zt">WL_ZT</isNotNull>	
+			<isNotNull prepend="," property="wl_zt_desc">WL_ZT_DESC</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="link_man">LINK_MAN</isNotNull>	
+			<isNotNull prepend="," property="tel">TEL</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="waybill_no">#waybill_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_id">#order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_zt">#wl_zt:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_zt_desc">#wl_zt_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_man">#link_man:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tel">#tel:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateWlWhInfo" parameterClass="wlWhInfo">
+		update WL_WH_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="waybill_no">WAYBILL_NO = #waybill_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_id">ORDER_ID = #order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_zt">WL_ZT = #wl_zt:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_zt_desc">WL_ZT_DESC = #wl_zt_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME = #comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_man">LINK_MAN = #link_man:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tel">TEL = #tel:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteWlWhInfo" parameterClass="wlWhInfo">
+		delete from WL_WH_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

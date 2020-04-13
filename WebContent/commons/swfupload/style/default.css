@@ -1,0 +1,232 @@
+#content {
+	width: 680px;
+	align: left;
+}
+
+div.fieldset {
+	border: 1px solid #afe14c;
+	margin: 10px 0;
+	padding: 20px 10px;
+}
+
+div.fieldset span.legend {
+	position: relative;
+	background-color: #FFF;
+	padding: 3px;
+	top: -30px;
+	font: 700 14px Arial, Helvetica, sans-serif;
+	color: #73b304;
+}
+
+div.flash {
+	width: 375px;
+	margin: 10px 5px;
+	border-color: #D9E4FF;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+}
+
+/* -- progress Styles ------------------------------- */
+.progressWrapper {
+	width: 357px;
+	overflow: hidden;
+}
+
+.progressContainer {
+	margin: 5px;
+	padding: 4px;
+	border: solid 1px #E8E8E8;
+	background-color: #F7F7F7;
+	overflow: hidden;
+}
+
+/* Message */
+.message {
+	margin: 1em 0;
+	padding: 10px 20px;
+	border: solid 1px #FFDD99;
+	background-color: #FFFFCC;
+	overflow: hidden;
+}
+
+/* Error */
+.red {
+	border: solid 1px #B50000;
+	background-color: #FFEBEB;
+}
+
+/* Current */
+.green {
+	border: solid 1px #DDF0DD;
+	background-color: #EBFFEB;
+}
+
+/* Complete */
+.blue {
+	border: solid 1px #CEE2F2;
+	background-color: #F0F5FF;
+}
+
+.progressName {
+	font-size: 8pt;
+	font-weight: 700;
+	color: #555;
+	width: 323px;
+	height: 20px;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.progressBarInProgressContainer {
+	font-size: 0;
+	width: 339px;
+	height: 9px;
+	border: 1px solid #ccc;
+	margin-top: 2px;
+}
+
+.progressBarInProgress {
+	position: relative;
+	left: 2px;
+	top: 11px;
+	font-size: 0;
+	width: 0%;
+	height: 7px;
+	margin-top: 2px;
+	background-image: url(images/progressBg.png)
+}
+
+.progressBarComplete,.progressBarError {
+	font-size: 0;
+	width: 0%;
+	height: 4px;
+	background-color: blue;
+	margin-top: 2px;
+}
+
+.progressBarComplete {
+	width: 100%;
+	background-color: green;
+	visibility: hidden;
+}
+
+.progressBarError {
+	width: 100%;
+	background-color: red;
+	visibility: hidden;
+}
+
+.progressBarStatus {
+	margin-top: 2px;
+	width: 337px;
+	font-size: 7pt;
+	font-family: Arial;
+	text-align: left;
+	white-space: nowrap;
+}
+
+a.progressCancel {
+	font-size: 0;
+	display: block;
+	height: 14px;
+	width: 14px;
+	background-image: url(images/cancelbutton.gif);
+	background-repeat: no-repeat;
+	background-position: -14px 0px;
+	float: right;
+}
+a.progressCancel:hover {
+	background-position: 0px 0px;
+}
+
+/* -- SWFUpload Object Styles ------------------------------- */
+.swfupload {
+	vertical-align: top;
+	margin-top: 2px;
+}
+
+/* -- createElementsToForm Styles ------------------------------- */
+.fileNameClass {
+	width: 260px;
+}
+
+.delElement {
+	paddind-left: 5px;
+	font-family: Verdana;
+	color: #005590;
+	cursor: pointer;
+}
+
+
+.multimage-gallery li {
+font-size: 0;
+display: inline-block;
+border: 1px solid #CDCDCD;
+margin-right: 10px;
+position: relative;
+vertical-align: top;
+}
+
+.multimage-gallery .primary {
+margin-left: 0;
+border: 1px solid #FFC097;
+}
+ .multimage-gallery .preview {
+z-index: 4;
+text-align: center;
+line-height: 90px;
+font-family: arial;
+background-color: #FFF;
+}
+.multimage-gallery .preview {
+width: 90px;
+height: 90px;
+overflow: hidden;
+}
+.multimage-gallery .operate {
+background: rgba(33, 33, 33, 0.7);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);
+z-index: 5;
+position: absolute;
+bottom: 0;
+left: 0;
+width: 78px;
+height: 10px;
+display: none;
+padding: 5px 0;
+padding-left: 12px;
+}
+.multimage-gallery .operate i {
+display: inline-block;
+cursor: pointer;
+height: 12px;
+width: 12px;
+margin-right: 10px;
+font-size: 0;
+overflow: hidden;
+background: url(images/left_right.png) no-repeat 0 0;
+}
+.multimage-gallery .operate .toleft {
+background-position: 0 -13px;
+}
+.multimage-gallery .operate .toright {
+background-position: -13px -13px;
+}
+.multimage-gallery .operate .del {
+background-position: -13px 0;
+}
+.buttonDiv{
+	margin-bottom: 5px;
+}
+.buttonDiv #btnCancel{
+	font-family: Verdana; 
+	color: #005590; 
+	cursor: pointer;
+}

@@ -1,0 +1,6 @@
+{
+"versionCode":"23",
+"versionName":"1.1.0",
+"downloadUrl":"http://itunes.apple.com/cn/app/ren-yi-lian-meng-shang-cheng/id1147456405",
+"updateLog":"仁义商城 for Ios v1.1.0 \n更新日志：1、版本不息，优化不止2、增加支付宝支付"
+}

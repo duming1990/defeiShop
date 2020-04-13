@@ -1,0 +1,404 @@
+.base-sprite, .filter-tag__delete { background-image: url(../../imagesPublic/base.png); background-repeat: no-repeat }
+.shop-list a { color: #ec5051 }
+.shop-list__error { margin-top: 100px; text-align: center }
+.shop-list__error .icon { vertical-align: top }
+.shop-list__error .detail { margin-left: 10px; line-height: 54px }
+.shop-list__error .keyword { padding: 0 5px; font-weight: 700; color: #f76120 }
+.shop-item { margin: 0 0 14px; background: #fff; border: 1px solid #eee; color: #666 }
+.shop-item--more { margin-bottom: 36px; padding-bottom: 1px }
+.shop-meta { position: relative; padding: 13px 15px 5px; background: #f9f9f9; border-bottom: 1px solid #f6f6f6; font-size: 12px; line-height: 24px; _height: .01% }
+.shop-meta:last-child { border-bottom: 0 }
+.shop-meta__name { font-size: 14px }
+.shop-meta__branch-link { margin-left: 5px; font-weight: 400 }
+.shop-meta__address { float: left; max-width: 386px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; _width: 330px }
+.shop-meta__phone { padding-left: 18px }
+.shop-meta__tags { display: block }
+.shop-meta__tags a { margin-right: 5px }
+.shop-meta__rate-status { position: absolute; top: 13px; right: 15px; text-align: right; font-size: 12px }
+.shop-meta__evaluate-score { display: block; margin: 6px 0; height: 12px; line-height: 12px }
+.shop-meta__evaluate-score .common-rating { text-align: left }
+.shop-meta__evaluate-link { vertical-align: 1px; *vertical-align:baseline
+}
+.shop-deals .shop-deal__link { display: block; margin: 0 15px; padding: 15px 0; border-top: 1px solid #f6f6f6; color: #666; cursor: pointer }
+.shop-deal__link:hover { text-decoration: none; background: #fff }
+.shop-deal__link:focus { outline: 0 }
+.shop-deal__wrapper--first .shop-deal__link { border-top: 0 }
+.shop-deal__wrapper--hidden { display: none }
+.shop-deal__area { float: left; height: 54px }
+.shop-deal__area--title { width: 255px; padding: 0 15px; font-size: 14px; line-height: 27px }
+.shop-deal__area--price { width: 125px; text-align: center }
+.shop-deal__area--count { padding-right: 10px; width: 160px; text-align: right; font-size: 12px }
+.shop-deal__area--price .price { display: block; font-size: 14px }
+.shop-deal__area--price .price strong { font-size: 22px }
+.shop-deal__area--price .origin-price { font-size: 12px; color: #999 }
+.shop-deals-more { position: relative; height: 1px; max-height: 1px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd }
+.shop-deals-more__link { position: absolute; left: 310px; display: block; padding-right: 8px; width: 70px; height: 22px; margin: 0 auto; background: #f2f2f2; border: 1px solid #dedede; border-top: 0; line-height: 22px; font-size: 12px; text-align: center; box-shadow: inset 0 2px 3px rgba(0,0,0,.05) }
+.shop-deals-more__link .tri { top: 10px; right: 12px; border-top: 3px solid #ec5051 }
+.filter-tag { position: relative; display: inline-block; margin: 0 10px 0 0; padding: 0 16px 0 5px; border: 1px solid #ec5051; font-size: 12px; color: #666; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; *display:inline;
+*zoom:1
+}
+.filter-tag:hover { border-color: #ec5051; text-decoration: none }
+.filter-tags__sub-cate { color: #999 }
+.filter-tag__delete { position: absolute; right: 6px; top: 7px; display: inline-block; margin-left: 5px; width: 6px; height: 5px; font-size: 0; text-align: center; color: #fff; background-position: 0 -787px; cursor: pointer; *display:inline;
+*zoom:1
+}
+.filter-tags-title { color: #ec5051; *zoom:1
+}
+.filter-tags-wrapper { padding: 11px 15px; height: 19px; border-bottom: 1px solid #eee }
+.paginator-wrapper { clear: both; padding-top: 20px; text-align: center }
+.brand-banner { position: relative; height: 140px; margin-bottom: 10px; overflow: hidden }
+.brand-name { position: absolute; top: 15px; padding: 0 40px; min-width: 320px; max-width: 890px; height: 100px; line-height: 100px; border: 1px solid rgba(255,255,255,.9); border-left: none; font-size: 32px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #333; background-color: rgba(255,255,255,.75); filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#BFFFFFFF', endColorstr='#BFFFFFFF');
+box-shadow: 0 0 5px rgba(0,0,0,.2) }
+.component-holy-reco .holy-reco { padding-right: 260px; width: 720px }
+#filter .around-geo-strip .delete, #filter .around-geo-strip .modify, #filter .button-strip-item-asc .button-img, #filter .button-strip-item-asc-active .button-img, #filter .button-strip-item-asc:hover .button-img, #filter .button-strip-item-desc .button-img, #filter .button-strip-item-desc-active .button-img, #filter .button-strip-item-desc:hover .button-img, #filter .checkbox, #filter .checkbox-checked, #filter .checkbox-checked-disabled, #filter .checkbox-disabled, #filter .filter-section-wrapper .current .subway, #filter .filter-section-wrapper .item .subway, #filter .filter-section-wrapper .item .subway:hover, #filter .filter-tag__delete, .base-sprite { background-image: url(../../imagesPublic/base.png); background-repeat: no-repeat }
+.float-card { _display: none; position: fixed; width: 100%; height: 60px; left: 0; bottom: 0; z-index: 999 }
+.float-card .bg { width: 100%; height: 58px; border: 1px solid #000; background-color: #000; opacity: .8 }
+.float-card .award { position: absolute; top: 14px; left: 50%; margin-left: -256px }
+.float-card .award .pic { display: inline-block; margin-right: 54px }
+.float-card .award .btn { margin-bottom: 14px }
+.float-card .common-close--large { position: absolute; right: 20px; top: 20px }
+#filter .brand-filter-wrapper .has-icon, #filter .buziarea-filter-wrapper .has-icon, #filter .cinema-type-wrapper .has-icon, #filter .date-filter-wrapper .has-icon, #filter .destination-filter-wrapper .has-icon, #filter .dinnernum-filter-wrapper .has-icon, #filter .dinnerprice-filter-wrapper .has-icon, #filter .facility-filter-wrapper .has-icon, #filter .geo-filter-wrapper .has-icon, #filter .room-filter-wrapper .has-icon, #filter .shoppingmall-filter-wrapper .has-icon, #filter .subway-filter-wrapper .has-icon, #filter .time-filter-wrapper .has-icon, #filter .travel-filter-wrapper .has-icon, .icon-filter-sprite { background-image: url(../images/si/icon-filter.vf6f41a64.png); background-repeat: no-repeat }
+#filter { margin-bottom: 10px; font-size: 12px; line-height: 19px; *zoom:1
+}
+#filter .label { color: #333 }
+#filter .filter-label-list { position: relative; padding-left: 5em; _zoom: 1 }
+#filter .filter-label-list .label { position: absolute; top: 0; left: 0; width: 5em; text-align: right }
+#filter .filter-label-list .filter-list--fold {_height:expression(this.scrollHeight > 50 ? "50px" : "auto");
+overflow: hidden }
+#filter .filter-label-list .filter-opt--more { position: absolute; bottom: 9px; right: 5px; color: #999; padding-right: 14px; text-decoration: none }
+#filter .filter-label-list .filter-opt--more .fold-tri { position: absolute; height: 0; width: 0; line-height: 0; font-size: 0; right: 2px; border: 3px dashed transparent; border-top: 3px solid #999 }
+#filter .filter-label-list .filter-opt--more .fold-tri--down { top: 8px }
+#filter .filter-label-list .filter-opt--more .fold-tri--up { top: 5px; border-top: 3px dashed transparent; border-bottom: 3px solid #999 }
+#filter .filter-label-list .filter-opt--more:hover { color: #ec5051 }
+#filter .filter-label-list .filter-opt--more:hover .fold-tri { border-top-color: #ec5051 }
+#filter .filter-label-list .filter-opt--more:hover .fold-tri--up { border-top-color: transparent; border-bottom-color: #ec5051 }
+#filter .inline-block-list { padding-right: 66px }
+#filter .inline-block-list .item { display: inline-block; *display:inline;
+*zoom:1
+}
+#filter .filter-sortbar-outer-box { border: 1px #eee solid; background: #fff }
+#filter .filter-sortbar-outer-box .label { top: 13px; left: 5px }
+#filter .filter-sortbar-outer-box--merge { border-top-color: #eee }
+#filter .filter-section-wrapper { position: relative; padding: 0 15px }
+#filter .filter-section-wrapper .filter-section { padding: 10px 0 10px 65px; border-top: 1px dotted #ddd }
+#filter .filter-section-wrapper .filter-section a { color: #666 }
+#filter .filter-section-wrapper .filter-section .filter-opt--more { color: #999 }
+#filter .filter-section-wrapper .filter-section .filter-opt--more:hover { color: #ec5051 }
+#filter .filter-content--down { margin-top: 10px }
+#filter .filter-main--attrs .filter-section { padding-left: 50px }
+#filter .filter-main--attrs .travel-filter-wrapper { padding-left: 65px }
+#filter .filter-sortbar-outer-box .first-filter { border-top: 0 }
+#filter .filter-sortbar-outer-box .icon-new { margin-top: -6px }
+#filter .filter-section-wrapper .item { margin: 4px 16px 4px 0; vertical-align: top; height: 14px }
+#filter .filter-section-wrapper .item a { display: block; _display: inline; padding: 0 4px; height: 19px; _zoom: 1 }
+#filter .filter-section-wrapper .item a span { margin-left: 3px; font-size: 10px; font-family: arial, sans-serif; color: #999 }
+#filter .filter-section-wrapper .item a:hover { border-radius: 2px; text-decoration: none; color: #fff; background-color: #ec5051 }
+#filter .filter-section-wrapper .item a:hover span { color: #fff }
+#filter .filter-section-wrapper .current a { border-radius: 2px; background-color: #ec5051; color: #fff }
+#filter .filter-section-wrapper .current a:hover { cursor: pointer }
+#filter .filter-section-wrapper .current a span { color: #fff }
+#filter .filter-section-wrapper .has-fc a { display: inline-block; *display:inline
+}
+#filter .filter-section-wrapper .has-fc b { margin-right: 1px; font-family: arial, sans-serif; font-weight: 400; color: #f76120 }
+#filter .filter-section-wrapper .has-icon { padding-left: 2em; width: 3em; *zoom:1
+}
+#filter .buziarea-filter-wrapper .has-icon, #filter .geo-filter-wrapper .has-icon, #filter .travel-filter-wrapper .has-icon { background-position: 0 -63px }
+#filter .dinnernum-filter-wrapper .has-icon { background-position: 0 -84px }
+#filter .dinnerprice-filter-wrapper .has-icon { background-position: 0 -105px }
+#filter .date-filter-wrapper .has-icon, #filter .time-filter-wrapper .has-icon { background-position: 0 -210px }
+#filter .room-filter-wrapper .has-icon { background-position: 0 -147px }
+#filter .subway-filter-wrapper .has-icon { background-position: 0 -189px }
+#filter .facility-filter-wrapper .has-icon { background-position: 0 -126px }
+#filter .brand-filter-wrapper .has-icon { background-position: 0 0 }
+#filter .cinema-type-wrapper .has-icon { background-position: 0 -21px }
+#filter .destination-filter-wrapper .has-icon { background-position: 0 -42px }
+#filter .shoppingmall-filter-wrapper .has-icon { background-position: 0 -168px }
+#filter .travel-filter-wrapper { padding-left: 65px; text-align: left }
+#filter .travel-filter-wrapper .has-icon { width: 5em }
+#filter .sub-filter-wrapper { margin-top: 5px; padding: 5px 10px; background: #eee }
+#filter .sub-filter-wrapper--geo { margin-top: 0; border: 1px solid #eee; background: #fff }
+#filter .sub-filter-wrapper--geo .filter-label-list { padding-left: 0 }
+#filter .sub-filter-wrapper--singlearea { border: none; padding: 0; background: #fff }
+#filter .sub-filter-wrapper .label { top: 4px; width: 4em; color: #777 }
+#filter .sub-filter-wrapper .transfer-stop { color: #f76120 }
+#filter .sub-filter-section { padding-left: 0 }
+#filter .sub-sub-filter-section { padding-left: 4em }
+#filter .sub-category-hotel-travel .label { display: none }
+#filter .sub-category-hotel-travel .sub-sub-filter-section { padding-left: 0 }
+#filter .nav-sub-filter { margin: 0; border: 0; padding: 0; background: 0 0 }
+#filter .filter-section-wrapper .destination-filter-wrapper .city-list-wrapper { margin-top: 5px }
+#filter .filter-section-wrapper .destination-filter-wrapper .city-list-wrapper .label { top: 4px; width: 5em; line-height: 19px }
+#filter .filter-section-wrapper .destination-filter-wrapper .city-list-wrapper .text { color: #777 }
+#filter .buffet-filter-wrapper, #filter .subwaystation-filter-wrapper { margin-top: 2px }
+#filter .filter-section-wrapper .item .subway { padding-left: 20px; *zoom:1;
+background-position: 0 -1054px }
+#filter .filter-section-wrapper .current .subway, #filter .filter-section-wrapper .item .subway:hover { background-position: 0 -1034px }
+#filter .filter-section-wrapper .item .briber, #filter .filter-section-wrapper .item .briber span { color: #f76120 }
+#filter .filter-section-wrapper .current .briber, #filter .filter-section-wrapper .current .briber span { color: #fff }
+#filter .filter-hot-tag { background-color: #eee }
+#filter .filter-hot-tag-wrapper { padding: 0 15px 0 67px; height: 33px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; overflow: hidden }
+#filter .filter-hot-tag-wrapper .label { top: 7px; left: -2px }
+#filter .filter-hot-tag-wrapper .item { margin: 7px 12px 7px 0; padding: 0 4px; height: 18px; vertical-align: top }
+#filter .filter-hot-tag-wrapper .item:hover { border-radius: 2px; text-decoration: none; color: #fff; background-color: #ec5051 }
+#filter .filter-hot-tag-wrapper .hot { color: #f76120 }
+#filter .sort-bar { position: relative; padding: 0 15px; border-top: 1px solid #eee; height: 37px; background: #F7F7F7; margin-top: 10px }
+#filter .sort-bar__map { position: relative; color: #f76120; margin-left: 10px }
+#filter .sort-bar__map .icon-new { top: -6px; right: 0 }
+#filter .filter-main { border: 1px #eee solid; background: #fff }
+#filter .filter-main__sects { padding: 0 15px }
+#filter .filter-sortbar { background: #fff; margin-top: 8px; border: 1px #eee solid; padding: 0; height: 29px }
+#filter .filter-sortbar .icon-new { margin-top: -6px }
+#filter .filter-sortbar .button-strip, #filter .filter-sortbar .sort-filter { float: left }
+#filter .filter-sortbar .button-dropdown { position: relative; margin-left: -10px; border-right: 1px solid #ddd }
+#filter .filter-sortbar .button-dropdown .button-strip-item { position: relative; padding-right: 30px; border: none }
+#filter .filter-sortbar .button-dropdown .button-strip-item .tri--dropdown { top: 13px; right: 17px; border: 4px dashed transparent; border-top: 4px solid #999 }
+#filter .filter-sortbar .button-dropdown .dropdown-menu { display: none; position: absolute; top: 29px; _top: 35px; left: -1px; padding: 4px 0; width: 100%; _width: 106px; border: 1px solid #ddd; background-color: #fff; z-index: 10 }
+#filter .filter-sortbar .button-dropdown .dropdown-menu li { height: 25px }
+#filter .filter-sortbar .button-dropdown .dropdown-menu li a { display: block; height: 25px; line-height: 25px; color: #666; text-decoration: none }
+#filter .filter-sortbar .button-dropdown .dropdown-menu li a:hover { color: #ec5051; background: #eee }
+#filter .filter-sortbar .button-dropdown .dropdown-menu li .current { color: #ec5051 }
+#filter .filter-sortbar .button-dropdown .txt-align--left li a { text-align: left; padding-left: 20px }
+#filter .filter-sortbar .dropdown--open { z-index: 10 }
+#filter .filter-sortbar .dropdown--open .button-strip-item { color: #ec5051 }
+#filter .filter-sortbar .dropdown--open .button-strip-item .tri--dropdown { top: 8px; _border-top-style: dashed; border-top-color: transparent; border-bottom: 4px solid #ec5051 }
+#filter .filter-sortbar .dropdown--open .dropdown-menu { display: block; border-top-color: #fff }
+#filter .button-strip { margin: 0 10px 0 0; font-size: 12px; line-height: 19px; text-align: center }
+#filter .button-strip-item { padding: 0 15px 0 20px; line-height: 29px; height: 29px; _height: 31px; border-right: 1px solid #eee; background: #fff; color: #333 }
+#filter .button-strip-item:hover { background: #fff; color: #ec5051 }
+#filter .button-strip-item .button-img { margin: 11px 0 5px 6px; width: 7px; height: 8px; vertical-align: top }
+#filter .button-strip-item .button-content { _line-height: 33px }
+#filter .button-img { font-size: 0 }
+#filter .button-strip-item-asc .button-img { background-position: 0 -21px }
+#filter .button-strip-item-asc .button-img.asc-active, #filter .button-strip-item-asc .button-img:active, #filter .button-strip-item-asc:hover .button-img { background-position: 0 -11px }
+#filter .button-strip-item-desc .button-img { background-position: 0 -820px }
+#filter .button-strip-item-desc .button-img.desc-active, #filter .button-strip-item-desc .button-img:active, #filter .button-strip-item-desc:hover .button-img { background-position: 0 -810px }
+#filter .button-strip-item-asc-active .button-img { background-position: 0 -11px; margin-top: 10px }
+#filter .button-strip-item-desc-active .button-img { background-position: 0 -810px; margin-top: 10px }
+#filter .button-strip-item-right { margin-right: 0 }
+#filter .button-strip-item-checked { color: #ec5051; line-height: 27px; height: 28px; margin-top: -1px; border-top: 2px solid #ec5051 }
+#filter .checkbox { position: relative; margin: 5px 10px 8px; padding-left: 15px; color: #333; line-height: 19px; text-decoration: none; text-align: left; background-position: 0 -94px; vertical-align: top; outline: 0 }
+#filter .checkbox-checked { background-position: 0 -73px }
+#filter .checkbox-disabled { background-position: 0 -94px; color: #AAA; cursor: default }
+#filter .checkbox-checked-disabled { background-position: 0 -73px; cursor: default }
+#filter .checkbox--hot { color: #f76120 }
+#filter .icon-new { right: 3px; top: -5px }
+#filter .uix-tooltip { display: inline-block; vertical-align: bottom; width: 14px; height: 14px; margin-bottom: 3px; margin-left: 3px; border-radius: 7px; font-size: 12px; line-height: 12px; text-align: center; background: #eee }
+#filter .around-filter-outer-box { margin-bottom: 12px; border: 1px solid #ddd; background: #fff }
+#filter .around-filter-outer-box .filter-section { padding-left: 5em }
+#filter .around-filter-outer-box .first-filter { border-top: none }
+#filter .around-filter-outer-box .label { top: 16px; width: 3em }
+#filter .around-filter-outer-box .inline-link { display: inline-block; *display:inline;
+*zoom:1;
+vertical-align: top; line-height: 27px }
+#filter .around-geo-strip { padding: 10px 15px; border-top: 1px solid #eee; background: #fff; color: #666 }
+#filter .around-geo-strip .icon { margin-right: 5px; color: #f76120; font-size: 1.1em }
+#filter .around-geo-strip .delete, #filter .around-geo-strip .modify { margin-left: 20px; padding-left: 10px }
+#filter .around-geo-strip .delete { background-position: 0 -794px }
+#filter .around-geo-strip .modify { background-position: 0 -1018px }
+#filter .around-geo-strip .save-tips { margin-left: 10px; padding-left: 10px; border-left: 1px solid #ddd }
+#filter .around-geo-strip .save { position: absolute; width: 41px; height: 21px; margin-top: -1px; *margin-top:-2px;
+margin-left: 2px; border: 1px solid #ddd; border-radius: 3px; line-height: 21px; text-align: center; color: #555 }
+#filter .around-geo-strip .save:hover { text-decoration: none; border-color: #ec5051 }
+#filter .filter-tag { position: relative; display: inline-block; *display:inline;
+*zoom:1;
+margin: 0 10px 5px 0; padding: 0 16px 0 2px; color: #333; font-size: 12px; border: 1px solid #ec5051; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none }
+#filter .filter-tag__delete { position: absolute; right: 6px; top: 7px; display: inline-block; *display:inline;
+*zoom:1;
+margin-left: 5px; width: 6px; height: 5px; background-position: 0 -787px; color: #fff; font-size: 0; text-align: center; cursor: pointer }
+#filter .filter-sect__items { height: 27px; line-height: 27px }
+#filter .filter-sect__items li { float: left; position: relative }
+#filter .filter-sect__items li a { display: block; height: 27px; padding: 0 10px; _float: left }
+#filter .filter-sect__items li i { *display:inline-block
+}
+#filter .filter-sect__items .filter-sect--tab a { padding-right: 20px!important }
+#filter .filter-sect__items .filter-sect--tab a .arrow { position: absolute; top: 11px; right: 7px; height: 0; width: 0; line-height: 0; font-size: 0; border: 4px dashed transparent; border-top: 4px solid #ec5051 }
+#filter .filter-sect__items .current { border-top: 2px solid #ec5051 }
+#filter .filter-sect__items .current a { background: #eee; border: 1px solid #eee; border-bottom: 0; height: 25px; padding: 0 9px; line-height: 21px; color: #666 }
+#filter .filter-sect__items .current a .arrow { top: 5px; border-top: 4px dashed transparent; border-bottom: 4px solid #ec5051 }
+.base-sprite, .brand-tile__cover .multi-icon, .deal-mark__item--appoint, .deal-mark__item--bawangcan, .deal-mark__item--hasroom, .deal-mark__item--holiday, .deal-mark__item--imax, .deal-mark__item--lottery, .deal-mark__item--ndhotel, .deal-mark__item--nightsnack, .deal-mark__item--nnbooking, .deal-mark__item--pois, .deal-mark__item--primetime, .deal-mark__item--reserve, .deal-mark__item--voucher, .deal-mark__item--weddingexclusive, .deal-mark__item--weddinginsurance, .deal-mark__item--weddingmainstay { background-image: url(../../imagesPublic/base.png); background-repeat: no-repeat }
+.deal-tile--reco .deal-rank, .deal-tile--small .deal-rank, .movie-sprite { background-image: url(../images/si/movie.vc6a0b161.png); background-repeat: no-repeat }
+.mall--fixed .deal-tile { height: 370px }
+.mall--3cols--fixed .deal-tile { height: 348px }
+.deal-tile { position: relative; float: left; width: 350px; border: 1px solid #eee; background-color: #fff; color: #999 }
+.deal-tile:hover .short-title { color: #333 }
+.deal-tile .w-link:hover .short-title { _color: #333 }
+.deal-tile .num { font-size: 12px }
+.deal-tile .deal-mark { top: -4px; left: 10px }
+.deal-tile .deal-index { top: -4px; left: 0 }
+.deal-tile__cover { display: block; position: relative; _zoom: 1; text-decoration: none }
+.deal-tile__cover:hover { text-decoration: none }
+.deal-tile__cover img { display: block }
+.deal-tile__cover .trade-geo { position: absolute; bottom: 0; width: 318px; padding: 5px 16px; max-height: 166px; z-index: 5; font-size: 12px; line-height: 22px; color: #ccc; opacity: 0; filter: Alpha(opacity=0); overflow: hidden; background-color: #000; cursor: pointer; text-decoration: none!important; -moz-transition-property: opacity; -o-transition-property: opacity; -webkit-transition-property: opacity; transition-property: opacity; -moz-transition-duration: .5s; -o-transition-duration: .5s; -webkit-transition-duration: .5s; transition-duration: .5s; -moz-transition-timing-function: ease-out; -o-transition-timing-function: ease-out; -webkit-transition-timing-function: ease-out; transition-timing-function: ease-out }
+.deal-tile__cover .trade-geo em { color: #f76120 }
+.deal-tile__cover .geo-hover, .deal-tile__cover .trade-geo:hover { opacity: .9; filter: Alpha(opacity=90) }
+.deal-tile__cover .geo-title { font-weight: 700 }
+.deal-tile__cover .geo-title .F-glob-position { margin-right: 5px; color: #f76120; font-weight: lighter }
+.deal-tile__cover .deal-st { position: absolute; top: 0; left: 0; width: 350px; height: 214px; overflow: hidden; background: url(../images/i/bg-deal-status-24.vb2aeeac4.png) 0 0 no-repeat; _background-image: url(../images/i/bg-deal-status.v02744d0b.png) }
+.deal-tile__cover .deal-st--expire { background-position: 0 -224px }
+.deal-tile__title { margin-top: 15px; padding: 0 16px }
+.deal-tile__title .w-link { display: block; height: 64px; overflow: hidden; _cursor: pointer; -moz-transition-property: color; -o-transition-property: color; -webkit-transition-property: color; transition-property: color; -moz-transition-duration: .2s; -o-transition-duration: .2s; -webkit-transition-duration: .2s; transition-duration: .2s }
+.deal-tile__title .w-link:hover { text-decoration: none }
+.deal-tile__title .w-link--wedding { height: 83px; margin-bottom: 10px }
+.deal-tile__title .w-link--wedding .xtitle { text-indent: 0 }
+.deal-tile__title .short-title, .deal-tile__title .xtitle { display: block; -moz-transition-property: color; -o-transition-property: color; -webkit-transition-property: color; transition-property: color; -moz-transition-duration: .2s; -o-transition-duration: .2s; -webkit-transition-duration: .2s; transition-duration: .2s }
+.deal-tile__title .xtitle { margin-bottom: 4px; color: #333; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-indent: -.5em; _width: 306px }
+.deal-tile__title .short-title { line-height: 18px; color: #999; font-weight: 400 }
+.deal-tile__title em { font-weight: inherit; color: #f76120 }
+.deal-tile__detail { padding: 0 16px 2px }
+.deal-tile__detail .price { font-size: 16px }
+.deal-tile__detail .price strong { font-size: 26px; font-weight: 700 }
+.deal-tile__detail .price .price-label--wedding { margin-left: 4px }
+.deal-tile__detail .campaign { margin: 12px 5px 0 0; padding: 2px 4px; font-size: 12px; color: #fff; background-color: #ff8e3f }
+.deal-tile__detail .hots__discount { margin-left: 4px; padding: 1px 5px; vertical-align: 2px; background-color: #f76120; font-size: 12px; color: #fff }
+.deal-tile__detail .hots__discount--saleout { background-color: #999 }
+.deal-tile__detail .num { font-family: arial, sans-serif }
+.deal-tile__detail .value { margin-left: 10px; font-size: 12px }
+.deal-tile__detail .value del { padding-left: 6px }
+.deal-tile__detail .tags { float: right; margin-top: 13px; font-size: 12px; color: #f76120 }
+.deal-tile__detail .tags span { border: 1px solid #f94236; padding: 1px 5px }
+.deal-tile__detail .contact_service--btn { float: right; margin-top: 10px; padding: 1px 10px 2px 30px; text-decoration: none; font-size: 12px; background: url(../images/i/icon-online-service.vd53cbd23.gif) no-repeat }
+.deal-tile__detail .contact_service--btn, .deal-tile__detail .contact_service--btn:hover { color: #fff }
+.deal-tile--small { position: relative; width: 198px; margin-bottom: 20px; color: #999; border-bottom: 1px dotted #ddd }
+.deal-tile--small .deal-rank { position: absolute; top: -2px; left: 0; padding: 0 2px 2px 0; width: 16px; height: 16px; line-height: 16px; background-position: 0 -209px; color: #fff; text-align: center }
+.deal-tile--small__cover { display: block; position: relative; _zoom: 1; text-decoration: none }
+.deal-tile--small__cover img { display: block }
+.deal-tile--small__title { margin-top: 15px }
+.deal-tile--small__title .w-link { display: block; height: 35px; _cursor: pointer; text-indent: -.25em; text-decoration: none; -moz-transition-property: color; -o-transition-property: color; -webkit-transition-property: color; transition-property: color; -moz-transition-duration: .2s; -o-transition-duration: .2s; -webkit-transition-duration: .2s; transition-duration: .2s; overflow: hidden }
+.deal-tile--small__detail { padding-bottom: 10px; font-size: 12px }
+.deal-tile--small__detail .num { font-family: arial, sans-serif }
+.deal-tile--small__detail .price { font-size: 12px }
+.deal-tile--small__detail .price strong { font-size: 22px }
+.deal-tile--small__detail .sales { margin-left: 10px }
+.deal-tile--small__detail .sales .num { margin-left: 4px; color: #f76120; font-weight: 400 }
+.deal-tile--mini { position: relative; width: 198px; margin-bottom: 18px; padding-bottom: 15px; color: #999; border-bottom: 1px dotted #ddd; zoom: 1 }
+.deal-tile--mini__cover img { float: left; margin: 2px 10px 0 0 }
+.deal-tile--mini__title { height: 32px; line-height: 16px; overflow: hidden; font-weight: 400 }
+.deal-tile--mini__title .w-link { -moz-transition-property: color; -o-transition-property: color; -webkit-transition-property: color; transition-property: color; -moz-transition-duration: .2s; -o-transition-duration: .2s; -webkit-transition-duration: .2s; transition-duration: .2s; text-decoration: none }
+.deal-tile--mini__detail { padding-top: 6px }
+.deal-tile--mini__detail .num { font-size: 12px }
+.deal-tile--mini__detail .price { padding-right: 5px; font-size: 12px }
+.deal-tile--mini__detail .price strong { font-size: 14px }
+.deal-tile__last { margin-bottom: 0; border-bottom: none }
+.deal-tile__extra { padding: 1px; border-top: 1px #eee solid }
+.deal-tile__extra .extra-inner { position: relative; height: 33px; padding: 0 15px; font-size: 12px; background-color: #f9f9f9 }
+.deal-tile__extra .sales { float: left; height: 33px; line-height: 33px }
+.deal-tile__extra .sales .num { margin-left: 2px; color: #f76120; font-weight: 400 }
+.deal-tile__extra .rate-info { float: right; height: 33px; line-height: 33px; cursor: pointer }
+.deal-tile__extra .rate-info:hover, .deal-tile__extra .rate-info:hover .rate-info__count { color: #ec5051; text-decoration: none }
+.deal-tile__extra .rate-info__bar { margin-right: 5px; *margin-right:8px;
+vertical-align: -1px; *vertical-align:1px
+}
+.deal-tile__extra .rate-info__count { display: inline-block; color: #999; font-family: arial, sans-serif }
+.deal-tile__extra .rate-info--noreviews { cursor: default }
+.deal-tile__extra .rate-info--noreviews:hover { color: inherit }
+.deal-tile__extra .marker { float: right; position: relative; top: 10px; width: 10px; height: 13px; overflow: hidden }
+.deal-tile__extra .maker--distance { background-position: -54px -77px }
+.deal-tile__extra .sp-around-icon { background-position: 0 -62px }
+.deal-tile__extra .around-distance, .deal-tile__extra .subway-distance { float: right; padding-left: 5px; font-size: 12px; line-height: 33px }
+.deal-tile__extra .around-distance .F-glob-position, .deal-tile__extra .subway-distance .F-glob-position { margin-right: 5px; color: #f76120; font-size: 1.1em }
+.deal-tile__extra .around-distance em { padding: 0 3px; font-weight: 700; color: #f76120 }
+.deal-mark { position: absolute; z-index: 9 }
+.deal-mark__item { float: left; _position: relative; margin-right: -3px; width: 43px; height: 40px; text-indent: -9999px; overflow: hidden }
+.deal-mark__item--voucher { background-position: 0 -619px }
+.deal-mark__item--pois { background-position: 0 -493px }
+.deal-mark__item--nnbooking { background-position: 0 -451px }
+.deal-mark__item--appoint { background-position: 0 -115px }
+.deal-mark__item--hasroom { background-position: 0 -199px }
+.deal-mark__item--imax { background-position: 0 -283px }
+.deal-mark__item--ndhotel { background-position: 0 -367px }
+.deal-mark__item--lottery { background-position: 0 -325px }
+.deal-mark__item--bawangcan { background-position: 0 -157px }
+.deal-mark__item--reserve { background-position: 0 -577px }
+.deal-mark__item--weddingexclusive { background-position: 0 -661px }
+.deal-mark__item--weddinginsurance { background-position: 0 -703px }
+.deal-mark__item--weddingmainstay { background-position: 0 -745px }
+.deal-mark__item--nightsnack { background-position: 0 -409px }
+.deal-mark__item--primetime { background-position: 0 -535px }
+.deal-mark__item--holiday { background-position: 0 -241px }
+.deal-tile--small .deal-index { position: absolute; z-index: 9; top: -1px; left: 0; width: 15px; height: 16px; text-align: center; background: #f76120; color: #fff; -webkit-border-bottom-right-radius: 90px; -moz-border-radius-bottomright: 90px; border-bottom-right-radius: 3px; font-size: 11px }
+.brand-tile { position: relative; float: left; width: 350px; border: 1px solid #eee; background: #fff; color: #666 }
+.brand-tile .logo { margin: 20px auto }
+.brand-tile .title { display: block; text-align: center; font-weight: 700; color: #666 }
+.brand-tile--even { margin-right: 0 }
+.brand-tile__cover { display: block; padding-bottom: 20px; border-bottom: 1px solid #eee; text-align: center }
+.brand-tile__cover img { display: block; max-width: 314px }
+.brand-tile__cover img:first-child { border-bottom: 1px solid #eee }
+.brand-tile__cover .multi-icon { position: absolute; width: 50px; height: 50px; left: 0; top: 192px; background-position: 0 -952px }
+.brand-tile__cover:hover { text-decoration: none }
+.brand-tile__extra { display: block; border-top: 1px solid #fff; margin-bottom: 1px; padding: 10px 0; text-align: center; font-size: 12px; background-color: #fff }
+.brand-tile__extra .extra-inner { width: 33%; float: left; border-right: 1px dotted #ddd }
+.brand-tile__extra .count { font-size: 18px; font-family: arial, sans-serif; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.brand-tile__extra .label { color: #999 }
+.brand-tile__extra .extra-inner--last { border-right: none }
+.deal-tile--reco { border: 0; width: 198px; height: 195px; font-size: 12px }
+.deal-tile--reco:hover { box-shadow: none }
+.deal-tile--reco .w-link { width: 198px; height: 36px }
+.deal-tile--reco .w-link:hover .short-title { color: #ec5051 }
+.deal-tile--reco .short-title { text-indent: -.5em; color: #666 }
+.deal-tile--reco .price { font-size: 14px }
+.deal-tile--reco .price strong { font-size: 22px }
+.deal-tile--reco .deal-tile__title { margin-top: 10px; padding: 0 }
+.deal-tile--reco .deal-tile__detail { padding: 0 }
+.deal-tile--reco .deal-rank { position: absolute; top: -2px; left: 0; padding: 0 2px 2px 0; width: 16px; height: 16px; line-height: 16px; background-position: 0 -209px; color: #fff; text-align: center }
+.top-reco-deals .deal-tile--reco { float: none }
+.mall {
+*position:relative; float: left; width: 720px; clear: left }
+.mall .brand-tile, .mall .deal-tile { margin-bottom: 16px }
+.mall .brand-tile:hover, .mall .deal-tile:hover { border-bottom-color: #ec5051; box-shadow: inset 0 -1px 0 0 #ec5051 }
+.mall .deal-tile--even { float: right }
+.mall .paginator-wrapper { clear: both; padding-top: 20px; text-align: center }
+.pg-nav .paginator-wrapper { padding-top: 24px }
+.mall--3cols { width: 980px }
+.mall--3cols .brand-tile, .mall--3cols .deal-tile { margin: 0 16px 16px 0; width: 314px }
+.mall--3cols .brand-tile--even, .mall--3cols .deal-tile--even { float: left; margin-right: 0 }
+.mall--3cols .deal-tile__cover .trade-geo { width: 282px }
+.mall--3cols .deal-tile__cover .deal-st { width: 314px; height: 192px; background-position: -18px -11px }
+.mall--3cols .deal-tile__cover .deal-st--expire { background-image: url(../images/i/bg-dealstatus-over.ve7fe9b41.png); background-position: 230px 127px }
+.mall--3cols .deal-tile__cover .deal-st--soldout { background-image: url(../images/i/bg-dealstatus-soldout.vfc45631c.png); background-position: 230px 127px }
+.mall--3cols .deal-tile__title .xtitle { _width: 282px }
+.mall--3cols .deal-tile__detail { padding: 4px 16px }
+.mall--3cols .deal-tile__detail .price { font-size: 14px }
+.mall--3cols .deal-tile__detail .price strong { font-size: 22px }
+.mall--mini, .mall--small { width: 198px }
+.deal-list--floor-new .deal-tile { border-right: none; border-bottom: none; width: 291px }
+.deal-list--floor-new .deal-tile .deal-mark { top: 8px; left: 15px }
+.deal-list--floor-new .deal-tile--even { border-right: 1px solid #eee; width: 292px }
+.deal-list--floor-new .deal-tile__cover { padding: 12px 15px 0 }
+.deal-list--floor-new .deal-tile__cover .trade-geo { width: 228px }
+.deal-list--floor-new .deal-tile__title { margin-top: 12px; padding: 0 15px 5px }
+.deal-list--floor-new .deal-tile__title .short-title, .deal-list--floor-new .deal-tile__title .xtitle { height: 24px; line-height: 24px }
+.deal-list--floor-new .deal-tile__title .xtitle { margin-bottom: 0; font-size: 14px; color: #666 }
+.deal-list--floor-new .deal-tile__title .short-title { overflow: hidden; text-overflow: ellipsis; color: #999 }
+.deal-list--floor-new .w-link { height: auto }
+.deal-list--floor-new .w-link:hover .short-title, .deal-list--floor-new .w-link:hover .xtitle { color: #333 }
+.deal-list--floor-new .deal-tile__detail { margin-bottom: 10px; padding: 0 15px; height: 24px }
+.deal-list--floor-new .deal-tile__detail .sales { float: right; margin-top: 8px; font-size: 12px; font-weight: 400; color: #999 }
+.deal-list--floor-new .deal-tile__detail .sales .num { font-weight: 400 }
+.deal-list--floor-new .deal-tile__detail .price { font-size: 20px }
+.deal-list--floor-new .deal-tile__detail .price strong { font-size: 20px; font-weight: 400 }
+.deal-list--floor-new .deal-tile__detail .value { margin-left: 0 }
+.deal-list--floor-new .deal-tile__detail .value .num { padding-left: 0 }
+.deal-list--floor-new .deal-tile__extra { border-top: none; padding: 0 15px }
+.deal-list--floor-new .deal-tile__extra .extra-inner { border-top: 1px dotted #ddd; padding: 0; height: 45px; background: #fff }
+.deal-list--floor-new .deal-tile__extra .campaign { float: left; margin: 10px 5px 0 0; padding: 0 4px; height: 16px; line-height: 16px; font-size: 12px; color: #fff; background-color: #ff8e3f }
+.deal-list--hots .deal-tile { border: none; border-right: 1px solid #eee; width: 237px }
+.deal-list--hots .deal-tile .deal-mark { top: 11px; left: 16px }
+.deal-list--hots .deal-tile--even { border-right: none }
+.deal-list--hots .deal-tile__cover { padding: 15px 16px 0 }
+.deal-list--hots .deal-tile__cover .trade-geo { display: none }
+.deal-list--hots .deal-tile__title { margin-top: 18px; padding: 0 16px }
+.deal-list--hots .deal-tile__title .xtitle { height: 18px; line-height: 18px; margin-bottom: 0; font-size: 14px; color: #666 }
+.deal-list--hots .deal-tile__title .short-title { display: none }
+.deal-list--hots .w-link { height: auto }
+.deal-list--hots .w-link:hover .short-title, .deal-list--hots .w-link:hover .xtitle { color: #333 }
+.deal-list--hots .deal-tile__detail { padding: 0 16px; height: 17px; line-height: 17px; margin: 10px 0 12px }
+.deal-list--hots .deal-tile__detail .price strong { font-size: 16px; font-weight: 400 }
+.deal-list--hots .deal-tile__detail .value { margin-left: 0; font-size: 12px; color: #999 }
+.deal-list--hots .deal-tile__detail .sales { float: right; margin-top: 2px; font-size: 12px; font-weight: 400; color: #999 }
+.deal-list--hots .deal-tile__extra { padding: 0 16px; border: none }
+.deal-list--hots .deal-tile__extra .extra-inner { border-top: 1px dotted #ddd; padding: 0; height: 45px; background: #fff }
+.deal-list--hots .deal-tile__extra .extra-inner .hots__discount { padding: 1px 5px; line-height: 40px; color: #fff; background-color: #f76120 }
+.deal-list--hots .deal-tile__extra .campaign { float: left; margin: 12px 5px 0 0; padding: 0 4px; height: 16px; line-height: 16px; font-size: 12px; color: #fff; background-color: #ff8e3f }
+.deal-list--hots .deal-tile__extra .rate-info { display: none }
+.no-poilist{margin-bottom: 16px;border: 1px solid #ddd;padding: 45px;height: 68px;text-align: center;font-size: 12px;background: #fff;}
+

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="COMM_INFO_PROMOTION">
+
+	<typeAlias alias="commInfoPromotion" type="com.ebiz.webapp.domain.CommInfoPromotion" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCommInfoPromotion" />
+		<flushOnExecute statement="updateCommInfoPromotion" />
+		<flushOnExecute statement="deleteCommInfoPromotion" />
+	</cacheModel>
+
+	<resultMap id="commInfoPromotionResultForList" class="commInfoPromotion">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="PROM_PRICE" property="prom_price" jdbcType="DECIMAL" />
+		<result column="NO_DIST_PRICE" property="no_dist_price" jdbcType="DECIMAL" />
+		<result column="COMM_TCZH_ID" property="comm_tczh_id" jdbcType="DECIMAL" />
+		<result column="F_MA" property="f_ma" jdbcType="INTEGER" />
+		<result column="COMM_TITLE" property="comm_title" jdbcType="VARCHAR" />
+		<result column="COMM_SUB_TITLE" property="comm_sub_title" jdbcType="VARCHAR" />
+		<result column="PROMOTION_TYPE" property="promotion_type" jdbcType="INTEGER" />
+		<result column="START_TIME" property="start_time" jdbcType="TIMESTAMP" />
+		<result column="END_TIME" property="end_time" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="AUDIT_DATE" property="audit_date" jdbcType="TIMESTAMP" />
+		<result column="AUDIT_USER_ID" property="audit_user_id" jdbcType="INTEGER" />
+		<result column="IS_BUYER_LIMIT" property="is_buyer_limit" jdbcType="INTEGER" />
+		<result column="BUYER_LIMIT_NUM" property="buyer_limit_num" jdbcType="INTEGER" />
+		<result column="PROM_INVENTORY" property="prom_inventory" jdbcType="INTEGER" />
+		<result column="PROM_SALE_ACOUNT" property="prom_sale_acount" jdbcType="INTEGER" />
+		<result column="OWN_ENTP_ID" property="own_entp_id" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />
+		<result column="AUDIT_DESC" property="audit_desc" jdbcType="VARCHAR" />
+		<result column="COMM_TCZH_IDS" property="comm_tczh_ids" jdbcType="VARCHAR" />
+		<result column="TG_TCZH_IDS" property="tg_tczh_ids" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="commInfoPromotionResult" class="commInfoPromotion" extends="commInfoPromotionResultForList">
+	</resultMap>
+	
+	<resultMap id="commInfoPromotionResultAndEntpName" class="commInfoPromotion" extends="commInfoPromotionResultForList">
+	  <result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="sf-commInfoPromotion">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="prom_price">a.PROM_PRICE = #prom_price:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="no_dist_price">a.NO_DIST_PRICE = #no_dist_price:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_id">a.COMM_TCZH_ID = #comm_tczh_id:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="f_ma">a.F_MA = #f_ma:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_title">a.COMM_TITLE = #comm_title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_sub_title">a.COMM_SUB_TITLE = #comm_sub_title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="promotion_type">a.PROMOTION_TYPE = #promotion_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="start_time">a.START_TIME = #start_time:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="end_time">a.END_TIME = #end_time:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_date">a.AUDIT_DATE = #audit_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_id">a.AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_buyer_limit">a.IS_BUYER_LIMIT = #is_buyer_limit:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="buyer_limit_num">a.BUYER_LIMIT_NUM = #buyer_limit_num:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="prom_inventory">a.PROM_INVENTORY = #prom_inventory:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="prom_sale_acount">a.PROM_SALE_ACOUNT = #prom_sale_acount:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_entp_id">a.OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_desc">a.AUDIT_DESC = #audit_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_ids">a.COMM_TCZH_IDS = #comm_tczh_ids:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tg_tczh_ids">a.TG_TCZH_IDS = #tg_tczh_ids:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.end_time_dayu_new_date"><![CDATA[
+			a.end_time >= str_to_date(now(), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.start_time_xiaoyu_new_date"><![CDATA[
+			a.start_time <= str_to_date(now(), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.not_out_sell_time"><![CDATA[sysdate() between a.start_time and a.end_time]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_title_like">a.comm_title like '%'  #map.comm_title_like#  '%'</isNotEmpty>
+	</sql>
+
+	<select id="selectCommInfoPromotion" resultMap="commInfoPromotionResultAndEntpName" parameterClass="commInfoPromotion" cacheModel="oneDayCache">
+		select a.*,b.entp_name from COMM_INFO_PROMOTION a 
+		left join entp_info b on a.own_entp_id=b.id
+		where 1 = 1
+		<include refid="sf-commInfoPromotion"/>
+	</select>
+
+	<select id="selectCommInfoPromotionList" resultMap="commInfoPromotionResultForList" parameterClass="commInfoPromotion" cacheModel="oneDayCache">
+		select * from COMM_INFO_PROMOTION a where 1 = 1
+		<include refid="sf-commInfoPromotion" />
+		<!-- order by a.ID asc -->
+		order by  
+<!-- 		<isNotEmpty property="map.orderByCommentAsc"><![CDATA[a.comment_count asc,]]></isNotEmpty> -->
+		 <isNotEmpty property="map.orderByAddDateDesc"><![CDATA[a.add_date desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderBySaleAsc"><![CDATA[a.prom_sale_acount asc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderBySaleDesc"><![CDATA[a.prom_sale_acount desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByPriceDesc"><![CDATA[a.prom_price desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByPriceAsc"><![CDATA[a.prom_price asc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByUpDateDesc"><![CDATA[a.up_date desc,]]></isNotEmpty>
+<!-- 		 <isNotEmpty property="map.orderByViewCountDesc"><![CDATA[a.view_count desc,]]></isNotEmpty> -->
+<!-- 		 <isNotEmpty  property="map.order_value">a.order_value desc,</isNotEmpty> -->
+		<isNotEmpty property="map.TG_desc"><![CDATA[ a.end_time desc,]]></isNotEmpty>
+		 a.ADD_DATE desc
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+		
+	</select>
+
+	<select id="selectCommInfoPromotionCount" resultClass="int" parameterClass="commInfoPromotion" cacheModel="oneDayCache">
+		select count(*) from COMM_INFO_PROMOTION a where 1 = 1
+		<include refid="sf-commInfoPromotion" />
+	</select>
+
+	<select id="selectCommInfoPromotionPaginatedList" resultMap="commInfoPromotionResultAndEntpName" parameterClass="commInfoPromotion" cacheModel="oneDayCache">
+		select  a.*,b.entp_name from COMM_INFO_PROMOTION a 
+		left join entp_info b on a.own_entp_id=b.id
+		where 1 = 1
+		<include refid="sf-commInfoPromotion" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCommInfoPromotion" parameterClass="commInfoPromotion">
+		<![CDATA[insert into COMM_INFO_PROMOTION (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="prom_price">PROM_PRICE</isNotNull>	
+			<isNotNull prepend="," property="no_dist_price">NO_DIST_PRICE</isNotNull>	
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID</isNotNull>	
+			<isNotNull prepend="," property="f_ma">F_MA</isNotNull>	
+			<isNotNull prepend="," property="comm_title">COMM_TITLE</isNotNull>	
+			<isNotNull prepend="," property="comm_sub_title">COMM_SUB_TITLE</isNotNull>	
+			<isNotNull prepend="," property="promotion_type">PROMOTION_TYPE</isNotNull>	
+			<isNotNull prepend="," property="start_time">START_TIME</isNotNull>	
+			<isNotNull prepend="," property="end_time">END_TIME</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE</isNotNull>	
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="is_buyer_limit">IS_BUYER_LIMIT</isNotNull>	
+			<isNotNull prepend="," property="buyer_limit_num">BUYER_LIMIT_NUM</isNotNull>	
+			<isNotNull prepend="," property="prom_inventory">PROM_INVENTORY</isNotNull>	
+			<isNotNull prepend="," property="prom_sale_acount">PROM_SALE_ACOUNT</isNotNull>	
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC</isNotNull>		
+			<isNotNull prepend="," property="comm_tczh_ids">COMM_TCZH_IDS</isNotNull>		
+			<isNotNull prepend="," property="tg_tczh_ids">TG_TCZH_IDS</isNotNull>		
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="prom_price">#prom_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="no_dist_price">#no_dist_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">#comm_tczh_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="f_ma">#f_ma:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_title">#comm_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_sub_title">#comm_sub_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="promotion_type">#promotion_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="start_time">#start_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="end_time">#end_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_date">#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">#audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_buyer_limit">#is_buyer_limit:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="buyer_limit_num">#buyer_limit_num:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="prom_inventory">#prom_inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="prom_sale_acount">#prom_sale_acount:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">#own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">#audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_ids">#comm_tczh_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tg_tczh_ids">#tg_tczh_ids:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCommInfoPromotion" parameterClass="commInfoPromotion">
+		update COMM_INFO_PROMOTION
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="prom_price">PROM_PRICE = #prom_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="no_dist_price">NO_DIST_PRICE = #no_dist_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID = #comm_tczh_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="f_ma">F_MA = #f_ma:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_title">COMM_TITLE = #comm_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_sub_title">COMM_SUB_TITLE = #comm_sub_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="promotion_type">PROMOTION_TYPE = #promotion_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="start_time">START_TIME = #start_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="end_time">END_TIME = #end_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE = #audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_buyer_limit">IS_BUYER_LIMIT = #is_buyer_limit:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="buyer_limit_num">BUYER_LIMIT_NUM = #buyer_limit_num:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="prom_inventory">PROM_INVENTORY = #prom_inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="prom_sale_acount">PROM_SALE_ACOUNT = #prom_sale_acount:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC = #audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_ids">COMM_TCZH_IDS = #comm_tczh_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tg_tczh_ids">TG_TCZH_IDS = #tg_tczh_ids:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="map.add_sale_count">PROM_SALE_ACOUNT = PROM_SALE_ACOUNT + #map.add_sale_count#</isNotNull>
+			<isNotNull prepend="," property="map.sub_sale_count">PROM_SALE_ACOUNT = PROM_SALE_ACOUNT - #map.sub_sale_count#</isNotNull>
+			
+			<isNotNull prepend="," property="map.add_inventory">PROM_INVENTORY = PROM_INVENTORY + #map.add_inventory#</isNotNull>
+			<isNotNull prepend="," property="map.sub_inventory">PROM_INVENTORY = PROM_INVENTORY - #map.sub_inventory#</isNotNull>
+			
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCommInfoPromotion" parameterClass="commInfoPromotion">
+		delete from COMM_INFO_PROMOTION where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

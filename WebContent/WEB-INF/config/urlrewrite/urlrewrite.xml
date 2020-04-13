@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+
+<urlrewrite>
+	<!-- index.do BEGIN-->
+	<outbound-rule>
+		<from>/index.do$</from>
+		<to>/index.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/index.shtml$</from>
+		<to>/index.do</to>
+	</rule>
+	<rule>
+		<from>^/manager/entp/index.shtml$</from>
+		<to>/manager/entp/Index.do</to>
+	</rule>
+	<rule>
+		<from>^/manager/customer/index.shtml$</from>
+		<to>/manager/customer/Index.do</to>
+	</rule>
+	
+	<rule>
+		<from>^/group/index.shtml$</from>
+		<to>/group/Index.do</to>
+	</rule>
+	<rule>
+		<from>^/m/index.shtml$</from>
+		<to>/m/index.do</to>
+	</rule>
+	<rule>
+		<from>^/m/indexHz.shtml$</from>
+		<to>/m/IndexHz.do</to>
+	</rule>
+	<rule>
+		<from>^/mshop/index.shtml$</from>
+		<to>/mshop/index.do</to>
+	</rule>
+	<rule>
+		<from>^/jifen/index.shtml$</from>
+		<to>/jifen/index.do</to>
+	</rule>
+	<!-- index.do END-->
+	
+	<!-- 超时  -->
+ 	<outbound-rule>
+		<from>/IndexTimeout.do$</from>
+		<to>/timeout.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/timeout.html$</from>
+		<to>/IndexTimeout.do</to>
+	</rule>
+	<!-- 超时  -->
+	
+	<!-- 运营中心 indexTg.do BEGIN-->
+	<outbound-rule>
+		<from>/IndexServiceCenterInfo.do$</from>
+		<to>/servicecenter.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/servicecenter.html$</from>
+		<to>/IndexServiceCenterInfo.do</to>
+	</rule>
+	<!--  运营中心 END-->
+	
+	<!-- 内部商城 IndexDaLiBao.do BEGIN-->
+	<outbound-rule>
+		<from>/IndexDaLiBao.do$</from>
+		<to>/dalibao.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/dalibao.html$</from>
+		<to>/IndexDaLiBao.do</to>
+	</rule>
+	<!--   内部商城 END-->
+	
+	
+	<!-- 我要开店 BEGIN-->
+ 	<outbound-rule>
+		<from>/IndexEntpEnter.do(.*)$</from>
+		<to>/entpenter.html$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/entpenter.html(.*)$</from>
+		<to>/IndexEntpEnter.do$1</to>
+	</rule>
+	<!--  我要开店 END-->
+	
+	<!--管理员发布优惠券IndexYhqLq start -->
+	<outbound-rule>
+		<from>/IndexYhqLq.do$</from>
+		<to>/indexYhqLq.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/indexYhqLq.shtml$</from>
+		<to>/IndexYhqLq.do</to>
+	</rule>
+	<!-- Wedding end -->
+	
+	<!-- 新闻列表 BEGIN-->
+	<outbound-rule>
+		<from>/IndexNewsInfo.do\?method=list&amp;mod_code=([0-9]+)$</from>
+		<to>/newsInfo-list-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/newsInfo-list-([0-9]+).shtml$</from>
+		<to>/IndexNewsInfo.do?method=list&amp;mod_code=$1</to>
+	</rule>
+	<!-- 新闻列表 END-->
+	
+	<!-- 新闻详细信息 BEGIN -->
+	<outbound-rule>
+		<from>/IndexNewsInfo.do\?uuid=([a-zA-Z0-9\-]{36})$</from>
+		<to>/news-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/news-([a-zA-Z0-9\-]{36}).shtml$</from>
+		<to>/IndexNewsInfo.do?uuid=$1</to>
+	</rule>
+	<!-- 新闻详细信息 END -->
+	
+	<!-- 新闻分页 BEGIN -->
+ 	<outbound-rule>
+		<from>/IndexNewsInfo.do(.*)$</from>
+		<to>/newslist.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/newslist.shtml(.*)$</from>
+		<to>/IndexNewsInfo.do$1</to>
+	</rule>
+	<!-- 新闻分页 END -->
+
+ 	<!-- 搜索 BEGIN -->
+	
+	<outbound-rule>
+		<from>/Search.do\?root_cls_id=([0-9]+)$</from>
+		<to>/search-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/search-([0-9]+).shtml</from>
+		<to>/Search.do?root_cls_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/Search.do\?root_cls_id=([0-9]+)&amp;par_cls_id=([0-9]+)$</from>
+		<to>/search-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/search-([0-9]+)-([0-9]+).shtml</from>
+		<to>/Search.do?root_cls_id=$1&amp;par_cls_id=$2</to>
+	</rule>
+	
+ 	<outbound-rule>
+		<from>/Search.do\?root_cls_id=([0-9]+)&amp;par_cls_id=([0-9]+)&amp;son_cls_id=([0-9]+)$</from>
+		<to>/search-$1-$2-$3.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/search-([0-9]+)-([0-9]+)-([0-9]+).shtml</from>
+		<to>/Search.do?root_cls_id=$1&amp;par_cls_id=$2&amp;son_cls_id=$3</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/Search.do(.*)$</from>
+		<to>/search.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/search.shtml(.*)$</from>
+		<to>/Search.do$1</to>
+	</rule>
+	
+	<!-- 搜索 END -->
+	
+ 	<!-- 登录 BEGIN -->
+ 	<outbound-rule>
+		<from>/IndexLogin.do(.*)$</from>
+		<to>/login.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/login.shtml(.*)$</from>
+		<to>/IndexLogin.do$1</to>
+	</rule>
+	<!-- 登录 END -->
+	
+ 	<!-- 注册 BEGIN -->
+ 	<outbound-rule>
+		<from>/Register.do$</from>
+		<to>/register.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/register.shtml$</from>
+		<to>/Register.do</to>
+	</rule>
+	<!-- 注册 END -->
+	
+	<!-- 企业列表 BEGIN -->
+ 	<!-- <outbound-rule>
+		<from>/IndexEntp.do(.*)$</from>
+		<to>/entplist.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/entplist.shtml(.*)$</from>
+		<to>/IndexEntp.do$1</to>
+	</rule> -->
+	<!-- 企业列表 END -->
+	
+	<!-- 产品 BEGIN -->
+ 	<outbound-rule>
+		<from>/IndexPd.do$</from>
+		<to>/pd.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/pd.shtml$</from>
+		<to>/IndexPd.do</to>
+	</rule>
+	
+ 	<outbound-rule>
+		<from>/IndexPd.do\?method=listCategory$</from>
+		<to>/pdCategory.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/pdCategory.shtml</from>
+		<to>/IndexPd.do?method=listCategory</to>
+	</rule>
+	
+ 	<outbound-rule>
+		<from>/IndexPd.do\?method=listPdHome&amp;cls_id=([0-9]+)$</from>
+		<to>/pdHome-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/pdHome-([0-9]+).shtml</from>
+		<to>/IndexPd.do?method=listPdHome&amp;cls_id=$1</to>
+	</rule>
+	
+ 	<outbound-rule>
+		<from>/IndexPd.do\?method=listPdHome&amp;par_id=([0-9]+)&amp;cls_id=([0-9]+)$</from>
+		<to>/pdHome-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/pdHome-([0-9]+)-([0-9]+).shtml</from>
+		<to>/IndexPd.do?method=listPdHome&amp;par_id=$1&amp;cls_id=$2</to>
+	</rule>
+	
+ 	<outbound-rule>
+		<from>/IndexPd.do\?method=listPdList&amp;par_id=([0-9]+)&amp;cls_id=([0-9]+)$</from>
+		<to>/pdList-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/pdList-([0-9]+)-([0-9]+).shtml</from>
+		<to>/IndexPd.do?method=listPdList&amp;par_id=$1&amp;cls_id=$2</to>
+	</rule>
+	<!-- 产品 END -->
+	
+	
+	<!-- 互动咨询 BEGIN -->
+ 	<outbound-rule>
+		<from>/IndexQaInfo.do(.*)$</from>
+		<to>/qainfo.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/qainfo.shtml(.*)$</from>
+		<to>/IndexQaInfo.do$1</to>
+	</rule>
+	<!-- 互动咨询  END -->
+	
+	<!-- 网站介绍 底部链接 BEGIN -->
+ 	<outbound-rule>
+		<from>/IndexWebsiteIntroduction.do\?method=view&amp;mod_code=([0-9]+)$</from>
+		<to>/siteinfo-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/siteinfo-([0-9]+).shtml$</from>
+		<to>/IndexWebsiteIntroduction.do?method=view&amp;mod_code=$1</to>
+	</rule>
+	<!-- 网站介绍 底部链接  END -->
+	
+	<!-- 企业首页 BEGIN -->
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=subdomain&amp;custom_url=([a-zA-Z0-9\-]+)$</from>
+		<to>/$1.ehtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/([a-zA-Z0-9\-]+).ehtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=subdomain&amp;custom_url=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=getCommInfo&amp;id=([0-9]+)$</from>
+		<to>/item-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/item-([0-9]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=getCommInfo&amp;id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?entp_id=([0-9]+)$</from>
+		<to>/entp-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/entp-([0-9]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?entp_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=getCommList&amp;entp_id=([0-9]+)&amp;orderBy=([a-zA-Z0-9\-]+)$</from>
+		<to>/commlistorderBy-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/commlistorderBy-([0-9]+)-([a-zA-Z0-9\-]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=getCommList&amp;entp_id=$1&amp;orderBy=$2</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=getCommList&amp;entp_id=([0-9]+)&amp;cls_id=([0-9]+)$</from>
+		<to>/entp-pds-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/entp-pds-([0-9]+)-([0-9]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=getCommList&amp;entp_id=$1&amp;cls_id=$2</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=getCommList&amp;entp_id=([0-9]+)$</from>
+		<to>/commlist-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/commlist-([0-9]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=getCommList&amp;entp_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=getEntpYhqList&amp;entp_id=([0-9]+)$</from>
+		<to>/yhqlist-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/yhqlist-([0-9]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=getEntpYhqList&amp;entp_id=$1</to>
+	</rule>
+		
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=getEntpInfo&amp;entp_id=([0-9]+)$</from>
+		<to>/entpinfo-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/entpinfo-([0-9]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=getEntpInfo&amp;entp_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=addInquiryOffer&amp;entp_id=([0-9]+)$</from>
+		<to>/addInquiryOffer-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/addInquiryOffer-([0-9]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=addInquiryOffer&amp;entp_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do\?method=getEntpContact&amp;entp_id=([0-9]+)$</from>
+		<to>/entpcontact-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/entpcontact-([0-9]+).shtml$</from>
+		<to>/entp/IndexEntpInfo.do?method=getEntpContact&amp;entp_id=$1</to>
+	</rule>
+	
+ 	<outbound-rule>
+		<from>/entp/IndexEntpInfo.do(.*)$</from>
+		<to>/entp/entp.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/entp/entp.shtml(.*)$</from>
+		<to>/entp/IndexEntpInfo.do$1</to>
+	</rule>
+	<!-- 企业首页  END -->
+	
+
+	
+	<!-- 询价 BEGIN -->
+	<outbound-rule>
+		<from>/specialarea/IndexInquiryQuote.do(.*)$</from>
+		<to>/specialarea/inquiryOrder.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/specialarea/inquiryOrder.shtml(.*)$</from>
+		<to>/specialarea/IndexInquiryQuote.do$1</to>
+	</rule>
+	<!-- 询价 BEGIN -->
+	
+	<!-- 购物车  START -->
+	
+	<outbound-rule>
+		<from>/IndexPayOrder.do\?method=groupBuying&amp;group_id=([0-9]+)$</from>
+		<to>/cart-group-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-group-([0-9]+).shtml$</from>
+		<to>/IndexPayOrder.do\?method=groupBuying&amp;group_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexShoppingCar.do\?method=step3$</from>
+		<to>/cart-step3.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-step3.shtml$</from>
+		<to>/IndexShoppingCar.do?method=step3</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexShoppingCar.do\?pd_id=([0-9]+)$</from>
+		<to>/cart-buypd-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-buypd-([0-9]+).shtml$</from>
+		<to>/IndexShoppingCar.do?pd_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexShoppingCar.do\?method=step50&amp;group_id=([0-9]+)$</from>
+		<to>/cart-buygroup-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-buygroup-([0-9]+).shtml$</from>
+		<to>/IndexShoppingCar.do\?method=step50&amp;group_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexShoppingCar.do\?method=step60&amp;pd_id=([0-9]+)$</from>
+		<to>/cart-hotel-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-hotel-([0-9]+).shtml$</from>
+		<to>/IndexShoppingCar.do\?method=step60&amp;pd_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexShoppingCar.do\?method=step70&amp;pd_id=([0-9]+)$</from>
+		<to>/cart-tourxl-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-tourxl-([0-9]+).shtml$</from>
+		<to>/IndexShoppingCar.do\?method=step70&amp;pd_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexShoppingCar.do\?method=step80&amp;pd_id=([0-9]+)$</from>
+		<to>/cart-scenic-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-scenic-([0-9]+).shtml$</from>
+		<to>/IndexShoppingCar.do\?method=step80&amp;pd_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexShoppingCar.do\?method=stepBm&amp;pd_id=([0-9]+)$</from>
+		<to>/cart-buybm-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-buybm-([0-9]+).shtml$</from>
+		<to>/IndexShoppingCar.do\?method=stepBm&amp;pd_id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexShoppingCar.do\?comm_id=([0-9]+)&amp;cart_ids=([0-9]+)$</from>
+		<to>/cart-buycomm-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-buycomm-([0-9]+)-([0-9]+).shtml$</from>
+		<to>/IndexShoppingCar.do\?comm_id=$1&amp;cart_ids=$2</to>
+	</rule>
+	
+ 	<outbound-rule>
+		<from>/IndexShoppingCar.do(.*)$</from>
+		<to>/cart.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart.shtml(.*)$</from>
+		<to>/IndexShoppingCar.do$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexPayOrder.do(.*)$</from>
+		<to>/cart-payOrder.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-payOrder.shtml(.*)$</from>
+		<to>/IndexPayOrder.do$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexAxPayOrder.do\?id=([0-9]+)$</from>
+		<to>/cart-axjz-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-axjz-([0-9]+).shtml$</from>
+		<to>/IndexAxPayOrder.do\?id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/IndexAxPayOrder.do(.*)$</from>
+		<to>/cart-payAxOrder.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/cart-payAxOrder.shtml(.*)$</from>
+		<to>/IndexAxPayOrder.do$1</to>
+	</rule>
+	<!-- 购物车  END -->
+	
+	
+	<!-- OrderInfo.do BEGIN-->
+	<outbound-rule>
+		<from>/OrderInfo.do$</from>
+		<to>/order.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/manager/entpm/order.shtml$</from>
+		<to>/manager/entpm/OrderInfo.do</to>
+	</rule>
+	<rule>
+		<from>^/manager/entps/order.shtml$</from>
+		<to>/manager/entps/OrderInfo.do</to>
+	</rule>
+	<rule>
+		<from>^/manager/customer/order.shtml$</from>
+		<to>/manager/customer/OrderInfo.do</to>
+	</rule>
+	<rule>
+		<from>^/manager/all/order.shtml$</from>
+		<to>/manager/all/OrderInfo.do</to>
+	</rule>
+	<rule>
+		<from>^/manager/entpm/order.shtml$</from>
+		<to>/manager/entpm/OrderInfo.do</to>
+	</rule>
+	<!-- OrderInfo.do END-->
+	
+	<!-- 团购 BEGIN -->
+	<outbound-rule>
+		<from>/group/Index.do\?type=([0-9]+)$</from>
+		<to>/group-index-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/group-index-([0-9]+).shtml$</from>
+		<to>/group/Index.do?type=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/group/Index.do\?method=view&amp;id=([0-9]+)$</from>
+		<to>/group-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/group-([0-9]+).shtml$</from>
+		<to>/group/Index.do?method=view&amp;id=$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/group/Index.do\?method=index&amp;cls_id=([0-9]+)&amp;type=([0-9]+)$</from>
+		<to>/group-cls_id-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/group-cls_id-([0-9]+)-([0-9]+).shtml$</from>
+		<to>/group/Index.do?method=index&amp;cls_id=$1&amp;type=$2</to>
+	</rule>
+
+	<outbound-rule>
+		<from>/group/Index.do\?method=index&amp;p_index=([0-9]+)&amp;type=([0-9]+)$</from>
+		<to>/group-p_index-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/group-p_index-([0-9]+)-([0-9]+).shtml$</from>
+		<to>/group/Index.do?method=index&amp;p_index=$1&amp;type=$2</to>
+	</rule>
+	<!-- 团购  END -->
+	
+	<!-- IndexHelpInfo.do BEGIN-->
+	<outbound-rule>
+		<from>/IndexHelpInfo.do\?method=view&amp;h_mod_id=([0-9]+)$</from>
+		<to>/help-h_mod_id-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/help-h_mod_id-([0-9]+).shtml$</from>
+		<to>/IndexHelpInfo.do?method=view&amp;h_mod_id=$1</to>
+	</rule>
+	<!-- IndexHelpInfo.do END-->
+	
+	<!-- 找回密码 BEGIN-->
+	<outbound-rule>
+		<from>/GetPwBack.do\?method=resetPw&amp;user_id=([0-9]+)&amp;sign=([a-zA-Z0-9\-]{36})$</from>
+		<to>/getpwback-resetpw-$1-$2.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/getpwback-resetpw-([0-9]+)-([a-zA-Z0-9\-]{36}).shtml$</from>
+		<to>/GetPwBack.do?method=resetPw&amp;user_id=$1&amp;sign=$2</to>
+	</rule>
+	
+	 <outbound-rule>
+		<from>/GetPwBack.do(.*)$</from>
+		<to>/getpwback.shtml$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/getpwback.shtml(.*)$</from>
+		<to>/GetPwBack.do$1</to>
+	</rule>
+	<!-- 找回密码 END-->
+	
+	<!-- 商品更多 BEGIN-->
+	<outbound-rule>
+		<from>/IndexPromotions.do\?method=list&amp;link_type=([0-9]+)$</from>
+		<to>/indexPromotions-list-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/indexPromotions-list-([0-9]+).shtml$</from>
+		<to>/IndexPromotions.do?method=list&amp;link_type=$1</to>
+	</rule>
+	
+	 <outbound-rule>
+		<from>/IndexPromotions.do$</from>
+		<to>/indexPromotions.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/indexPromotions.shtml$</from>
+		<to>/IndexPromotions.do</to>
+	</rule>
+	<!-- 商品更多 END-->
+	
+	<outbound-rule>
+		<from>/IndexAxPayment.do\?trade_index=([0-9]+)$</from>
+		<to>/indexAxPayment-$1.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/indexAxPayment-([0-9]+).shtml$</from>
+		<to>/IndexAxPayment.do?trade_index=$1</to>
+	</rule>
+	
+	<!-- 微信 BEGIN -->
+	<outbound-rule>
+		<from>/weixin/WeixinLogin.do\?method=weixin$</from>
+		<to>/weixin/loginweixin.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/weixin/loginweixin.html$</from>
+		<to>/weixin/WeixinLogin.do?method=weixin</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/weixin/WeixinLogin.do\?method=pay1Fen$</from>
+		<to>/weixin/pay1fen.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/weixin/pay1fen.html$</from>
+		<to>/weixin/WeixinLogin.do?method=pay1Fen</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/weixin/WeixinLogin.do\?method=pay1FenNative$</from>
+		<to>/weixin/pay1fennative.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/weixin/pay1fennative.html$</from>
+		<to>/weixin/WeixinLogin.do?method=pay1FenNative</to>
+	</rule>
+	
+ 	<outbound-rule>
+		<from>/weixin/WeixinLogin.do(.*)$</from>
+		<to>/weixin/login.html$1</to>
+	</outbound-rule>
+	<rule>
+		<from>^/weixin/login.html(.*)$</from>
+		<to>/weixin/WeixinLogin.do$1</to>
+	</rule>
+	<!-- 微信  END -->
+	
+	<!-- 分享Begin -->
+	<outbound-rule>
+		<from>/IndexShare.do\?method=share&amp;suid=([0-9]+)$</from>
+		<to>/share-$1.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/share-([0-9]+).html</from>
+		<to>/IndexShare.do?method=share&amp;suid=$1</to>
+	</rule>
+	<rule>
+		<from>^/share-([0-9]+).shtml</from>
+		<to>/IndexShare.do?method=share&amp;suid=$1</to>
+	</rule>
+	<!-- 分享 END -->
+	
+	<!-- 商家收款码 100:100Begin -->
+	<outbound-rule>
+		<from>/IndexShoukuan.do\?method=shoukuan&amp;entp_id=([0-9]+)$</from>
+		<to>/shoukuan-$1.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/shoukuan-([0-9]+).html</from>
+		<to>/IndexShoukuan.do?method=shoukuan&amp;entp_id=$1</to>
+	</rule>
+	<!-- 商家收款码 100 END -->
+
+	<!-- 商家收款码 200:100Begin -->
+	<outbound-rule>
+		<from>/IndexShoukuan.do\?method=shoukuan&amp;entp_id=([0-9]+)&amp;rule=([0-9]+)$</from>
+		<to>/shoukuan-$1-$2.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/shoukuan-([0-9]+)-([0-9]+).html</from>
+		<to>/IndexShoukuan.do?method=shoukuan&amp;entp_id=$1&amp;rule=$2</to>
+	</rule>
+	<!-- 商家收款码 100 END -->
+		
+	<!-- app扫描登陆 /m/MIndexLogin.do?method=loginapp&code=32 BEGIN-->
+	<outbound-rule>
+		<from>/m/MIndexLogin.do\?method=loginapp&amp;code=([a-zA-Z0-9\-]{32})$</from>
+		<to>/app-login-$1.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/app-login-([a-zA-Z0-9\-]{32}).html$</from>
+		<to>/m/MIndexLogin.do?method=loginapp&amp;code=$1</to>
+	</rule>
+	<!-- app扫描登陆 END-->
+	
+	
+	<!-- 通城团 indexTg.do BEGIN-->
+	<outbound-rule>
+		<from>/IndexHd.do$</from>
+		<to>/indexhd.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/indexhd.shtml$</from>
+		<to>/IndexHd.do</to>
+	</rule>
+	<!-- indexTg.do END-->
+	
+	
+	
+	<!-- 商家收款码 100:100Begin -->
+	<outbound-rule>
+		<from>/m/MJsShoukuan.do\?method=shoukuan&amp;jst_no=([0-9]+)$</from>
+		<to>/m/jsShoukuan-$1.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/m/jsShoukuan-([0-9]+).html</from>
+		<to>/m/MJsShoukuan.do?method=shoukuan&amp;jst_no=$1</to>
+	</rule>
+	<!-- 商家收款码 100 END -->
+	
+	
+	<!-- 商家收款码 100:100Begin -->
+	<outbound-rule>
+		<from>/m/MJsShoukuan.do\?method=shoukuan&amp;jst_no=([0-9]+)$</from>
+		<to>/m/jsShoukuan-$1.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/m/jsShoukuan-([0-9]+).html</from>
+		<to>/m/MJsShoukuan.do?method=shoukuan&amp;jst_no=$1</to>
+	</rule>
+	<!-- 商家收款码 100 END -->
+	
+	<!-- 进门扫码 Begin -->
+	<outbound-rule>
+		<from>/m/MInputStore.do\?method=list&amp;device_no=([0-9]+)$</from>
+		<to>/m/inputStore-$1.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/m/inputStore-([0-9]+).html</from>
+		<to>/m/MInputStore.do?method=list&amp;device_no=$1</to>
+	</rule>
+	<!--进门扫码  END -->
+	
+	<!-- 出门扫码 Begin -->
+	<outbound-rule>
+		<from>/m/MOutStore.do\?method=list&amp;device_no=([0-9]+)$</from>
+		<to>/m/outStore-$1.html</to>
+	</outbound-rule>
+	<rule>
+		<from>^/m/outStore-([0-9]+).html</from>
+		<to>/m/MOutStore.do?method=list&amp;device_no=$1</to>
+	</rule>
+	<!--出门扫码  END -->
+	
+	<!-- 出门扫码 Begin -->
+	
+	<outbound-rule>
+		<from>/manager/customer/MyPos.do$</from>
+		<to>/manager/customer/myPos.shtml</to>
+	</outbound-rule>
+	<rule>
+		<from>^/manager/customer/myPos.shtml$</from>
+		<to>/manager/customer/MyPos.do</to>
+	</rule>
+	<!--出门扫码  END -->
+	
+	
+</urlrewrite>

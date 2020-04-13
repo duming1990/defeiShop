@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="INVOICE_INFO">
+
+	<typeAlias alias="invoiceInfo" type="com.ebiz.webapp.domain.InvoiceInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertInvoiceInfo" />
+		<flushOnExecute statement="updateInvoiceInfo" />
+		<flushOnExecute statement="deleteInvoiceInfo" />
+	</cacheModel>
+
+	<resultMap id="invoiceInfoResultForList" class="invoiceInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="SHIPPING_ID" property="shipping_id" jdbcType="INTEGER" />
+		<result column="INVOICE_TYPE" property="invoice_type" jdbcType="INTEGER" />
+		<result column="INVOICES_PAYABLE" property="invoices_payable" jdbcType="VARCHAR" />
+		<result column="VAT_COMPANYNAME" property="vat_companyname" jdbcType="VARCHAR" />
+		<result column="VAT_CODE" property="vat_code" jdbcType="VARCHAR" />
+		<result column="VAT_ADDRESS" property="vat_address" jdbcType="VARCHAR" />
+		<result column="VAT_PHONE" property="vat_phone" jdbcType="VARCHAR" />
+		<result column="VAT_BANKNAME" property="vat_bankname" jdbcType="VARCHAR" />
+		<result column="VAT_BANKACCOUNT" property="vat_bankaccount" jdbcType="VARCHAR" />
+		<result column="CONSIGNEE_NAME" property="consignee_name" jdbcType="VARCHAR" />
+		<result column="CONSIGNEE_MOBILE" property="consignee_mobile" jdbcType="VARCHAR" />
+		<result column="CONSIGNEE_P_INDEX" property="consignee_p_index" jdbcType="INTEGER" />
+		<result column="CONSIGNEE_P_NAME" property="consignee_p_name" jdbcType="VARCHAR" />
+		<result column="CONSIGNEE_ADDRESS" property="consignee_address" jdbcType="VARCHAR" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="invoiceInfoResult" class="invoiceInfo" extends="invoiceInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-invoiceInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="shipping_id">a.SHIPPING_ID = #shipping_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="invoice_type">a.INVOICE_TYPE = #invoice_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="invoices_payable">a.INVOICES_PAYABLE = #invoices_payable:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="vat_companyname">a.VAT_COMPANYNAME = #vat_companyname:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="vat_code">a.VAT_CODE = #vat_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="vat_address">a.VAT_ADDRESS = #vat_address:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="vat_phone">a.VAT_PHONE = #vat_phone:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="vat_bankname">a.VAT_BANKNAME = #vat_bankname:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="vat_bankaccount">a.VAT_BANKACCOUNT = #vat_bankaccount:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="consignee_name">a.CONSIGNEE_NAME = #consignee_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="consignee_mobile">a.CONSIGNEE_MOBILE = #consignee_mobile:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="consignee_p_index">a.CONSIGNEE_P_INDEX = #consignee_p_index:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="consignee_p_name">a.CONSIGNEE_P_NAME = #consignee_p_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="consignee_address">a.CONSIGNEE_ADDRESS = #consignee_address:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectInvoiceInfo" resultMap="invoiceInfoResult" parameterClass="invoiceInfo" cacheModel="oneDayCache">
+		select * from INVOICE_INFO a where 1 = 1
+		<include refid="sf-invoiceInfo" />
+	</select>
+
+	<select id="selectInvoiceInfoList" resultMap="invoiceInfoResultForList" parameterClass="invoiceInfo" cacheModel="oneDayCache">
+		
+		select * from INVOICE_INFO a where 1 = 1
+		<include refid="sf-invoiceInfo" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectInvoiceInfoCount" resultClass="int" parameterClass="invoiceInfo" cacheModel="oneDayCache">
+		select count(*) from INVOICE_INFO a where 1 = 1
+		<include refid="sf-invoiceInfo" />
+	</select>
+
+	<select id="selectInvoiceInfoPaginatedList" resultMap="invoiceInfoResult" parameterClass="invoiceInfo" cacheModel="oneDayCache">
+		
+		select * from INVOICE_INFO a where 1 = 1
+		<include refid="sf-invoiceInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertInvoiceInfo" parameterClass="invoiceInfo">
+		<![CDATA[insert into INVOICE_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="shipping_id">SHIPPING_ID</isNotNull>	
+			<isNotNull prepend="," property="invoice_type">INVOICE_TYPE</isNotNull>	
+			<isNotNull prepend="," property="invoices_payable">INVOICES_PAYABLE</isNotNull>	
+			<isNotNull prepend="," property="vat_companyname">VAT_COMPANYNAME</isNotNull>	
+			<isNotNull prepend="," property="vat_code">VAT_CODE</isNotNull>	
+			<isNotNull prepend="," property="vat_address">VAT_ADDRESS</isNotNull>	
+			<isNotNull prepend="," property="vat_phone">VAT_PHONE</isNotNull>	
+			<isNotNull prepend="," property="vat_bankname">VAT_BANKNAME</isNotNull>	
+			<isNotNull prepend="," property="vat_bankaccount">VAT_BANKACCOUNT</isNotNull>	
+			<isNotNull prepend="," property="consignee_name">CONSIGNEE_NAME</isNotNull>	
+			<isNotNull prepend="," property="consignee_mobile">CONSIGNEE_MOBILE</isNotNull>	
+			<isNotNull prepend="," property="consignee_p_index">CONSIGNEE_P_INDEX</isNotNull>	
+			<isNotNull prepend="," property="consignee_p_name">CONSIGNEE_P_NAME</isNotNull>	
+			<isNotNull prepend="," property="consignee_address">CONSIGNEE_ADDRESS</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="shipping_id">#shipping_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="invoice_type">#invoice_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="invoices_payable">#invoices_payable:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_companyname">#vat_companyname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_code">#vat_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_address">#vat_address:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_phone">#vat_phone:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_bankname">#vat_bankname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_bankaccount">#vat_bankaccount:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="consignee_name">#consignee_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="consignee_mobile">#consignee_mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="consignee_p_index">#consignee_p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="consignee_p_name">#consignee_p_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="consignee_address">#consignee_address:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateInvoiceInfo" parameterClass="invoiceInfo">
+		update INVOICE_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="shipping_id">SHIPPING_ID = #shipping_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="invoice_type">INVOICE_TYPE = #invoice_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="invoices_payable">INVOICES_PAYABLE = #invoices_payable:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_companyname">VAT_COMPANYNAME = #vat_companyname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_code">VAT_CODE = #vat_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_address">VAT_ADDRESS = #vat_address:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_phone">VAT_PHONE = #vat_phone:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_bankname">VAT_BANKNAME = #vat_bankname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="vat_bankaccount">VAT_BANKACCOUNT = #vat_bankaccount:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="consignee_name">CONSIGNEE_NAME = #consignee_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="consignee_mobile">CONSIGNEE_MOBILE = #consignee_mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="consignee_p_index">CONSIGNEE_P_INDEX = #consignee_p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="consignee_p_name">CONSIGNEE_P_NAME = #consignee_p_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="consignee_address">CONSIGNEE_ADDRESS = #consignee_address:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="shipping_id">SHIPPING_ID = #shipping_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteInvoiceInfo" parameterClass="invoiceInfo">
+		delete from INVOICE_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

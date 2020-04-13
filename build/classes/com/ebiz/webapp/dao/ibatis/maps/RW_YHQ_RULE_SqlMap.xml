@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="RW_YHQ_RULE">
+
+	<typeAlias alias="rwYhqRule" type="com.ebiz.webapp.domain.RwYhqRule" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertRwYhqRule" />
+		<flushOnExecute statement="updateRwYhqRule" />
+		<flushOnExecute statement="deleteRwYhqRule" />
+	</cacheModel>
+
+	<resultMap id="rwYhqRuleResultForList" class="rwYhqRule">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="MIN_MONEY" property="min_money" jdbcType="INTEGER" />
+		<result column="AMOUNT" property="amount" jdbcType="INTEGER" />
+		<result column="RULE_TYPE" property="rule_type" jdbcType="INTEGER" />
+		<result column="EFFECT_COUNT" property="effect_count" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_UID" property="add_uid" jdbcType="INTEGER" />
+		<result column="MODIFY_DATE" property="modify_date" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_UID" property="modify_uid" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_UID" property="del_uid" jdbcType="INTEGER" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="rwYhqRuleResult" class="rwYhqRule" extends="rwYhqRuleResultForList">
+	</resultMap>
+
+	<sql id="sf-rwYhqRule">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title">a.TITLE = #title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="min_money">a.MIN_MONEY = #min_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="amount">a.AMOUNT = #amount:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rule_type">a.RULE_TYPE = #rule_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="effect_count">a.EFFECT_COUNT = #effect_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_uid">a.ADD_UID = #add_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="modify_date">a.MODIFY_DATE = #modify_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="modify_uid">a.MODIFY_UID = #modify_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_uid">a.DEL_UID = #del_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">a.REMARK = #remark:VARCHAR#</isNotEmpty>
+	</sql>
+
+	<select id="selectRwYhqRule" resultMap="rwYhqRuleResult" parameterClass="rwYhqRule" cacheModel="oneDayCache">
+		select * from RW_YHQ_RULE a where 1 = 1
+		<include refid="sf-rwYhqRule" />
+	</select>
+
+	<select id="selectRwYhqRuleList" resultMap="rwYhqRuleResultForList" parameterClass="rwYhqRule" cacheModel="oneDayCache">
+		select * from RW_YHQ_RULE a where 1 = 1
+		<include refid="sf-rwYhqRule" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectRwYhqRuleCount" resultClass="int" parameterClass="rwYhqRule" cacheModel="oneDayCache">
+		select count(*) from RW_YHQ_RULE a where 1 = 1
+		<include refid="sf-rwYhqRule" />
+	</select>
+
+	<select id="selectRwYhqRulePaginatedList" resultMap="rwYhqRuleResult" parameterClass="rwYhqRule" cacheModel="oneDayCache">
+		select * from RW_YHQ_RULE a where 1 = 1
+		<include refid="sf-rwYhqRule" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertRwYhqRule" parameterClass="rwYhqRule">
+		<![CDATA[insert into RW_YHQ_RULE (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="title">TITLE</isNotNull>	
+			<isNotNull prepend="," property="min_money">MIN_MONEY</isNotNull>	
+			<isNotNull prepend="," property="amount">AMOUNT</isNotNull>	
+			<isNotNull prepend="," property="rule_type">RULE_TYPE</isNotNull>	
+			<isNotNull prepend="," property="effect_count">EFFECT_COUNT</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_uid">ADD_UID</isNotNull>	
+			<isNotNull prepend="," property="modify_date">MODIFY_DATE</isNotNull>	
+			<isNotNull prepend="," property="modify_uid">MODIFY_UID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_uid">DEL_UID</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title">#title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="min_money">#min_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="amount">#amount:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rule_type">#rule_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="effect_count">#effect_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_uid">#add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="modify_date">#modify_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="modify_uid">#modify_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">#del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateRwYhqRule" parameterClass="rwYhqRule">
+		update RW_YHQ_RULE
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title">TITLE = #title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="min_money">MIN_MONEY = #min_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="amount">AMOUNT = #amount:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rule_type">RULE_TYPE = #rule_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="effect_count">EFFECT_COUNT = #effect_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_uid">ADD_UID = #add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="modify_date">MODIFY_DATE = #modify_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="modify_uid">MODIFY_UID = #modify_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">DEL_UID = #del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteRwYhqRule" parameterClass="rwYhqRule">
+		delete from RW_YHQ_RULE where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

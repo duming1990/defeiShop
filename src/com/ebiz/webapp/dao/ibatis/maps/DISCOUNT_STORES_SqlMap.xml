@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="DISCOUNT_STORES">
+
+	<typeAlias alias="discountStores" type="com.ebiz.webapp.domain.DiscountStores" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertDiscountStores" />
+		<flushOnExecute statement="updateDiscountStores" />
+		<flushOnExecute statement="deleteDiscountStores" />
+	</cacheModel>
+
+	<resultMap id="discountStoresResultForList" class="discountStores">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="DISCOUNT_NAME" property="discount_name" jdbcType="VARCHAR" />
+		<result column="DISCOUNT_TYPE" property="discount_type" jdbcType="INTEGER" />
+		<result column="DISCOUNT_BEGIN_DATE" property="discount_begin_date" jdbcType="TIMESTAMP" />
+		<result column="DISCOUNT_END_DATE" property="discount_end_date" jdbcType="TIMESTAMP" />
+		<result column="DISCOUNT_TJ" property="discount_tj" jdbcType="INTEGER" />
+		<result column="DISCOUNT_TJ_CONTENT" property="discount_tj_content" jdbcType="INTEGER" />
+		<result column="DISCOUNT_METHOD" property="discount_method" jdbcType="INTEGER" />
+		<result column="DISCOUNT_TYPE_CONTENT" property="discount_type_content" jdbcType="VARCHAR" />
+		<result column="DISCOUNT_TYPE_CONTENT2" property="discount_type_content2" jdbcType="VARCHAR" />
+		<result column="BY_TYPE" property="by_type" jdbcType="INTEGER" />
+		<result column="P_INDEXS" property="p_indexs" jdbcType="VARCHAR" />
+		<result column="DISCOUNT_COMM_TYPE" property="discount_comm_type" jdbcType="INTEGER" />
+		<result column="CLS_IDS" property="cls_ids" jdbcType="VARCHAR" />
+		<result column="DISCOUNT_COMM_IDS" property="discount_comm_ids" jdbcType="VARCHAR" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ENTP_NAME" property="entp_name" jdbcType="VARCHAR" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="CLS_NAMES" property="cls_names" jdbcType="VARCHAR" />
+		<result column="HD_SHOW_TYPE" property="hd_show_type" jdbcType="INTEGER" />
+		<result column="HY_DETAILS_CONTENT" property="hy_details_content" jdbcType="VARCHAR" />
+		<result column="IS_OPEN" property="is_open" jdbcType="INTEGER" />
+		<result column="IS_TIME_GIFT" property="is_time_gift" jdbcType="INTEGER" />
+		<result column="TIME_GIFT_INVENTORY" property="time_gift_inventory" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="discountStoresResult" class="discountStores" extends="discountStoresResultForList">
+	</resultMap>
+
+	<sql id="sf-discountStores">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_name">a.DISCOUNT_NAME = #discount_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_type">a.DISCOUNT_TYPE = #discount_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_begin_date">a.DISCOUNT_BEGIN_DATE = #discount_begin_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_end_date">a.DISCOUNT_END_DATE = #discount_end_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_tj">a.DISCOUNT_TJ = #discount_tj:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_tj_content">a.DISCOUNT_TJ_CONTENT = #discount_tj_content:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_method">a.DISCOUNT_METHOD = #discount_method:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_type_content">a.DISCOUNT_TYPE_CONTENT = #discount_type_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_type_content2">a.DISCOUNT_TYPE_CONTENT2 = #discount_type_content2:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="by_type">a.BY_TYPE = #by_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_indexs">a.P_INDEXS = #p_indexs:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_comm_type">a.DISCOUNT_COMM_TYPE = #discount_comm_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_ids">a.CLS_IDS = #cls_ids:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_comm_ids">a.DISCOUNT_COMM_IDS = #discount_comm_ids:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_name">a.ENTP_NAME = #entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_names">a.CLS_NAMES = #cls_names:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hd_show_type">a.HD_SHOW_TYPE = #hd_show_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hy_details_content">a.HY_DETAILS_CONTENT = #hy_details_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_open">a.IS_OPEN = #is_open:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_time_gift">a.IS_TIME_GIFT = #is_time_gift:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="time_gift_inventory">a.TIME_GIFT_INVENTORY = #time_gift_inventory:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.time_gift_inventory_gt_0">a.TIME_GIFT_INVENTORY > 0</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.discount_name_like">a.DISCOUNT_NAME like '%'  #map.discount_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.now_date"><![CDATA[
+			a.discount_end_date >= str_to_date(#map.now_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.now_date"><![CDATA[
+			a.discount_begin_date <= str_to_date(#map.now_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+	
+	</sql>
+
+	<select id="selectDiscountStores" resultMap="discountStoresResult" parameterClass="discountStores" cacheModel="oneDayCache">
+		select * from DISCOUNT_STORES a where 1 = 1
+		<include refid="sf-discountStores" />
+	</select>
+
+	<select id="selectDiscountStoresList" resultMap="discountStoresResultForList" parameterClass="discountStores" cacheModel="oneDayCache">
+		
+		select * from DISCOUNT_STORES a where 1 = 1
+		<include refid="sf-discountStores" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectDiscountStoresCount" resultClass="int" parameterClass="discountStores" cacheModel="oneDayCache">
+		select count(*) from DISCOUNT_STORES a where 1 = 1
+		<include refid="sf-discountStores" />
+	</select>
+
+	<select id="selectDiscountStoresPaginatedList" resultMap="discountStoresResult" parameterClass="discountStores" cacheModel="oneDayCache">
+		
+		select * from DISCOUNT_STORES a where 1 = 1
+		<include refid="sf-discountStores" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertDiscountStores" parameterClass="discountStores">
+		
+		<![CDATA[insert into DISCOUNT_STORES (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="discount_name">DISCOUNT_NAME</isNotNull>	
+			<isNotNull prepend="," property="discount_type">DISCOUNT_TYPE</isNotNull>	
+			<isNotNull prepend="," property="discount_begin_date">DISCOUNT_BEGIN_DATE</isNotNull>	
+			<isNotNull prepend="," property="discount_end_date">DISCOUNT_END_DATE</isNotNull>	
+			<isNotNull prepend="," property="discount_tj">DISCOUNT_TJ</isNotNull>	
+			<isNotNull prepend="," property="discount_tj_content">DISCOUNT_TJ_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="discount_method">DISCOUNT_METHOD</isNotNull>	
+			<isNotNull prepend="," property="discount_type_content">DISCOUNT_TYPE_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="discount_type_content2">DISCOUNT_TYPE_CONTENT2</isNotNull>	
+			<isNotNull prepend="," property="by_type">BY_TYPE</isNotNull>	
+			<isNotNull prepend="," property="p_indexs">P_INDEXS</isNotNull>	
+			<isNotNull prepend="," property="discount_comm_type">DISCOUNT_COMM_TYPE</isNotNull>	
+			<isNotNull prepend="," property="cls_ids">CLS_IDS</isNotNull>	
+			<isNotNull prepend="," property="discount_comm_ids">DISCOUNT_COMM_IDS</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="entp_name">ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="cls_names">CLS_NAMES</isNotNull>	
+			<isNotNull prepend="," property="hd_show_type">HD_SHOW_TYPE</isNotNull>	
+			<isNotNull prepend="," property="hy_details_content">HY_DETAILS_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="is_open">IS_OPEN</isNotNull>	
+			<isNotNull prepend="," property="is_time_gift">IS_TIME_GIFT</isNotNull>	
+			<isNotNull prepend="," property="time_gift_inventory">TIME_GIFT_INVENTORY</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_name">#discount_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_type">#discount_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_begin_date">#discount_begin_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="discount_end_date">#discount_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="discount_tj">#discount_tj:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_tj_content">#discount_tj_content:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_method">#discount_method:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_type_content">#discount_type_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_type_content2">#discount_type_content2:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="by_type">#by_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_indexs">#p_indexs:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_comm_type">#discount_comm_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_ids">#cls_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_comm_ids">#discount_comm_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_name">#entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_names">#cls_names:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="hd_show_type">#hd_show_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hy_details_content">#hy_details_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_open">#is_open:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_time_gift">#is_time_gift:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="time_gift_inventory">#time_gift_inventory:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateDiscountStores" parameterClass="discountStores">
+		update DISCOUNT_STORES
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_name">DISCOUNT_NAME = #discount_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_type">DISCOUNT_TYPE = #discount_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_begin_date">DISCOUNT_BEGIN_DATE = #discount_begin_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="discount_end_date">DISCOUNT_END_DATE = #discount_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="discount_tj">DISCOUNT_TJ = #discount_tj:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_tj_content">DISCOUNT_TJ_CONTENT = #discount_tj_content:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_method">DISCOUNT_METHOD = #discount_method:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_type_content">DISCOUNT_TYPE_CONTENT = #discount_type_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_type_content2">DISCOUNT_TYPE_CONTENT2 = #discount_type_content2:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="by_type">BY_TYPE = #by_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_indexs">P_INDEXS = #p_indexs:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_comm_type">DISCOUNT_COMM_TYPE = #discount_comm_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_ids">CLS_IDS = #cls_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_comm_ids">DISCOUNT_COMM_IDS = #discount_comm_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_name">ENTP_NAME = #entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_names">CLS_NAMES = #cls_names:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="hd_show_type">HD_SHOW_TYPE = #hd_show_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hy_details_content">HY_DETAILS_CONTENT = #hy_details_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_open">IS_OPEN = #is_open:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_time_gift">IS_TIME_GIFT = #is_time_gift:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="time_gift_inventory">TIME_GIFT_INVENTORY = #time_gift_inventory:INTEGER#</isNotNull>
+			
+			<isNotNull prepend="," property="map.add_inventory">TIME_GIFT_INVENTORY = TIME_GIFT_INVENTORY + #map.add_inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.sub_inventory">TIME_GIFT_INVENTORY = TIME_GIFT_INVENTORY - #map.sub_inventory:INTEGER#</isNotNull>
+			
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.where_cal_inventory">TIME_GIFT_INVENTORY >= #map.where_cal_inventory#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteDiscountStores" parameterClass="discountStores">
+		delete from DISCOUNT_STORES where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

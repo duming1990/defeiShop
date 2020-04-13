@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="CARD_INFO">
+
+	<typeAlias alias="cardInfo" type="com.ebiz.webapp.domain.CardInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCardInfo" />
+		<flushOnExecute statement="updateCardInfo" />
+		<flushOnExecute statement="deleteCardInfo" />
+	</cacheModel>
+
+	<resultMap id="cardInfoResultForList" class="cardInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="CARD_APPLY_ID" property="card_apply_id" jdbcType="INTEGER" />
+		<result column="APPLY_NO" property="apply_no" jdbcType="VARCHAR" />
+		<result column="CARD_NO" property="card_no" jdbcType="VARCHAR" />
+		<result column="CARD_AC" property="card_ac" jdbcType="VARCHAR" />
+		<result column="CARD_PWD" property="card_pwd" jdbcType="VARCHAR" />
+		<result column="CARD_TYPE" property="card_type" jdbcType="INTEGER" />
+		<result column="USER_ID" property="user_id" jdbcType="INTEGER" />
+		<result column="USER_DATE" property="user_date" jdbcType="TIMESTAMP" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ENTP_DATE" property="entp_date" jdbcType="TIMESTAMP" />
+		<result column="CARD_AMOUNT" property="card_amount" jdbcType="DECIMAL" />
+		<result column="CARD_CASH" property="card_cash" jdbcType="DECIMAL" />
+		<result column="CARD_STATE" property="card_state" jdbcType="INTEGER" />
+		<result column="START_DATE" property="start_date" jdbcType="TIMESTAMP" />
+		<result column="END_DATE" property="end_date" jdbcType="TIMESTAMP" />
+		<result column="DIS_MEMO" property="dis_memo" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="ADD_UID" property="add_uid" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_UID" property="del_uid" jdbcType="INTEGER" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="IS_SEND" property="is_send" jdbcType="INTEGER" />
+		<result column="RECEIVED_NAME" property="received_name" jdbcType="VARCHAR" />
+		<result column="RECEIVED_MOBILE" property="received_mobile" jdbcType="VARCHAR" />
+		<result column="SEVICE_CENTER_INFO_ID" property="sevice_center_info_id" jdbcType="INTEGER" />
+		<result column="GEN_ID" property="gen_id" jdbcType="INTEGER" />
+		<result column="GEN_NO" property="gen_no" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cardInfoResult" class="cardInfo" extends="cardInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-cardInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_apply_id">a.CARD_APPLY_ID = #card_apply_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="apply_no">a.APPLY_NO = #apply_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_no">a.CARD_NO = #card_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_ac">a.CARD_AC = #card_ac:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_pwd">a.CARD_PWD = #card_pwd:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_type">a.CARD_TYPE = #card_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">a.USER_ID = #user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_date">a.USER_DATE = #user_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_date">a.ENTP_DATE = #entp_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_amount">a.CARD_AMOUNT = #card_amount:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_cash">a.CARD_CASH = #card_cash:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_state">a.CARD_STATE = #card_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="start_date">a.START_DATE = #start_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="end_date">a.END_DATE = #end_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="dis_memo">a.DIS_MEMO = #dis_memo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_uid">a.ADD_UID = #add_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_uid">a.DEL_UID = #del_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">a.REMARK = #remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_send">a.IS_SEND = #is_send:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="received_name">a.RECEIVED_NAME = #received_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="received_mobile">a.RECEIVED_MOBILE = #received_mobile:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sevice_center_info_id">a.SEVICE_CENTER_INFO_ID = #sevice_center_info_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="gen_id">a.GEN_ID = #gen_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="gen_no">a.GEN_NO = #gen_no:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.card_no_like">a.card_no like '%' #map.card_no_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.card_cash_gt"><![CDATA[a.CARD_CASH > #map.card_cash_gt:DECIMAL#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.card_state_ge"><![CDATA[a.CARD_STATE >= #map.card_state_ge:INTEGER#]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.end_date_ge">
+			<![CDATA[a.END_DATE >= str_to_date(#map.end_date_ge:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]>
+		</isNotEmpty>
+	</sql>
+
+	<select id="selectCardInfo" resultMap="cardInfoResult" parameterClass="cardInfo" cacheModel="oneDayCache">
+		select * from CARD_INFO a where 1 = 1
+		<include refid="sf-cardInfo" />
+	</select>
+
+	<select id="selectCardInfoList" resultMap="cardInfoResultForList" parameterClass="cardInfo" cacheModel="oneDayCache">
+		select * from CARD_INFO a where 1 = 1
+		<include refid="sf-cardInfo" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectCardInfoCount" resultClass="int" parameterClass="cardInfo" cacheModel="oneDayCache">
+		select count(*) from CARD_INFO a where 1 = 1
+		<include refid="sf-cardInfo" />
+	</select>
+
+	<select id="selectCardInfoPaginatedList" resultMap="cardInfoResult" parameterClass="cardInfo" cacheModel="oneDayCache">
+		select * from CARD_INFO a where 1 = 1
+		<include refid="sf-cardInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCardInfo" parameterClass="cardInfo">
+		<![CDATA[insert into CARD_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="card_apply_id">CARD_APPLY_ID</isNotNull>	
+			<isNotNull prepend="," property="apply_no">APPLY_NO</isNotNull>	
+			<isNotNull prepend="," property="card_no">CARD_NO</isNotNull>	
+			<isNotNull prepend="," property="card_ac">CARD_AC</isNotNull>	
+			<isNotNull prepend="," property="card_pwd">CARD_PWD</isNotNull>	
+			<isNotNull prepend="," property="card_type">CARD_TYPE</isNotNull>	
+			<isNotNull prepend="," property="user_id">USER_ID</isNotNull>	
+			<isNotNull prepend="," property="user_date">USER_DATE</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="entp_date">ENTP_DATE</isNotNull>	
+			<isNotNull prepend="," property="card_amount">CARD_AMOUNT</isNotNull>	
+			<isNotNull prepend="," property="card_cash">CARD_CASH</isNotNull>	
+			<isNotNull prepend="," property="card_state">CARD_STATE</isNotNull>	
+			<isNotNull prepend="," property="start_date">START_DATE</isNotNull>	
+			<isNotNull prepend="," property="end_date">END_DATE</isNotNull>	
+			<isNotNull prepend="," property="dis_memo">DIS_MEMO</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="add_uid">ADD_UID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_uid">DEL_UID</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+			<isNotNull prepend="," property="is_send">IS_SEND</isNotNull>	
+			<isNotNull prepend="," property="received_name">RECEIVED_NAME</isNotNull>	
+			<isNotNull prepend="," property="received_mobile">RECEIVED_MOBILE</isNotNull>	
+			<isNotNull prepend="," property="sevice_center_info_id">SEVICE_CENTER_INFO_ID</isNotNull>	
+			<isNotNull prepend="," property="gen_id">GEN_ID</isNotNull>	
+			<isNotNull prepend="," property="gen_no">GEN_NO</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_apply_id">#card_apply_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="apply_no">#apply_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_no">#card_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_ac">#card_ac:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_pwd">#card_pwd:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_type">#card_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">#user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_date">#user_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_date">#entp_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="card_amount">#card_amount:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="card_cash">#card_cash:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="card_state">#card_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="start_date">#start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="end_date">#end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="dis_memo">#dis_memo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_uid">#add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">#del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_send">#is_send:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="received_name">#received_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="received_mobile">#received_mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="sevice_center_info_id">#sevice_center_info_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gen_id">#gen_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gen_no">#gen_no:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+	
+	<insert id="insertCardInfoByList" parameterClass="cardInfo">
+		<![CDATA[insert into CARD_INFO (]]>
+			ID,
+			CARD_APPLY_ID,
+			APPLY_NO,
+			CARD_NO,
+			CARD_AC,
+			CARD_PWD,
+			CARD_TYPE,
+			USER_ID,
+			USER_DATE,
+			ENTP_ID,
+			ENTP_DATE,
+			CARD_AMOUNT,
+			CARD_CASH,
+			CARD_STATE,
+			START_DATE,
+			END_DATE,
+			DIS_MEMO,
+			ORDER_VALUE,
+			ADD_UID,
+			ADD_DATE,
+			IS_DEL,
+			DEL_DATE,
+			DEL_UID,
+			REMARK,
+			IS_SEND,
+			RECEIVED_NAME,
+			RECEIVED_MOBILE,
+			SEVICE_CENTER_INFO_ID,
+			GEN_ID,
+			GEN_NO
+		<![CDATA[) values ]]>
+	    <iterate conjunction="," property="map.cardInfoList">
+          	(
+	          	#map.cardInfoList[].id:INTEGER#,
+				#map.cardInfoList[].card_apply_id#,
+				#map.cardInfoList[].apply_no#,
+				#map.cardInfoList[].card_no#,
+				#map.cardInfoList[].card_ac#,
+				#map.cardInfoList[].card_pwd#,
+				#map.cardInfoList[].card_type#,
+				#map.cardInfoList[].user_id#,
+				#map.cardInfoList[].user_date#,
+				#map.cardInfoList[].entp_id#,
+				#map.cardInfoList[].entp_date#,
+				#map.cardInfoList[].card_amount#,
+				#map.cardInfoList[].card_cash#,
+				#map.cardInfoList[].card_state#,
+				#map.cardInfoList[].start_date#,
+				#map.cardInfoList[].end_date#,
+				#map.cardInfoList[].dis_memo#,
+				#map.cardInfoList[].order_value#,
+				#map.cardInfoList[].add_uid#,
+				#map.cardInfoList[].add_date#,
+				#map.cardInfoList[].is_del#,
+				#map.cardInfoList[].del_date#,
+				#map.cardInfoList[].del_uid#,
+				#map.cardInfoList[].remark#,
+				#map.cardInfoList[].is_send#,
+				#map.cardInfoList[].received_name#,
+				#map.cardInfoList[].received_mobile#,
+				#map.cardInfoList[].sevice_center_info_id#,
+				#gen_id:INTEGER#,
+				#map.cardInfoList[].gen_no#
+			)
+        </iterate>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+	
+
+	<update id="updateCardInfo" parameterClass="cardInfo">
+		update CARD_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_apply_id">CARD_APPLY_ID = #card_apply_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="apply_no">APPLY_NO = #apply_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_no">CARD_NO = #card_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_ac">CARD_AC = #card_ac:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_pwd">CARD_PWD = #card_pwd:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_type">CARD_TYPE = #card_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">USER_ID = #user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_date">USER_DATE = #user_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_date">ENTP_DATE = #entp_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="card_amount">CARD_AMOUNT = #card_amount:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="card_cash">CARD_CASH = #card_cash:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="card_state">CARD_STATE = #card_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="start_date">START_DATE = #start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="end_date">END_DATE = #end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="dis_memo">DIS_MEMO = #dis_memo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_uid">ADD_UID = #add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">DEL_UID = #del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_send">IS_SEND = #is_send:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="received_name">RECEIVED_NAME = #received_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="received_mobile">RECEIVED_MOBILE = #received_mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="sevice_center_info_id">SEVICE_CENTER_INFO_ID = #sevice_center_info_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gen_id">GEN_ID = #gen_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gen_no">GEN_NO = #gen_no:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="map.sub_card_cash">CARD_CASH = CARD_CASH - #map.sub_card_cash#</isNotNull>
+			<isNotNull prepend="," property="map.add_card_cash">CARD_CASH = CARD_CASH + #map.add_card_cash#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.gen_id">GEN_ID = #map.gen_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCardInfo" parameterClass="cardInfo">
+		delete from CARD_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.gen_id">GEN_ID = #map.gen_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="COMM_INFO_POORS">
+
+	<typeAlias alias="commInfoPoors" type="com.ebiz.webapp.domain.CommInfoPoors" />
+	
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCommInfoPoors" />
+		<flushOnExecute statement="updateCommInfoPoors" />
+		<flushOnExecute statement="deleteCommInfoPoors" />
+	</cacheModel>
+
+	<resultMap id="commInfoPoorsResultForList" class="commInfoPoors">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="POOR_ID" property="poor_id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="IS_TEMP" property="is_temp" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="commInfoPoorsResult" class="commInfoPoors" extends="commInfoPoorsResultForList">
+	</resultMap>
+	
+	<resultMap id="commInfoPoorsResultWithPoor" class="commInfoPoors" extends="commInfoPoorsResultForList">
+		<result column="POOR_NAME" property="map.poor_name" jdbcType="VARCHAR" />
+		<result column="P_NAME" property="map.p_name" jdbcType="VARCHAR" />
+		<result column="HEAD_LOGO" property="map.head_logo" jdbcType="VARCHAR" />
+		<result column="REAL_NAME" property="map.real_name" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="map.user_id" jdbcType="INTEGER" />
+		<result column="REAL_NAME" property="map.real_name" jdbcType="VARCHAR" />
+		
+		<result column="MAIN_PIC" property="map.main_pic" jdbcType="VARCHAR" />
+		<result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+		<result column="SALE_PRICE" property="map.sale_price" jdbcType="INTEGER" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="INTEGER" />
+		<result column="ENTP_LOGO" property="map.entp_logo" jdbcType="INTEGER" />
+		<result column="AID_SCALE" property="map.aid_scale" jdbcType="DECIMAL" />
+		<result column="ENTP_TEL" property="map.entp_tel" jdbcType="VARCHAR" />
+		<result column="COMM_ID" property="commImgsList" select="selectCommImgsListWithPdIdAndPoor" />
+	</resultMap>
+	
+	
+	<resultMap id="commImgsResultForList" class="pdImgs">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PD_ID" property="pd_id" jdbcType="INTEGER" />
+		<result column="FILE_PATH" property="file_path" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="sf-commInfoPoors">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="poor_id">a.POOR_ID = #poor_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_temp">a.IS_TEMP= #is_temp:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.not_out_sell_time"><![CDATA[sysdate() between comm.up_date and comm.down_date]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_aid">comm.IS_AID = #map.is_aid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_aid">comm.IS_AID = #map.is_aid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.audit_state">comm.audit_state = #map.audit_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_sell">comm.is_sell = #map.is_sell:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_has_tc">comm.is_has_tc = #map.is_has_tc:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_del">comm.is_del = #map.is_del:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectCommInfoPoors" resultMap="commInfoPoorsResult" parameterClass="commInfoPoors" cacheModel="oneDayCache">
+		select * from COMM_INFO_POORS a where 1 = 1
+		<include refid="sf-commInfoPoors" />
+	</select>
+	
+	<select id="selectCommImgsListWithPdIdAndPoor" resultMap="commImgsResultForList" parameterClass="DECIMAL" cacheModel="oneDayCache">
+		select * from PD_IMGS t 
+		  where 1 = 1
+		    and t.pd_id = #value#
+		order by t.id asc
+		 <![CDATA[limit 0, 3]]>
+	</select>
+
+	<select id="selectCommInfoPoorsList" resultMap="commInfoPoorsResultWithPoor" parameterClass="commInfoPoors" cacheModel="oneDayCache">
+		select 
+			a.*,b.pet_name as poor_name,
+			b.real_name,c.p_name,b.head_logo,b.user_id,
+			comm.main_pic,comm.comm_name,comm.sale_price,comm.aid_scale,
+			entp.entp_name,entp.entp_logo,entp.entp_tel
+		from 
+			COMM_INFO_POORS a 
+		left join POOR_INFO b on a.POOR_ID = b.id 
+		left join BASE_PROVINCE c on b.p_index = c.p_index
+		left join comm_info comm on comm.id = a.comm_id
+		left join entp_info entp on entp.id = comm.own_entp_id
+		where 1 = 1
+		<include refid="sf-commInfoPoors" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+
+	<select id="selectCommInfoPoorsCount" resultClass="int" parameterClass="commInfoPoors" cacheModel="oneDayCache">
+		select 
+			count(*) 
+		from 
+			COMM_INFO_POORS a 
+		left join POOR_INFO b on a.POOR_ID = b.id 
+		left join BASE_PROVINCE c on b.p_index = c.p_index
+		left join comm_info comm on comm.id = a.comm_id
+		left join entp_info entp on entp.id = comm.own_entp_id
+		where 1 = 1
+		<include refid="sf-commInfoPoors" />
+	</select>
+
+	<select id="selectCommInfoPoorsPaginatedList" resultMap="commInfoPoorsResultWithPoor" parameterClass="commInfoPoors" cacheModel="oneDayCache">
+		select 
+			a.*,b.pet_name as poor_name,
+			b.real_name,c.p_name,b.head_logo,b.user_id,
+			comm.main_pic,comm.comm_name,comm.sale_price,comm.aid_scale,
+			entp.entp_name,entp.entp_logo,entp.entp_tel
+		from 
+			COMM_INFO_POORS a 
+		left join POOR_INFO b on a.POOR_ID = b.id 
+		left join BASE_PROVINCE c on b.p_index = c.p_index
+		left join comm_info comm on comm.id = a.comm_id
+		left join entp_info entp on entp.id = comm.own_entp_id
+		where 1 = 1
+		<include refid="sf-commInfoPoors" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCommInfoPoors" parameterClass="commInfoPoors">
+		<![CDATA[insert into COMM_INFO_POORS (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="poor_id">POOR_ID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="is_temp">IS_TEMP</isNotNull>
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="poor_id">#poor_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_temp">#is_temp:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCommInfoPoors" parameterClass="commInfoPoors">
+		update COMM_INFO_POORS
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="poor_id">POOR_ID = #poor_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_temp">IS_TEMP =#is_temp:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCommInfoPoors" parameterClass="commInfoPoors">
+		delete from COMM_INFO_POORS where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_id">COMM_ID = #map.comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.poor_id">POOR_ID = #map.poor_id:INTEGER#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

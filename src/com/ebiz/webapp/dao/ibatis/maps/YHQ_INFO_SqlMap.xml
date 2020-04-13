@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="YHQ_INFO">
+
+	<typeAlias alias="yhqInfo" type="com.ebiz.webapp.domain.YhqInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertYhqInfo" />
+		<flushOnExecute statement="updateYhqInfo" />
+		<flushOnExecute statement="deleteYhqInfo" />
+	</cacheModel>
+
+	<resultMap id="yhqInfoResultForList" class="yhqInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="YHQ_NAME" property="yhq_name" jdbcType="VARCHAR" />
+		<result column="YHQ_TYPE" property="yhq_type" jdbcType="INTEGER" />
+		<result column="YHQ_SYGZ" property="yhq_sygz" jdbcType="INTEGER" />
+		<result column="YHQ_NUMBER" property="yhq_number" jdbcType="INTEGER" />
+		<result column="YHQ_NUMBER_NOW" property="yhq_number_now" jdbcType="INTEGER" />
+		<result column="SYGZ_ID" property="sygz_id" jdbcType="VARCHAR" />
+		<result column="SYGZ_NAMES" property="sygz_names" jdbcType="VARCHAR" />
+		<result column="YHQ_SYTJ" property="yhq_sytj" jdbcType="DECIMAL" />
+		<result column="YHQ_MONEY" property="yhq_money" jdbcType="DECIMAL" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="YHQ_START_DATE" property="yhq_start_date" jdbcType="TIMESTAMP" />
+		<result column="YHQ_END_DATE" property="yhq_end_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="OWN_ENTP_ID" property="own_entp_id" jdbcType="INTEGER" />
+		<result column="OWN_ENTP_NAME" property="own_entp_name" jdbcType="VARCHAR" />
+		<result column="IS_LIMITED" property="is_limited" jdbcType="INTEGER" />
+		<result column="LIMITED_NUMBER" property="limited_number" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_USER_NAME" property="update_user_name" jdbcType="VARCHAR" />
+		<result column="qrcpde_path" property="qrcpde_path" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="yhqInfoResult" class="yhqInfo" extends="yhqInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-yhqInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_name">a.YHQ_NAME = #yhq_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_type">a.YHQ_TYPE = #yhq_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_sygz">a.YHQ_SYGZ = #yhq_sygz:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_number">a.YHQ_NUMBER = #yhq_number:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_number_now">a.YHQ_NUMBER_NOW = #yhq_number_now:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sygz_id">a.SYGZ_ID = #sygz_id:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sygz_names">a.SYGZ_NAMES = #sygz_names:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_sytj">a.YHQ_SYTJ = #yhq_sytj:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_money">a.YHQ_MONEY = #yhq_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_start_date">a.YHQ_START_DATE = #yhq_start_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_end_date">a.YHQ_END_DATE = #yhq_end_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_entp_id">a.OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_entp_name">a.OWN_ENTP_NAME = #own_entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_limited">a.IS_LIMITED = #is_limited:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="limited_number">a.LIMITED_NUMBER = #limited_number:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_name">a.UPDATE_USER_NAME = #update_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qrcpde_path">a.QRCPDE_PATH = #qrcpde_path:VARCHAR#</isNotEmpty>
+	
+		<isNotEmpty prepend=" and " property="map.yhq_name_like">a.YHQ_NAME like '%'  #map.yhq_name_like#  '%'</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.today_date"><![CDATA[
+			str_to_date(#map.today_date:VARCHAR#, '%Y-%m-%d %H:%i:%s') >= a.yhq_start_date  
+			and a.yhq_end_date >= str_to_date(concat(#map.today_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.yhq_start_time"><![CDATA[
+			a.YHQ_START_DATE >= str_to_date(#map.yhq_start_time:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.yhq_end_time"><![CDATA[
+			a.YHQ_END_DATE >= str_to_date(now(), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+	
+	</sql>
+
+	<select id="selectYhqInfo" resultMap="yhqInfoResult" parameterClass="yhqInfo" cacheModel="oneDayCache">
+		select * from YHQ_INFO a where 1 = 1
+		<include refid="sf-yhqInfo" />
+	</select>
+
+	<select id="selectYhqInfoList" resultMap="yhqInfoResultForList" parameterClass="yhqInfo" cacheModel="oneDayCache">
+		select * from YHQ_INFO a where 1 = 1
+		<include refid="sf-yhqInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectYhqInfoCount" resultClass="int" parameterClass="yhqInfo" cacheModel="oneDayCache">
+		select count(*) from YHQ_INFO a where 1 = 1
+		<include refid="sf-yhqInfo" />
+	</select>
+
+	<select id="selectYhqInfoPaginatedList" resultMap="yhqInfoResult" parameterClass="yhqInfo" cacheModel="oneDayCache">
+		select * from YHQ_INFO a where 1 = 1
+		<include refid="sf-yhqInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertYhqInfo" parameterClass="yhqInfo">
+		<![CDATA[insert into YHQ_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="yhq_name">YHQ_NAME</isNotNull>	
+			<isNotNull prepend="," property="yhq_type">YHQ_TYPE</isNotNull>	
+			<isNotNull prepend="," property="yhq_sygz">YHQ_SYGZ</isNotNull>	
+			<isNotNull prepend="," property="yhq_number">YHQ_NUMBER</isNotNull>	
+			<isNotNull prepend="," property="yhq_number_now">YHQ_NUMBER_NOW</isNotNull>	
+			<isNotNull prepend="," property="sygz_id">SYGZ_ID</isNotNull>	
+			<isNotNull prepend="," property="sygz_names">SYGZ_NAMES</isNotNull>	
+			<isNotNull prepend="," property="yhq_sytj">YHQ_SYTJ</isNotNull>	
+			<isNotNull prepend="," property="yhq_money">YHQ_MONEY</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="yhq_start_date">YHQ_START_DATE</isNotNull>	
+			<isNotNull prepend="," property="yhq_end_date">YHQ_END_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="own_entp_name">OWN_ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="is_limited">IS_LIMITED</isNotNull>	
+			<isNotNull prepend="," property="limited_number">LIMITED_NUMBER</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_user_name">UPDATE_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="qrcpde_path">QRCPDE_PATH</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_name">#yhq_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_type">#yhq_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_sygz">#yhq_sygz:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_number">#yhq_number:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_number_now">#yhq_number_now:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sygz_id">#sygz_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="sygz_names">#sygz_names:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_sytj">#yhq_sytj:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="yhq_money">#yhq_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_start_date">#yhq_start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="yhq_end_date">#yhq_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">#own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_name">#own_entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_limited">#is_limited:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="limited_number">#limited_number:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_user_name">#update_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qrcpde_path">#qrcpde_path:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateYhqInfo" parameterClass="yhqInfo">
+		update YHQ_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_name">YHQ_NAME = #yhq_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_type">YHQ_TYPE = #yhq_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_sygz">YHQ_SYGZ = #yhq_sygz:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_number">YHQ_NUMBER = #yhq_number:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_number_now">YHQ_NUMBER_NOW = #yhq_number_now:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sygz_id">SYGZ_ID = #sygz_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="sygz_names">SYGZ_NAMES = #sygz_names:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_sytj">YHQ_SYTJ = #yhq_sytj:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="yhq_money">YHQ_MONEY = #yhq_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_start_date">YHQ_START_DATE = #yhq_start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="yhq_end_date">YHQ_END_DATE = #yhq_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_name">OWN_ENTP_NAME = #own_entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_limited">IS_LIMITED = #is_limited:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="limited_number">LIMITED_NUMBER = #limited_number:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_user_name">UPDATE_USER_NAME = #update_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qrcpde_path">QRCPDE_PATH = #qrcpde_path:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="map.number_now_reduce">YHQ_NUMBER_NOW = YHQ_NUMBER_NOW + 1</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.coupons_now">LIMITED_NUMBER > YHQ_NUMBER_NOW</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteYhqInfo" parameterClass="yhqInfo">
+		delete from YHQ_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

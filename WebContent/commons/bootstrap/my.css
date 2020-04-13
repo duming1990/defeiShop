@@ -1,0 +1,39 @@
+/* @author : Wuyang */
+@charset "utf-8";
+.content-bg {
+padding-left: 5px;
+padding-right: 5px;
+}
+.table th {
+text-align: center;
+}
+.pageClass{
+	text-align: center;
+}
+.pagination{
+	margin: 0 0 5px 0;
+}
+.content-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 15px;
+  margin-bottom: 30px;
+}
+ .content-container:before,
+ .content-container:after {
+  content: " ";
+  display: table;
+}
+ .content-container:after {
+  clear: both;
+}
+ .content-container .content .content-wrapper {
+  margin-bottom: 1em;
+  background: #fbfbfb;
+  border: solid 1px #e1e1e1;
+  -webkit-box-shadow: 0 0 3px #eeeeee, inset 0 0 3px #ffffff;
+  box-shadow: 0 0 3px #eeeeee, inset 0 0 3px #ffffff;
+  min-height: 0;
+  padding: 10px;
+}

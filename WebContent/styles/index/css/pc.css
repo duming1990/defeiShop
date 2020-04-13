@@ -1,0 +1,6 @@
+@charset "utf-8";
+.deal-tile__detail .campaign{
+	vertical-align: text-top;
+	color: #ffffff!important;
+	border-radius: 3px;
+}

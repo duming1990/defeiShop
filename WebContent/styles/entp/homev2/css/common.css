@@ -1,0 +1,52 @@
+@charset "utf-8";
+/*公共样式*/
+body,div,ul,ol,li,form,p,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+body{font:normal 12px "Microsoft Yahei,宋体, Arial, Helvetica, sans-serif";color:#333;}
+body { background-color: #FFF; background-position: left top; }
+h3,h4,{font:bold 12px "宋体";}
+input,textarea,select,option{font:normal 12px "宋体";}
+a{color:#333;text-decoration:none;cursor:pointer;}
+a:link,a:visited{color:#333;text-decoration:none;}
+a:hover{color:#cf0000;text-decoration:underline;}
+a:active{color:#333;text-decoration:none}
+img,a img { border:0; }
+ul,ol,li{list-style:none; line-height:24px;}
+.clear{clear:both;height:0;overflow:hidden;}
+.alignl{text-align:left;}
+.alignr{text-align:right;}
+.alignm{text-align:center;}
+.l{float:left;}
+.r{float:right;}
+.bold { font-weight:bold;}
+h6{ height:20px; font-weight:normal; padding-top:8px;}
+h5{ height:24px; font-weight:normal;  text-align:left; color:#c3000c; font-size:13px; font-weight:bold;}
+
+/* a */
+
+h3 a:link,h3 a:visited {color:#333;}
+h3 a:hover {color:#cf0000;text-decoration:underline;}
+
+/* fotn */
+.red1 {color:#a20a1c;}
+.red1 a,a.red1,.red1 a:visited {color:#a20a1c;}
+.red1 a:hover,a.red1:hover {color:#cf0000;text-decoration:underline;}
+.red2 {color:#ff0000;}
+.red2 a,a.red1,.red2 a:visited {color:#ff0000;}
+.red2 a:hover,a.red2:hover {color:#cf0000;text-decoration:underline;}
+.rogf1 {color:#ff3300;}
+.rogf1 a,a.rogf1,.rogf1 a:visited {color:#ff3300;}
+.rogf1 a:hover,a.rogf1:hover {color:#cf0000;text-decoration:underline;}
+
+.red3 { color:#ff0000; font-size:14px; font-family: "微软雅黑", "黑体"; font-weight: bold; }
+.red3 a,a.red3,.red3 a:visited {color:#ff0000; font-size:14px}
+.red3 a:hover,a.red3:hover {color:#cf0000;text-decoration:underline; font-size:14px}
+
+/* form */
+.input1 {height:15px;background:#fff;border:1px solid #cecece;padding:0 2px;color:#666;}
+.input2 {width:474px;height:20px;background:url(../images/inputbg1.gif) no-repeat;border:0;padding:5px;color:#666;}
+.input3 { width:280px; height:20px; border:0; padding:5px; color:#666; line-height: 20px; background-image: url(../images/sososo.jpg); background-repeat: no-repeat; }
+
+.selct1 {border:1px solid #333;}
+.but1 {width:38px;height:18px;background:url(../images/butbg1.gif) no-repeat;border:1px solid #cdcdcd;color:#666;cursor:pointer;}
+.but2 { width:100px; height:30px; border:0; font:bold 16px/30px "Microsoft YaHei","宋体"; color:#fff; cursor:pointer; letter-spacing:1px; background-image: url(../images/sosuo0000.jpg); background-repeat: no-repeat; }
+.f_redian { font-weight: normal; width:471px; height: 30px; background-image: url(../images/redian.gif); background-repeat: no-repeat; margin-bottom: 5px; border-right-width: 1px; border-right-style: solid; border-right-color: #CCC; padding-left: 110px; line-height: 30px; }

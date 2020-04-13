@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FREIGHT_DETAIL">
+
+	<typeAlias alias="freightDetail" type="com.ebiz.webapp.domain.FreightDetail" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertFreightDetail" />
+		<flushOnExecute statement="updateFreightDetail" />
+		<flushOnExecute statement="deleteFreightDetail" />
+	</cacheModel>
+
+	<resultMap id="freightDetailResultForList" class="freightDetail">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="FRE_ID" property="fre_id" jdbcType="INTEGER" />
+		<result column="AREA_NAME" property="area_name" jdbcType="VARCHAR" />
+		<result column="AREA_PINDEX" property="area_pindex" jdbcType="VARCHAR" />
+		<result column="FIRST_WEIGHT" property="first_weight" jdbcType="INTEGER" />
+		<result column="FIRST_PRICE" property="first_price" jdbcType="INTEGER" />
+		<result column="SED_WEIGHT" property="sed_weight" jdbcType="INTEGER" />
+		<result column="SED_PRICE" property="sed_price" jdbcType="INTEGER" />
+		<result column="DELIVERY_WAY" property="delivery_way" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="freightDetailResult" class="freightDetail" extends="freightDetailResultForList">
+	</resultMap>
+
+	<sql id="sf-freightDetail">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fre_id">a.FRE_ID = #fre_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="area_name">a.AREA_NAME = #area_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="area_pindex">a.AREA_PINDEX = #area_pindex:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="first_weight">a.FIRST_WEIGHT = #first_weight:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="first_price">a.FIRST_PRICE = #first_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sed_weight">a.SED_WEIGHT = #sed_weight:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sed_price">a.SED_PRICE = #sed_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="delivery_way">a.DELIVERY_WAY = #delivery_way:INTEGER#</isNotEmpty>
+	
+	
+	
+		<!--  add by chenzhen  begin -->
+		<isNotEmpty prepend=" and " property="map.area_name_isnull">a.AREA_NAME  is null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.area_pindex_isnull">a.AREA_PINDEX	 is null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.area_name_isnotnull">a.AREA_NAME  is not null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.area_pindex_isnotnull">a.AREA_PINDEX	 is not null</isNotEmpty>
+		
+		
+		<!--  add by chenzhen  end  -->
+	
+	
+	
+	</sql>
+
+	<select id="selectFreightDetail" resultMap="freightDetailResult" parameterClass="freightDetail" cacheModel="oneDayCache">
+		select * from FREIGHT_DETAIL a where 1 = 1
+		<include refid="sf-freightDetail" />
+	</select>
+
+	<select id="selectFreightDetailList" resultMap="freightDetailResultForList" parameterClass="freightDetail" cacheModel="oneDayCache">
+		
+		select * from FREIGHT_DETAIL a where 1 = 1
+		<include refid="sf-freightDetail" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectFreightDetailCount" resultClass="int" parameterClass="freightDetail" cacheModel="oneDayCache">
+		select count(*) from FREIGHT_DETAIL a where 1 = 1
+		<include refid="sf-freightDetail" />
+	</select>
+
+	<select id="selectFreightDetailPaginatedList" resultMap="freightDetailResult" parameterClass="freightDetail" cacheModel="oneDayCache">
+		
+		select * from FREIGHT_DETAIL a where 1 = 1
+		<include refid="sf-freightDetail" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertFreightDetail" parameterClass="freightDetail">
+		<![CDATA[insert into FREIGHT_DETAIL (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="fre_id">FRE_ID</isNotNull>	
+			<isNotNull prepend="," property="area_name">AREA_NAME</isNotNull>	
+			<isNotNull prepend="," property="area_pindex">AREA_PINDEX</isNotNull>	
+			<isNotNull prepend="," property="first_weight">FIRST_WEIGHT</isNotNull>	
+			<isNotNull prepend="," property="first_price">FIRST_PRICE</isNotNull>	
+			<isNotNull prepend="," property="sed_weight">SED_WEIGHT</isNotNull>	
+			<isNotNull prepend="," property="sed_price">SED_PRICE</isNotNull>	
+			<isNotNull prepend="," property="delivery_way">DELIVERY_WAY</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fre_id">#fre_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="area_name">#area_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="area_pindex">#area_pindex:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="first_weight">#first_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="first_price">#first_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sed_weight">#sed_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sed_price">#sed_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="delivery_way">#delivery_way:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateFreightDetail" parameterClass="freightDetail">
+		update FREIGHT_DETAIL
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fre_id">FRE_ID = #fre_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="area_name">AREA_NAME = #area_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="area_pindex">AREA_PINDEX = #area_pindex:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="first_weight">FIRST_WEIGHT = #first_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="first_price">FIRST_PRICE = #first_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sed_weight">SED_WEIGHT = #sed_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sed_price">SED_PRICE = #sed_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="delivery_way">DELIVERY_WAY = #delivery_way:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteFreightDetail" parameterClass="freightDetail">
+		delete from FREIGHT_DETAIL where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fre_id">FRE_ID = #fre_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

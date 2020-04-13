@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="NEWS_INFO">
+
+	<typeAlias alias="newsInfo" type="com.ebiz.webapp.domain.NewsInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertNewsInfo" />
+		<flushOnExecute statement="updateNewsInfo" />
+		<flushOnExecute statement="deleteNewsInfo" />
+	</cacheModel>
+
+	<resultMap id="newsInfoResultForList" class="newsInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="UUID" property="uuid" jdbcType="VARCHAR" />
+		<result column="MOD_ID" property="mod_id" jdbcType="VARCHAR" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="TITLE_COLOR" property="title_color" jdbcType="VARCHAR" />
+		<result column="TITLE_IS_STRONG" property="title_is_strong" jdbcType="INTEGER" />
+		<result column="TITLE_SHORT" property="title_short" jdbcType="VARCHAR" />
+		<result column="TITLE_SUB" property="title_sub" jdbcType="VARCHAR" />
+		<result column="IS_USE_DIRECT_URI" property="is_use_direct_uri" jdbcType="INTEGER" />
+		<result column="DIRECT_URI" property="direct_uri" jdbcType="VARCHAR" />
+		<result column="KEYWORD" property="keyword" jdbcType="VARCHAR" />
+		<result column="IMAGE_PATH" property="image_path" jdbcType="VARCHAR" />
+		<result column="IMAGE_DESC" property="image_desc" jdbcType="VARCHAR" />
+		<result column="SUMMARY" property="summary" jdbcType="VARCHAR" />
+		<result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+		<result column="INFO_SOURCE" property="info_source" jdbcType="VARCHAR" />
+		<result column="IS_USE_INVALID_DATE" property="is_use_invalid_date" jdbcType="INTEGER" />
+		<result column="INVALID_DATE" property="invalid_date" jdbcType="TIMESTAMP" />
+		<result column="PUB_TIME" property="pub_time" jdbcType="TIMESTAMP" />
+		<result column="VIEW_COUNT" property="view_count" jdbcType="INTEGER" />
+		<result column="VIEW_DATETIME" property="view_datetime" jdbcType="TIMESTAMP" />
+		<result column="INFO_STATE" property="info_state" jdbcType="INTEGER" />
+		<result column="ADD_UID" property="add_uid" jdbcType="INTEGER" />
+		<result column="ADD_TIME" property="add_time" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_UID" property="update_uid" jdbcType="INTEGER" />
+		<result column="UPDATE_TIME" property="update_time" jdbcType="TIMESTAMP" />
+		<result column="DEL_UID" property="del_uid" jdbcType="INTEGER" />
+		<result column="DEL_TIME" property="del_time" jdbcType="TIMESTAMP" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="IS_PUSH" property="is_push" jdbcType="INTEGER" />
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="LINK_ID" property="link_id" jdbcType="INTEGER" />
+		
+		<result column="LOCALE_NAME" property="locale_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="newsInfoResult" class="newsInfo" extends="newsInfoResultForList">
+	    <result column="CONTENT" property="map.content" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	
+	<resultMap id="newsInfoResultWithTopicPptForList" class="newsInfo" extends="newsInfoResultForList">
+	    <result column="TOPIC_MOD_ID" property="map.topic_mod_id" jdbcType="VARCHAR" />
+	</resultMap>
+	
+
+	<sql id="sf-newsInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="uuid">a.UUID = #uuid:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mod_id">a.MOD_ID = #mod_id:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title">a.TITLE = #title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title_color">a.TITLE_COLOR = #title_color:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title_is_strong">a.TITLE_IS_STRONG = #title_is_strong:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title_short">a.TITLE_SHORT = #title_short:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title_sub">a.TITLE_SUB = #title_sub:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_use_direct_uri">a.IS_USE_DIRECT_URI = #is_use_direct_uri:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="direct_uri">a.DIRECT_URI = #direct_uri:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="keyword">a.KEYWORD = #keyword:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="image_path">a.IMAGE_PATH = #image_path:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="image_desc">a.IMAGE_DESC = #image_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="summary">a.SUMMARY = #summary:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="author">a.AUTHOR = #author:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="info_source">a.INFO_SOURCE = #info_source:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_use_invalid_date">a.IS_USE_INVALID_DATE = #is_use_invalid_date:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="invalid_date">a.INVALID_DATE = #invalid_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pub_time">a.PUB_TIME = #pub_time:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="view_count">a.VIEW_COUNT = #view_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="view_datetime">a.VIEW_DATETIME = #view_datetime:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="info_state">a.INFO_STATE = #info_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_uid">a.ADD_UID = #add_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_time">a.ADD_TIME = #add_time:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_uid">a.UPDATE_UID = #update_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_time">a.UPDATE_TIME = #update_time:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_uid">a.DEL_UID = #del_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_time">a.DEL_TIME = #del_time:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_push">a.IS_PUSH = #is_push:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_id">a.CLS_ID = #cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_name">a.CLS_NAME = #cls_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_id">a.LINK_ID = #link_id:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="locale_name">a.LOCALE_NAME = #locale_name:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.title_like">a.TITLE like '%'  #map.title_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.image_path">a.IMAGE_PATH is not null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.info_state_gt"><![CDATA[a.INFO_STATE > #map.info_state_gt:INTEGER#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.info_state_ge"><![CDATA[a.INFO_STATE >= #map.info_state_ge:INTEGER#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.info_state_lt"><![CDATA[a.INFO_STATE < #map.info_state_lt:INTEGER#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.info_state_le"><![CDATA[a.INFO_STATE <= #map.info_state_le:INTEGER#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.info_state_ne"><![CDATA[a.INFO_STATE <> #map.info_state_ne:INTEGER#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.info_state_eq"><![CDATA[a.INFO_STATE = #map.info_state_eq:INTEGER#]]></isNotEmpty>
+		<isEmpty prepend="" property="info_state">
+			<isNotEmpty prepend=" and " property="map.is_pub">
+				<![CDATA[ a.INFO_STATE > #map.is_pub# ]]>
+			</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.no_pub">
+				<![CDATA[ a.INFO_STATE <= #map.no_pub# ]]>
+			</isNotEmpty>
+		</isEmpty>
+		<isNotEmpty prepend=" and " property="map.st_pub_date"><![CDATA[
+			a.pub_time >= str_to_date(#map.st_pub_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pub_date"><![CDATA[
+			a.pub_time <= str_to_date(concat(#map.en_pub_date:VARCHAR# , '23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.no_invalid"><![CDATA[
+		(CASE WHEN a.IS_USE_INVALID_DATE = 1 && a.INVALID_DATE IS NOT NULL  THEN date_format(INVALID_DATE, '%Y-%m-%d') ELSE date_format(now(), '%Y-%m-%d') END) >= date_format(now(), '%Y-%m-%d')
+		]]></isNotEmpty>
+	</sql>
+
+	<select id="selectNewsInfo" resultMap="newsInfoResult" parameterClass="newsInfo" cacheModel="oneDayCache">
+		select a.*,b.CONTENT from NEWS_INFO a left join NEWS_CONTENT b on a.id = b.id where 1 = 1
+		<include refid="sf-newsInfo" />
+	</select>
+
+	<select id="selectNewsInfoList" resultMap="newsInfoResultForList" parameterClass="newsInfo" cacheModel="oneDayCache">
+		
+		select * from NEWS_INFO a where 1 = 1 
+		<isNotEmpty prepend=" and " property="map.no_null_image_path">a.image_path is not null</isNotEmpty>
+		<include refid="sf-newsInfo" />
+		order by a.order_value,a.pub_time desc  
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectNewsInfoListForRank" resultMap="newsInfoResultForList" parameterClass="newsInfo" cacheModel="oneDayCache">
+		
+		select * from NEWS_INFO a where 1 = 1
+		<include refid="sf-newsInfo" />
+		order by a.pub_time desc  
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectNewsInfoListForTopicPpt" resultMap="newsInfoResultWithTopicPptForList" parameterClass="newsInfo" cacheModel="oneDayCache">
+		
+		select a.*,b.mod_id as topic_mod_id from NEWS_INFO a 
+		inner join  topic_config b on a.id=b.link_id
+		where b.is_del=0
+		<include refid="sf-newsInfo" />
+		<isNotEmpty prepend=" and " property="map.image_newsInfo">
+			a.image_path is not null
+		</isNotEmpty> 
+		<isNotEmpty prepend=" and " property="map.topic_mod_id">
+			b.mod_id=#map.topic_mod_id#
+		</isNotEmpty> 
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectNewsInfoCount" resultClass="int" parameterClass="newsInfo" cacheModel="oneDayCache">
+		select count(a.id) from NEWS_INFO a 
+		where 1 = 1 
+		<isNotEmpty prepend=" and " property="map.topic_news">
+			a.id not in (select t.link_id from topic_config t where t.link_id_type = #map.link_id_type#  and t.topic_id = #map.topic_id# and t.mod_id = #map.mod_id#   and t.is_del = 0)
+		</isNotEmpty>
+		<include refid="sf-newsInfo" />
+	</select>
+
+	<select id="selectNewsInfoPaginatedList" resultMap="newsInfoResult" parameterClass="newsInfo" cacheModel="oneDayCache">
+		
+		select a.*,c.CONTENT from NEWS_INFO a 
+		LEFT JOIN news_content c on a.ID=c.ID
+		where 1 = 1 
+		<isNotEmpty prepend=" and " property="map.topic_news">
+			a.id not in (select t.link_id from topic_config t where t.link_id_type = #map.link_id_type#  and t.topic_id = #map.topic_id#  and t.mod_id = #map.mod_id#  and t.is_del = 0)
+		</isNotEmpty>
+		<include refid="sf-newsInfo" />
+		order by a.pub_time desc 
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertNewsInfo" parameterClass="newsInfo">
+		<![CDATA[insert into NEWS_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="uuid">UUID</isNotNull>	
+			<isNotNull prepend="," property="mod_id">MOD_ID</isNotNull>	
+			<isNotNull prepend="," property="title">TITLE</isNotNull>	
+			<isNotNull prepend="," property="title_color">TITLE_COLOR</isNotNull>	
+			<isNotNull prepend="," property="title_is_strong">TITLE_IS_STRONG</isNotNull>	
+			<isNotNull prepend="," property="title_short">TITLE_SHORT</isNotNull>	
+			<isNotNull prepend="," property="title_sub">TITLE_SUB</isNotNull>	
+			<isNotNull prepend="," property="is_use_direct_uri">IS_USE_DIRECT_URI</isNotNull>	
+			<isNotNull prepend="," property="direct_uri">DIRECT_URI</isNotNull>	
+			<isNotNull prepend="," property="keyword">KEYWORD</isNotNull>	
+			<isNotNull prepend="," property="image_path">IMAGE_PATH</isNotNull>	
+			<isNotNull prepend="," property="image_desc">IMAGE_DESC</isNotNull>	
+			<isNotNull prepend="," property="summary">SUMMARY</isNotNull>	
+			<isNotNull prepend="," property="author">AUTHOR</isNotNull>	
+			<isNotNull prepend="," property="info_source">INFO_SOURCE</isNotNull>	
+			<isNotNull prepend="," property="is_use_invalid_date">IS_USE_INVALID_DATE</isNotNull>	
+			<isNotNull prepend="," property="invalid_date">INVALID_DATE</isNotNull>	
+			<isNotNull prepend="," property="pub_time">PUB_TIME</isNotNull>	
+			<isNotNull prepend="," property="view_count">VIEW_COUNT</isNotNull>	
+			<isNotNull prepend="," property="view_datetime">VIEW_DATETIME</isNotNull>	
+			<isNotNull prepend="," property="info_state">INFO_STATE</isNotNull>	
+			<isNotNull prepend="," property="add_uid">ADD_UID</isNotNull>	
+			<isNotNull prepend="," property="add_time">ADD_TIME</isNotNull>	
+			<isNotNull prepend="," property="update_uid">UPDATE_UID</isNotNull>	
+			<isNotNull prepend="," property="update_time">UPDATE_TIME</isNotNull>	
+			<isNotNull prepend="," property="del_uid">DEL_UID</isNotNull>	
+			<isNotNull prepend="," property="del_time">DEL_TIME</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>
+			<isNotNull prepend="," property="is_push">IS_PUSH</isNotNull>
+			<isNotNull prepend="," property="cls_id">CLS_ID</isNotNull>	
+			<isNotNull prepend="," property="cls_name">CLS_NAME</isNotNull>		
+			
+			<isNotNull prepend="," property="locale_name">LOCALE_NAME</isNotNull>	
+			<isNotNull prepend="," property="link_id">LINK_ID</isNotNull>
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="uuid">#uuid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mod_id">#mod_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="title">#title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="title_color">#title_color:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="title_is_strong">#title_is_strong:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title_short">#title_short:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="title_sub">#title_sub:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_use_direct_uri">#is_use_direct_uri:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="direct_uri">#direct_uri:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="keyword">#keyword:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="image_path">#image_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="image_desc">#image_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="summary">#summary:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="author">#author:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="info_source">#info_source:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_use_invalid_date">#is_use_invalid_date:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="invalid_date">#invalid_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="pub_time">#pub_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="view_count">#view_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="view_datetime">#view_datetime:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="info_state">#info_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_uid">#add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_time">#add_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_uid">#update_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_time">#update_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">#del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_time">#del_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_push">#is_push:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_id">#cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">#cls_name:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="locale_name">#locale_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="link_id">#link_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateNewsInfo" parameterClass="newsInfo">
+		update NEWS_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="uuid">UUID = #uuid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mod_id">MOD_ID = #mod_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="title">TITLE = #title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="title_color">TITLE_COLOR = #title_color:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="title_is_strong">TITLE_IS_STRONG = #title_is_strong:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title_short">TITLE_SHORT = #title_short:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="title_sub">TITLE_SUB = #title_sub:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_use_direct_uri">IS_USE_DIRECT_URI = #is_use_direct_uri:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="direct_uri">DIRECT_URI = #direct_uri:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="keyword">KEYWORD = #keyword:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="image_path">IMAGE_PATH = #image_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="image_desc">IMAGE_DESC = #image_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="summary">SUMMARY = #summary:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="author">AUTHOR = #author:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="info_source">INFO_SOURCE = #info_source:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_use_invalid_date">IS_USE_INVALID_DATE = #is_use_invalid_date:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="invalid_date">INVALID_DATE = #invalid_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="pub_time">PUB_TIME = #pub_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="view_count">VIEW_COUNT = #view_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="view_datetime">VIEW_DATETIME = #view_datetime:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="info_state">INFO_STATE = #info_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_uid">ADD_UID = #add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_time">ADD_TIME = #add_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_uid">UPDATE_UID = #update_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_time">UPDATE_TIME = #update_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">DEL_UID = #del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_time">DEL_TIME = #del_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_push">IS_PUSH = #is_push:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_id">CLS_ID = #cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">CLS_NAME = #cls_name:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="locale_name">LOCALE_NAME = #locale_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="link_id">LINK_ID = #link_id:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteNewsInfo" parameterClass="newsInfo">
+		delete from NEWS_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

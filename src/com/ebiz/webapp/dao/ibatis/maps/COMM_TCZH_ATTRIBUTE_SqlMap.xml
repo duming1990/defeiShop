@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="COMM_TCZH_ATTRIBUTE">
+
+	<typeAlias alias="commTczhAttribute" type="com.ebiz.webapp.domain.CommTczhAttribute" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCommTczhAttribute" />
+		<flushOnExecute statement="updateCommTczhAttribute" />
+		<flushOnExecute statement="deleteCommTczhAttribute" />
+	</cacheModel>
+
+	<resultMap id="commTczhAttributeResultForList" class="commTczhAttribute">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="COMM_TCZH_ID" property="comm_tczh_id" jdbcType="INTEGER" />
+		<result column="COMM_ID" property="comm_id" jdbcType="VARCHAR" />
+		<result column="ATTR_ID" property="attr_id" jdbcType="VARCHAR" />
+		<result column="ATTR_NAME" property="attr_name" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="TYPE" property="type" jdbcType="INTEGER" />
+		<result column="PAR_ID" property="par_id" jdbcType="INTEGER" />		
+	</resultMap>
+
+	<resultMap id="commTczhAttributeResult" class="commTczhAttribute" extends="commTczhAttributeResultForList">
+	</resultMap>
+	
+	<resultMap id="commTczhAttributeResultForAttrList" class="commTczhAttribute" extends="commTczhAttributeResultForList">
+		<result column="ATTR_SHOW_NAME" property="map.attr_show_name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="commTczhAttributeResultForGetCommTczhId" class="commTczhAttribute" >
+		<result column="COMM_TCZH_ID" property="comm_tczh_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="sf-commTczhAttribute">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_id">a.COMM_TCZH_ID = #comm_tczh_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="attr_id">a.ATTR_ID = #attr_id:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="attr_name">a.ATTR_NAME = #attr_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="type">a.TYPE = #type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="par_id">a.PAR_ID = #par_id:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.attr_ids_in">a.ATTR_ID in ($map.attr_ids_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_tczh_ids">a.COMM_TCZH_ID in ($map.comm_tczh_ids$)</isNotEmpty>
+	</sql>
+
+	<select id="selectCommTczhAttribute" resultMap="commTczhAttributeResult" parameterClass="commTczhAttribute" cacheModel="oneDayCache">
+		select * from COMM_TCZH_ATTRIBUTE a where 1 = 1
+		<include refid="sf-commTczhAttribute" />
+	</select>
+
+	<select id="selectCommTczhAttributeList" resultMap="commTczhAttributeResultForList" parameterClass="commTczhAttribute" cacheModel="oneDayCache">
+		
+		select * from COMM_TCZH_ATTRIBUTE a where 1 = 1
+		<include refid="sf-commTczhAttribute" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectCommTczhAttributeCount" resultClass="int" parameterClass="commTczhAttribute" cacheModel="oneDayCache">
+		select count(*) from COMM_TCZH_ATTRIBUTE a where 1 = 1
+		<include refid="sf-commTczhAttribute" />
+	</select>
+
+	<select id="selectCommTczhAttributePaginatedList" resultMap="commTczhAttributeResult" parameterClass="commTczhAttribute" cacheModel="oneDayCache">
+		
+		select * from COMM_TCZH_ATTRIBUTE a where 1 = 1
+		<include refid="sf-commTczhAttribute" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectCommTczhAttributeForGetCommTczhId" resultMap="commTczhAttributeResultForGetCommTczhId" parameterClass="commTczhAttribute" cacheModel="oneDayCache">
+		SELECT COMM_TCZH_ID from comm_tczh_attribute t where t.ATTR_ID in( $map.att_ids$ ) group by COMM_TCZH_ID HAVING count(1) = #map.att_size# 
+	</select>
+
+	<select id="selectCommTczhAttributeListByTczhId" resultMap="commTczhAttributeResultForAttrList" parameterClass="long" >
+	 		select a.*,(select attr_show_name from base_attribute_son t where id=a.ATTR_ID) attr_show_name from COMM_TCZH_ATTRIBUTE a where a.COMM_TCZH_ID = #value# order by order_value
+	</select>
+	
+	<insert id="insertCommTczhAttribute" parameterClass="commTczhAttribute">
+		<![CDATA[insert into COMM_TCZH_ATTRIBUTE (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="attr_id">ATTR_ID</isNotNull>	
+			<isNotNull prepend="," property="attr_name">ATTR_NAME</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="type">TYPE</isNotNull>	
+			<isNotNull prepend="," property="par_id">PAR_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">#comm_tczh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="attr_id">#attr_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="attr_name">#attr_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">#type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="par_id">#par_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCommTczhAttribute" parameterClass="commTczhAttribute">
+		update COMM_TCZH_ATTRIBUTE
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID = #comm_tczh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="attr_id">ATTR_ID = #attr_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="attr_name">ATTR_NAME = #attr_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">TYPE = #type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="par_id">PAR_ID = #par_id:INTEGER#</isNotNull>		
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCommTczhAttribute" parameterClass="commTczhAttribute">
+		delete from COMM_TCZH_ATTRIBUTE where 1 = 1
+		<isNotEmpty prepend=" and " property="comm_id">COMM_ID = #comm_id:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

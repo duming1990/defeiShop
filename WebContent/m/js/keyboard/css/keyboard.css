@@ -1,0 +1,328 @@
+.fix-lb {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+.bt {
+    border-top: 1px solid #e4e4e4;
+}
+.bb {
+    border-bottom: 1px solid #e4e4e4;
+}
+.br {
+    border-right: 1px solid #e4e4e4;
+}
+.bl {
+    border-left: 1px solid #e4e4e4;
+}
+.pct100 {
+    width: 100%;
+}
+.border-box {
+    box-sizing: border-box;
+}
+.arrow-box {
+    height:.5rem;
+}
+.abs-mt {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.abs-mm {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.abs-rm {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.abs-rm {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.arrow-down {
+    height: .2rem;
+    right: .2rem;
+    background-size: contain;
+    background-image: url(../img/common/arrow_down.png);
+}
+.keyboard .arrow-down {
+	width: .5rem;
+	background-image: url(../img/arrow_keydown.png)
+}
+
+.keyboard .arrow-box {
+	width: .5rem
+}
+.keyboard.ani {
+	-webkit-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-ms-transition: all .3s ease-in;
+	transition: all .3s ease-in
+}
+
+.keyboard {
+	-webkit-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-ms-transition: all .3s ease-in;
+	transition: all .3s ease-in;
+	-webkit-transform: translateY(100%);
+	-moz-transform: translateY(100%);
+	-ms-transform: translateY(100%);
+	transform: translateY(100%)
+}
+
+.keyboard.slideUp {
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-ms-transform: translateY(0);
+	transform: translateY(0)
+}
+
+.keyboard.fix {
+	position: fixed;
+	bottom: 0;
+	left: 0
+}
+
+.keyboard {
+	width: 100%;
+	z-index: 900;
+	height: 6rem;
+	background-color: #fff;
+	text-align: center;
+	line-height: 1;
+	border-color: #e4e4e4
+}
+
+.keyboard .symbol {
+	width: 100%;
+	height: 1rem;
+	border-color: #e4e4e4;
+	background-color: #fff
+}
+
+.keyboard .symbol h5 {
+	padding-left:.5rem;
+	background-image: url(../img/safekey_icon.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-size: .3rem;
+}
+
+.keyboard .symbol .arrow-box {
+	right: .2rem
+}
+
+.keyboard ul {
+	position: absolute;
+	top: 1rem;
+	bottom: -.2rem;
+	border-color: #e4e4e4
+}
+
+.keyboard li {
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	display: box;
+	display: -ms-box;
+	display: -webkit-box;
+	display: flex;
+	display: -ms-flex;
+	display: -webkit-flex;
+	height: 25%;
+	border-color: #e4e4e4;
+	position: relative
+}
+
+.keyboard li div {
+	flex: 1;
+	-ms-flex: 1;
+	-webkit-flex: 1;
+	box-flex: 1;
+	-ms-box-flex: 1;
+	-webkit-box-flex: 1;
+	position: relative
+}
+.keyboard.letter .char,.keyboard.letter.type-letter .num,.keyboard.letter.type-num .char,.keyboard.letter.type-num.type-letter .num,.keyboard.num .char,.keyboard.num.type-letter .num {
+	display: none
+}
+
+.keyboard.letter.type-letter .letter,.keyboard.letter.type-num.type-letter .letter,.keyboard.num.type-letter .letter {
+	display: block
+}
+
+.keyboard.letter .char,.keyboard.letter.type-num .char,.keyboard.letter.type-num .letter,.keyboard.letter.type-num.type-num .letter,.keyboard.num .char,.keyboard.num.type-num .letter {
+	display: none
+}
+
+.keyboard.letter.type-num .num,.keyboard.letter.type-num.type-num .num,.keyboard.num.type-num .num {
+	display: block
+}
+
+.keyboard.letter .letter,.keyboard.letter.type-char .num,.keyboard.letter.type-num .letter,.keyboard.letter.type-num.type-char .num,.keyboard.num .letter,.keyboard.num.type-char .num {
+	display: none
+}
+
+.keyboard.letter.type-char .char,.keyboard.letter.type-num.type-char .char,.keyboard.num.type-char .char {
+	display: block
+}
+
+.keyboard.letter .fs18,.keyboard.letter.type-num .fs18,.keyboard.num .fs18 {
+	font-size: 1.8rem
+}
+
+.keyboard.letter .fs16,.keyboard.letter.type-num .fs16,.keyboard.num .fs16 {
+	font-size: 1.6rem
+}
+
+.keyboard.letter .bg-gray,.keyboard.letter.type-num .bg-gray,.keyboard.num .bg-gray {
+	background-color: #C3C7CF
+}
+
+.keyboard.letter div.active,.keyboard.letter.type-num div.active,.keyboard.num div.active {
+	background-color: #C3C7CF;
+	color: #fff
+}
+
+.keyboard.letter .del span,.keyboard.letter.type-num .del span,.keyboard.num .del span {
+	width: .8rem;
+    height: .7rem;
+	background-image: url(../img/delete.png);
+	background-position: center top;
+	background-size: 100%
+}
+
+.keyboard.letter .del.active,.keyboard.letter.type-num .del.active,.keyboard.num .del.active {
+	background-color: #fff
+}
+
+.keyboard.letter .del.active span,.keyboard.letter.type-num .del.active span,.keyboard.num .del.active span {
+	background-position: center -2.5rem
+}
+
+.keyboard.letter.type-char li,.keyboard.letter.type-letter li {
+	font-size: 2.4rem;
+	line-height: 5rem;
+	text-align: center
+}
+
+.keyboard.letter.type-char li div,.keyboard.letter.type-letter li div {
+	border-left: 1px solid #d6d6d6
+}
+
+.keyboard.letter.type-char li div:nth-of-type(1),.keyboard.letter.type-letter li div:nth-of-type(1) {
+	border-width: 0
+}
+
+.keyboard.letter.type-letter li:nth-of-type(3) div {
+	border-top: 1px solid #d6d6d6
+}
+
+.keyboard.letter.type-letter li:nth-of-type(2) div:nth-last-of-type(1),.keyboard.letter.type-letter li:nth-of-type(2) div:nth-of-type(1) {
+	flex: 1.5;
+	-ms-flex: 1.5;
+	-webkit-flex: 1.5;
+	box-flex: 1.5;
+	-ms-box-flex: 1.5;
+	-webkit-box-flex: 1.5;
+	border-bottom-color: #B3B9C4
+}
+
+.keyboard.letter.type-letter li:nth-of-type(3) div:nth-last-of-type(1),.keyboard.letter.type-letter li:nth-of-type(3) div:nth-of-type(1) {
+	flex: 1.5;
+	-ms-flex: 1.5;
+	-webkit-flex: 1.5;
+	box-flex: 1.5;
+	-ms-box-flex: 1.5;
+	-webkit-box-flex: 1.5
+}
+
+.keyboard.letter.type-letter li:nth-last-of-type(1),.keyboard.letter.type-letter li:nth-of-type(3) div:nth-last-of-type(1),.keyboard.letter.type-letter li:nth-of-type(3) div:nth-of-type(1),.keyboard.letter.type-letter li:nth-of-type(3) div:nth-of-type(2),.keyboard.letter.type-letter li:nth-of-type(4) div:nth-last-of-type(1),.keyboard.letter.type-letter li:nth-of-type(4) div:nth-of-type(2) {
+	border-color: #B3B9C4
+}
+
+.keyboard.letter.type-letter .blank span {
+	width: 4rem;
+	height: .5rem;
+	border-width: 2px;
+	border-color: #000
+}
+
+.keyboard.letter.type-letter .blank.active {
+	background-color: #C3C7CF
+}
+
+.keyboard.letter.type-letter .caps span {
+	width: 2rem;
+	height: 1.8rem;
+	background-image: url(../img/capsLock.png);
+	background-position: center top;
+	background-size: 100%
+}
+
+.keyboard.letter.type-letter .caps.active {
+	background-color: #fff
+}
+
+.keyboard.letter.type-letter .caps.active span {
+	background-position: center -2.5rem
+}
+
+.keyboard.letter.type-char li:nth-of-type(3) div,.keyboard.letter.type-char li:nth-of-type(4) div {
+	border-top: 1px solid #d6d6d6
+}
+
+.keyboard.letter.type-char li:nth-of-type(3) div:nth-last-of-type(1),.keyboard.letter.type-char li:nth-of-type(3) div:nth-of-type(1),.keyboard.letter.type-char li:nth-of-type(4) div:nth-last-of-type(1),.keyboard.letter.type-char li:nth-of-type(4) div:nth-of-type(1) {
+	flex: 1.5;
+	-ms-flex: 1.5;
+	-webkit-flex: 1.5;
+	box-flex: 1.5;
+	-ms-box-flex: 1.5;
+	-webkit-box-flex: 1.5
+}
+
+.keyboard.letter.type-char li:nth-of-type(3) div:nth-last-of-type(1),.keyboard.letter.type-char li:nth-of-type(4) div:nth-last-of-type(1),.keyboard.letter.type-char li:nth-of-type(4) div:nth-of-type(1) {
+	border-color: #B3B9C4
+}
+
+.keyboard.letter.type-char li:nth-of-type(4) div:nth-of-type(2) {
+	border-left-color: #B3B9C4
+}
+
+.keyboard.letter.type-num li div,.keyboard.num li div {
+	font-size: .5rem;
+    line-height: 1.2rem;
+}
+
+.keyboard.letter.type-num li div.active,.keyboard.num li div.active {
+	background-color: #C3C7CF
+}
+
+.keyboard.letter.type-num li>div:nth-of-type(2),.keyboard.num li>div:nth-of-type(2) {
+	border-color: #e4e4e4
+}

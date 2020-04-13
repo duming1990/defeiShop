@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="PD_IMGS">
+
+	<typeAlias alias="pdImgs" type="com.ebiz.webapp.domain.PdImgs" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertPdImgs" />
+		<flushOnExecute statement="updatePdImgs" />
+		<flushOnExecute statement="deletePdImgs" />
+	</cacheModel>
+
+	<resultMap id="pdImgsResultForList" class="pdImgs">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PD_ID" property="pd_id" jdbcType="INTEGER" />
+		<result column="FILE_PATH" property="file_path" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="pdImgsResult" class="pdImgs" extends="pdImgsResultForList">
+	</resultMap>
+
+	<sql id="sf-pdImgs">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_id">a.PD_ID = #pd_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="file_path">a.FILE_PATH = #file_path:VARCHAR#</isNotEmpty>
+	</sql>
+
+	<select id="selectPdImgs" resultMap="pdImgsResult" parameterClass="pdImgs" cacheModel="oneDayCache">
+		select * from PD_IMGS a where 1 = 1
+		<include refid="sf-pdImgs" />
+	</select>
+
+	<select id="selectPdImgsList" resultMap="pdImgsResultForList" parameterClass="pdImgs" cacheModel="oneDayCache">
+		
+		select * from PD_IMGS a where 1 = 1
+		<include refid="sf-pdImgs" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectPdImgsCount" resultClass="int" parameterClass="pdImgs" cacheModel="oneDayCache">
+		select count(*) from PD_IMGS a where 1 = 1
+		<include refid="sf-pdImgs" />
+	</select>
+
+	<select id="selectPdImgsPaginatedList" resultMap="pdImgsResult" parameterClass="pdImgs" cacheModel="oneDayCache">
+		
+		select * from PD_IMGS a where 1 = 1
+		<include refid="sf-pdImgs" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertPdImgs" parameterClass="pdImgs">
+		<![CDATA[insert into PD_IMGS (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="pd_id">PD_ID</isNotNull>	
+			<isNotNull prepend="," property="file_path">FILE_PATH</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_id">#pd_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="file_path">#file_path:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updatePdImgs" parameterClass="pdImgs">
+		update PD_IMGS
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_id">PD_ID = #pd_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="file_path">FILE_PATH = #file_path:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deletePdImgs" parameterClass="pdImgs">
+		delete from PD_IMGS where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_id">PD_ID = #pd_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.file_path">file_path = #map.file_path#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

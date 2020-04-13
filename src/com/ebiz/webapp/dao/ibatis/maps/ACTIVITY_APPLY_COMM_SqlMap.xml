@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="ACTIVITY_APPLY_COMM">
+
+	<typeAlias alias="activityApplyComm" type="com.ebiz.webapp.domain.ActivityApplyComm" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertActivityApplyComm" />
+		<flushOnExecute statement="updateActivityApplyComm" />
+		<flushOnExecute statement="deleteActivityApplyComm" />
+	</cacheModel>
+
+	<resultMap id="activityApplyCommResultForList" class="activityApplyComm">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ACTIVITY_ID" property="activity_id" jdbcType="INTEGER" />
+		<result column="ACTIVITY_APPLY_ID" property="activity_apply_id" jdbcType="INTEGER" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="COMM_TCZH_ID" property="comm_tczh_id" jdbcType="INTEGER" />
+		
+	</resultMap>
+	
+	<resultMap id="activityApplyCommOrderResultForList" class="activityApplyComm">
+		<result column="ACTIVITY_ID" property="activity_id" jdbcType="INTEGER" />
+<!-- 		<result column="ACTIVITY_APPLY_ID" property="activity_apply_id" jdbcType="INTEGER" /> -->
+		<result column="TITLE" property="map.title" jdbcType="VARCHAR" />
+<!-- 		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" /> -->
+		<result column="ENTP_COUNT" property="map.entp_count" jdbcType="INTEGER" />
+		<result column="GOOD_COUNT" property="map.good_count" jdbcType="INTEGER" />
+		<result column="GOOD_SUM_PRICE" property="map.good_sum_price" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<resultMap id="activityApplyCommEntpResultForList" class="activityApplyComm">
+		<result column="USER_NAME" property="map.user_name" jdbcType="VARCHAR" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" />
+		<result column="ACTIVITY_ID" property="activity_id" jdbcType="INTEGER" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+<!-- 		<result column="ACTIVITY_APPLY_ID" property="activity_apply_id" jdbcType="INTEGER" /> -->
+<!-- 		<result column="TITLE" property="map.title" jdbcType="VARCHAR" /> -->
+<!-- 		<result column="ENTP_COUNT" property="map.entp_count" jdbcType="INTEGER" /> -->
+		<result column="GOOD_COUNT" property="map.good_count" jdbcType="INTEGER" />
+		<result column="GOOD_SUM_PRICE" property="map.good_sum_price" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<resultMap id="activityApplyCommOrderEntpResultForList" class="activityApplyComm">
+		<result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+		<result column="GOOD_COUNT" property="map.good_count" jdbcType="INTEGER" />
+		<result column="GOOD_SUM_PRICE" property="map.good_sum_price" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<resultMap id="activityApplyCommTcResultForList" class="activityApplyComm">
+		<result column="TITLE" property="map.title" jdbcType="VARCHAR" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" />
+		<result column="TCZH_NAME" property="map.tczh_name" jdbcType="VARCHAR" />
+		<result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+		<result column="GOOD_COUNT" property="map.good_count" jdbcType="INTEGER" />
+		<result column="GOOD_SUM_PRICE" property="map.good_sum_price" jdbcType="DECIMAL" />
+	</resultMap>
+	
+
+	<resultMap id="activityApplyCommResult" class="activityApplyComm" extends="activityApplyCommResultForList">
+		<result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+		<result column="PRICE_REF" property="map.price_ref" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="map.cls_name" jdbcType="VARCHAR" />
+		<result column="MAIN_PIC" property="map.main_pic" jdbcType="VARCHAR" />
+		<result column="IS_AID" property="map.is_aid" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="activityApplyCommAuditResult" class="activityApplyComm" extends="activityApplyCommResultForList">
+		<result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+		<result column="PRICE_REF" property="map.price_ref" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="map.cls_name" jdbcType="VARCHAR" />
+		<result column="MAIN_PIC" property="map.main_pic" jdbcType="VARCHAR" />
+		
+		<result column="AID_SCALE" property="map.aid_scale" jdbcType="INTEGER" />
+		<result column="COMM_PRICE" property="map.comm_price" jdbcType="DECIMAL" />
+		<result column="ORIG_PRICE" property="map.orig_price" jdbcType="DECIMAL" />
+		<result column="PAY_TYPE" property="map.pay_type" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="sf-activityApplyComm">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="activity_id">a.ACTIVITY_ID = #activity_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="activity_apply_id">a.ACTIVITY_APPLY_ID = #activity_apply_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME = #comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_id">a.COMM_TCZH_ID = #comm_tczh_id:INTEGER#</isNotEmpty>
+		
+	</sql>
+	<sql id="sq-activityApplyComm">
+		a.ID,
+		a.ACTIVITY_ID,
+		a.ACTIVITY_APPLY_ID,
+		a.COMM_ID,
+		a.COMM_NAME,
+		a.ENTP_ID
+	</sql>
+
+	<select id="selectActivityApplyComm" resultMap="activityApplyCommResult" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		select 
+			a.*,
+			b.comm_name,b.price_ref,b.cls_name,b.main_pic,b.is_aid
+		from 
+			ACTIVITY_APPLY_COMM a
+		left join comm_info b on b.id = a.comm_id
+		where 1 = 1
+		<include refid="sf-activityApplyComm" />
+	</select>
+
+	<select id="selectActivityApplyCommList" resultMap="activityApplyCommResult" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		select 
+			a.*,
+			b.comm_name,b.price_ref,b.cls_name,b.main_pic,b.is_aid
+		from 
+			ACTIVITY_APPLY_COMM a
+		left join comm_info b on b.id = a.comm_id
+		where 1 = 1
+		<include refid="sf-activityApplyComm" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectActivityApplyCommAuditList" resultMap="activityApplyCommAuditResult" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		select 
+			a.*,
+			b.comm_name,b.price_ref,b.cls_name,b.main_pic,b.aid_scale,c.comm_price,c.orig_price,d.pay_type
+		from 
+			ACTIVITY_APPLY_COMM a
+		left join ACTIVITY_APPLY d on d.id = a.activity_id
+		left join comm_info b on b.id = a.comm_id
+		left join comm_tczh_price c on c.id = a.comm_tczh_id AND c.comm_id=a.comm_id
+		where 1 = 1
+		<include refid="sf-activityApplyComm" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectActivityApplyCommTcList" resultMap="activityApplyCommTcResultForList" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		SELECT
+			e.title,
+			f.ENTP_NAME,
+			a.comm_name,
+			g.TCZH_NAME,
+			sum(b.good_sum_price) good_sum_price,
+			sum(b.GOOD_COUNT) good_count
+		FROM
+			activity_apply_comm a,
+			order_info_details b,
+			order_info c,
+			activity_apply d,
+			activity e,
+			entp_info f,
+			comm_tczh_price g
+		WHERE 1=1 
+			<isNotEmpty prepend=" and " property="map.title_like">e.TITLE like '%' #map.title_like# '%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.entp_name_like">f.ENTP_NAME like '%' #map.entp_name_like# '%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.comm_name_like">a.COMM_NAME like '%' #map.comm_name_like# '%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.st_start_date"><![CDATA[
+			b.ADD_DATE >= str_to_date(#map.st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_end_date"><![CDATA[
+	     	b.ADD_DATE <= str_to_date(concat(#map.en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+		AND c.id = b.ORDER_ID
+		AND a.comm_id = b.COMM_ID
+		AND d.audit_state = 1
+		AND c.order_state = 50
+		AND c.ORDER_TYPE = 90
+		AND a.activity_apply_id = d.id
+		AND e.id = a.activity_id
+		AND f.id = a.entp_id
+		AND g.id = a.comm_tczh_id
+		GROUP BY
+<!-- 			a.activity_apply_id, -->
+<!-- 			a.entp_id, -->
+			
+			a.comm_name,
+			a.id
+		<include refid="sf-activityApplyComm" />
+		ORDER BY
+			sum(b.GOOD_SUM_PRICE) DESC
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectActivityApplyCommTcCount" resultClass="int" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		select count(*) from 
+		(SELECT
+			e.title,
+			f.ENTP_NAME,
+			a.comm_name,
+			g.TCZH_NAME,
+			sum(c.ORDER_MONEY + c.MONEY_BI) good_sum_price,
+			sum(b.GOOD_COUNT) good_count
+		FROM
+			activity_apply_comm a,
+			order_info_details b,
+			order_info c,
+			activity_apply d,
+			activity e,
+			entp_info f,
+			comm_tczh_price g
+		WHERE
+		1=1 
+		AND c.id = b.ORDER_ID
+		AND a.comm_id = b.COMM_ID
+		AND d.audit_state = 1
+		AND c.order_state = 50
+		AND c.ORDER_TYPE = 90
+		AND a.activity_apply_id = d.id
+		AND e.id = a.activity_id
+		AND f.id = a.entp_id
+		AND g.id = a.comm_tczh_id
+			<isNotEmpty prepend=" and " property="map.title_like">e.TITLE like '%' #map.title_like# '%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.entp_name_like">f.ENTP_NAME like '%' #map.entp_name_like# '%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.comm_name_like">a.COMM_NAME like '%' #map.comm_name_like# '%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.st_start_date"><![CDATA[
+				b.ADD_DATE >= str_to_date(#map.st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.en_end_date"><![CDATA[
+		     	b.ADD_DATE <= str_to_date(concat(#map.en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+		<include refid="sf-activityApplyComm" />
+		GROUP BY
+			a.activity_apply_id,
+			a.entp_id,
+			a.comm_name) a 
+		where 1 = 1
+		<include refid="sf-activityApplyComm" />
+		
+	</select>
+	
+	<select id="selectActivityApplyCommOrderEntpList" resultMap="activityApplyCommOrderEntpResultForList" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		
+		SELECT
+			d.COMM_NAME,
+			sum(d.ACTUAL_MONEY) good_sum_price,
+			sum(d.GOOD_COUNT) good_count
+		FROM
+			
+		 activity_apply b 
+		LEFT JOIN order_info e ON e.activity_id=b.link_id
+		AND e.activity_id = b.link_id
+		AND e.ENTP_ID = b.entp_id
+		LEFT JOIN order_info_details d ON d.ORDER_ID=e.ID
+		
+		
+		WHERE
+			1 = 1
+		AND b.audit_state = 1
+		AND e.order_state = 50
+		AND e.ORDER_TYPE = 90
+		<isNotEmpty prepend=" and " property="map.comm_name_like">d.COMM_NAME like '%' #map.comm_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_start_date"><![CDATA[
+				d.ADD_DATE >= str_to_date(#map.st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.en_end_date"><![CDATA[
+		     	d.ADD_DATE <= str_to_date(concat(#map.en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="activity_id">b.link_ID = #activity_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">b.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		GROUP BY
+			 d.COMM_ID
+		ORDER BY
+			good_sum_price DESC
+		
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+	
+	<select id="selectActivityApplyCommOrderEntpCount" resultClass="int" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		select count(*) from 
+		(	SELECT
+			d.COMM_NAME,
+			sum(d.ACTUAL_MONEY) good_sum_price,
+			sum(d.GOOD_COUNT) good_count
+		FROM
+			
+		 activity_apply b 
+		LEFT JOIN order_info e ON e.activity_id=b.link_id
+		AND e.activity_id = b.link_id
+		AND e.ENTP_ID = b.entp_id
+		LEFT JOIN order_info_details d ON d.ORDER_ID=e.ID
+		
+		
+		WHERE
+			1 = 1
+		AND b.audit_state = 1
+		AND e.order_state = 50
+		AND e.ORDER_TYPE = 90
+		<isNotEmpty prepend=" and " property="map.comm_name_like">d.COMM_NAME like '%' #map.comm_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_start_date"><![CDATA[
+				d.ADD_DATE >= str_to_date(#map.st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.en_end_date"><![CDATA[
+		     	d.ADD_DATE <= str_to_date(concat(#map.en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="activity_id">b.link_ID = #activity_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">b.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		GROUP BY
+			 d.COMM_ID
+		ORDER BY
+			good_sum_price DESC
+		
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>) a 
+		WhERE 1= 1
+	</select>
+	
+	
+	<select id="selectActivityApplyCommEntpList" resultMap="activityApplyCommEntpResultForList" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		
+		
+		
+		
+		SELECT
+			b.link_id activity_id,
+			b.entp_id entp_id,
+			b.user_name,
+			b.ENTP_NAME,
+			(
+				SELECT
+					IFNULL(sum(f.ORDER_MONEY + f.MONEY_BI),0) good_sum_price
+				FROM
+					order_info f
+				WHERE
+					1 = 1
+					AND f.order_state = 50
+					and f.ORDER_TYPE = 90
+				<isNotEmpty prepend=" and " property="activity_id">f.activity_id = #activity_id:INTEGER#</isNotEmpty>
+				AND f.ENTP_ID = b.entp_id
+			) good_sum_price,
+			
+			count(DISTINCT e.ID) good_count
+		FROM
+			activity_apply b
+		LEFT JOIN order_info e ON e.activity_id = b.link_id AND b.entp_id=e.ENTP_ID
+		LEFT JOIN order_info_details d ON d.ORDER_ID = e.ID
+		WHERE
+			1 = 1 
+		
+		<isNotEmpty prepend=" and " property="map.entp_name_like">f.entp_name like '%' #map.entp_name_like# '%'</isNotEmpty>
+		AND b.audit_state = 1
+		AND e.order_state = 50
+		AND e.ORDER_TYPE = 90
+		<isNotEmpty prepend=" and " property="activity_id">b.link_id = #activity_id:INTEGER#</isNotEmpty>
+		
+		GROUP BY
+			b.entp_id
+		ORDER BY
+			good_sum_price DESC
+		
+	
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectActivityApplyCommOrderList" resultMap="activityApplyCommOrderResultForList" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		
+		
+		SELECT
+		a.id as activity_id,
+			a.title,
+			(
+				SELECT
+					sum(e.ORDER_MONEY + e.MONEY_BI) good_sum_price
+				FROM
+					order_info e
+				WHERE 
+				 e.order_state = 50
+				AND e.ORDER_TYPE = 90
+				 AND e.activity_id = a.id 
+				AND e.ENTP_ID = c.entp_id
+				<isNotEmpty prepend=" and " property="map.order_st_start_date"><![CDATA[
+				e.ADD_DATE >= str_to_date(#map.order_st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.order_en_end_date"><![CDATA[
+		     	e.ADD_DATE <= str_to_date(concat(#map.order_en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+			)  AS good_sum_price,
+			count(b.id) AS order_count,
+			(
+				SELECT
+					count(DISTINCT f.entp_id)
+				FROM
+					activity_apply f
+				WHERE
+					f.link_id = a.id
+			) AS entp_count,
+			count(DISTINCT d.ORDER_ID) AS good_count
+		FROM
+			activity a
+			LEFT JOIN activity_apply c ON c.link_id = a.id
+		LEFT JOIN order_info b ON b.activity_id = a.id AND b.entp_id=c.ENTP_ID
+		
+		LEFT JOIN order_info_details d ON d.ORDER_ID = b.id
+		WHERE 1=1 AND
+		b.id = d.ORDER_ID
+		AND b.order_state = 50
+		AND b.ORDER_TYPE = 90
+		<isNotEmpty prepend=" and " property="map.title_like">a.TITLE like '%' #map.title_like# '%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.st_start_date"><![CDATA[
+				d.ADD_DATE >= str_to_date(#map.st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.en_end_date"><![CDATA[
+		     	d.ADD_DATE <= str_to_date(concat(#map.en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="entp_id">d.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+			
+			<isNotEmpty prepend=" and " property="map.order_st_start_date"><![CDATA[
+				b.ADD_DATE >= str_to_date(#map.order_st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.order_en_end_date"><![CDATA[
+		     	b.ADD_DATE <= str_to_date(concat(#map.order_en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+		GROUP BY
+			a.id
+		
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectActivityApplyCommOrderCount" resultClass="int" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		select count(*) from 
+				(	SELECT
+		a.id as activity_id,
+			a.title,
+			(
+				SELECT
+					sum(e.ORDER_MONEY + e.MONEY_BI) good_sum_price
+				FROM
+					order_info e
+				WHERE 
+				 e.order_state = 50
+				AND e.ORDER_TYPE = 90
+				 AND e.activity_id = a.id 
+				AND e.ENTP_ID = c.entp_id
+				<isNotEmpty prepend=" and " property="map.order_st_start_date"><![CDATA[
+				e.ADD_DATE >= str_to_date(#map.order_st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.order_en_end_date"><![CDATA[
+		     	e.ADD_DATE <= str_to_date(concat(#map.order_en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+			)  AS good_sum_price,
+			count(b.id) AS order_count,
+			(
+				SELECT
+					count(DISTINCT f.entp_id)
+				FROM
+					activity_apply f
+				WHERE
+					f.link_id = a.id
+					
+			) AS entp_count,
+			count(DISTINCT d.ORDER_ID) AS good_count
+		FROM
+			activity a
+			LEFT JOIN activity_apply c ON c.link_id = a.id
+		LEFT JOIN order_info b ON b.activity_id = a.id AND b.entp_id=c.ENTP_ID
+		
+		LEFT JOIN order_info_details d ON d.ORDER_ID = b.id
+		WHERE 1=1 AND
+		b.id = d.ORDER_ID
+		AND b.order_state = 50
+		AND b.ORDER_TYPE = 90
+		<isNotEmpty prepend=" and " property="map.title_like">a.TITLE like '%' #map.title_like# '%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.st_start_date"><![CDATA[
+				d.ADD_DATE >= str_to_date(#map.st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.en_end_date"><![CDATA[
+		     	d.ADD_DATE <= str_to_date(concat(#map.en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="entp_id">d.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+			
+			<isNotEmpty prepend=" and " property="map.order_st_start_date"><![CDATA[
+				b.ADD_DATE >= str_to_date(#map.order_st_start_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.order_en_end_date"><![CDATA[
+		     	b.ADD_DATE <= str_to_date(concat(#map.order_en_end_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		     ]]></isNotEmpty>
+		GROUP BY
+			a.id) a 
+		where 1 = 1
+		
+	</select>
+	
+	
+	<select id="selectActivityApplyCommCount" resultClass="int" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		select count(*) from ACTIVITY_APPLY_COMM a where 1 = 1
+		<include refid="sf-activityApplyComm" />
+	</select>
+
+	<select id="selectActivityApplyCommPaginatedList" resultMap="activityApplyCommResult" parameterClass="activityApplyComm" cacheModel="oneDayCache">
+		select 
+			a.*,
+			b.comm_name,b.price_ref,b.cls_name,b.main_pic,b.is_aid
+		from 
+			ACTIVITY_APPLY_COMM a
+		left join comm_info b on b.id = a.comm_id
+		where 1 = 1
+		<include refid="sf-activityApplyComm" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertActivityApplyComm" parameterClass="activityApplyComm">
+		<![CDATA[insert into ACTIVITY_APPLY_COMM (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="activity_id">ACTIVITY_ID</isNotNull>	
+			<isNotNull prepend="," property="activity_apply_id">ACTIVITY_APPLY_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="activity_id">#activity_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="activity_apply_id">#activity_apply_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">#comm_tczh_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateActivityApplyComm" parameterClass="activityApplyComm">
+		update ACTIVITY_APPLY_COMM
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="activity_id">ACTIVITY_ID = #activity_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="activity_apply_id">ACTIVITY_APPLY_ID = #activity_apply_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME = #comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID = #comm_tczh_id:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteActivityApplyComm" parameterClass="activityApplyComm">
+		delete from ACTIVITY_APPLY_COMM where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.activity_id">activity_id = #map.activity_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.entp_id">entp_id = #map.entp_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

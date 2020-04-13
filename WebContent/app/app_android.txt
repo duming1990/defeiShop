@@ -1,0 +1,6 @@
+{
+"versionCode":"22",
+"versionName":"1.2.3",
+"downloadUrl":"http://www.99renyi.com/app/renyi_123_jiagu_sign.apk",
+"updateLog":"仁义联盟商城 for Android v1.2.3 \n更新日志：\n1、增加线下店铺功能；\n2、优化首页的布局；\n3、优化会员中心功能；\n4、系统bug修复"
+}

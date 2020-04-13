@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="VILLAGE_INFO">
+
+	<typeAlias alias="villageInfo" type="com.ebiz.webapp.domain.VillageInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertVillageInfo" />
+		<flushOnExecute statement="updateVillageInfo" />
+		<flushOnExecute statement="deleteVillageInfo" />
+	</cacheModel>
+
+	<resultMap id="villageInfoResultForList" class="villageInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="VILLAGE_NAME" property="village_name" jdbcType="BIGINT" />
+		<result column="P_INDEX" property="p_index" jdbcType="BIGINT" />
+		<result column="VILLAGE_MOBILE" property="village_mobile" jdbcType="VARCHAR" />
+		<result column="OWNER_NAME" property="owner_name" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="IS_REN_ZHENG" property="is_ren_zheng" jdbcType="INTEGER" />
+		<result column="IS_VIRTUAL" property="is_virtual" jdbcType="INTEGER" />
+		<result column="SERVICE_ONLINE_DATE" property="service_online_date" jdbcType="TIMESTAMP" />
+		<result column="SERVICE_OPERATION_DATE" property="service_operation_date" jdbcType="TIMESTAMP" />
+		<result column="SERVICE_OPERATION_DATE_END" property="service_operation_date_end" jdbcType="TIMESTAMP" />
+		<result column="SHOP_NAME" property="shop_name" jdbcType="VARCHAR" />
+		<result column="SHOP_LICENCE" property="shop_licence" jdbcType="VARCHAR" />
+		<result column="SHOP_LICENCE_IMG" property="shop_licence_img" jdbcType="VARCHAR" />
+		<result column="SHOP_FAITH_CODE" property="shop_faith_code" jdbcType="VARCHAR" />
+		<result column="FOOD_LICENSE" property="food_license" jdbcType="VARCHAR" />
+		<result column="FOOD_LICENCE_IMG" property="food_licence_img" jdbcType="VARCHAR" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />
+		<result column="AUDIT_USER_ID" property="audit_user_id" jdbcType="INTEGER" />
+		<result column="AUDIT_DATE" property="audit_date" jdbcType="TIMESTAMP" />
+		<result column="AUDIT_DESC" property="audit_desc" jdbcType="VARCHAR" />
+		<result column="POSITION_LATLNG" property="position_latlng" jdbcType="VARCHAR" />
+		<result column="VILLAGE_LOGO" property="village_logo" jdbcType="VARCHAR" />
+		<result column="VILLAGE_BANNER" property="village_banner" jdbcType="VARCHAR" />
+		<result column="VILLAGE_QRCODE" property="village_qrcode" jdbcType="VARCHAR" />
+		<result column="SEX" property="sex" jdbcType="INTEGER" />
+		<result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="ID_CARD" property="id_card" jdbcType="VARCHAR" />
+		<result column="APPID_QQ" property="appid_qq" jdbcType="VARCHAR" />
+		<result column="IMG_ID_CARD_ZM" property="img_id_card_zm" jdbcType="VARCHAR" />
+		<result column="IMG_ID_CARD_FM" property="img_id_card_fm" jdbcType="VARCHAR" />
+		<result column="VILLAGE_ADDRESS" property="village_address" jdbcType="VARCHAR" />
+		<result column="COUNT" property="count" jdbcType="INTEGER" />
+		<result column="VILLAGE_CONDITION" property="village_condition" jdbcType="LONGVARCHAR" />
+		<result column="VILLAGE_QRCODE_PATH" property="village_qrcode_path" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="villageInfoResult" class="villageInfo" extends="villageInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-villageInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_name">a.VILLAGE_NAME = #village_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX = #p_index:BIGINT#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_mobile">a.VILLAGE_MOBILE = #village_mobile:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="owner_name">a.OWNER_NAME = #owner_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_ren_zheng">a.IS_REN_ZHENG = #is_ren_zheng:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_virtual">a.IS_VIRTUAL = #is_virtual:INTEGER#</isNotEmpty>
+		<isEmpty prepend="  " property="map.is_virtual_no_def">
+			<isEmpty prepend=" and " property="is_virtual">a.IS_VIRTUAL = 0</isEmpty>
+		</isEmpty>
+		<isNotEmpty prepend=" and " property="service_online_date">a.SERVICE_ONLINE_DATE = #service_online_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="service_operation_date">a.SERVICE_OPERATION_DATE = #service_operation_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="service_operation_date_end">a.SERVICE_OPERATION_DATE_END = #service_operation_date_end:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="shop_name">a.SHOP_NAME = #shop_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="shop_licence">a.SHOP_LICENCE = #shop_licence:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="shop_licence_img">a.SHOP_LICENCE_IMG = #shop_licence_img:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="shop_faith_code">a.SHOP_FAITH_CODE = #shop_faith_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="food_license">a.FOOD_LICENSE = #food_license:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="food_licence_img">a.FOOD_LICENCE_IMG = #food_licence_img:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_id">a.AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_date">a.AUDIT_DATE = #audit_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_desc">a.AUDIT_DESC = #audit_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="position_latlng">a.POSITION_LATLNG = #position_latlng:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_logo">a.VILLAGE_LOGO = #village_logo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_banner">a.VILLAGE_BANNER = #village_banner:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_qrcode">a.VILLAGE_QRCODE = #village_qrcode:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sex">a.SEX = #sex:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="birthday">a.BIRTHDAY = #birthday:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="email">a.EMAIL = #email:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="id_card">a.ID_CARD = #id_card:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="appid_qq">a.APPID_QQ = #appid_qq:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="img_id_card_zm">a.IMG_ID_CARD_ZM = #img_id_card_zm:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="img_id_card_fm">a.IMG_ID_CARD_FM = #img_id_card_fm:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_address">a.VILLAGE_ADDRESS = #village_address:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="count">a.COUNT = #count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_condition">a.VILLAGE_CONDITION = #village_condition:LONGVARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_qrcode_path">a.VILLAGE_QRCODE_PATH = #village_qrcode_path:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.country">a.P_INDEX like #map.country# '%'</isNotEmpty>
+	
+		<isNotEmpty prepend=" and " property="map.st_audit_date"><![CDATA[
+			a.AUDIT_DATE >= str_to_date(#map.st_audit_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_audit_date"><![CDATA[
+	     	a.AUDIT_DATE <= str_to_date(concat(#map.en_audit_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	     <isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.ADD_DATE >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+	     	a.ADD_DATE <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	     
+	     <isNotEmpty prepend=" and " property="map.village_name_like">a.village_name like '%' #map.village_name_like:VARCHAR# '%'</isNotEmpty>
+	     <isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like #map.p_index_like:VARCHAR# '%'</isNotEmpty>
+	</sql>
+
+	<select id="selectVillageInfo" resultMap="villageInfoResult" parameterClass="villageInfo" cacheModel="oneDayCache">
+		select * from VILLAGE_INFO a where 1 = 1
+		<include refid="sf-villageInfo" />
+	</select>
+
+	<select id="selectVillageInfoList" resultMap="villageInfoResultForList" parameterClass="villageInfo" cacheModel="oneDayCache">
+		select * from VILLAGE_INFO a where 1 = 1
+		<include refid="sf-villageInfo" />
+		
+		<isNotEmpty prepend=" " property="map.order_by_id_desc">order by a.ID desc</isNotEmpty>
+		
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectVillageInfoCount" resultClass="int" parameterClass="villageInfo" cacheModel="oneDayCache">
+		select count(*) from VILLAGE_INFO a where 1 = 1
+		<include refid="sf-villageInfo" />
+	</select>
+
+	<select id="selectVillageInfoPaginatedList" resultMap="villageInfoResult" parameterClass="villageInfo" cacheModel="oneDayCache">
+		select * from VILLAGE_INFO a where 1 = 1
+		<include refid="sf-villageInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertVillageInfo" parameterClass="villageInfo">
+		<![CDATA[insert into VILLAGE_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="village_name">VILLAGE_NAME</isNotNull>	
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>	
+			<isNotNull prepend="," property="village_mobile">VILLAGE_MOBILE</isNotNull>	
+			<isNotNull prepend="," property="owner_name">OWNER_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="is_ren_zheng">IS_REN_ZHENG</isNotNull>	
+			<isNotNull prepend="," property="is_virtual">IS_VIRTUAL</isNotNull>	
+			<isNotNull prepend="," property="service_online_date">SERVICE_ONLINE_DATE</isNotNull>	
+			<isNotNull prepend="," property="service_operation_date">SERVICE_OPERATION_DATE</isNotNull>	
+			<isNotNull prepend="," property="service_operation_date_end">SERVICE_OPERATION_DATE_END</isNotNull>	
+			<isNotNull prepend="," property="shop_name">SHOP_NAME</isNotNull>	
+			<isNotNull prepend="," property="shop_licence">SHOP_LICENCE</isNotNull>	
+			<isNotNull prepend="," property="shop_licence_img">SHOP_LICENCE_IMG</isNotNull>	
+			<isNotNull prepend="," property="shop_faith_code">SHOP_FAITH_CODE</isNotNull>	
+			<isNotNull prepend="," property="food_license">FOOD_LICENSE</isNotNull>
+			<isNotNull prepend="," property="food_licence_img">FOOD_LICENCE_IMG</isNotNull>		
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>	
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE</isNotNull>	
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC</isNotNull>	
+			<isNotNull prepend="," property="position_latlng">POSITION_LATLNG</isNotNull>
+			<isNotNull prepend="," property="village_logo">VILLAGE_LOGO</isNotNull>
+			<isNotNull prepend="," property="village_banner">VILLAGE_BANNER</isNotNull>
+			<isNotNull prepend="," property="village_qrcode">VILLAGE_QRCODE</isNotNull>
+			<isNotNull prepend="," property="sex">SEX</isNotNull>	
+			<isNotNull prepend="," property="birthday">BIRTHDAY</isNotNull>	
+			<isNotNull prepend="," property="email">EMAIL</isNotNull>	
+			<isNotNull prepend="," property="id_card">ID_CARD</isNotNull>	
+			<isNotNull prepend="," property="appid_qq">APPID_QQ</isNotNull>	
+			<isNotNull prepend="," property="img_id_card_zm">IMG_ID_CARD_ZM</isNotNull>	
+			<isNotNull prepend="," property="img_id_card_fm">IMG_ID_CARD_FM</isNotNull>
+			<isNotNull prepend="," property="village_address">VILLAGE_ADDRESS</isNotNull>
+			<isNotNull prepend="," property="count">COUNT</isNotNull>
+			<isNotNull prepend="," property="village_condition">VILLAGE_CONDITION</isNotNull>		
+			<isNotNull prepend="," property="village_qrcode_path">VILLAGE_QRCODE_PATH</isNotNull>		
+			
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_name">#village_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="village_mobile">#village_mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="owner_name">#owner_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+	
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_ren_zheng">#is_ren_zheng:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_virtual">#is_virtual:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="service_online_date">#service_online_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="service_operation_date">#service_operation_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="service_operation_date_end">#service_operation_date_end:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="shop_name">#shop_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="shop_licence">#shop_licence:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="shop_licence_img">#shop_licence_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="shop_faith_code">#shop_faith_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="food_license">#food_license:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="food_licence_img">#food_licence_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">#audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">#audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="position_latlng">#position_latlng:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_logo">#village_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_banner">#village_banner:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_qrcode">#village_qrcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="sex">#sex:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="birthday">#birthday:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="email">#email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="id_card">#id_card:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_qq">#appid_qq:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_zm">#img_id_card_zm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_fm">#img_id_card_fm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_address">#village_address:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="count">#count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_condition">#content:LONGVARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_qrcode_path">#village_qrcode_path:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateVillageInfo" parameterClass="villageInfo">
+		update VILLAGE_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_name">VILLAGE_NAME = #village_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="village_mobile">VILLAGE_MOBILE = #village_mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="owner_name">OWNER_NAME = #owner_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_ren_zheng">IS_REN_ZHENG = #is_ren_zheng:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_virtual">IS_VIRTUAL = #is_virtual:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="service_online_date">SERVICE_ONLINE_DATE = #service_online_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="service_operation_date">SERVICE_OPERATION_DATE = #service_operation_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="service_operation_date_end">SERVICE_OPERATION_DATE_END = #service_operation_date_end:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="shop_name">SHOP_NAME = #shop_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="shop_licence">SHOP_LICENCE = #shop_licence:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="shop_licence_img">SHOP_LICENCE_IMG = #shop_licence_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="shop_faith_code">SHOP_FAITH_CODE = #shop_faith_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="food_license">FOOD_LICENSE = #food_license:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="food_licence_img">FOOD_LICENCE_IMG = #food_licence_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE = #audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC = #audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="position_latlng">POSITION_LATLNG = #position_latlng:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_logo">VILLAGE_LOGO = #village_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_banner">VILLAGE_BANNER = #village_banner:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_qrcode">VILLAGE_QRCODE = #village_qrcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="sex">SEX = #sex:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="birthday">BIRTHDAY = #birthday:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="email">EMAIL = #email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="id_card">ID_CARD = #id_card:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_qq">APPID_QQ = #appid_qq:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_zm">IMG_ID_CARD_ZM = #img_id_card_zm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_fm">IMG_ID_CARD_FM = #img_id_card_fm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_address">VILLAGE_ADDRESS = #village_address:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="count">COUNT = #count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_condition">VILLAGE_CONDITION = #village_condition:LONGVARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_qrcode_path">VILLAGE_QRCODE_PATH = #village_qrcode_path:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="map.add_count">COUNT = COUNT + #map.add_count#</isNotNull>
+			<isNotNull prepend="," property="map.sub_count">COUNT = COUNT - #map.add_count#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteVillageInfo" parameterClass="villageInfo">
+		delete from VILLAGE_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

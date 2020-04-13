@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+body,html{height:100%;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,input{ margin:0; padding:0; list-style:none;}
+img,.img a{ border:none; vertical-align:top;}
+a{ text-decoration:none;}
+body{background-color:#f7f7f7;}
+ul{ list-style:none;}
+/*********左边*******/
+.allleft{ float: left; width:80%;overflow: hidden;}
+.topbar{  width:80%; background-color:#30446d; height:50px; color:#FFF; font-family:SimHei; font-weight:bold; font-size:24px; line-height:48px; position:fixed;}
+.topbar p{ text-align:center;  background-color:#30446d; height:58px; color:#FFF; font-family:SimHei; font-size:28px; line-height:57px;}
+.topbar ul{ background-color:#f7f7f7; height:48px; color:#FFF; font-family:SimHei; font-size:22px; line-height:48px; box-shadow:#e6e6e6 0 6px 10px; overflow:hidden; }
+.topbar li{ float:left; color:#30446d; padding:0;}
+.topbar li span{padding:0 0 0 40px; display:inline-block}
+.topbar img{margin:16px 10px 0 0;}
+.tabulation{font-size:16px; margin-top:105px; height:680px; overflow-y:scroll; }
+.tabulation table{ width:100%;}
+.tabulation td{padding:20px 0 15px 0; border-bottom:#CCC dotted 1px;}
+.tabulation td span{padding:0 0 0 60px;color:#30446d; display: inline-block;}
+/*********右边*******/
+.allright{ width:20%; background-color:#fcefee; text-align:center; height:100%; border-left:2px solid #30446d;right:0; position:absolute}
+.rq_Code h1{ margin-top:85px; }
+.rq_Code img{ margin:10px 0 10px 0;}
+.ad{ margin-top:60px;}
+.cent-box{ height:260px; border:2px solid #fcefee; text-align:center;overflow:hidden;}
+.foot-box{ height:198px; border:2px solid #fcefee; overflow:hidden;}
+.cent-box p,.foot-box p{margin-top:15px; width:50%; max-height:240px; text-align:center; float:left; overflow:hidden;}
+.cent-box p img,.foot-box p img{ width:88%;}
+
+
+/**************轮播图****************/
+.hadotupan{ width:90%; margin:0 auto 20px auto; overflow:hidden;border-radius:14px;}
+.mui-slider .mui-slider-group {
+	font-size: 0;
+	position: relative;
+	-webkit-transition: all 0s linear;
+	transition: all 0s linear;
+	white-space: nowrap
+}
+.mui-slider .mui-slider-group img{ width:100%;}
+
+.mui-slider .mui-slider-group .mui-slider-item {
+	font-size: 14px;
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	vertical-align: top;
+	white-space: normal
+}
+
+.mui-slider .mui-slider-group .mui-slider-item>a:not(.mui-control-item) {
+	line-height: 0;
+	position: relative;
+	display: block
+}
+
+
+
+.slider-nav-cc { width:30px; height:30px; background:#F00; overflow:hidden; zoom:1;}

@@ -1,0 +1,103 @@
+.index {
+    width: 100%;
+}
+
+.swiper-container {
+    width: 100%;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    width: 20px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-size: 10px auto;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.index .div1 {
+    width: 100%;
+}
+
+.index img {
+    width: 100%;
+    height: auto;
+}
+
+.index .div2 {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+.index .div2 .div2_img1 {
+    width: 33.5%;
+}
+
+.index .div2 .div2_img2 {
+    width: 66.5%;
+}
+
+.index .div3 {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.index .div31 {
+/*     background-color: #faf6ed; */
+}
+
+.index .div32 {
+    background-color: #fdf3f4;
+}
+
+.index .div3 img {
+/*     width: 33.333% !important; */
+/*     height: 100%; */
+    border-right: 1px solid #ddd;
+}
+
+.index .div3 img:last-child {
+    border-right: none;
+}
+
+.index .div4 {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+.index .div41 {
+    background-color: #f0f9fe;
+}
+
+.index .div41 .div4_img1 {
+    border-right: 1px solid #ddd;
+}
+
+.index .div42 .div4_img2 {
+    border-right: 1px solid #ddd;
+}
+
+.index .div42 {
+    background-color: #eaeaec;
+}
+
+.index .div4 .div4_img1 {
+    width: 66.5%;
+}
+
+.index .div4 .div4_img2 {
+    width: 33.5%;
+}

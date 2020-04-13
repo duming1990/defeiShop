@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="RW_HB_YHQ">
+
+	<typeAlias alias="rwHbYhq" type="com.ebiz.webapp.domain.RwHbYhq" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertRwHbYhq" />
+		<flushOnExecute statement="updateRwHbYhq" />
+		<flushOnExecute statement="deleteRwHbYhq" />
+	</cacheModel>
+
+	<resultMap id="rwHbYhqResultForList" class="rwHbYhq">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="HB_ID" property="hb_id" jdbcType="INTEGER" />
+		<result column="YHQ_ID" property="yhq_id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_UID" property="add_uid" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="rwHbYhqResult" class="rwHbYhq" extends="rwHbYhqResultForList">
+	</resultMap>
+
+	<sql id="sf-rwHbYhq">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hb_id">a.HB_ID = #hb_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_id">a.YHQ_ID = #yhq_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_uid">a.ADD_UID = #add_uid:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectRwHbYhq" resultMap="rwHbYhqResult" parameterClass="rwHbYhq" cacheModel="oneDayCache">
+		select * from RW_HB_YHQ a where 1 = 1
+		<include refid="sf-rwHbYhq" />
+	</select>
+
+	<select id="selectRwHbYhqList" resultMap="rwHbYhqResultForList" parameterClass="rwHbYhq" cacheModel="oneDayCache">
+		select * from RW_HB_YHQ a where 1 = 1
+		<include refid="sf-rwHbYhq" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectRwHbYhqCount" resultClass="int" parameterClass="rwHbYhq" cacheModel="oneDayCache">
+		select count(*) from RW_HB_YHQ a where 1 = 1
+		<include refid="sf-rwHbYhq" />
+	</select>
+
+	<select id="selectRwHbYhqPaginatedList" resultMap="rwHbYhqResult" parameterClass="rwHbYhq" cacheModel="oneDayCache">
+		select * from RW_HB_YHQ a where 1 = 1
+		<include refid="sf-rwHbYhq" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertRwHbYhq" parameterClass="rwHbYhq">
+		<![CDATA[insert into RW_HB_YHQ (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="hb_id">HB_ID</isNotNull>	
+			<isNotNull prepend="," property="yhq_id">YHQ_ID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_uid">ADD_UID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_id">#hb_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_id">#yhq_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_uid">#add_uid:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateRwHbYhq" parameterClass="rwHbYhq">
+		update RW_HB_YHQ
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hb_id">HB_ID = #hb_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_id">YHQ_ID = #yhq_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_uid">ADD_UID = #add_uid:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteRwHbYhq" parameterClass="rwHbYhq">
+		delete from RW_HB_YHQ where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

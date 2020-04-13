@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<!-- ======================================== Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="lazyForm" type="org.apache.struts.validator.LazyValidatorForm" />
+
+		<form-bean name="fullLazyForm" type="org.apache.struts.validator.LazyValidatorForm">
+			<form-property name="imageField" type="org.apache.struts.util.ImageButtonBean" />
+			<form-property name="pager" type="com.ebiz.ssi.web.struts.bean.Pager" />
+			<form-property name="pks" type="java.lang.String[]" />
+		</form-bean>
+	</form-beans>
+
+	<global-forwards>
+		<forward name="index" path="index.do" redirect="true" />
+	</global-forwards>
+
+	<action-mappings>
+		<action path="/index" attribute="af" name="lazyForm" type="com.ebiz.webapp.web.struts.IndexAction" scope="request" validate="false"
+			parameter="method">
+			<forward name="success" path="/index.jsp" />
+		</action>
+		<action path="/Index" attribute="af" name="lazyForm" type="com.ebiz.webapp.web.struts.IndexAction" scope="request" validate="false"
+			parameter="method">
+			<forward name="success" path="/index.jsp" />
+		</action>
+		
+		<action path="/service" attribute="af" name="lazyForm" type="com.ebiz.webapp.web.struts.service.ServiceAction" scope="request" validate="false"
+			parameter="method">
+			<forward name="success" path="/index.jsp" />
+		</action>
+
+		<action path="/*" attribute="af" name="fullLazyForm" type="com.ebiz.webapp.web.struts.{1}Action" scope="request"
+			validate="false" parameter="method">
+			<forward name="input" path="/index/{1}/form.jsp" />
+			<forward name="list" path="/index/{1}/list.jsp" />
+			<forward name="view" path="/index/{1}/view.jsp" />
+		</action>
+		<action path="/indexEntp/*" attribute="af" name="fullLazyForm" type="com.ebiz.webapp.web.struts.indexEntp.{1}Action" scope="request"
+			validate="false" parameter="method">
+			<forward name="input" path="/IndexEntp/{1}/form.jsp" />
+			<forward name="list" path="/IndexEntp/{1}/list.jsp" />
+			<forward name="view" path="/IndexEntp/{1}/view.jsp" />
+<!-- 			<forward name="indexEntp" path="/IndexEntp/{1}/indexEntp.jsp" /> -->
+<!-- 			<forward name="_header" path="/IndexEntp/{1}/_header.jsp" /> -->
+<!-- 			<forward name="_footer" path="/IndexEntp/{1}/_footer.jsp" /> -->
+		</action>
+	</action-mappings>
+
+	<!-- =================================== Message Resources Definitions -->
+	<message-resources parameter="i18n/messages" />
+</struts-config>

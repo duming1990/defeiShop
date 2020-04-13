@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="SHORT_MESSAGE">
+
+	<typeAlias alias="shortMessage" type="com.ebiz.webapp.domain.ShortMessage" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertShortMessage" />
+		<flushOnExecute statement="updateShortMessage" />
+		<flushOnExecute statement="deleteShortMessage" />
+	</cacheModel>
+
+	<resultMap id="shortMessageResultForList" class="shortMessage">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+		<result column="IS_ALL" property="is_all" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		
+		<result column="MESSAGE1" property="message1" jdbcType="VARCHAR" />
+		<result column="MESSAGE2" property="message2" jdbcType="VARCHAR" />
+		<result column="MESSAGE3" property="message3" jdbcType="VARCHAR" />
+		<result column="MESSAGE4" property="message4" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="shortMessageResult" class="shortMessage" extends="shortMessageResultForList">
+	</resultMap>
+
+	<sql id="sf-shortMessage">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="title">a.TITLE = #title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="message">a.MESSAGE = #message:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_all">a.IS_ALL = #is_all:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="message1">a.MESSAGE1 = #message1:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="message2">a.MESSAGE2 = #message2:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="message3">a.MESSAGE3 = #message3:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="message4">a.MESSAGE4 = #message4:VARCHAR#</isNotEmpty>
+		
+		
+		<isNotEmpty prepend=" and " property="map.st_date"><![CDATA[a.ADD_DATE >= str_to_date(concat(#map.st_date:VARCHAR#,'00:00:00'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_date"><![CDATA[a.ADD_DATE <= str_to_date(concat(#map.en_date:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.title_like">a.TITLE like '%' #map.title_like:VARCHAR# '%'</isNotEmpty>
+		
+	</sql>
+
+	<select id="selectShortMessage" resultMap="shortMessageResult" parameterClass="shortMessage" cacheModel="oneDayCache">
+		select * from SHORT_MESSAGE a where 1 = 1
+		<include refid="sf-shortMessage" />
+	</select>
+
+	<select id="selectShortMessageList" resultMap="shortMessageResultForList" parameterClass="shortMessage" cacheModel="oneDayCache">
+		select * from SHORT_MESSAGE a where 1 = 1
+		<include refid="sf-shortMessage" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectShortMessageCount" resultClass="int" parameterClass="shortMessage" cacheModel="oneDayCache">
+		select count(*) from SHORT_MESSAGE a where 1 = 1
+		<include refid="sf-shortMessage" />
+	</select>
+
+	<select id="selectShortMessagePaginatedList" resultMap="shortMessageResult" parameterClass="shortMessage" cacheModel="oneDayCache">
+		select * from SHORT_MESSAGE a where 1 = 1
+		<include refid="sf-shortMessage" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertShortMessage" parameterClass="shortMessage">
+		<![CDATA[insert into SHORT_MESSAGE (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="title">TITLE</isNotNull>	
+			<isNotNull prepend="," property="message">MESSAGE</isNotNull>	
+			<isNotNull prepend="," property="is_all">IS_ALL</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			
+			<isNotNull prepend="," property="message1">MESSAGE1</isNotNull>
+			<isNotNull prepend="," property="message2">MESSAGE2</isNotNull>
+			<isNotNull prepend="," property="message3">MESSAGE3</isNotNull>
+			<isNotNull prepend="," property="message4">MESSAGE4</isNotNull>
+			
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title">#title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="message">#message:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_all">#is_all:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			
+			<isNotNull prepend="," property="message1">#message1:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="message2">#message2:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="message3">#message3:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="message4">#message4:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateShortMessage" parameterClass="shortMessage">
+		update SHORT_MESSAGE
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="title">TITLE = #title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="message">MESSAGE = #message:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_all">IS_ALL = #is_all:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			
+			<isNotNull prepend="," property="message1">MESSAGE1 = #message1:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="message2">MESSAGE2 = #message2:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="message3">MESSAGE3 = #message3:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="message4">MESSAGE4 = #message4:VARCHAR#</isNotNull>
+			
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteShortMessage" parameterClass="shortMessage">
+		delete from SHORT_MESSAGE where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

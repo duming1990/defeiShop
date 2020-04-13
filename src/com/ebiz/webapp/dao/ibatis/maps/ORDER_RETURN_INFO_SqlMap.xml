@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="ORDER_RETURN_INFO">
+
+	<typeAlias alias="orderReturnInfo" type="com.ebiz.webapp.domain.OrderReturnInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertOrderReturnInfo" />
+		<flushOnExecute statement="updateOrderReturnInfo" />
+		<flushOnExecute statement="deleteOrderReturnInfo" />
+	</cacheModel>
+
+	<resultMap id="orderReturnInfoResultForList" class="orderReturnInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ORDER_ID" property="order_id" jdbcType="INTEGER" />
+		<result column="ORDER_STATE" property="order_state" jdbcType="INTEGER" />
+		<result column="RETURN_DESC" property="return_desc" jdbcType="VARCHAR" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />
+		<result column="AUDIT_USER_ID" property="audit_user_id" jdbcType="INTEGER" />
+		<result column="AUDIT_DATE" property="audit_date" jdbcType="TIMESTAMP" />
+		<result column="USER_ID" property="user_id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="IS_CONFIRM" property="is_confirm" jdbcType="INTEGER" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="RETURN_TYPE" property="return_type" jdbcType="INTEGER" />
+		<result column="EXPECT_RETURN_WAY" property="expect_return_way" jdbcType="INTEGER" />
+		<result column="RETURN_WAY" property="return_way" jdbcType="INTEGER" />
+		<result column="FH_FEE" property="fh_fee" jdbcType="INTEGER" />
+		<result column="TH_WL_COMPANY" property="th_wl_company" jdbcType="VARCHAR" />
+		<result column="TH_WL_NO" property="th_wl_no" jdbcType="VARCHAR" />
+		<result column="TH_WL_FEE" property="th_wl_fee" jdbcType="DECIMAL" />
+		<result column="ORDER_TYPE" property="order_type" jdbcType="INTEGER" />
+		<result column="ORDER_DETAIL_ID" property="order_detail_id" jdbcType="INTEGER" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="PRICE" property="price" jdbcType="DECIMAL" />
+		<result column="NUM" property="num" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="TK_MONEY" property="tk_money" jdbcType="DECIMAL" />
+		<result column="TK_FEE" property="tk_fee" jdbcType="DECIMAL" />
+		<result column="TK_STATUS" property="tk_status" jdbcType="INTEGER" />
+		<result column="RETURN_NO" property="return_no" jdbcType="VARCHAR" />
+		<result column="RETURN_ADDR" property="return_addr" jdbcType="VARCHAR" />
+		<result column="RETURN_LINK_MAN" property="return_link_man" jdbcType="VARCHAR" />
+		<result column="RETURN_TEL" property="return_tel" jdbcType="VARCHAR" />
+		<result column="HH_WL_NO" property="hh_wl_no" jdbcType="VARCHAR" />
+		<result column="HH_WL_COMPANY" property="hh_wl_company" jdbcType="VARCHAR" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="AUDIT_NOTE" property="audit_note" jdbcType="VARCHAR" />
+		<result column="RETURN_MONEY_TYPE" property="return_money_type" jdbcType="INTEGER" />
+		<result column="RETURN_REAL_MONEY" property="return_real_money" jdbcType="DECIMAL" />
+		<result column="RETURN_BI_DIANZI" property="return_bi_dianzi" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="orderReturnInfoResult" class="orderReturnInfo" extends="orderReturnInfoResultForList">
+		<result column="TRADE_INDEX" property="map.trade_index" jdbcType="VARCHAR"></result>
+		<result column="ORDER_TYPE" property="map.order_type" jdbcType="INTEGER"></result>
+	</resultMap>
+	
+	<resultMap id="refundResult" class="orderReturnInfo">
+		<result column="sum_price" property="map.sum_price" jdbcType="DECIMAL"></result>
+		<result column="count_order_id" property="map.count_order_id" jdbcType="INTEGER"></result>
+		<result column="order_id" property="map.order_id" jdbcType="INTEGER"></result>
+	</resultMap>
+	
+
+	<sql id="sf-orderReturnInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_id">a.ORDER_ID = #order_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_state">a.ORDER_STATE = #order_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_desc">a.RETURN_DESC = #return_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_id">a.AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_date">a.AUDIT_DATE = #audit_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">a.USER_ID = #user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_name">a.USER_NAME = #user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_confirm">a.IS_CONFIRM = #is_confirm:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="memo">a.MEMO = #memo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_type">a.RETURN_TYPE = #return_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="expect_return_way">a.EXPECT_RETURN_WAY = #expect_return_way:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_way">a.RETURN_WAY = #return_way:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fh_fee">a.FH_FEE = #fh_fee:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="th_wl_company">a.TH_WL_COMPANY = #th_wl_company:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="th_wl_no">a.TH_WL_NO = #th_wl_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="th_wl_fee">a.TH_WL_FEE = #th_wl_fee:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_type">a.ORDER_TYPE = #order_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_detail_id">a.ORDER_DETAIL_ID = #order_detail_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price">a.PRICE = #price:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="num">a.NUM = #num:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME = #comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tk_money">a.TK_MONEY = #tk_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tk_fee">a.TK_FEE = #tk_fee:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tk_status">a.TK_STATUS = #tk_status:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_no">a.RETURN_NO = #return_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_addr">a.RETURN_ADDR = #return_addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_link_man">a.RETURN_LINK_MAN = #return_link_man:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_tel">a.RETURN_TEL = #return_tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hh_wl_no">a.HH_WL_NO = #hh_wl_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hh_wl_company">a.HH_WL_COMPANY = #hh_wl_company:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_note">a.AUDIT_NOTE = #audit_note:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_money_type">a.return_money_type = #return_money_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_real_money">a.return_real_money = #return_real_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_bi_dianzi">a.return_bi_dianzi = #return_bi_dianzi:DECIMAL#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.comm_name_like">a.COMM_NAME like '%' #map.comm_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_name_like">a.USER_NAME like '%' #map.user_name_like# '%'</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.trade_index">b.TRADE_INDEX like '%' #map.trade_index# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.return_no">a.RETURN_NO like '%' #map.return_no# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.expect_return_way_in">a.EXPECT_RETURN_WAY in ($map.expect_return_way_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type">a.ORDER_TYPE = #order_type:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			a.add_date <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_audit_date"><![CDATA[
+			a.audit_date >= str_to_date(#map.st_audit_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_audit_date"><![CDATA[
+			a.audit_date <= str_to_date(concat(#map.en_audit_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+	</sql>
+
+	<select id="selectOrderReturnInfo" resultMap="orderReturnInfoResult" parameterClass="orderReturnInfo" cacheModel="oneDayCache">
+		select b.trade_index,b.order_type,a.* from ORDER_RETURN_INFO a LEFT JOIN order_info b on b.ID = a.order_id where 1 = 1
+		<include refid="sf-orderReturnInfo" />
+	</select>
+
+	<select id="selectOrderReturnInfoList" resultMap="orderReturnInfoResult" parameterClass="orderReturnInfo" cacheModel="oneDayCache">
+		select b.trade_index,b.order_type,a.* from ORDER_RETURN_INFO a LEFT JOIN order_info b on b.ID = a.order_id where 1 = 1
+		<include refid="sf-orderReturnInfo" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectOrderReturnInfoCount" resultClass="int" parameterClass="orderReturnInfo" cacheModel="oneDayCache">
+		select count(*) from ORDER_RETURN_INFO a LEFT JOIN order_info b on b.ID = a.order_id where 1 = 1
+		<include refid="sf-orderReturnInfo" />
+	</select>
+
+	<select id="selectOrderReturnInfoPaginatedList" resultMap="orderReturnInfoResult" parameterClass="orderReturnInfo" cacheModel="oneDayCache">
+		select b.trade_index,b.order_type,a.* from ORDER_RETURN_INFO a LEFT JOIN order_info b on b.ID = a.order_id where 1 = 1
+		<include refid="sf-orderReturnInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectOrderReturnInfoRefund" resultMap="refundResult" parameterClass="orderReturnInfo" cacheModel="oneDayCache">
+		select sum(price) sum_price,count(order_id) count_order_id,order_id
+		from order_return_info a
+		where 1 = 1
+		<include refid="sf-orderReturnInfo" />
+		GROUP BY a.order_id
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertOrderReturnInfo" parameterClass="orderReturnInfo">
+		<![CDATA[insert into ORDER_RETURN_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="order_id">ORDER_ID</isNotNull>	
+			<isNotNull prepend="," property="order_state">ORDER_STATE</isNotNull>	
+			<isNotNull prepend="," property="return_desc">RETURN_DESC</isNotNull>	
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>	
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE</isNotNull>	
+			<isNotNull prepend="," property="user_id">USER_ID</isNotNull>	
+			<isNotNull prepend="," property="user_name">USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_confirm">IS_CONFIRM</isNotNull>	
+			<isNotNull prepend="," property="memo">MEMO</isNotNull>	
+			<isNotNull prepend="," property="return_type">RETURN_TYPE</isNotNull>	
+			<isNotNull prepend="," property="expect_return_way">EXPECT_RETURN_WAY</isNotNull>	
+			<isNotNull prepend="," property="return_way">RETURN_WAY</isNotNull>	
+			<isNotNull prepend="," property="fh_fee">FH_FEE</isNotNull>	
+			<isNotNull prepend="," property="th_wl_company">TH_WL_COMPANY</isNotNull>	
+			<isNotNull prepend="," property="th_wl_no">TH_WL_NO</isNotNull>	
+			<isNotNull prepend="," property="th_wl_fee">TH_WL_FEE</isNotNull>	
+			<isNotNull prepend="," property="order_type">ORDER_TYPE</isNotNull>	
+			<isNotNull prepend="," property="order_detail_id">ORDER_DETAIL_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="price">PRICE</isNotNull>	
+			<isNotNull prepend="," property="num">NUM</isNotNull>	
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>	
+			<isNotNull prepend="," property="tk_money">TK_MONEY</isNotNull>	
+			<isNotNull prepend="," property="tk_fee">TK_FEE</isNotNull>	
+			<isNotNull prepend="," property="tk_status">TK_STATUS</isNotNull>	
+			<isNotNull prepend="," property="return_no">RETURN_NO</isNotNull>	
+			<isNotNull prepend="," property="return_addr">RETURN_ADDR</isNotNull>	
+			<isNotNull prepend="," property="return_link_man">RETURN_LINK_MAN</isNotNull>	
+			<isNotNull prepend="," property="return_tel">RETURN_TEL</isNotNull>	
+			<isNotNull prepend="," property="hh_wl_no">HH_WL_NO</isNotNull>	
+			<isNotNull prepend="," property="hh_wl_company">HH_WL_COMPANY</isNotNull>	
+			<isNotNull prepend="," property="entp_id">entp_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_note">AUDIT_NOTE</isNotNull>	
+			<isNotNull prepend="," property="return_money_type">RETURN_MONEY_TYPE</isNotNull>	
+			<isNotNull prepend="," property="return_real_money">RETURN_REAL_MONEY</isNotNull>	
+			<isNotNull prepend="," property="return_bi_dianzi">RETURN_BI_DIANZI</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_id">#order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_state">#order_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_desc">#return_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">#audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="user_id">#user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">#user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_confirm">#is_confirm:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="memo">#memo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_type">#return_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="expect_return_way">#expect_return_way:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_way">#return_way:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fh_fee">#fh_fee:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="th_wl_company">#th_wl_company:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="th_wl_no">#th_wl_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="th_wl_fee">#th_wl_fee:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="order_type">#order_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_detail_id">#order_detail_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price">#price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="num">#num:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tk_money">#tk_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tk_fee">#tk_fee:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tk_status">#tk_status:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_no">#return_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_addr">#return_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_link_man">#return_link_man:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_tel">#return_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="hh_wl_no">#hh_wl_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="hh_wl_company">#hh_wl_company:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_note">#audit_note:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_money_type">#return_money_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_real_money">#return_real_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="return_bi_dianzi">#return_bi_dianzi:DECIMAL#</isNotNull>
+			
+			<isNotEmpty prepend=" and " property="map.user_name_like">a.user_name like '%'  #map.user_name_like#  '%'</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.add_date_st"><![CDATA[a.ADD_DATE >= str_to_date(#map.add_date_st:VARCHAR#, '%Y-%m-%d')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.add_date_en"><![CDATA[a.ADD_DATE <= str_to_date(concat(#map.add_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	
+		<isNotEmpty prepend=" and " property="map.audit_date_st"><![CDATA[a.audit_date >= str_to_date(#map.audit_date_st:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.audit_date_en"><![CDATA[a.audit_date <= str_to_date(concat(#map.audit_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateOrderReturnInfo" parameterClass="orderReturnInfo">
+		update ORDER_RETURN_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_id">ORDER_ID = #order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_state">ORDER_STATE = #order_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_desc">RETURN_DESC = #return_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE = #audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="user_id">USER_ID = #user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">USER_NAME = #user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_confirm">IS_CONFIRM = #is_confirm:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="memo">MEMO = #memo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_type">RETURN_TYPE = #return_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="expect_return_way">EXPECT_RETURN_WAY = #expect_return_way:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_way">RETURN_WAY = #return_way:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fh_fee">FH_FEE = #fh_fee:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="th_wl_company">TH_WL_COMPANY = #th_wl_company:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="th_wl_no">TH_WL_NO = #th_wl_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="th_wl_fee">TH_WL_FEE = #th_wl_fee:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="order_type">ORDER_TYPE = #order_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_detail_id">ORDER_DETAIL_ID = #order_detail_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price">PRICE = #price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="num">NUM = #num:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME = #comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tk_money">TK_MONEY = #tk_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tk_fee">TK_FEE = #tk_fee:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tk_status">TK_STATUS = #tk_status:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_no">RETURN_NO = #return_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_addr">RETURN_ADDR = #return_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_link_man">RETURN_LINK_MAN = #return_link_man:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_tel">RETURN_TEL = #return_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="hh_wl_no">HH_WL_NO = #hh_wl_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="hh_wl_company">HH_WL_COMPANY = #hh_wl_company:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_note">AUDIT_NOTE = #audit_note:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_money_type">RETURN_MONEY_TYPE = #return_money_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_real_money">RETURN_REAL_MONEY = #return_real_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="return_bi_dianzi">RETURN_BI_DIANZI = #return_bi_dianzi:DECIMAL#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteOrderReturnInfo" parameterClass="orderReturnInfo">
+		delete from ORDER_RETURN_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

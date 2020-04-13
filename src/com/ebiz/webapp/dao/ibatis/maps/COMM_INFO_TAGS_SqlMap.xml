@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="COMM_INFO_TAGS">
+
+	<typeAlias alias="commInfoTags" type="com.ebiz.webapp.domain.CommInfoTags" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCommInfoTags" />
+		<flushOnExecute statement="updateCommInfoTags" />
+		<flushOnExecute statement="deleteCommInfoTags" />
+	</cacheModel>
+
+	<resultMap id="commInfoTagsResultForList" class="commInfoTags">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TAG_ID" property="tag_id" jdbcType="INTEGER" />
+		<result column="TAG_NAME" property="tag_name" jdbcType="VARCHAR" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="DECIMAL" />
+		<result column="TAG_TYPE" property="tag_type" jdbcType="INTEGER" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="P_INDEX" property="p_index" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="commInfoTagsResult" class="commInfoTags" extends="commInfoTagsResultForList">
+	</resultMap>
+
+    <resultMap id="commInfoTagsJiaZaiResult" class="commInfoTags">
+		<result column="ID" property="map.comm_id" jdbcType="INTEGER" />
+		<result column="MAIN_PIC" property="map.main_pic" jdbcType="VARCHAR" />
+		<result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+		<result column="SALE_PRICE" property="map.sale_price" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="sf-commInfoTags">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tag_id">a.TAG_ID = #tag_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tag_name">a.TAG_NAME = #tag_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tag_type">a.TAG_TYPE = #tag_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX = #p_index:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectCommInfoTags" resultMap="commInfoTagsResult" parameterClass="commInfoTags" cacheModel="oneDayCache">
+		select * from COMM_INFO_TAGS a where 1 = 1
+		<include refid="sf-commInfoTags" />
+	</select>
+
+	<select id="selectCommInfoTagsList" resultMap="commInfoTagsResultForList" parameterClass="commInfoTags" cacheModel="oneDayCache">
+		select * from COMM_INFO_TAGS a where 1 = 1
+		<include refid="sf-commInfoTags" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectCommInfoTagsCount" resultClass="int" parameterClass="commInfoTags" cacheModel="oneDayCache">
+		select count(*) from COMM_INFO_TAGS a where 1 = 1
+		<include refid="sf-commInfoTags" />
+	</select>
+	
+	<select id="selectCommInfoTagsJiaZaiCount" resultClass="int" parameterClass="commInfoTags" cacheModel="oneDayCache">
+		SELECT count(c.id) FROM (
+		SELECT
+			b.*
+		FROM
+			COMM_INFO_TAGS a,
+			comm_info b
+		WHERE
+			1 = 1
+		AND b.ID = a.COMM_ID
+		AND b.is_del = 0
+		and b.AUDIT_STATE=1
+		<isNotEmpty prepend=" and " property="map.p_index_like">b.P_INDEX like '%'  #map.p_index_like#  '%'</isNotEmpty>
+		<include refid="sf-commInfoTags" />
+		) c
+		WHERE
+			1 = 1
+	</select>
+	
+	<select id="selectCommInfoTagsPaginatedList" resultMap="commInfoTagsResult" parameterClass="commInfoTags" cacheModel="oneDayCache">
+		select * from COMM_INFO_TAGS a where 1 = 1
+		<include refid="sf-commInfoTags" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectCommInfoTagsJiaZaiPaginatedList" resultMap="commInfoTagsJiaZaiResult" parameterClass="commInfoTags" cacheModel="oneDayCache">
+		SELECT
+			b.*
+		FROM
+			COMM_INFO_TAGS a,
+			comm_info b
+		WHERE
+			1 = 1
+		AND b.ID = a.COMM_ID
+		AND b.is_del = 0
+		and b.AUDIT_STATE=1
+		<isNotEmpty prepend=" and " property="map.p_index_like">b.P_INDEX like '%'  #map.p_index_like#  '%'</isNotEmpty>
+		<include refid="sf-commInfoTags" />
+		order by 
+		<isNotEmpty  property="map.order_by">b.$map.order_by$ desc, </isNotEmpty>
+		<isNotEmpty  property="map.order_value_desc">a.order_value desc, </isNotEmpty>
+		a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCommInfoTags" parameterClass="commInfoTags">
+		<![CDATA[insert into COMM_INFO_TAGS (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="tag_id">TAG_ID</isNotNull>	
+			<isNotNull prepend="," property="tag_name">TAG_NAME</isNotNull>	
+			<isNull property="tag_name">
+				<isNotNull prepend="," property="tag_id">TAG_NAME</isNotNull>
+			</isNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="tag_type">TAG_TYPE</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>
+			<isNull property="tag_name">
+				<isNotNull prepend="," property="tag_id">P_INDEX</isNotNull>
+			</isNull>
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="tag_id">#tag_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="tag_name">#tag_name:VARCHAR#</isNotNull>
+			<isNull property="tag_name">
+				<isNotNull prepend="," property="tag_id">(select tag.tag_name from BASE_COMMINFO_TAGS tag where tag.id=#tag_id:INTEGER#)</isNotNull>
+			</isNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tag_type">#tag_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:INTEGER#</isNotNull>
+			<isNull property="tag_name">
+				<isNotNull prepend="," property="tag_id">(select tag.p_index from BASE_COMMINFO_TAGS tag where tag.id=#tag_id:INTEGER#)</isNotNull>
+			</isNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCommInfoTags" parameterClass="commInfoTags">
+		update COMM_INFO_TAGS
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="tag_id">TAG_ID = #tag_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="tag_name">TAG_NAME = #tag_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tag_type">TAG_TYPE = #tag_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCommInfoTags" parameterClass="commInfoTags">
+		delete from COMM_INFO_TAGS where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.comm_id">COMM_ID = #map.comm_id:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.tag_id">TAG_ID = #map.tag_id:INTEGER#</isNotEmpty>
+		
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

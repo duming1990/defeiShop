@@ -1,0 +1,1134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ORDER_INFO_DETAILS">
+
+	<typeAlias alias="orderInfoDetails" type="com.ebiz.webapp.domain.OrderInfoDetails" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertOrderInfoDetails" />
+		<flushOnExecute statement="updateOrderInfoDetails" />
+		<flushOnExecute statement="deleteOrderInfoDetails" />
+	</cacheModel>
+
+	<resultMap id="orderInfoDetailsResultForList" class="orderInfoDetails">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ORDER_ID" property="order_id" jdbcType="INTEGER" />
+		<result column="ORDER_TYPE" property="order_type" jdbcType="INTEGER" />
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="PD_ID" property="pd_id" jdbcType="INTEGER" />
+		<result column="PD_NAME" property="pd_name" jdbcType="VARCHAR" />
+		<result column="GOOD_STATE" property="good_state" jdbcType="INTEGER" />
+		<result column="GOOD_COUNT" property="good_count" jdbcType="INTEGER" />
+		<result column="GOOD_PRICE" property="good_price" jdbcType="INTEGER" />
+		<result column="GOOD_UNIT" property="good_unit" jdbcType="VARCHAR" />
+		<result column="GOOD_SUM_PRICE" property="good_sum_price"
+			jdbcType="INTEGER" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="MATFLOW_PRICE" property="matflow_price"
+			jdbcType="INTEGER" />
+		<result column="WL_COMP_NAME" property="wl_comp_name" jdbcType="VARCHAR" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="COMM_TCZH_ID" property="comm_tczh_id" jdbcType="INTEGER" />
+		<result column="COMM_TCZH_NAME" property="comm_tczh_name"
+			jdbcType="VARCHAR" />
+		<result column="DELIVERY_P_INDEX" property="delivery_p_index"
+			jdbcType="delivery_p_index" />
+		<result column="PRICE_MODIFY_OLD" property="price_modify_old"
+			jdbcType="INTEGER" />
+		<result column="PRICE_MODIFY_DATE" property="price_modify_date"
+			jdbcType="TIMESTAMP" />
+		<result column="PRICE_MODIFY_REMARK" property="price_modify_remark"
+			jdbcType="VARCHAR" />
+		<result column="IS_PRICE_MODIFY" property="is_price_modify"
+			jdbcType="INTEGER" />
+		<result column="ACTIVITY_PRICE" property="activity_price"
+			jdbcType="INTEGER" />
+		<result column="ACTIVITY_TITLE" property="activity_title"
+			jdbcType="VARCHAR" />
+		<result column="MATFLOW_PRICE_OLD" property="matflow_price_old"
+			jdbcType="INTEGER" />
+		<result column="HAS_COMMENT" property="has_comment" jdbcType="INTEGER" />
+		<result column="HUIZHUAN_RULE" property="huizhuan_rule"
+			jdbcType="INTEGER" />
+		<result column="COST_PRICE" property="cost_price" jdbcType="INTEGER" />
+
+		<result column="IS_TUIHUO" property="is_tuihuo" jdbcType="INTEGER" />
+		<result column="IS_HD_COMM" property="is_hd_comm" jdbcType="INTEGER" />
+		<result column="COMM_TG_ID" property="comm_tg_id" jdbcType="INTEGER" />
+		<result column="SUM_RED_MONEY" property="sum_red_money"
+			jdbcType="DECIMAL" />
+		<result column="SUM_REBATE_MONEY" property="sum_rebate_money"
+			jdbcType="DECIMAL" />
+		<result column="SUM_AID_MONEY" property="sum_aid_money"
+			jdbcType="DECIMAL" />
+		<result column="POOR_ID" property="poor_id" jdbcType="INTEGER" />
+		<result column="IS_COMMENT" property="is_comment" jdbcType="INTEGER" />
+		<result column="FP_STATE" property="fp_state" jdbcType="INTEGER" />
+		<result column="ACTUAL_MONEY" property="actual_money" jdbcType="DECIMAL" />
+		<result column="YHQ_SON_ID" property="yhq_son_id" jdbcType="INTEGER" />
+		<result column="YHQ_MONEY" property="yhq_money" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsResult" class="orderInfoDetails"
+		extends="orderInfoDetailsResultForList">
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsLinkOrderInfoResult" class="orderInfoDetails"
+		extends="orderInfoDetailsResultForList">
+		<result column="TRADE_INDEX" property="map.trade_index"
+			jdbcType="VARCHAR" />
+		<result column="PAY_DATE" property="map.pay_date" jdbcType="TIMESTAMP" />
+		<result column="ORDER_STATE" property="map.order_state"
+			jdbcType="INTEGER" />
+		<result column="ENTP_ID" property="map.entp_id" jdbcType="INTEGER" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsStatisticaEntpClsResult"
+		class="orderInfoDetails">
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="COMM_TCZH_NAME" property="comm_tczh_name"
+			jdbcType="VARCHAR" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="SUM_GOOD_NUM" property="map.sum_good_num"
+			jdbcType="INTEGER" />
+		<result column="SUM_GOOD_MONEY" property="map.sum_good_money"
+			jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsStatisticaSumResult" class="orderInfoDetails">
+		<result column="SUM_GOOD_NUM" property="map.sum_good_num"
+			jdbcType="INTEGER" />
+		<result column="SUM_GOOD_MONEY" property="map.sum_good_money"
+			jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsStatisticaEntpResult" class="orderInfoDetails">
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsBuyHistoryResult" class="orderInfoDetails"
+		extends="orderInfoDetailsResult">
+		<result column="ORDER_INFO_ADD_DATE" property="order_info_add_date"
+			jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_NAME" property="map.add_user_name"
+			jdbcType="VARCHAR" />
+		<result column="USER_NAME" property="map.user_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsEntpCommSaleResult" class="orderInfoDetails">
+		<result column="SUM_GOOD_COUNT" property="map.sum_good_count"
+			jdbcType="INTEGER" />
+		<result column="SUM_GOOD_PRICE" property="map.sum_good_price"
+			jdbcType="VARCHAR" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="selectUserSaleRankingListResult" class="orderInfoDetails">
+		<result column="ID" property="map.id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="map.user_name" jdbcType="VARCHAR" />
+		<result column="REAL_NAME" property="map.real_name" jdbcType="VARCHAR" />
+		<result column="USER_LOGO" property="map.user_logo" jdbcType="VARCHAR" />
+		<result column="GOOD_PRICE" property="map.good_price" jdbcType="DECIMAL" />
+		<result column="VILLAGE_NAME" property="map.village_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="selectPoorSalesRankingListResult" class="orderInfoDetails">
+		<result column="ID" property="map.id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="map.user_name" jdbcType="VARCHAR" />
+		<result column="REAL_NAME" property="map.real_name" jdbcType="VARCHAR" />
+		<result column="USER_LOGO" property="map.user_logo" jdbcType="VARCHAR" />
+		<result column="GOOD_PRICE" property="map.good_price" jdbcType="DECIMAL" />
+		<result column="VILLAGE_NAME" property="map.village_name" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="selectPoorSalesRealtimeListResult" class="orderInfoDetails">
+		<result column="ID" property="map.id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="map.user_name" jdbcType="VARCHAR" />
+		<result column="REAL_NAME" property="map.real_name" jdbcType="VARCHAR" />
+		<result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+		<result column="GOOD_PRICE" property="map.good_price" jdbcType="DECIMAL" />
+		<result column="ADD_DATE" property="map.add_date" jdbcType="TIMESTAMP" />
+		<result column="VILLAGE_NAME" property="map.village_name"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsListResultForReport" class="orderInfoDetails">
+		<result column="ORDER_STATE" property="map.order_state"
+			jdbcType="INTEGER" />
+		<result column="IS_PAY_NAME" property="map.is_pay_name"
+			jdbcType="VARCHAR" />
+		<result column="IS_FUXIAO" property="map.is_fuxiao" jdbcType="INTEGER" />
+		<result column="TRADE_INDEX" property="map.trade_index"
+			jdbcType="VARCHAR" />
+		<result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+		<result column="ADD_USER_NAME" property="map.add_user_name"
+			jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="map.add_date" jdbcType="TIMESTAMP" />
+		<result column="GOOD_PRICE" property="map.good_price" jdbcType="VARCHAR" />
+		<result column="BI_MONEY" property="map.bi_money" jdbcType="VARCHAR" />
+		<result column="YF_MONEY" property="map.yf_money" jdbcType="VARCHAR" />
+		<result column="HZ_COUNT" property="map.hz_count" jdbcType="INTEGER" />
+		<result column="PAY_DATE" property="map.pay_date" jdbcType="TIMESTAMP" />
+		<result column="PAY_TYPE" property="map.pay_type" jdbcType="INTEGER" />
+		<result column="ZF_MONEY" property="map.zf_money" jdbcType="VARCHAR" />
+		<result column="FY_COUNT" property="map.fy_count" jdbcType="INTEGER" />
+		<!-- <result column="TG_MONEY" property="map.tg_money" jdbcType="VARCHAR" 
+			/> -->
+		<result column="IS_TG" property="map.is_tg" jdbcType="INTEGER" />
+
+	</resultMap>
+
+	<resultMap id="orderInfoDetailsResultForListByCommInfo"
+		class="orderInfoDetails" extends="orderInfoDetailsResultForList">
+		<result column="JD_SKUID" property="map.jd_skuid" jdbcType="VARCHAR" />
+		<result column="JD_AGENT_PRICE" property="map.jd_agent_price"
+			jdbcType="VARCHAR" />
+		<result column="JD_PRICE" property="map.jd_price" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap class="orderInfoDetails" id="CommRankinglist">
+		<result column="sum_id" property="map.sum_id" jdbcType="Integer" />
+		<result column="sum_good_sum_price" property="map.sum_good_sum_price"
+			jdbcType="DECIMAL" />
+		<result column="full_name" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="entp_name" property="map.entp_name" jdbcType="VARCHAR" />
+		<result column="comm_name" property="map.comm_name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="orderInfoDetailsResultByOrder" class="orderInfoDetails"
+		extends="orderInfoDetailsResultForList">
+		<result column="add_user_id" property="map.add_user_id" jdbcType="VARCHAR" />
+		<result column="add_user_name" property="map.add_user_name" jdbcType="VARCHAR" />
+		<result column="finish_date" property="map.finish_date" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="sf-orderInfoDetails">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_id">a.ORDER_ID =
+			#order_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_type">a.ORDER_TYPE =
+			#order_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_id">a.CLS_ID =
+			#cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_name">a.CLS_NAME =
+			#cls_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_id">a.PD_ID =
+			#pd_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_name">a.PD_NAME =
+			#pd_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="good_state">a.GOOD_STATE =
+			#good_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="good_count">a.GOOD_COUNT =
+			#good_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="good_price">a.GOOD_PRICE =
+			#good_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="good_unit">a.GOOD_UNIT =
+			#good_unit:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="good_sum_price">a.GOOD_SUM_PRICE =
+			#good_sum_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="matflow_price">a.MATFLOW_PRICE =
+			#matflow_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comp_name">a.WL_COMP_NAME =
+			#wl_comp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID =
+			#comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME =
+			#comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_id">a.COMM_TCZH_ID =
+			#comm_tczh_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_name">a.COMM_TCZH_NAME =
+			#comm_tczh_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="delivery_p_index">a.DELIVERY_P_INDEX =
+			#delivery_p_index:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_modify_old">a.PRICE_MODIFY_OLD =
+			#price_modify_old:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_modify_date">a.PRICE_MODIFY_DATE =
+			#price_modify_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_modify_remark">a.PRICE_MODIFY_REMARK
+			= #price_modify_remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_price_modify">a.IS_PRICE_MODIFY =
+			#is_price_modify:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="activity_price">a.ACTIVITY_PRICE =
+			#activity_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="activity_title">a.ACTIVITY_TITLE =
+			#activity_title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="matflow_price_old">a.MATFLOW_PRICE_OLD =
+			#matflow_price_old:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="has_comment">a.HAS_COMMENT =
+			#has_comment:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="huizhuan_rule">a.HUIZHUAN_RULE =
+			#huizhuan_rule:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cost_price">a.COST_PRICE =
+			#cost_price:INTEGER#</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="is_tuihuo">a.IS_TUIHUO =
+			#is_tuihuo:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_hd_comm">a.IS_HD_COMM =
+			#is_hd_comm:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tg_id">a.COMM_TG_ID =
+			#comm_tg_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sum_red_money">a.SUM_RED_MONEY =
+			#sum_red_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sum_rebate_money">a.SUM_REBATE_MONEY =
+			#sum_rebate_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sum_aid_money">a.SUM_AID_MONEY =
+			#sum_aid_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="poor_id">a.POOR_ID =
+			#poor_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_comment">a.IS_COMMENT =
+			#is_comment:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fp_state">a.FP_STATE =
+			#fp_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="actual_money">a.ACTUAL_MONEY =
+			#actual_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_son_id">a.YHQ_SON_ID = #yhq_son_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_money">a.YHQ_MONEY = #yhq_money:DECIMAL#</isNotEmpty>
+
+
+		<isNotEmpty prepend=" and " property="map.entp_id_in">a.entp_id in($map.entp_id_in$)</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.order_type_in">a.order_type
+			in($map.order_type_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.tuihuo_type_not_in">a.IS_TUIHUO not in
+			($map.tuihuo_type_not_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID =
+			#entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.entp_name_like">c.ENTP_NAME like '%'
+			#map.entp_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_name_like">a.COMM_NAME like '%'
+			#map.comm_name_like# '%'</isNotEmpty>
+
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			a.add_date <= str_to_date(concat(#map.en_add_date#, '23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state"><![CDATA[
+			b.order_state = #map.order_state:INTEGER#
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.actual_money_not_null">a.actual_money is not null</isNotEmpty>
+	</sql>
+
+	<select id="selectOrderInfoDetails" resultMap="orderInfoDetailsResult"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select * from ORDER_INFO_DETAILS a where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+	</select>
+
+
+	<select id="selectOrderInfoDetailsLinkOrderInfoCount"
+		resultClass="int" parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select count(*) from ORDER_INFO_DETAILS a left join
+		ORDER_INFO t on a.ORDER_ID = t.ID where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		and t.ORDER_STATE>=10
+		
+		<isNotEmpty prepend=" and " property="map.orderType">
+			t.ORDER_TYPE=#map.orderType:INTEGER#
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_pay_date"><![CDATA[
+			t.pay_date >= str_to_date(#map.st_pay_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date"><![CDATA[
+			t.pay_date <= str_to_date(concat(#map.en_pay_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" " property="map.own_entp_id">and
+			a.entp_id=#map.own_entp_id#</isNotEmpty>
+	</select>
+
+	<select id="selectCommRankingCount" resultClass="int"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select count(*)
+		from(select count(*) as
+		sum_id,comm_NAME,sum(GOOD_SUM_PRICE) as sum_good_sum_price,d.full_name
+		full_name ,a.ENTP_NAME entp_name
+		from order_info_details b LEFT JOIN order_info a on a.id=b.order_id
+		LEFT JOIN user_info c on b.ENTP_ID=c.OWN_ENTP_ID
+		LEFT JOIN base_province d on c.P_INDEX=d.P_INDEX
+		where 1=1
+		<isNotEmpty prepend=" and " property="map.p_index_like">c.P_INDEX like #map.p_index_like#  '%'</isNotEmpty>
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.order_state_ge">
+			<![CDATA[a.ORDER_STATE >= #map.order_state_ge#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state_le">
+			<![CDATA[a.ORDER_STATE <= #map.order_state_le#]]>
+		</isNotEmpty>
+		group by b.comm_id
+		<isNotEmpty prepend=" HAVING " property="map.sum_good_sum_price">sum(GOOD_SUM_PRICE)
+			> #map.sum_good_sum_price#</isNotEmpty>
+		) aa
+	</select>
+
+	<select id="selectCommRankingList" resultMap="CommRankinglist"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select count(*) as sum_id,comm_NAME,sum(GOOD_SUM_PRICE) as
+		sum_good_sum_price,d.full_name full_name ,a.ENTP_NAME entp_name
+		from order_info_details b LEFT JOIN order_info a on a.id=b.order_id
+		LEFT JOIN user_info c on b.ENTP_ID=c.OWN_ENTP_ID
+		LEFT JOIN base_province d on c.P_INDEX=d.P_INDEX
+		where 1=1
+		<isNotEmpty prepend=" and " property="map.p_index_like">c.P_INDEX like #map.p_index_like#  '%'</isNotEmpty>
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.order_state1">a.order_state &gt;=10
+			#map.order_state1# </isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state2">a.order_state &lt;=
+			#map.order_state2# </isNotEmpty>
+		group by b.comm_id
+		<isNotEmpty prepend=" HAVING " property="map.sum_good_sum_price">sum(GOOD_SUM_PRICE)
+			> #map.sum_good_sum_price#</isNotEmpty>
+		order by sum(GOOD_SUM_PRICE) desc 
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+
+	<select id="selectOrderInfoDetailsLinkOrderInfoPaginatedList"
+		resultMap="orderInfoDetailsLinkOrderInfoResult" parameterClass="orderInfoDetails"
+		cacheModel="oneDayCache">
+
+		select
+		a.*,t.TRADE_INDEX,t.PAY_DATE,t.ORDER_STATE,t.ENTP_ID,t.ENTP_NAME from
+		ORDER_INFO_DETAILS a left join
+		ORDER_INFO t on a.ORDER_ID = t.ID where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		and t.ORDER_STATE>=10
+		<isNotEmpty prepend=" and " property="map.st_pay_date"><![CDATA[
+			t.pay_date >= str_to_date(#map.st_pay_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date"><![CDATA[
+			t.pay_date <= str_to_date(concat(#map.en_pay_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" " property="map.own_entp_id">and
+			a.entp_id=#map.own_entp_id#</isNotEmpty>
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+
+	<select id="selectOrderInfoDetailsList" resultMap="orderInfoDetailsResultForList"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+
+		select a.* from ORDER_INFO_DETAILS a
+		<isNotEmpty property="map.left_join_order_info_query_has_sale_count">
+			left join Order_info b on a.order_id=b.id
+		</isNotEmpty>
+		where 1 = 1
+		<isNotEmpty property="map.left_join_order_info_query_has_sale_count">
+			and b.order_state = 10
+		</isNotEmpty>
+
+		<include refid="sf-orderInfoDetails" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectOrderInfoDetailsCount" resultClass="int"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select count(*) from ORDER_INFO_DETAILS a where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+	</select>
+
+
+	<select id="selectOrderInfoDetailsForTuiSum" resultClass="int"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select ifnull(sum(countSum),0) from
+		(
+		select count(*) as countSum from order_info_details a where 1=1
+		<include refid="sf-orderInfoDetails" />
+		GROUP BY a.IS_TUIHUO,a.ORDER_ID
+		having
+		<isNotEmpty prepend=" " property="is_tuihuo">a.IS_TUIHUO =
+			#is_tuihuo:INTEGER#</isNotEmpty>
+		) t
+	</select>
+
+	<select id="selectOrderInfoDetailsPaginatedList" resultMap="orderInfoDetailsResult"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+
+		select * from ORDER_INFO_DETAILS a where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectOrderInfoDetailsDisCount" resultClass="int"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select count(*) from
+		(
+		select a.comm_name,a.entp_id,a.cls_id,a.cls_name
+		from ORDER_INFO_DETAILS a
+		left join Order_info b on a.order_id=b.id
+		left join entp_info c on c.id = a.entp_id
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		group by
+		a.entp_id,a.cls_id,a.cls_name,a.comm_name,a.comm_id,a.comm_tczh_name
+		order by a.entp_id asc, a.cls_id asc
+		) t
+	</select>
+
+	<select id="selectOrderInfoDetailsStatisticaCount" resultClass="int"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select count(*) from
+		(
+		select a.entp_id,c.entp_name from
+		ORDER_INFO_DETAILS a
+		left join Order_info b on a.order_id=b.id
+		left join entp_info c on c.id = a.entp_id
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		group by a.entp_id,c.entp_name
+		) t
+	</select>
+
+	<select id="selectOrderInfoDetailsStatisticaEntpPaginatedList"
+		resultMap="orderInfoDetailsStatisticaEntpResult" parameterClass="orderInfoDetails"
+		cacheModel="oneDayCache">
+
+		select a.entp_id,c.entp_name from ORDER_INFO_DETAILS a
+		left join Order_info b on a.order_id=b.id
+		left join entp_info c on c.id = a.entp_id
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		group by a.entp_id,c.entp_name
+		order by a.entp_id asc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+
+	<select id="selectOrderInfoDetailsBuyHistoryCount" resultClass="int"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select count(*) from ORDER_INFO_DETAILS a
+		left join Order_info b on a.order_id=b.id
+		left join user_info c on b.add_user_id = c.id
+		where 1 = 1 and b.order_state
+		>= 40
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.add_date_begin"><![CDATA[
+			b.add_date >= str_to_date(#map.add_date_begin:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_date_end"><![CDATA[
+			b.add_date <= str_to_date(concat(#map.add_date_end# , ' 23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state_in">b.ORDER_STATE in
+			($map.order_state_in$)</isNotEmpty>
+	</select>
+
+	<select id="selectOrderInfoDetailsBuyHistoryPaginatedList"
+		resultMap="orderInfoDetailsBuyHistoryResult" parameterClass="orderInfoDetails"
+		cacheModel="oneDayCache">
+
+		select a.*,b.add_date as
+		order_info_add_date,b.add_user_name,c.user_name from
+		ORDER_INFO_DETAILS a
+		left join Order_info b on a.order_id=b.id
+		left join user_info c on b.add_user_id = c.id
+		where 1 = 1 and b.order_state
+		>= 40
+		<include refid="sf-orderInfoDetails" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+
+	<select id="selectOrderInfoDetailsStatisticaEntpClsList"
+		resultMap="orderInfoDetailsStatisticaEntpClsResult" parameterClass="orderInfoDetails"
+		cacheModel="oneDayCache">
+		select
+		a.comm_name,a.comm_id,a.comm_tczh_name,a.entp_id,a.cls_id,a.cls_name,sum(GOOD_COUNT)
+		as sum_good_num,sum(GOOD_SUM_PRICE) as sum_good_money from
+		ORDER_INFO_DETAILS a
+		left join Order_info b on a.order_id=b.id
+		left join entp_info c on c.id = a.entp_id
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		group by
+		a.entp_id,a.cls_id,a.cls_name,a.comm_name,a.comm_id,a.comm_tczh_name
+		order by a.entp_id asc, a.cls_id asc
+	</select>
+
+	<select id="selectOrderInfoDetailsStatisticaSum" resultMap="orderInfoDetailsStatisticaSumResult"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select ifnull(sum(GOOD_COUNT),0) as
+		sum_good_num,ifnull(sum(GOOD_SUM_PRICE),0) as sum_good_money from
+		ORDER_INFO_DETAILS a
+		left join Order_info b on a.order_id=b.id
+		left join entp_info c on c.id =
+		a.entp_id
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+	</select>
+
+	<select id="selectOrderInfoDetailsByReportCount" resultClass="int"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		SELECT
+		count(1)
+		FROM
+		order_info_details a,
+		order_info b
+		WHERE
+		a.ORDER_ID = b.ID
+		AND b.ORDER_TYPE = 50
+		AND b.ORDER_STATE >= 10
+		AND b.PAY_DATE IS
+		NOT NULL
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			b.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			b.add_date <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_pay_date"><![CDATA[
+			b.pay_date >= str_to_date(#map.st_pay_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date"><![CDATA[
+			b.pay_date <= str_to_date(concat(#map.en_pay_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pay_type">b.pay_type =
+			#map.pay_type#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state">b.order_state =
+			#map.order_state#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_fuxiao">b.is_fuxiao =
+			#map.is_fuxiao#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_name_like">b.ADD_USER_NAME like
+			#map.add_user_name_like# '%'</isNotEmpty>
+	</select>
+
+	<select id="selectOrderInfoDetailsByReportPaginatedList"
+		resultMap="orderInfoDetailsListResultForReport" parameterClass="orderInfoDetails"
+		cacheModel="oneDayCache">
+
+		SELECT
+		b.ORDER_STATE,
+		(
+		CASE
+		WHEN b.PAY_DATE IS NOT NULL THEN
+		'已支付'
+		ELSE
+		'未支付'
+		END
+		) AS IS_PAY_NAME,
+		b.IS_FUXIAO,
+		b.TRADE_INDEX,
+		a.COMM_NAME,
+		b.ADD_USER_NAME,
+
+		b.ADD_DATE,
+		a.GOOD_PRICE,
+		(
+		CASE
+		WHEN b.PAY_TYPE = 0 THEN
+		a.GOOD_PRICE * a.GOOD_COUNT
+		ELSE
+		0
+		END
+		) AS bi_money,
+		a.GOOD_PRICE * a.GOOD_COUNT AS yf_money,
+		(a.GOOD_PRICE * a.GOOD_COUNT) / a.HUIZHUAN_RULE AS hz_count,
+		b.PAY_DATE,
+		b.PAY_TYPE,
+		(
+		CASE
+				<![CDATA[ WHEN b.PAY_TYPE <> 0 THEN ]]>
+		a.GOOD_PRICE * a.GOOD_COUNT
+		ELSE
+		0
+		END
+		) AS zf_money,
+		(
+		SELECT
+		count(1)
+		FROM
+		huizhuan_chi_detail hcd
+		WHERE
+		hcd.ORDER_TRADE_INDEX = b.TRADE_INDEX
+		<!-- and hcd.chi_type = 1 -->
+		and hcd.BI_CHU_OR_RU = -1
+		) AS fy_count,
+		<!-- ( SELECT sum(ht.MONEY) FROM huizhuan_tuiguang ht WHERE ht.BI_STATE 
+			= 0 AND ht.ORDER_TRADE_INDEX = b.TRADE_INDEX ) AS tg_money -->
+		(
+		SELECT
+		count(1)
+		FROM
+		huizhuan_tuiguang ht
+		WHERE 1 = 1
+		AND ht.ORDER_TRADE_INDEX = b.TRADE_INDEX
+		) AS is_tg
+
+		FROM
+		order_info_details a,
+		order_info b
+		WHERE
+		a.ORDER_ID = b.ID
+		AND b.ORDER_TYPE = 50
+		AND b.ORDER_STATE >= 10
+		AND b.PAY_DATE IS
+		NOT NULL
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			b.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			b.add_date <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_pay_date"><![CDATA[
+			b.pay_date >= str_to_date(#map.st_pay_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date"><![CDATA[
+			b.pay_date <= str_to_date(concat(#map.en_pay_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pay_type">b.pay_type =
+			#map.pay_type#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state">b.order_state =
+			#map.order_state#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_fuxiao">b.is_fuxiao =
+			#map.is_fuxiao#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_name_like">b.ADD_USER_NAME like
+			#map.add_user_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_name_like">a.COMM_NAME like
+			#map.comm_name_like# '%'</isNotEmpty>
+		order by b.add_date desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectOrderInfoDetailsEntpCommSaleCount"
+		resultClass="int" parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+
+		select count(*) from
+		(
+		SELECT
+		sum(a.GOOD_COUNT),
+		a.COMM_NAME,
+		sum(a.GOOD_SUM_PRICE),
+		t2.entp_name,
+		a.comm_id
+		FROM
+		order_info_details a
+		left join order_info t2 on a.order_id = t2.id
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.orderType">t2.order_Type = #map.orderType#</isNotEmpty>
+		<![CDATA[ and t2.ORDER_STATE > 0 and t2.ORDER_STATE < 90]]>
+		<isNotEmpty prepend=" and " property="map.is_test_eq">t2.is_test = #map.is_test_eq#</isNotEmpty>
+		GROUP BY
+		a.COMM_ID
+		ORDER BY
+		sum(a.GOOD_COUNT) DESC
+		) t
+	</select>
+
+	<select id="selectOrderInfoDetailsEntpCommSalePaginatedList"
+		resultMap="orderInfoDetailsEntpCommSaleResult" parameterClass="orderInfoDetails"
+		cacheModel="oneDayCache">
+		SELECT
+		sum(a.GOOD_COUNT) as sum_good_count,
+		a.COMM_NAME,
+		sum(a.GOOD_SUM_PRICE) as sum_good_price,
+		t2.entp_name,
+		a.comm_id
+		FROM
+		order_info_details a
+		left join order_info t2 on a.order_id = t2.id
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.orderType">t2.order_Type = #map.orderType#</isNotEmpty>
+		<![CDATA[ and t2.ORDER_STATE > 0 and t2.ORDER_STATE < 90]]>
+		GROUP BY
+		a.COMM_ID
+		ORDER BY
+		sum(a.GOOD_COUNT) DESC
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectUserSaleRankingList" resultMap="selectUserSaleRankingListResult"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select
+		c.id,c.user_name,c.real_name,c.user_logo,sum(a.GOOD_SUM_PRICE) as good_price,c.own_village_name as village_name
+		from
+		order_info_details a
+		left join order_info t2 on a.order_id = t2.id
+		left
+		join comm_info b on b.id = a.comm_id
+		left join user_info c on c.id =
+		b.add_user_id
+		left join village_info d on d.id = c.own_village_id
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.p_index_like">d.p_index like
+			#map.p_index_like:VARCHAR# '%'</isNotEmpty>
+		<![CDATA[ and t2.ORDER_STATE > 0 and t2.ORDER_STATE < 90]]>
+		GROUP BY
+		c.id
+		ORDER BY
+		sum(a.good_price) DESC
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+	<select id="selectPoorSalesRankingList" resultMap="selectPoorSalesRankingListResult"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select a.id,d.user_name,d.real_name,d.user_logo,sum(a.GOOD_SUM_PRICE)
+		as good_price,d.own_village_name as village_name
+		from
+		order_info_details a
+		left JOIN order_info b on a.ORDER_ID = b.id
+		left JOIN comm_info c on a.COMM_ID =c.ID
+		left JOIN user_info d on d.IS_POOR = 1 and c.ADD_USER_ID = d.ID
+		left JOIN poor_info e on d.POOR_ID = e.ID
+		where 1 = 1
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.order_type">a.order_type =
+			#map.order_type#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_like">e.p_index like
+			#map.p_index_like:VARCHAR# '%'</isNotEmpty>
+
+		<![CDATA[ and b.ORDER_STATE > 0 and b.ORDER_STATE < 90]]>
+		GROUP BY
+		d.id
+		ORDER BY
+		sum(a.good_price) DESC
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectPoorSalesRealtimeList" resultMap="selectPoorSalesRealtimeListResult"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		SELECT a.id,d.user_name,d.real_name,c.COMM_NAME,a.GOOD_SUM_PRICE as
+		good_price,a.ADD_DATE,f.VILLAGE_NAME
+		FROM
+		order_info_details a
+		LEFT JOIN order_info b ON a.ORDER_ID = b.id
+		LEFT JOIN comm_info c ON
+		a.COMM_ID = c.ID
+		LEFT JOIN user_info d ON d.IS_POOR = 1 and
+		c.ADD_USER_ID = d.id
+		LEFT JOIN village_member e on e.USER_ID=d.ID AND
+		e.AUDIT_STATE =1
+		LEFT JOIN village_info f on f.ID = e.VILLAGE_ID
+		LEFT
+		JOIN poor_info g ON d.POOR_ID = g.ID
+		WHERE
+		1 = 1
+		<include refid="sf-orderInfoDetails" />
+		<isNotEmpty prepend=" and " property="map.order_type">a.order_type =
+			#map.order_type#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_like">g.p_index like
+			#map.p_index_like:VARCHAR# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.last_id">a.id > #map.last_id#</isNotEmpty> 
+
+		<![CDATA[ and b.ORDER_STATE > 0 and b.ORDER_STATE < 90]]>
+		ORDER BY a.ADD_DATE desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectOrderInfoDetailsListByCommInfo" resultMap="orderInfoDetailsResultForListByCommInfo"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+
+		select a.*,b.jd_skuid,b.jd_agent_price,b.sale_price as jd_price from
+		ORDER_INFO_DETAILS a left join comm_info b on a.comm_id = b.id
+		where 1
+		= 1
+		<include refid="sf-orderInfoDetails" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectOrderInfoDetailsListByOrder" resultMap="orderInfoDetailsResultByOrder"
+		parameterClass="orderInfoDetails" cacheModel="oneDayCache">
+		select a.*,b.add_user_id,b.add_user_name,b.finish_date from
+		ORDER_INFO_DETAILS a LEFT JOIN order_info b ON a.ORDER_ID = b.ID
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="map.order_type">b.ORDER_TYPE = #map.order_type#</isNotEmpty>
+		<include refid="sf-orderInfoDetails" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<insert id="insertOrderInfoDetails" parameterClass="orderInfoDetails">
+		<![CDATA[insert into ORDER_INFO_DETAILS (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>
+			<isNotNull prepend="," property="order_id">ORDER_ID</isNotNull>
+			<isNotNull prepend="," property="order_type">ORDER_TYPE</isNotNull>
+			<isNotNull prepend="," property="cls_id">CLS_ID</isNotNull>
+			<isNotNull prepend="," property="cls_name">CLS_NAME</isNotNull>
+			<isNotNull prepend="," property="pd_id">PD_ID</isNotNull>
+			<isNotNull prepend="," property="pd_name">PD_NAME</isNotNull>
+			<isNotNull prepend="," property="good_state">GOOD_STATE</isNotNull>
+			<isNotNull prepend="," property="good_count">GOOD_COUNT</isNotNull>
+			<isNotNull prepend="," property="good_price">GOOD_PRICE</isNotNull>
+			<isNotNull prepend="," property="good_unit">GOOD_UNIT</isNotNull>
+			<isNotNull prepend="," property="good_sum_price">GOOD_SUM_PRICE</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>
+			<isNotNull prepend="," property="matflow_price">MATFLOW_PRICE</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">WL_COMP_NAME</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_name">COMM_TCZH_NAME</isNotNull>
+			<isNotNull prepend="," property="delivery_p_index">DELIVERY_P_INDEX
+			</isNotNull>
+			<isNotNull prepend="," property="price_modify_old">PRICE_MODIFY_OLD
+			</isNotNull>
+			<isNotNull prepend="," property="price_modify_date">PRICE_MODIFY_DATE
+			</isNotNull>
+			<isNotNull prepend="," property="price_modify_remark">PRICE_MODIFY_REMARK
+			</isNotNull>
+			<isNotNull prepend="," property="is_price_modify">IS_PRICE_MODIFY</isNotNull>
+			<isNotNull prepend="," property="activity_price">ACTIVITY_PRICE</isNotNull>
+			<isNotNull prepend="," property="activity_title">ACTIVITY_TITLE</isNotNull>
+			<isNotNull prepend="," property="matflow_price_old">MATFLOW_PRICE_OLD
+			</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>
+			<isNotNull prepend="," property="has_comment">HAS_COMMENT</isNotNull>
+			<isNotNull prepend="," property="huizhuan_rule">HUIZHUAN_RULE</isNotNull>
+			<isNotNull prepend="," property="cost_price">COST_PRICE</isNotNull>
+
+			<isNotNull prepend="," property="is_tuihuo">IS_TUIHUO</isNotNull>
+			<isNotNull prepend="," property="is_hd_comm">IS_HD_COMM</isNotNull>
+			<isNotNull prepend="," property="comm_tg_id">COMM_TG_ID</isNotNull>
+			<isNotNull prepend="," property="sum_red_money">SUM_RED_MONEY</isNotNull>
+			<isNotNull prepend="," property="sum_rebate_money">SUM_REBATE_MONEY
+			</isNotNull>
+			<isNotNull prepend="," property="sum_aid_money">SUM_AID_MONEY</isNotNull>
+			<isNotNull prepend="," property="poor_id">POOR_ID</isNotNull>
+			<isNotNull prepend="," property="is_comment">IS_COMMENT</isNotNull>
+			<isNotNull prepend="," property="fp_state">FP_STATE</isNotNull>
+			<isNotNull prepend="," property="actual_money">ACTUAL_MONEY</isNotNull>
+			<isNotNull prepend="," property="yhq_son_id">YHQ_SON_ID</isNotNull>
+			<isNotNull prepend="," property="yhq_money">YHQ_MONEY</isNotNull>
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_id">#order_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="order_type">#order_type:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="cls_id">#cls_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="cls_name">#cls_name:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="pd_id">#pd_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_name">#pd_name:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="good_state">#good_state:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="good_count">#good_count:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="good_price">#good_price:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="good_unit">#good_unit:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="good_sum_price">#good_sum_price:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="matflow_price">#matflow_price:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">#wl_comp_name:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">#comm_tczh_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_name">#comm_tczh_name:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="delivery_p_index">#delivery_p_index:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="price_modify_old">#price_modify_old:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="price_modify_date">#price_modify_date:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="price_modify_remark">#price_modify_remark:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="is_price_modify">#is_price_modify:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="activity_price">#activity_price:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="activity_title">#activity_title:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="matflow_price_old">#matflow_price_old:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="has_comment">#has_comment:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="huizhuan_rule">#huizhuan_rule:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="cost_price">#cost_price:INTEGER#
+			</isNotNull>
+
+			<isNotNull prepend="," property="is_tuihuo">#is_tuihuo:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="is_hd_comm">#is_hd_comm:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="comm_tg_id">#comm_tg_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="sum_red_money">#sum_red_money:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="sum_rebate_money">#sum_rebate_money:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="sum_aid_money">#sum_aid_money:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="poor_id">#poor_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="is_comment">#is_comment:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="fp_state">#fp_state:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="actual_money">#actual_money:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="yhq_son_id">#yhq_son_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="yhq_money">#yhq_money:DECIMAL#
+			</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT
+			LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateOrderInfoDetails" parameterClass="orderInfoDetails">
+		update ORDER_INFO_DETAILS
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="order_id">ORDER_ID =
+				#order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_type">ORDER_TYPE =
+				#order_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_id">CLS_ID = #cls_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="cls_name">CLS_NAME =
+				#cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pd_id">PD_ID = #pd_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="pd_name">PD_NAME = #pd_name:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="good_state">GOOD_STATE =
+				#good_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="good_count">GOOD_COUNT =
+				#good_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="good_price">GOOD_PRICE =
+				#good_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="good_unit">GOOD_UNIT =
+				#good_unit:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="good_sum_price">GOOD_SUM_PRICE =
+				#good_sum_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="matflow_price">MATFLOW_PRICE =
+				#matflow_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">WL_COMP_NAME =
+				#wl_comp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME =
+				#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID =
+				#comm_tczh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_name">COMM_TCZH_NAME =
+				#comm_tczh_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="delivery_p_index">DELIVERY_P_INDEX =
+				#delivery_p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_modify_old">PRICE_MODIFY_OLD =
+				#price_modify_old:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_modify_date">PRICE_MODIFY_DATE =
+				#price_modify_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="price_modify_remark">PRICE_MODIFY_REMARK =
+				#price_modify_remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_price_modify">IS_PRICE_MODIFY =
+				#is_price_modify:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="activity_price">ACTIVITY_PRICE =
+				#activity_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="activity_title">ACTIVITY_TITLE =
+				#activity_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="matflow_price_old">MATFLOW_PRICE_OLD =
+				#matflow_price_old:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="has_comment">HAS_COMMENT =
+				#has_comment:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="huizhuan_rule">HUIZHUAN_RULE =
+				#huizhuan_rule:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cost_price">COST_PRICE =
+				#cost_price:INTEGER#</isNotNull>
+
+			<isNotNull prepend="," property="is_tuihuo">IS_TUIHUO =
+				#is_tuihuo:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_hd_comm">IS_HD_COMM =
+				#is_hd_comm:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tg_id">COMM_TG_ID =
+				#comm_tg_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sum_red_money">SUM_RED_MONEY =
+				#sum_red_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="sum_rebate_money">SUM_REBATE_MONEY =
+				#sum_rebate_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="sum_aid_money">SUM_AID_MONEY =
+				#sum_aid_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="poor_id">POOR_ID = #poor_id:INTEGER#
+			</isNotNull>
+			<isNotNull prepend="," property="is_comment">IS_COMMENT =
+				#is_comment:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fp_state">FP_STATE =
+				#fp_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="actual_money">ACTUAL_MONEY =
+				#actual_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="yhq_son_id">YHQ_SON_ID = #yhq_son_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_money">YHQ_MONEY = #yhq_money:DECIMAL#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_id">ORDER_ID = #order_id#
+		</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#
+				</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteOrderInfoDetails" parameterClass="orderInfoDetails">
+		delete from ORDER_INFO_DETAILS where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_id">ORDER_ID = #order_id#
+		</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#
+				</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

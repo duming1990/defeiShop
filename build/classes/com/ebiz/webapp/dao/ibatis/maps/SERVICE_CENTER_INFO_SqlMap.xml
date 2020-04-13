@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="SERVICE_CENTER_INFO">
+
+	<typeAlias alias="serviceCenterInfo" type="com.ebiz.webapp.domain.ServiceCenterInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertServiceCenterInfo" />
+		<flushOnExecute statement="updateServiceCenterInfo" />
+		<flushOnExecute statement="deleteServiceCenterInfo" />
+	</cacheModel>
+
+	<resultMap id="serviceCenterInfoResultForList" class="serviceCenterInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="SERVICECENTER_NAME" property="servicecenter_name" jdbcType="VARCHAR" />
+		<result column="P_INDEX" property="p_index" jdbcType="INTEGER" />
+		<result column="SERVICECENTER_LEVEL" property="servicecenter_level" jdbcType="INTEGER" />
+		<result column="SERVICECENTER_ADDR" property="servicecenter_addr" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_CORPORATION" property="servicecenter_corporation" jdbcType="INTEGER" />
+		<result column="SERVICECENTER_TYPE" property="servicecenter_type" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_REG_MONEY" property="servicecenter_reg_money" jdbcType="DECIMAL" />
+		<result column="SERVICECENTER_BUILD_DATE" property="servicecenter_build_date" jdbcType="TIMESTAMP" />
+		<result column="SERVICECENTER_PERSONS" property="servicecenter_persons" jdbcType="DECIMAL" />
+		<result column="SERVICECENTER_AREA" property="servicecenter_area" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_JY_DESC" property="servicecenter_jy_desc" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_LINKMAN" property="servicecenter_linkman" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_LINKMAN_TEL" property="servicecenter_linkman_tel" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_LINKMAN_QQ" property="servicecenter_linkman_qq" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_LINKMAN_ADDR" property="servicecenter_linkman_addr" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_LINKMAN_JG" property="servicecenter_linkman_jg" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_LINKMAN_WIXIN_NU" property="servicecenter_linkman_wixin_nu" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_HELP_LINKMAN" property="servicecenter_help_linkman" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_HELP_LINKMAN_TEL" property="servicecenter_help_linkman_tel" jdbcType="VARCHAR" />
+		<result column="IS_COMMEND" property="is_commend" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="DECIMAL" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="DECIMAL" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="DECIMAL" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="DECIMAL" />
+		<result column="AUDIT_USER_ID" property="audit_user_id" jdbcType="DECIMAL" />
+		<result column="AUDIT_DATE" property="audit_date" jdbcType="TIMESTAMP" />
+		<result column="AUDIT_DESC" property="audit_desc" jdbcType="VARCHAR" />
+		<result column="IS_CLOSED" property="is_closed" jdbcType="INTEGER" />
+		<result column="SERVICECENTER_CLOSED_DATE" property="servicecenter_closed_date" jdbcType="TIMESTAMP" />
+		<result column="PROJECT_KC_DATE" property="project_kc_date" jdbcType="TIMESTAMP" />
+		<result column="EXCEPT_END_DAY" property="except_end_day" jdbcType="INTEGER" />
+		<result column="HY_CLS_ID" property="hy_cls_id" jdbcType="INTEGER" />
+		<result column="KFSC_CONTENT" property="kfsc_content" jdbcType="VARCHAR" />
+		<result column="JBYS_CONTENT" property="jbys_content" jdbcType="VARCHAR" />
+		<result column="TRZY_CONTENT" property="trzy_content" jdbcType="VARCHAR" />
+		<result column="QDJY_CONTENT" property="qdjy_content" jdbcType="VARCHAR" />
+		<result column="PAY_SUCCESS" property="pay_success" jdbcType="INTEGER" />
+		<result column="PAY_DATE" property="pay_date" jdbcType="TIMESTAMP" />
+		<result column="EFFECT_STATE" property="effect_state" jdbcType="INTEGER" />
+		<result column="EFFECT_DATE" property="effect_date" jdbcType="TIMESTAMP" />
+		<result column="EFFECT_END_DATE" property="effect_end_date" jdbcType="TIMESTAMP" />
+		<result column="PAY_TYPE" property="pay_type" jdbcType="INTEGER" />
+		<result column="P_INDEX_PRO" property="p_index_pro" jdbcType="INTEGER" />
+		<result column="TRADE_NO" property="trade_no" jdbcType="VARCHAR" />
+		<result column="SERVICECENTER_NO" property="servicecenter_no" jdbcType="VARCHAR" />
+		<result column="WL_ORDER_STATE" property="wl_order_state" jdbcType="INTEGER" />
+		<result column="WL_FAHUO_DATE" property="wl_fahuo_date" jdbcType="TIMESTAMP" />
+		<result column="WL_QRSH_DATE" property="wl_qrsh_date" jdbcType="TIMESTAMP" />
+		<result column="WL_COMM" property="wl_comm" jdbcType="VARCHAR" />
+		<result column="WL_COMP_ID" property="wl_comp_id" jdbcType="INTEGER" />
+		<result column="WL_CODE" property="wl_code" jdbcType="VARCHAR" />
+		<result column="WL_COMP_NAME" property="wl_comp_name" jdbcType="VARCHAR" />
+		<result column="WL_WAYBILL_NO" property="wl_waybill_no" jdbcType="VARCHAR" />
+		<result column="POSITION_LATLNG" property="position_latlng" jdbcType="VARCHAR" />
+		<result column="ID_CARD" property="id_card" jdbcType="VARCHAR" />
+		<result column="IS_OPEN_AD" property="is_open_ad" jdbcType="INTEGER" />	
+		<result column="VILLAGE_COUNT_LIMIT" property="village_count_limit" jdbcType="INTEGER" />
+		<result column="BANNER" property="banner" jdbcType="VARCHAR" />
+		<result column="QRCODE" property="qrcode" jdbcType="VARCHAR" />
+		<result column="CONDITION_INFO" property="condition_info" jdbcType="VARCHAR" />
+		<result column="LOGO" property="logo" jdbcType="VARCHAR" />
+		<result column="BUSINESS_LICENSE_PATH" property="business_license_path" jdbcType="VARCHAR" />
+		<result column="BROUGHT_ACCOUNT" property="brought_account" jdbcType="VARCHAR" />
+		<result column="BANK_NAME" property="bank_name" jdbcType="VARCHAR" />
+		<result column="BROUGHT_ACCOUNT_NO" property="brought_account_no" jdbcType="VARCHAR" />
+		<result column="IS_VIRTUAL" property="is_virtual" jdbcType="INTEGER" />
+		<result column="DOMAIN_SITE" property="domain_site" jdbcType="VARCHAR" />
+		<result column="SERVICE_QRCODE_PATH" property="service_qrcode_path" jdbcType="VARCHAR" />
+		
+	</resultMap>
+
+	<resultMap id="serviceCenterInfoResult" class="serviceCenterInfo" extends="serviceCenterInfoResultForList">
+	</resultMap>
+	
+	<resultMap id="serviceCenterInfoResultForFullName" class="serviceCenterInfo" extends="serviceCenterInfoResultForList">
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="P_NAME" property="map.p_name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="ServiceCenterInfoPaiMing" class="serviceCenterInfo">
+		<result column="ENTP_SALE_MONEY" property="map.entp_sale_money" jdbcType="DECIMAL" />
+		<result column="SERVICECENTER_NAME" property="map.servicecenter_name" jdbcType="VARCHAR" />
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="P_INDEX" property="map.p_index" jdbcType="INTEGER" />
+		<result column="ENTP_COUNT" property="map.entp_count" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="MyServiceCenterInfoList" class="serviceCenterInfo">
+		<result column="ENTP_SALE_MONEY" property="map.entp_sale_money" jdbcType="DECIMAL" />
+		<result column="SERVICECENTER_NAME" property="map.servicecenter_name" jdbcType="VARCHAR" />
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="P_INDEX" property="map.p_index" jdbcType="INTEGER" />
+		<result column="ENTP_COUNT" property="map.entp_count" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="sf-serviceCenterInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_name">a.SERVICECENTER_NAME = #servicecenter_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX = #p_index:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_level">a.SERVICECENTER_LEVEL = #servicecenter_level:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_addr">a.SERVICECENTER_ADDR = #servicecenter_addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_corporation">a.SERVICECENTER_CORPORATION = #servicecenter_corporation:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_type">a.SERVICECENTER_TYPE = #servicecenter_type:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_reg_money">a.SERVICECENTER_REG_MONEY = #servicecenter_reg_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_build_date">a.SERVICECENTER_BUILD_DATE = #servicecenter_build_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_persons">a.SERVICECENTER_PERSONS = #servicecenter_persons:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_area">a.SERVICECENTER_AREA = #servicecenter_area:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_jy_desc">a.SERVICECENTER_JY_DESC = #servicecenter_jy_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_linkman">a.SERVICECENTER_LINKMAN = #servicecenter_linkman:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_linkman_tel">a.SERVICECENTER_LINKMAN_TEL = #servicecenter_linkman_tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_linkman_qq">a.SERVICECENTER_LINKMAN_QQ = #servicecenter_linkman_qq:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_linkman_addr">a.SERVICECENTER_LINKMAN_ADDR = #servicecenter_linkman_addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_linkman_jg">a.SERVICECENTER_LINKMAN_JG = #servicecenter_linkman_jg:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_linkman_wixin_nu">a.SERVICECENTER_LINKMAN_WIXIN_NU = #servicecenter_linkman_wixin_nu:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_help_linkman">a.SERVICECENTER_HELP_LINKMAN = #servicecenter_help_linkman:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_help_linkman_tel">a.SERVICECENTER_HELP_LINKMAN_TEL = #servicecenter_help_linkman_tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_commend">a.IS_COMMEND = #is_commend:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_id">a.AUDIT_USER_ID = #audit_user_id:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_date">a.AUDIT_DATE = #audit_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_desc">a.AUDIT_DESC = #audit_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_closed">a.IS_CLOSED = #is_closed:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="servicecenter_closed_date">a.SERVICECENTER_CLOSED_DATE = #servicecenter_closed_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="project_kc_date">a.PROJECT_KC_DATE = #project_kc_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="except_end_day">a.EXCEPT_END_DAY = #except_end_day:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hy_cls_id">a.HY_CLS_ID = #hy_cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="kfsc_content">a.KFSC_CONTENT = #kfsc_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="jbys_content">a.JBYS_CONTENT = #jbys_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="trzy_content">a.TRZY_CONTENT = #trzy_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qdjy_content">a.QDJY_CONTENT = #qdjy_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_success">a.PAY_SUCCESS = #pay_success:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_date">a.PAY_DATE = #pay_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="effect_state">a.EFFECT_STATE = #effect_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="effect_date">a.EFFECT_DATE = #effect_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="effect_end_date">a.EFFECT_END_DATE = #effect_end_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_type">a.PAY_TYPE = #pay_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index_pro">a.P_INDEX_PRO = #p_index_pro:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="trade_no">a.TRADE_NO = #trade_no:VARCHAR#</isNotEmpty>		
+		<isNotEmpty prepend=" and " property="servicecenter_no">a.SERVICECENTER_NO = #servicecenter_no:VARCHAR#</isNotEmpty>		
+		<isNotEmpty prepend=" and " property="wl_order_state">a.WL_ORDER_STATE = #wl_order_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_fahuo_date">a.WL_FAHUO_DATE = #wl_fahuo_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_qrsh_date">a.WL_QRSH_DATE = #wl_qrsh_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comm">a.WL_COMM = #wl_comm:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comp_id">a.WL_COMP_ID = #wl_comp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_code">a.WL_CODE = #wl_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comp_name">a.WL_COMP_NAME = #wl_comp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_waybill_no">a.WL_WAYBILL_NO = #wl_waybill_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="position_latlng">a.POSITION_LATLNG = #position_latlng:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="id_card">a.ID_CARD = #id_card:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_open_ad">a.IS_OPEN_AD = #is_open_ad:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_count_limit">a.VILLAGE_COUNT_LIMIT = #village_count_limit:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="banner">a.BANNER = #banner:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qrcode">a.QRCODE = #qrcode:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="condition_info">a.CONDITION_INFO = #condition_info:LONGVARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="logo">a.LOGO = #logo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="business_license_path">a.BUSINESS_LICENSE_PATH = #business_license_path:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brought_account">a.BROUGHT_ACCOUNT = #brought_account:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bank_name">a.BANK_NAME = #bank_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brought_account_no">a.BROUGHT_ACCOUNT_NO = #brought_account_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_virtual">a.IS_VIRTUAL = #is_virtual:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="service_qrcode_path">a.SERVICE_QRCODE_PATH = #service_qrcode_path:VARCHAR#</isNotEmpty>
+		
+		
+		<isEmpty prepend="  " property="map.is_virtual_no_def">
+		<isEmpty prepend=" and " property="is_virtual">a.IS_VIRTUAL = 0</isEmpty>
+		</isEmpty>
+		<isNotEmpty prepend=" and " property="domain_site">a.DOMAIN_SITE = #domain_site:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like #map.p_index_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.servicecenter_no_like">a.SERVICECENTER_NO like #map.servicecenter_no_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.id_not_in">a.ID not in ($map.id_not_in$)</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.p_index_pro">
+			a.p_index_pro in
+			<iterate close=")" open="(" conjunction="," property="map.p_index_pro">#map.p_index_pro[]#</iterate>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.servicecenter_name_like">a.SERVICECENTER_NAME like '%'  #map.servicecenter_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_name_like">a.ADD_USER_NAME like '%'  #map.add_user_name_like#  '%'</isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.today_date"><![CDATA[
+		str_to_date(#map.today_date:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= a.add_date  
+		and a.add_date <= str_to_date(concat(#map.today_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.effect_today_date"><![CDATA[
+		str_to_date(#map.effect_today_date:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= a.effect_date  
+		and a.effect_date <= str_to_date(concat(#map.effect_today_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.pay_date_today"><![CDATA[
+		str_to_date(#map.pay_date_today#, '%Y-%m-%d %H:%i:%s') <= a.pay_date  
+		and a.pay_date <= str_to_date(concat(#map.pay_date_today# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.audit_today_date"><![CDATA[
+		str_to_date(#map.audit_today_date#, '%Y-%m-%d %H:%i:%s') <= a.AUDIT_DATE  
+		and a.AUDIT_DATE <= str_to_date(concat(#map.audit_today_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.province">concat(substring(a.P_INDEX,1,2),'0000') = #map.province#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.city">concat(substring(a.P_INDEX,1,4),'00') = #map.city#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.town">a.P_INDEX = #map.town#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.effect_date_today">DATE_FORMAT(a.effect_date,'%Y-%m-%d')=DATE_FORMAT(SYSDATE(),'%Y-%m-%d')</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.update_date_eq"><![CDATA[
+		str_to_date(#map.update_date_eq:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= a.update_date  
+		and a.update_date <= str_to_date(concat(#map.update_date_eq# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.ADD_DATE >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+	     	a.ADD_DATE <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+		
+	    <isNotEmpty prepend=" and " property="map.add_date_st"><![CDATA[a.ADD_DATE >= str_to_date(#map.add_date_st:VARCHAR#, '%Y-%m-%d')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.add_date_en"><![CDATA[a.ADD_DATE <= str_to_date(concat(#map.add_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	     
+	    <isNotEmpty prepend=" and " property="map.update_date_st"><![CDATA[a.update_date >= str_to_date(#map.update_date_st:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.update_date_en"><![CDATA[a.update_date <= str_to_date(concat(#map.update_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	     
+	    <isNotEmpty prepend=" and " property="map.audit_date_st"><![CDATA[a.audit_date >= str_to_date(#map.audit_date_st:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.audit_date_en"><![CDATA[a.audit_date <= str_to_date(concat(#map.audit_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	   
+	    <isNotEmpty prepend=" and " property="map.pay_date_st"><![CDATA[a.pay_date >= str_to_date(#map.pay_date_st:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.pay_date_en"><![CDATA[a.pay_date <= str_to_date(concat(#map.pay_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.effect_end_date_le"><![CDATA[
+			a.effect_end_date <= str_to_date(#map.effect_end_date_le:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.effect_end_date_not_null">a.effect_end_date is not null</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.servicecenter_no_not_null">a.servicecenter_no is not null</isNotEmpty>
+	</sql>
+
+	<select id="selectServiceCenterInfo" resultMap="serviceCenterInfoResultForFullName" parameterClass="serviceCenterInfo" cacheModel="oneDayCache">
+		select distinct a.*,b.p_name, b.full_name from SERVICE_CENTER_INFO a 
+		left join BASE_PROVINCE b on b.p_index = a.p_index
+		where 1 = 1
+		<include refid="sf-serviceCenterInfo" />
+	</select>
+
+	<select id="selectServiceCenterInfoList" resultMap="serviceCenterInfoResultForFullName" parameterClass="serviceCenterInfo" cacheModel="oneDayCache">
+		select a.* ,b.p_name,b.full_name from SERVICE_CENTER_INFO a 
+		left join BASE_PROVINCE b on b.p_index = a.p_index
+		where 1 = 1
+		<include refid="sf-serviceCenterInfo" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectServiceCenterInfoPaiMingList" resultMap="ServiceCenterInfoPaiMing" parameterClass="serviceCenterInfo" cacheModel="oneDayCache">
+					SELECT f.FULL_NAME,e.SERVICECENTER_NAME,d.* from (SELECT
+				c.P_INDEX, count(1) entp_count, sum(entp_sale_money) entp_sale_money
+			FROM
+				(
+					SELECT a.* FROM (
+							SELECT
+								t.entp_id,
+								b.ENTP_NAME, 
+								b.P_INDEX,
+								sum(t.order_money) AS entp_sale_money
+							FROM
+								order_info t
+							LEFT JOIN entp_info b ON t.entp_id = b.id
+							WHERE  
+							t.ORDER_STATE >= 10 
+							AND
+							t.ORDER_TYPE IN (10, 11, 20, 40, 70)
+						  <!--根据时间查询 -->
+						  <isNotEmpty prepend=" and " property="map.sereach_servecenter_st_date">
+				          <![CDATA[t.add_date >= str_to_date(#map.sereach_servecenter_st_date:VARCHAR#, '%Y-%m-%d')]]></isNotEmpty>                     
+				          <isNotEmpty prepend=" and " property="map.sereach_servecenter_en_date">
+				          <![CDATA[t.add_date < str_to_date(#map.sereach_servecenter_en_date:VARCHAR#, '%Y-%m-%d')]]></isNotEmpty> 
+				          <!--  根据区域查询条件 -->
+				          <isNotEmpty prepend=" and " property="map.p_index_like">b.P_INDEX like #map.p_index_like#  '%' </isNotEmpty>
+							GROUP BY t.ENTP_ID
+						) a
+					
+				) c 
+			GROUP BY c.P_INDEX) d  
+			
+			<isNotEmpty property="map.left_join">left join</isNotEmpty>
+			<isNotEmpty property="map.right_join">right join</isNotEmpty>
+			service_center_info e on d.P_INDEX = e.P_INDEX 
+			
+			LEFT JOIN base_province f on d.P_INDEX = f.P_INDEX
+<!-- 	<include refid="sf-serviceCenterInfo" /> -->
+             where 1=1
+            <isNotEmpty prepend=" and " property="map.add_user_id">e.ADD_USER_ID = #map.add_user_id:INTEGER#</isNotEmpty>
+            <isNotEmpty prepend=" and " property="map.id">e.ID = #map.id:INTEGER#</isNotEmpty>
+            <isNotEmpty prepend=" and " property="map.is_del">e.IS_DEL = #map.is_del:INTEGER#</isNotEmpty>
+            <isNotEmpty prepend=" and " property="map.effect_state">e.EFFECT_STATE = #map.effect_state:INTEGER#</isNotEmpty>
+			order by d.entp_sale_money desc
+		<isNotEmpty property="row.count">
+			limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectMyServiceCenterInfoList" resultMap="MyServiceCenterInfoList" parameterClass="serviceCenterInfo" cacheModel="oneDayCache">
+					SELECT f.FULL_NAME,e.SERVICECENTER_NAME,d.* from (SELECT
+				c.P_INDEX, count(1) entp_count, sum(entp_sale_money) entp_sale_money
+			FROM
+				(
+					SELECT a.* FROM (
+							SELECT
+								t.entp_id,
+								b.ENTP_NAME, 
+								b.P_INDEX,
+								sum(t.order_money) AS entp_sale_money
+							FROM
+								order_info t
+							LEFT JOIN entp_info b ON t.entp_id = b.id
+							WHERE  
+							t.ORDER_STATE >= 10 
+							AND
+							t.ORDER_TYPE IN (10, 11, 20, 40, 70)
+							
+						  <!--  根据时间查询-->
+				          <isNotEmpty prepend=" and " property="map.sereach_servecenter_st_date">
+				          <![CDATA[t.add_date >= str_to_date(#map.sereach_servecenter_st_date:VARCHAR#, '%Y-%m-%d')]]></isNotEmpty>                     
+				          <isNotEmpty prepend=" and " property="map.sereach_servecenter_en_date">
+				          <![CDATA[t.add_date < str_to_date(#map.sereach_servecenter_en_date:VARCHAR#, '%Y-%m-%d')]]></isNotEmpty> 
+                          <!--  根据区域查询条件 -->
+				          <isNotEmpty prepend=" and " property="map.p_index_like">b.P_INDEX like #map.p_index_like#  '%' </isNotEmpty>
+                              
+							GROUP BY t.ENTP_ID
+						) a
+					
+				) c 
+			GROUP BY c.P_INDEX) d  LEFT JOIN service_center_info e on d.P_INDEX = e.P_INDEX 
+			LEFT JOIN base_province f on d.P_INDEX = f.P_INDEX
+	
+			order by d.entp_sale_money desc
+			<isNotEmpty property="row.count">
+			limit #row.first#, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectServiceCenterInfoCount" resultClass="int" parameterClass="serviceCenterInfo" cacheModel="oneDayCache">
+		select count(*) from SERVICE_CENTER_INFO a 
+		left join BASE_PROVINCE b on b.p_index = a.p_index
+		left join USER_INFO c on c.ID = a.ADD_USER_ID
+		where 1 = 1
+		<include refid="sf-serviceCenterInfo" />
+	</select>
+
+	<select id="selectServiceCenterInfoPaginatedList" resultMap="serviceCenterInfoResultForFullName" parameterClass="serviceCenterInfo" cacheModel="oneDayCache">
+		select distinct a.*,b.p_name,b.full_name from SERVICE_CENTER_INFO a 
+			left join BASE_PROVINCE b on b.p_index = a.p_index
+		where 1 = 1
+		<include refid="sf-serviceCenterInfo" />
+		order by 
+		<isNotEmpty property="map.orderByInfo">$map.orderByInfo$</isNotEmpty>
+		IF(ISNULL(a.audit_date),0,1), a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectServiceCenterInfoCountByPIndex" resultClass="java.util.HashMap" parameterClass="serviceCenterInfo" cacheModel="oneDayCache">
+		select t.c,p.P_NAME,p.P_INDEX,PAR_INDEX from (SELECT count(*) c,concat(substring(a.P_INDEX,1,4),'00') p_index from service_center_info a 
+		where 1=1
+		<include refid="sf-serviceCenterInfo" />
+		group by concat(substring(a.P_INDEX,1,4),'00') )
+		t RIGHT JOIN (select p_index,p_name ,par_index from base_province where 1=1
+		<isNotEmpty prepend=" and " property="map.par_index">PAR_INDEX = #map.par_index#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_level">P_LEVEL = #map.p_level#</isNotEmpty>		
+		 )p on t.p_index=p.P_INDEX  order by p_index
+	</select>
+
+	<insert id="insertServiceCenterInfo" parameterClass="serviceCenterInfo">
+		<![CDATA[insert into SERVICE_CENTER_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_name">SERVICECENTER_NAME</isNotNull>	
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_level">SERVICECENTER_LEVEL</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_addr">SERVICECENTER_ADDR</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_corporation">SERVICECENTER_CORPORATION</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_type">SERVICECENTER_TYPE</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_reg_money">SERVICECENTER_REG_MONEY</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_build_date">SERVICECENTER_BUILD_DATE</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_persons">SERVICECENTER_PERSONS</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_area">SERVICECENTER_AREA</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_jy_desc">SERVICECENTER_JY_DESC</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_linkman">SERVICECENTER_LINKMAN</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_linkman_tel">SERVICECENTER_LINKMAN_TEL</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_linkman_qq">SERVICECENTER_LINKMAN_QQ</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_linkman_addr">SERVICECENTER_LINKMAN_ADDR</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_linkman_jg">SERVICECENTER_LINKMAN_JG</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_linkman_wixin_nu">SERVICECENTER_LINKMAN_WIXIN_NU</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_help_linkman">SERVICECENTER_HELP_LINKMAN</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_help_linkman_tel">SERVICECENTER_HELP_LINKMAN_TEL</isNotNull>	
+			<isNotNull prepend="," property="is_commend">IS_COMMEND</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>	
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE</isNotNull>	
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC</isNotNull>	
+			<isNotNull prepend="," property="is_closed">IS_CLOSED</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_closed_date">SERVICECENTER_CLOSED_DATE</isNotNull>	
+			<isNotNull prepend="," property="project_kc_date">PROJECT_KC_DATE</isNotNull>	
+			<isNotNull prepend="," property="except_end_day">EXCEPT_END_DAY</isNotNull>	
+			<isNotNull prepend="," property="hy_cls_id">HY_CLS_ID</isNotNull>	
+			<isNotNull prepend="," property="kfsc_content">KFSC_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="jbys_content">JBYS_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="trzy_content">TRZY_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="qdjy_content">QDJY_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="pay_success">PAY_SUCCESS</isNotNull>	
+			<isNotNull prepend="," property="pay_date">PAY_DATE</isNotNull>	
+			<isNotNull prepend="," property="effect_state">EFFECT_STATE</isNotNull>	
+			<isNotNull prepend="," property="effect_date">EFFECT_DATE</isNotNull>	
+			<isNotNull prepend="," property="effect_end_date">EFFECT_END_DATE</isNotNull>	
+			<isNotNull prepend="," property="pay_type">PAY_TYPE</isNotNull>	
+			<isNotNull prepend="," property="p_index_pro">P_INDEX_PRO</isNotNull>	
+			<isNotNull prepend="," property="trade_no">TRADE_NO</isNotNull>	
+			<isNotNull prepend="," property="servicecenter_no">SERVICECENTER_NO</isNotNull>	
+			<isNotNull prepend="," property="wl_order_state">WL_ORDER_STATE</isNotNull>	
+			<isNotNull prepend="," property="wl_fahuo_date">WL_FAHUO_DATE</isNotNull>	
+			<isNotNull prepend="," property="wl_qrsh_date">WL_QRSH_DATE</isNotNull>	
+			<isNotNull prepend="," property="wl_comm">WL_COMM</isNotNull>	
+			<isNotNull prepend="," property="wl_comp_id">WL_COMP_ID</isNotNull>	
+			<isNotNull prepend="," property="wl_code">WL_CODE</isNotNull>	
+			<isNotNull prepend="," property="wl_comp_name">WL_COMP_NAME</isNotNull>	
+			<isNotNull prepend="," property="wl_waybill_no">WL_WAYBILL_NO</isNotNull>
+			<isNotNull prepend="," property="position_latlng">POSITION_LATLNG</isNotNull>
+			<isNotNull prepend="," property="id_card">ID_CARD</isNotNull>
+			<isNotNull prepend="," property="is_open_ad">IS_OPEN_AD</isNotNull>		
+			<isNotNull prepend="," property="village_count_limit">VILLAGE_COUNT_LIMIT</isNotNull>
+			<isNotNull prepend="," property="banner">BANNER</isNotNull>	
+			<isNotNull prepend="," property="qrcode">QRCODE</isNotNull>	
+			<isNotNull prepend="," property="condition_info">CONDITION_INFO</isNotNull>	
+			<isNotNull prepend="," property="logo">LOGO</isNotNull>
+			<isNotNull prepend="," property="business_license_path">BUSINESS_LICENSE_PATH</isNotNull>	
+			<isNotNull prepend="," property="brought_account">BROUGHT_ACCOUNT</isNotNull>	
+			<isNotNull prepend="," property="bank_name">BANK_NAME</isNotNull>	
+			<isNotNull prepend="," property="brought_account_no">BROUGHT_ACCOUNT_NO</isNotNull>	
+			<isNotNull prepend="," property="is_virtual">IS_VIRTUAL</isNotNull>	
+			<isNotNull prepend="," property="domain_site">DOMAIN_SITE</isNotNull>	
+			<isNotNull prepend="," property="service_qrcode_path">SERVICE_QRCODE_PATH</isNotNull>	
+			
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_name">#servicecenter_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_level">#servicecenter_level:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_addr">#servicecenter_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_corporation">#servicecenter_corporation:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_type">#servicecenter_type:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_reg_money">#servicecenter_reg_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_build_date">#servicecenter_build_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_persons">#servicecenter_persons:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_area">#servicecenter_area:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_jy_desc">#servicecenter_jy_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman">#servicecenter_linkman:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_tel">#servicecenter_linkman_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_qq">#servicecenter_linkman_qq:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_addr">#servicecenter_linkman_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_jg">#servicecenter_linkman_jg:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_wixin_nu">#servicecenter_linkman_wixin_nu:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_help_linkman">#servicecenter_help_linkman:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_help_linkman_tel">#servicecenter_help_linkman_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_commend">#is_commend:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">#audit_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="audit_date">#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">#audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_closed">#is_closed:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_closed_date">#servicecenter_closed_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="project_kc_date">#project_kc_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="except_end_day">#except_end_day:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hy_cls_id">#hy_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="kfsc_content">#kfsc_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="jbys_content">#jbys_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="trzy_content">#trzy_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qdjy_content">#qdjy_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pay_success">#pay_success:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pay_date">#pay_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="effect_state">#effect_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="effect_date">#effect_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="effect_end_date">#effect_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="pay_type">#pay_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_index_pro">#p_index_pro:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="trade_no">#trade_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_no">#servicecenter_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_order_state">#wl_order_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_fahuo_date">#wl_fahuo_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="wl_qrsh_date">#wl_qrsh_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="wl_comm">#wl_comm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_id">#wl_comp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_code">#wl_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">#wl_comp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_waybill_no">#wl_waybill_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="position_latlng">#position_latlng:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="id_card">#id_card:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_open_ad">#is_open_ad:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_count_limit">#village_count_limit:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="banner">#banner:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qrcode">#qrcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="condition_info">#condition_info:LONGVARCHAR#</isNotNull>
+			<isNotNull prepend="," property="logo">#logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="business_license_path">#business_license_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brought_account">#brought_account:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_name">#bank_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brought_account_no">#brought_account_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_virtual">#is_virtual:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="domain_site">#DOMAIN_SITE:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="service_qrcode_path">#SERVICE_QRCODE_PATH:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateServiceCenterInfo" parameterClass="serviceCenterInfo">
+		update SERVICE_CENTER_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_name">SERVICECENTER_NAME = #servicecenter_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_level">SERVICECENTER_LEVEL = #servicecenter_level:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_addr">SERVICECENTER_ADDR = #servicecenter_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_corporation">SERVICECENTER_CORPORATION = #servicecenter_corporation:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_type">SERVICECENTER_TYPE = #servicecenter_type:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_reg_money">SERVICECENTER_REG_MONEY = #servicecenter_reg_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_build_date">SERVICECENTER_BUILD_DATE = #servicecenter_build_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_persons">SERVICECENTER_PERSONS = #servicecenter_persons:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_area">SERVICECENTER_AREA = #servicecenter_area:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_jy_desc">SERVICECENTER_JY_DESC = #servicecenter_jy_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman">SERVICECENTER_LINKMAN = #servicecenter_linkman:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_tel">SERVICECENTER_LINKMAN_TEL = #servicecenter_linkman_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_qq">SERVICECENTER_LINKMAN_QQ = #servicecenter_linkman_qq:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_addr">SERVICECENTER_LINKMAN_ADDR = #servicecenter_linkman_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_jg">SERVICECENTER_LINKMAN_JG = #servicecenter_linkman_jg:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_linkman_wixin_nu">SERVICECENTER_LINKMAN_WIXIN_NU = #servicecenter_linkman_wixin_nu:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_help_linkman">SERVICECENTER_HELP_LINKMAN = #servicecenter_help_linkman:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_help_linkman_tel">SERVICECENTER_HELP_LINKMAN_TEL = #servicecenter_help_linkman_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_commend">IS_COMMEND = #is_commend:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID = #audit_user_id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE = #audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC = #audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_closed">IS_CLOSED = #is_closed:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_closed_date">SERVICECENTER_CLOSED_DATE = #servicecenter_closed_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="project_kc_date">PROJECT_KC_DATE = #project_kc_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="except_end_day">EXCEPT_END_DAY = #except_end_day:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hy_cls_id">HY_CLS_ID = #hy_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="kfsc_content">KFSC_CONTENT = #kfsc_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="jbys_content">JBYS_CONTENT = #jbys_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="trzy_content">TRZY_CONTENT = #trzy_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qdjy_content">QDJY_CONTENT = #qdjy_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pay_success">PAY_SUCCESS = #pay_success:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pay_date">PAY_DATE = #pay_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="effect_state">EFFECT_STATE = #effect_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="effect_date">EFFECT_DATE = #effect_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="effect_end_date">EFFECT_END_DATE = #effect_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="pay_type">PAY_TYPE = #pay_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_index_pro">P_INDEX_PRO = #p_index_pro:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="trade_no">TRADE_NO = #trade_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="servicecenter_no">SERVICECENTER_NO = #servicecenter_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_order_state">WL_ORDER_STATE = #wl_order_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_fahuo_date">WL_FAHUO_DATE = #wl_fahuo_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="wl_qrsh_date">WL_QRSH_DATE = #wl_qrsh_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="wl_comm">WL_COMM = #wl_comm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_id">WL_COMP_ID = #wl_comp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_code">WL_CODE = #wl_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">WL_COMP_NAME = #wl_comp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_waybill_no">WL_WAYBILL_NO = #wl_waybill_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="position_latlng">POSITION_LATLNG = #position_latlng:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="id_card">ID_CARD = #id_card:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_open_ad">IS_OPEN_AD = #is_open_ad:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="village_count_limit">VILLAGE_COUNT_LIMIT = #village_count_limit:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="banner">BANNER = #banner:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qrcode">QRCODE = #qrcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="condition_info">CONDITION_INFO = #condition_info:LONGVARCHAR#</isNotNull>
+			<isNotNull prepend="," property="logo">LOGO = #logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="business_license_path">BUSINESS_LICENSE_PATH = #business_license_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brought_account">BROUGHT_ACCOUNT = #brought_account:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_name">BANK_NAME = #bank_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brought_account_no">BROUGHT_ACCOUNT_NO = #brought_account_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_virtual">IS_VIRTUAL = #is_virtual:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="domain_site">DOMAIN_SITE = #domain_site:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="service_qrcode_path">SERVICE_QRCODE_PATH = #service_qrcode_path:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteServiceCenterInfo" parameterClass="serviceCenterInfo">
+		delete from SERVICE_CENTER_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

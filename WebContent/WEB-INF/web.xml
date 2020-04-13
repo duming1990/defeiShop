@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+
+	<display-name>webapp</display-name>
+
+	<!-- parameters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-context.xml</param-value>
+	</context-param>
+
+	<!-- filters -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 公司内部人员 -->
+	<filter>
+		<filter-name>managerFilter</filter-name>
+		<filter-class>com.ebiz.webapp.web.filter.SimpleAuthenticateFilter</filter-class>
+		<init-param>
+			<param-name>sessionKey</param-name>
+			<param-value>userInfo</param-value>
+		</init-param>
+		<init-param>
+			<param-name>userType</param-name>
+			<param-value>1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,100</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/commons/pages/timeout_admin.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>managerFilter</filter-name>
+		<url-pattern>/manager/admin/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 注册用户 -->
+	<filter>
+		<filter-name>customerFilter</filter-name>
+		<filter-class>com.ebiz.webapp.web.filter.SimpleAuthenticateFilter</filter-class>
+		<init-param>
+			<param-name>sessionKey</param-name>
+			<param-value>userInfo</param-value>
+		</init-param>
+		<init-param>
+			<param-name>userType</param-name>
+			<param-value>2,4,19</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/timeout.html</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>customerFilter</filter-name>
+		<url-pattern>/manager/customer/*</url-pattern>
+	</filter-mapping>
+	<!-- 注册用户 -->
+	
+	<filter>
+		<filter-name>urlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<init-param>
+			<param-name>confPath</param-name>
+			<param-value>/WEB-INF/config/urlrewrite/urlrewrite.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>WARN</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>urlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	
+	<!-- 防止用户重复登录检查 -->
+<!-- 	<filter> -->
+<!-- 		<filter-name>RepeatLoginCheckFilter</filter-name> -->
+<!-- 		<filter-class>com.ebiz.webapp.web.filter.RepeatLoginCheckFilter</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>RepeatLoginCheckFilter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+
+	<!-- 图片尺寸过滤 -->
+	<filter>
+		<filter-name>imageSizeFilter</filter-name>
+		<filter-class>com.ebiz.webapp.web.filter.ImageSizeFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>imageSizeFilter</filter-name>
+		<url-pattern>/files/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- app过滤 -->
+	<filter>
+		<filter-name>appFilter</filter-name>
+		<filter-class>com.ebiz.webapp.web.filter.AppFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>appFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- app过滤 -->
+	<filter>
+		<filter-name>filter</filter-name>
+		<filter-class>com.ebiz.webapp.web.filter.Filter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- listeners -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.ebiz.webapp.web.listener.ResourceListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.ebiz.webapp.web.listener.MySessionContextListener</listener-class>
+	</listener>
+
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
+
+	<!-- servlets -->
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/manager</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig-manager.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/alipay</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig-alipay.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/unionpay</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig-unionpay.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/service</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig-service.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/weixin</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig-weixin.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/m</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig-m.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/entp</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig-entp.xml</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>config/allinpay</param-name>
+			<param-value>/WEB-INF/config/struts/strutsConfig-allinpay.xml</param-value>
+		</init-param>
+		
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>VerificationCode</servlet-name>
+		<servlet-class>com.ebiz.ssi.web.servlet.VerificationCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VerificationCode</servlet-name>
+		<url-pattern>/images/VerificationCode.jpg</url-pattern>
+	</servlet-mapping>
+
+	<!-- fusioncharts图片导出 BEGIN -->
+	<servlet>
+		<servlet-name>FusionchartExporter</servlet-name>
+		<servlet-class>com.fusioncharts.exporter.servlet.FCExporter</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FusionchartExporter</servlet-name>
+		<url-pattern>/FusionchartExporter.do</url-pattern>
+	</servlet-mapping>
+	<!-- fusioncharts图片导出 END -->
+	
+	<!-- COS大附件上传 限制 500M BEGIN -->
+	<servlet>
+		<servlet-name>CosUploader</servlet-name>
+		<servlet-class>com.ebiz.webapp.web.servlet.uploader.CosUploaderServlet</servlet-class>
+		<init-param>
+			<param-name>fileSizeLimit</param-name>
+			<param-value>500</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CosUploader</servlet-name>
+		<url-pattern>/CosUploader.do</url-pattern>
+	</servlet-mapping>
+	<!-- COS大附件上传 限制 500M END -->
+	
+	<!-- 图片图片上传 BEGIN -->
+	<servlet>
+		<servlet-name>Uploader</servlet-name>
+		<servlet-class>com.ebiz.webapp.web.servlet.uploader.UploaderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Uploader</servlet-name>
+		<url-pattern>/upload.do</url-pattern>
+	</servlet-mapping>
+	<!-- 图片图片上传 END -->
+	
+	<!-- APP图片上传 BEGIN -->
+	<servlet>
+		<servlet-name>Apploader</servlet-name>
+		<servlet-class>com.ebiz.webapp.web.servlet.uploader.ApploaderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Apploader</servlet-name>
+		<url-pattern>/appload.do</url-pattern>
+	</servlet-mapping>
+	<!-- APP图片上传END -->
+	
+	
+	<!-- kindeditor 文本编辑器 BEGIN -->
+	<servlet>
+		<servlet-name>KindEditorJsonUploader</servlet-name>
+		<servlet-class>com.ebiz.webapp.web.servlet.uploader.KindEditorJsonUploaderServlent</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>KindEditorJsonUploader</servlet-name>
+		<url-pattern>/commons/kindeditor/KindEditorJsonUploader.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>KindEditorFileManagerJson</servlet-name>
+		<servlet-class>com.ebiz.webapp.web.servlet.uploader.KindEditorFileManagerJsonServlent</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>KindEditorFileManagerJson</servlet-name>
+		<url-pattern>/commons/kindeditor/KindEditorFileManagerJson.do</url-pattern>
+	</servlet-mapping>
+	<!-- kindeditor 文本编辑器 END -->
+	
+	<!-- 百度 ueditor BEGIN -->
+	<servlet>
+		<servlet-name>BaiduControllerServlet</servlet-name>
+		<servlet-class>com.baidu.ueditor.servlet.BaiduControllerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BaiduControllerServlet</servlet-name>
+		<url-pattern>/commons/ueditor/jsp/controller.jsp</url-pattern>
+	</servlet-mapping>
+	<!-- 百度 ueditor END -->
+	
+	<!-- weixin BEGIN -->
+	<servlet>
+		<description>微信服务器消息处理,由微信服务器回调</description>
+		<servlet-name>weixinApi</servlet-name>
+		<servlet-class>com.aiisen.weixin.ApiServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>weixinApi</servlet-name>
+		<url-pattern>/weixin/api.html</url-pattern>
+	</servlet-mapping>
+	<!-- weixin END -->	
+	
+   	<servlet>
+		<servlet-name>QrCodeServlet</servlet-name>
+		<servlet-class>com.ebiz.webapp.web.servlet.QrCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QrCodeServlet</servlet-name>
+		<url-pattern>/QrCodeForWeixin.jpg</url-pattern>
+	</servlet-mapping>
+	
+	<!-- welcome-file-list -->
+	<welcome-file-list>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- error-page-list -->
+	<error-page>
+		<error-code>403</error-code>
+		<location>/commons/error-pages/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/commons/error-pages/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/commons/error-pages/500.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>org.springframework.dao.DataAccessException</exception-type>
+		<location>/commons/error-pages/daoException.jsp</location>
+	</error-page>
+	 
+	<!-- jsp-config -->
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<scripting-invalid>true</scripting-invalid>
+			<trim-directive-whitespaces>true</trim-directive-whitespaces>
+		</jsp-property-group>
+	</jsp-config>
+	
+	
+	<!-- 解决在ie下，如果上传文件是rar格式无法下载问题 -->
+	<mime-mapping>   
+	  	<extension>rar</extension>   
+		<mime-type>application/rar</mime-type>   
+	</mime-mapping> 
+	<mime-mapping>   
+	  	<extension>docx</extension>   
+		<mime-type>application/msword</mime-type>   
+	</mime-mapping> 
+	<mime-mapping>   
+	  	<extension>xlsx</extension>   
+		<mime-type>application/vnd.ms-excel</mime-type>   
+	</mime-mapping>
+	<mime-mapping>   
+	  	<extension>pptx</extension>   
+		<mime-type>application/vnd.ms-powerpoint</mime-type>   
+	</mime-mapping>
+</web-app>

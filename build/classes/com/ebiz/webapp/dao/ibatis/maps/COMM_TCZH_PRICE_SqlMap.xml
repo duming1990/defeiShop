@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="COMM_TCZH_PRICE">
+
+	<typeAlias alias="commTczhPrice" type="com.ebiz.webapp.domain.CommTczhPrice" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCommTczhPrice" />
+		<flushOnExecute statement="updateCommTczhPrice" />
+		<flushOnExecute statement="deleteCommTczhPrice" />
+	</cacheModel>
+
+	<resultMap id="commTczhPriceResultForList" class="commTczhPrice">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="COMM_ID" property="comm_id" jdbcType="VARCHAR" />
+		<result column="COMM_PRICE" property="comm_price" jdbcType="INTEGER" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="INVENTORY" property="inventory" jdbcType="INTEGER" />
+		<result column="USER_SCORE_PERCENT" property="user_score_percent" jdbcType="INTEGER" />
+		<result column="COST_PRICE" property="cost_price" jdbcType="INTEGER" />
+		<result column="ORIG_PRICE" property="orig_price" jdbcType="INTEGER" />
+		<result column="ID" property="commTczhAttributeList" select="selectCommTczhAttributeListByTczhId" />
+		<result column="TOTAL_INPUT_STOCK" property="total_input_stock" jdbcType="INTEGER" />
+		<result column="TCZH_TYPE" property="tczh_type" jdbcType="INTEGER" />
+		<result column="BUYER_LIMIT_NUM" property="buyer_limit_num" jdbcType="INTEGER" />
+		<result column="PAR_ID" property="par_id" jdbcType="INTEGER" />
+		<result column="TCZH_NAME" property="tczh_name" jdbcType="VARCHAR" />
+		<result column="ATTR_ID" property="attr_id" jdbcType="INTEGER" />
+		<result column="COMM_BARCODE" property="comm_barcode" jdbcType="VARCHAR" />
+		<result column="EARLY_WARNING_VALUE" property="early_warning_value" jdbcType="INTEGER" />
+		<result column="COMM_WEIGHT" property="comm_weight" jdbcType="DECIMAL" />
+		<result column="GROUP_PRICE" property="group_price" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="commTczhPriceResult" class="commTczhPrice" extends="commTczhPriceResultForList">
+	</resultMap>
+	<resultMap id="commTczhPriceLinkCommInfoResult" class="commTczhPrice" extends="commTczhPriceResultForList">
+	    <result column="COMM_ID" property="map.comm_id" jdbcType="INTEGER" />
+	    <result column="COMM_NAME" property="map.comm_name" jdbcType="VARCHAR" />
+	    <result column="BARCODE" property="map.barcode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="sf-commTczhPrice">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_price">a.COMM_PRICE = #comm_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="inventory">a.INVENTORY = #inventory:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cost_price">a.COST_PRICE = #cost_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_score_percent">a.USER_SCORE_PERCENT = #user_score_percent:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="orig_price">a.ORIG_PRICE = #orig_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="total_input_stock">a.TOTAL_INPUT_STOCK = #total_input_stock:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tczh_type">a.TCZH_TYPE = #tczh_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="buyer_limit_num">a.BUYER_LIMIT_NUM = #buyer_limit_num:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="par_id">a.PAR_ID = #par_id:INTEGER#</isNotEmpty>	
+		<isNotEmpty prepend=" and " property="tczh_name">a.TCZH_NAME = #tczh_name:VARCHAR#</isNotEmpty>	
+		<isNotEmpty prepend=" and " property="attr_id">a.ATTR_ID = #attr_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="early_warning_value">a.EARLY_WARNING_VALUE = #early_warning_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_barcode">a.COMM_BARCODE = #comm_barcode:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_weight">a.COMM_WEIGHT = #comm_weight:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="group_price">a.GROUP_PRICE = #group_price:DECIMAL#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.comm_barcode_like">a.COMM_BARCODE like '%'  #map.comm_barcode_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_name_like">t.COMM_NAME like '%'  #map.comm_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.critical">a.early_warning_value>=a.inventory</isNotEmpty>
+	</sql>
+
+	<select id="selectCommTczhPrice" resultMap="commTczhPriceResult" parameterClass="commTczhPrice" cacheModel="oneDayCache">
+		select * from COMM_TCZH_PRICE a where 1 = 1
+		<include refid="sf-commTczhPrice" />
+	</select>
+
+	<select id="selectCommTczhPriceList" resultMap="commTczhPriceResultForList" parameterClass="commTczhPrice" cacheModel="oneDayCache">
+		
+		select * from COMM_TCZH_PRICE a where 1 = 1
+		<include refid="sf-commTczhPrice" />
+		<isNotEmpty prepend=" " property="map.order_by_comm_price_asc">order by a.comm_price asc</isNotEmpty>
+		<isNotEmpty prepend=" " property="map.order_by_inventory_asc">order by a.inventory asc</isNotEmpty>
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectCommTczhPriceCount" resultClass="int" parameterClass="commTczhPrice" cacheModel="oneDayCache">
+		select count(*) from COMM_TCZH_PRICE a left join 
+		COMM_INFO t on a.COMM_ID = t.ID where 1 = 1
+		<include refid="sf-commTczhPrice" />
+		and t.COMM_TYPE=3 
+		<isNotEmpty prepend=" " property="map.own_entp_id">and t.own_entp_id=#map.own_entp_id#</isNotEmpty>
+	</select>
+
+
+	<select id="selectCommTczhPricePaginatedList" resultMap="commTczhPriceLinkCommInfoResult" parameterClass="commTczhPrice" cacheModel="oneDayCache">
+		
+		select a.*,t.COMM_BARCODE as BARCODE,t.COMM_NAME,t.id as comm_id from COMM_TCZH_PRICE a left join 
+		COMM_INFO t on a.COMM_ID = t.ID where 1 = 1
+		<include refid="sf-commTczhPrice" />
+		and t.COMM_TYPE=3 
+		<isNotEmpty prepend=" " property="map.own_entp_id">and t.own_entp_id=#map.own_entp_id#</isNotEmpty>
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCommTczhPrice" parameterClass="commTczhPrice">
+		<![CDATA[insert into COMM_TCZH_PRICE (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_price">COMM_PRICE</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="inventory">INVENTORY</isNotNull>	
+			<isNotNull prepend="," property="user_score_percent">USER_SCORE_PERCENT</isNotNull>	
+			<isNotNull prepend="," property="cost_price">COST_PRICE</isNotNull>	
+			<isNotNull prepend="," property="orig_price">ORIG_PRICE</isNotNull>	
+			<isNotNull prepend="," property="total_input_stock">TOTAL_INPUT_STOCK</isNotNull>	
+			<isNotNull prepend="," property="tczh_type">TCZH_TYPE</isNotNull>
+			<isNotNull prepend="," property="buyer_limit_num">BUYER_LIMIT_NUM</isNotNull>	
+			<isNotNull prepend="," property="par_id">PAR_ID</isNotNull>
+			<isNotNull prepend="," property="tczh_name">TCZH_NAME</isNotNull>	
+			<isNotNull prepend="," property="attr_id">ATTR_ID</isNotNull>	
+			<isNotNull prepend="," property="early_warning_value">EARLY_WARNING_VALUE</isNotNull>	
+			<isNotNull prepend="," property="comm_barcode">COMM_BARCODE</isNotNull>	
+			<isNotNull prepend="," property="comm_weight">COMM_WEIGHT</isNotNull>	
+			<isNotNull prepend="," property="group_price">GROUP_PRICE</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_price">#comm_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="inventory">#inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_score_percent">#user_score_percent:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cost_price">#cost_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="orig_price">#orig_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="total_input_stock">#total_input_stock:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="tczh_type">#tczh_type:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="buyer_limit_num">#buyer_limit_num:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="par_id">#par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="tczh_name">#tczh_name:VARCHAR#</isNotNull>	
+			<isNotNull prepend="," property="attr_id">#attr_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="early_warning_value">#early_warning_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_barcode">#comm_barcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_weight">#comm_weight:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="group_price">#group_price:DECIMAL#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+	
+	<update id="updateCommTczhPriceInventory" parameterClass="commTczhPrice">
+		update COMM_TCZH_PRICE set INVENTORY = INVENTORY - #inventory:INTEGER# where ID = #id# 
+	</update>
+
+	<update id="updateCommTczhPrice" parameterClass="commTczhPrice">
+		update COMM_TCZH_PRICE
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_price">COMM_PRICE = #comm_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="inventory">INVENTORY = #inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_score_percent">USER_SCORE_PERCENT = #user_score_percent:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cost_price">COST_PRICE = #cost_price:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="orig_price">ORIG_PRICE = #orig_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="total_input_stock">TOTAL_INPUT_STOCK = #total_input_stock:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="buyer_limit_num">BUYER_LIMIT_NUM = #buyer_limit_num:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="par_id">PAR_ID = #par_id:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="tczh_name">TCZH_NAME = #tczh_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tczh_type">TCZH_TYPE = #tczh_type:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="attr_id">ATTR_ID = #attr_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="early_warning_value">EARLY_WARNING_VALUE = #early_warning_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_barcode">COMM_BARCODE = #comm_barcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_weight">COMM_WEIGHT = #comm_weight:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="group_price">GROUP_PRICE = #comm_weight:DECIMAL#</isNotNull>
+
+			<isNotNull prepend="," property="map.add_inventory">INVENTORY = INVENTORY + #map.add_inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.sub_inventory">INVENTORY = INVENTORY - #map.sub_inventory:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.set_user_score_percent_null">USER_SCORE_PERCENT = null</isNotNull>
+			
+			<isNotNull prepend="," property="map.add_total_input_stock">TOTAL_INPUT_STOCK = TOTAL_INPUT_STOCK + #map.add_total_input_stock:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">COMM_ID = #comm_id:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.where_cal_inventory">INVENTORY >= #map.where_cal_inventory#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCommTczhPrice" parameterClass="commTczhPrice">
+		delete from COMM_TCZH_PRICE where 1 = 1
+		<isNotEmpty prepend=" and " property="comm_id">COMM_ID = #comm_id:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.tczh_type">TCZH_TYPE = #map.tczh_type:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_id">COMM_ID = #map.comm_id:VARCHAR#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

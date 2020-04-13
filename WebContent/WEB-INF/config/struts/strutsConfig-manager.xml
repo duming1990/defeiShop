@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<!-- ======================================== Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="lazyForm" type="org.apache.struts.validator.LazyValidatorForm" />
+
+		<form-bean name="fullLazyForm" type="org.apache.struts.validator.LazyValidatorForm">
+			<form-property name="imageField" type="org.apache.struts.util.ImageButtonBean" />
+			<form-property name="pager" type="com.ebiz.ssi.web.struts.bean.Pager" />
+			<form-property name="pks" type="java.lang.String[]" />
+			<form-property name="link_ids" type="java.lang.String[]" />
+			<form-property name="link_nums" type="java.lang.String[]" />
+			<form-property name="poor_ids" type="java.lang.String[]" />
+		</form-bean>
+	</form-beans>
+
+	<global-forwards>
+		<forward name="index" path="index.do" redirect="true" />
+	</global-forwards>
+
+	<action-mappings>
+		<action path="/login" attribute="loginForm" name="lazyForm" type="com.ebiz.webapp.web.struts.manager.LoginAction"
+			parameter="method" scope="request" validate="false">
+			<forward name="success" path="/admin/Frames.do" redirect="true" />
+			<forward name="login" path="/login.jsp" />
+		</action>
+
+		<action path="/*/*" attribute="af" name="fullLazyForm" type="com.ebiz.webapp.web.struts.manager.{1}.{2}Action"
+			parameter="method" scope="request" validate="false">
+			<forward name="list" path="/{1}/{2}/list.jsp" />
+			<forward name="view" path="/{1}/{2}/view.jsp" />
+			<forward name="input" path="/{1}/{2}/form.jsp" />
+			<forward name="success" path="/{1}/{2}.do?method=list" redirect="true" />
+
+			<forward name="index" path="/{1}/index.jsp" />
+			<forward name="indexFrame" path="/{1}/{2}/index.jsp" />
+		</action>
+	</action-mappings>
+
+	<!-- =================================== Message Resources Definitions -->
+	<message-resources parameter="i18n/messages" />
+</struts-config>

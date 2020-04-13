@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="CARD_GEN_HIS">
+
+	<typeAlias alias="cardGenHis" type="com.ebiz.webapp.domain.CardGenHis" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCardGenHis" />
+		<flushOnExecute statement="updateCardGenHis" />
+		<flushOnExecute statement="deleteCardGenHis" />
+	</cacheModel>
+
+	<resultMap id="cardGenHisResultForList" class="cardGenHis">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="CARD_APPLY_ID" property="card_apply_id" jdbcType="INTEGER" />
+		<result column="GEN_NO" property="gen_no" jdbcType="VARCHAR" />
+		<result column="CARD_TYPE" property="card_type" jdbcType="INTEGER" />
+		<result column="CARD_AMOUNT" property="card_amount" jdbcType="DECIMAL" />
+		<result column="PRE_CODE" property="pre_code" jdbcType="VARCHAR" />
+		<result column="B_CODE_NO" property="b_code_no" jdbcType="VARCHAR" />
+		<result column="E_CODE_NO" property="e_code_no" jdbcType="VARCHAR" />
+		<result column="GEN_COUNT" property="gen_count" jdbcType="INTEGER" />
+		<result column="USED_COUNT" property="used_count" jdbcType="INTEGER" />
+		<result column="INFO_STATE" property="info_state" jdbcType="INTEGER" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_SYSTEM" property="is_system" jdbcType="INTEGER" />
+		<result column="ADD_UID" property="add_uid" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_UID" property="modify_uid" jdbcType="INTEGER" />
+		<result column="MODIFY_DATE" property="modify_date" jdbcType="TIMESTAMP" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_UID" property="del_uid" jdbcType="INTEGER" />
+		<result column="OWN_SERVICE_ID" property="own_service_id" jdbcType="INTEGER" />
+		<result column="OWN_SERVICE_NAME" property="own_service_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="cardGenHisResult" class="cardGenHis" extends="cardGenHisResultForList">
+	</resultMap>
+
+	<sql id="sf-cardGenHis">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_apply_id">a.CARD_APPLY_ID = #card_apply_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="gen_no">a.GEN_NO = #gen_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_type">a.CARD_TYPE = #card_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_amount">a.CARD_AMOUNT = #card_amount:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pre_code">a.PRE_CODE = #pre_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="b_code_no">a.B_CODE_NO = #b_code_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="e_code_no">a.E_CODE_NO = #e_code_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="gen_count">a.GEN_COUNT = #gen_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="used_count">a.USED_COUNT = #used_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="info_state">a.INFO_STATE = #info_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">a.REMARK = #remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_system">a.IS_SYSTEM = #is_system:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_uid">a.ADD_UID = #add_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="modify_uid">a.MODIFY_UID = #modify_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="modify_date">a.MODIFY_DATE = #modify_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_uid">a.DEL_UID = #del_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_service_id">a.OWN_SERVICE_ID = #own_service_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_service_name">a.OWN_SERVICE_NAME = #own_service_name:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.gen_no_like">a.gen_no like '%' #map.gen_no_like# '%'</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.ADD_DATE >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+	     	a.ADD_DATE <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	</sql>
+
+	<select id="selectCardGenHis" resultMap="cardGenHisResult" parameterClass="cardGenHis" cacheModel="oneDayCache">
+		select * from CARD_GEN_HIS a where 1 = 1
+		<include refid="sf-cardGenHis" />
+	</select>
+
+	<select id="selectCardGenHisList" resultMap="cardGenHisResultForList" parameterClass="cardGenHis" cacheModel="oneDayCache">
+		select * from CARD_GEN_HIS a where 1 = 1
+		<include refid="sf-cardGenHis" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectCardGenHisCount" resultClass="int" parameterClass="cardGenHis" cacheModel="oneDayCache">
+		select count(*) from CARD_GEN_HIS a where 1 = 1
+		<include refid="sf-cardGenHis" />
+	</select>
+
+	<select id="selectCardGenHisPaginatedList" resultMap="cardGenHisResult" parameterClass="cardGenHis" cacheModel="oneDayCache">
+		select * from CARD_GEN_HIS a where 1 = 1
+		<include refid="sf-cardGenHis" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCardGenHis" parameterClass="cardGenHis">
+		<![CDATA[insert into CARD_GEN_HIS (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="card_apply_id">CARD_APPLY_ID</isNotNull>	
+			<isNotNull prepend="," property="gen_no">GEN_NO</isNotNull>	
+			<isNotNull prepend="," property="card_type">CARD_TYPE</isNotNull>	
+			<isNotNull prepend="," property="card_amount">CARD_AMOUNT</isNotNull>	
+			<isNotNull prepend="," property="pre_code">PRE_CODE</isNotNull>	
+			<isNotNull prepend="," property="b_code_no">B_CODE_NO</isNotNull>	
+			<isNotNull prepend="," property="e_code_no">E_CODE_NO</isNotNull>	
+			<isNotNull prepend="," property="gen_count">GEN_COUNT</isNotNull>	
+			<isNotNull prepend="," property="used_count">USED_COUNT</isNotNull>	
+			<isNotNull prepend="," property="info_state">INFO_STATE</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_system">IS_SYSTEM</isNotNull>	
+			<isNotNull prepend="," property="add_uid">ADD_UID</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="modify_uid">MODIFY_UID</isNotNull>	
+			<isNotNull prepend="," property="modify_date">MODIFY_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_uid">DEL_UID</isNotNull>	
+			<isNotNull prepend="," property="own_service_id">OWN_SERVICE_ID</isNotNull>	
+			<isNotNull prepend="," property="own_service_name">OWN_SERVICE_NAME</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_apply_id">#card_apply_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gen_no">#gen_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_type">#card_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_amount">#card_amount:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pre_code">#pre_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="b_code_no">#b_code_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="e_code_no">#e_code_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="gen_count">#gen_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="used_count">#used_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="info_state">#info_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_system">#is_system:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_uid">#add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="modify_uid">#modify_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="modify_date">#modify_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">#del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_service_id">#own_service_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_service_name">#own_service_name:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCardGenHis" parameterClass="cardGenHis">
+		update CARD_GEN_HIS
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_apply_id">CARD_APPLY_ID = #card_apply_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gen_no">GEN_NO = #gen_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="card_type">CARD_TYPE = #card_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_amount">CARD_AMOUNT = #card_amount:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pre_code">PRE_CODE = #pre_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="b_code_no">B_CODE_NO = #b_code_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="e_code_no">E_CODE_NO = #e_code_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="gen_count">GEN_COUNT = #gen_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="used_count">USED_COUNT = #used_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="info_state">INFO_STATE = #info_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_system">IS_SYSTEM = #is_system:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_uid">ADD_UID = #add_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="modify_uid">MODIFY_UID = #modify_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="modify_date">MODIFY_DATE = #modify_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_uid">DEL_UID = #del_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_service_id">OWN_SERVICE_ID = #own_service_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_service_name">OWN_SERVICE_NAME = #own_service_name:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="map.add_used_count">USED_COUNT = USED_COUNT + #map.add_used_count#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCardGenHis" parameterClass="cardGenHis">
+		delete from CARD_GEN_HIS where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

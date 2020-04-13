@@ -1,0 +1,1515 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ORDER_INFO">
+
+	<typeAlias alias="orderInfo" type="com.ebiz.webapp.domain.OrderInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertOrderInfo" />
+		<flushOnExecute statement="updateOrderInfo" />
+		<flushOnExecute statement="deleteOrderInfo" />
+	</cacheModel>
+
+	<resultMap id="orderInfoResultForList" class="orderInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TRADE_INDEX" property="trade_index" jdbcType="VARCHAR" />
+		<result column="TRADE_MERGER_INDEX" property="trade_merger_index" jdbcType="VARCHAR" />
+		<result column="ORDER_NUM" property="order_num" jdbcType="INTEGER" />
+		<result column="ORDER_MONEY" property="order_money" jdbcType="INTEGER" />
+		<result column="ORDER_STATE" property="order_state" jdbcType="INTEGER" />
+		<result column="SHIPPING_ADDRESS_ID" property="shipping_address_id" jdbcType="INTEGER" />
+		<result column="ORDER_DATE" property="order_date" jdbcType="TIMESTAMP" />
+		<result column="INVOICE_TYPE" property="invoice_type" jdbcType="INTEGER" />
+		<result column="INVOICES_PAYABLE" property="invoices_payable" jdbcType="VARCHAR" />
+		<result column="INVOICES_NO" property="invoices_no" jdbcType="VARCHAR" />
+		<result column="DELIVERY_TIME" property="delivery_time" jdbcType="VARCHAR" />
+		<result column="INVOICE_STATUS" property="invoice_status" jdbcType="INTEGER" />
+		<result column="PAY_TYPE" property="pay_type" jdbcType="INTEGER" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="END_DATE" property="end_date" jdbcType="TIMESTAMP" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ENTP_NAME" property="entp_name" jdbcType="VARCHAR" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="ORDER_TYPE" property="order_type" jdbcType="INTEGER" />
+		<result column="MATFLOW_PRICE" property="matflow_price" jdbcType="INTEGER" />
+		<result column="ADD_ENTP_ID" property="add_entp_id" jdbcType="INTEGER" />
+		<result column="ADD_ENTP_NAME" property="add_entp_name" jdbcType="VARCHAR" />
+		<result column="PAY_DATE" property="pay_date" jdbcType="TIMESTAMP" />
+		<result column="CONFIRM_DATE" property="confirm_date" jdbcType="TIMESTAMP" />
+		<result column="SERVICE_PRICE" property="service_price" jdbcType="INTEGER" />
+		<result column="ORDER_WEIGHT" property="order_weight" jdbcType="INTEGER" />
+		<result column="IS_FREESHIP" property="is_freeship" jdbcType="INTEGER" />
+		<result column="ORDER_STATE_ADMIN" property="order_state_admin" jdbcType="INTEGER" />
+		<result column="IS_PRICE_MODIFY" property="is_price_modify" jdbcType="INTEGER" />
+		<result column="PRICE_MODIFY_OLD" property="price_modify_old" jdbcType="INTEGER" />
+		<result column="PRICE_MODIFY_DATE" property="price_modify_date" jdbcType="TIMESTAMP" />
+		<result column="PRICE_MODIFY_REMARK" property="price_modify_remark" jdbcType="VARCHAR" />
+		<result column="MATFLOW_PRICE_MODIFY_OLD" property="matflow_price_modify_old" jdbcType="INTEGER" />
+		<result column="PRICE_MODIFY_USER_ID" property="price_modify_user_id" jdbcType="INTEGER" />
+		<result column="REL_NAME" property="rel_name" jdbcType="VARCHAR" />
+		<result column="REL_PHONE" property="rel_phone" jdbcType="VARCHAR" />
+		<result column="REL_TEL" property="rel_tel" jdbcType="VARCHAR" />
+		<result column="REL_PROVINCE" property="rel_province" jdbcType="INTEGER" />
+		<result column="REL_CITY" property="rel_city" jdbcType="INTEGER" />
+		<result column="REL_REGION" property="rel_region" jdbcType="INTEGER" />
+		<result column="REL_ADDR" property="rel_addr" jdbcType="VARCHAR" />
+		<result column="REL_EMAIL" property="rel_email" jdbcType="VARCHAR" />
+		<result column="REL_ZIP" property="rel_zip" jdbcType="INTEGER" />
+		<result column="QDYH_ID" property="qdyh_id" jdbcType="INTEGER" />
+		<result column="QDYH_TIP_DESC" property="qdyh_tip_desc" jdbcType="VARCHAR" />
+		<result column="YHQ_ID" property="yhq_id" jdbcType="INTEGER" />
+		<result column="YHQ_TIP_DESC" property="yhq_tip_desc" jdbcType="VARCHAR" />
+		<result column="JFDH_MONEY" property="jfdh_money" jdbcType="INTEGER" />
+		<result column="TRADE_NO" property="trade_no" jdbcType="VARCHAR" />
+		<result column="QRSH_DATE" property="qrsh_date" jdbcType="TIMESTAMP" />
+		<result column="IS_SQ_YJ" property="is_sq_yj" jdbcType="INTEGER" />
+		<result column="IS_TEST" property="is_test" jdbcType="INTEGER" />
+		<result column="RULE_VERSION" property="rule_version" jdbcType="INTEGER" />
+		<result column="IS_FUXIAO" property="is_fuxiao" jdbcType="INTEGER" />
+		<result column="LINE_TYPE" property="line_type" jdbcType="INTEGER" />
+		<result column="ORDER_MONEY_COST" property="order_money_cost" jdbcType="DECIMAL" />
+		<result column="ORDER_PASSWORD" property="order_password" jdbcType="VARCHAR" />
+		<result column="FAHUO_DATE" property="fahuo_date" jdbcType="TIMESTAMP" />
+		<result column="IS_OPT" property="is_opt" jdbcType="INTEGER" />
+		<result column="FAHUO_REMARK" property="fahuo_remark" jdbcType="VARCHAR" />
+		<result column="MONEY_CASH" property="money_cash" jdbcType="DECIMAL" />
+		<result column="MONEY_BI" property="money_bi" jdbcType="DECIMAL" />
+		<result column="MONEY_BI_LOCK" property="money_bi_lock" jdbcType="DECIMAL" />
+		<result column="PAY_EXTRA_PARAMS" property="pay_extra_params" jdbcType="VARCHAR" />
+		<result column="IS_ZITI" property="is_ziti" jdbcType="INTEGER" />
+		<result column="NO_DIS_MONEY" property="no_dis_money" jdbcType="DECIMAL" />
+		<result column="DIS_BL" property="dis_bl" jdbcType="DECIMAL" />
+		<result column="SEND_USER_ID" property="send_user_id" jdbcType="INTEGER" />
+		<result column="PAY_PLATFORM" property="pay_platform" jdbcType="INTEGER" />
+		<result column="PROFIT_MONEY" property="profit_money" jdbcType="DECIMAL" />
+		<result column="PROFIT_BL" property="profit_bl" jdbcType="DECIMAL" />
+		<result column="DAISHOU_OR_HASPAY" property="daishou_or_haspay" jdbcType="INTEGER" />
+		<result column="DAISHOU_PROFIT_BL" property="daishou_profit_bl" jdbcType="DECIMAL" />
+		<result column="FINISH_DATE" property="finish_date" jdbcType="TIMESTAMP" />
+		<result column="XIADAN_USER_SUM" property="xiadan_user_sum" jdbcType="DECIMAL" />
+		<result column="XIADAN_USER_BALANCE" property="xiadan_user_balance" jdbcType="DECIMAL" />
+		<result column="ENTP_USER_BALANCE" property="entp_user_balance" jdbcType="DECIMAL" />
+		<result column="ENTP_HUOKUAN_BI" property="entp_huokuan_bi" jdbcType="DECIMAL" />
+		<result column="DELAY_SHOUHUO" property="delay_shouhuo" jdbcType="INTEGER" />
+  		<result column="RES_BALANCE" property="res_balance" jdbcType="DECIMAL" />
+  		<result column="IS_RUCHI" property="is_ruchi" jdbcType="INTEGER" />
+  		<result column="REWARD_MONEY" property="reward_money" jdbcType="DECIMAL" />
+  		<result column="pre_bigdecimal" property="pre_bigdecimal" jdbcType="DECIMAL" />
+  		<result column="IS_ZHUANYUAN" property="is_zhuanyuan" jdbcType="INTEGER" />
+  		<result column="RED_MONEY" property="red_money" jdbcType="DECIMAL" />
+  		<result column="DEVICE_NO" property="device_no" jdbcType="VARCHAR" />
+  		<result column="VILLAGE_ID" property="village_id" jdbcType="INTEGER" />
+  		<result column="IS_SYNC_JD" property="is_sync_jd" jdbcType="INTEGER" />
+  		<result column="SYNC_DATE" property="sync_date" jdbcType="TIMESTAMP" />
+  		<result column="JD_ORDER_NO" property="jd_order_no" jdbcType="VARCHAR" />
+  		<result column="IS_CONFIRM_JD" property="is_confirm_jd" jdbcType="INTEGER" />
+  		<result column="JD_CONFIRM_DATE" property="jd_confirm_date" jdbcType="TIMESTAMP" />
+  		<result column="IS_COMMENT" property="is_comment" jdbcType="INTEGER" />
+  		<result column="FP_STATE" property="fp_state" jdbcType="INTEGER" />
+  		<result column="ENTP_CHARGE_NO" property="entp_charge_no" jdbcType="VARCHAR" />
+  		<result column="PUBLISH_USER_ID" property="publish_user_id" jdbcType="INTEGER" />
+  		<result column="YHQ_SUN_MONEY" property="yhq_sun_money" jdbcType="DECIMAL" />
+  		<result column="LINK_CHECK_ID" property="link_check_id" jdbcType="INTEGER" />
+  		<result column="IS_CHECK" property="is_check" jdbcType="INTEGER" />
+  		<result column="REAL_PAY_MONEY" property="real_pay_money" jdbcType="DECIMAL" />
+  		<result column="WELFARE_PAY_MONEY" property="welfare_pay_money" jdbcType="DECIMAL" />
+  		<result column="CARD_PAY_MONEY" property="card_pay_money" jdbcType="DECIMAL" />
+  		<result column="MARK_ORDER_ID" property="mark_order_id" jdbcType="INTEGER" />
+  		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />
+		<result column="AUDIT_USER_ID" property="audit_user_id" jdbcType="INTEGER" />
+		<result column="CARD_ID" property="card_id" jdbcType="INTEGER" />
+		<result column="AUDIT_DATE" property="audit_date" jdbcType="TIMESTAMP" />
+		<result column="AUDIT_DESC" property="audit_desc" jdbcType="VARCHAR" />
+		<result column="LEADER_ORDER_ID" property="leader_order_id" jdbcType="INTEGER" />
+		<result column="IS_LEADER" property="is_leader" jdbcType="INTEGER" />
+		<result column="IS_GROUP_SUCCESS" property="is_group_success" jdbcType="INTEGER" />
+		<result column="JD_OID" property="jd_oid" jdbcType="VARCHAR" />
+		<result column="IS_RELOAD_PAY" property="is_reload_pay" jdbcType="INTEGER" />
+		<result column="ACTIVITY_ID" property="activity_id" jdbcType="INTEGER" />
+		<result column="GROUP_NUMBER" property="group_number" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="orderInfoResult" class="orderInfo" extends="orderInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-orderInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="trade_index">a.TRADE_INDEX = #trade_index:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="trade_merger_index">a.TRADE_MERGER_INDEX = #trade_merger_index:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_num">a.ORDER_NUM = #order_num:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_money">a.ORDER_MONEY = #order_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_state">a.ORDER_STATE = #order_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="shipping_address_id">a.SHIPPING_ADDRESS_ID = #shipping_address_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_date">a.ORDER_DATE = #order_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="invoice_type">a.INVOICE_TYPE = #invoice_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="invoices_payable">a.INVOICES_PAYABLE = #invoices_payable:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="invoices_no">a.INVOICES_NO = #invoices_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="delivery_time">a.DELIVERY_TIME = #delivery_time:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="invoice_status">a.INVOICE_STATUS = #invoice_status:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_type">a.PAY_TYPE = #pay_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">a.REMARK = #remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="end_date">a.END_DATE = #end_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_name">a.ENTP_NAME = #entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_type">a.ORDER_TYPE = #order_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="matflow_price">a.MATFLOW_PRICE = #matflow_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_entp_id">a.ADD_ENTP_ID = #add_entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_entp_name">a.ADD_ENTP_NAME = #add_entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_date">a.PAY_DATE = #pay_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="confirm_date">a.CONFIRM_DATE = #confirm_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="service_price">a.SERVICE_PRICE = #service_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_weight">a.ORDER_WEIGHT = #order_weight:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_freeship">a.IS_FREESHIP = #is_freeship:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_state_admin">a.ORDER_STATE_ADMIN = #order_state_admin:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_price_modify">a.IS_PRICE_MODIFY = #is_price_modify:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_modify_old">a.PRICE_MODIFY_OLD = #price_modify_old:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_modify_date">a.PRICE_MODIFY_DATE = #price_modify_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_modify_remark">a.PRICE_MODIFY_REMARK = #price_modify_remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="matflow_price_modify_old">a.MATFLOW_PRICE_MODIFY_OLD = #matflow_price_modify_old:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price_modify_user_id">a.PRICE_MODIFY_USER_ID = #price_modify_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_name">a.REL_NAME = #rel_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_phone">a.REL_PHONE = #rel_phone:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_tel">a.REL_TEL = #rel_tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_province">a.REL_PROVINCE = #rel_province:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_city">a.REL_CITY = #rel_city:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_region">a.REL_REGION = #rel_region:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_addr">a.REL_ADDR = #rel_addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_email">a.REL_EMAIL = #rel_email:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rel_zip">a.REL_ZIP = #rel_zip:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qdyh_id">a.QDYH_ID = #qdyh_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qdyh_tip_desc">a.QDYH_TIP_DESC = #qdyh_tip_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_id">a.YHQ_ID = #yhq_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_tip_desc">a.YHQ_TIP_DESC = #yhq_tip_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="jfdh_money">a.JFDH_MONEY = #jfdh_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="trade_no">a.TRADE_NO = #trade_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qrsh_date">a.QRSH_DATE = #qrsh_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_sq_yj">a.IS_SQ_YJ = #is_sq_yj:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_test">a.IS_TEST = #is_test:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="rule_version">a.RULE_VERSION = #rule_version:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_fuxiao">a.IS_FUXIAO = #is_fuxiao:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="line_type">a.LINE_TYPE = #line_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_money_cost">a.ORDER_MONEY_COST = #order_money_cost:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_password">a.ORDER_PASSWORD = #order_password:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fahuo_date">a.FAHUO_DATE = #fahuo_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_opt">a.IS_OPT = #is_opt:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fahuo_remark">a.FAHUO_REMARK = #fahuo_remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="money_cash">a.MONEY_CASH = #money_cash:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="money_bi">a.MONEY_BI = #money_bi:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="money_bi_lock">a.MONEY_BI_LOCK = #money_bi_lock:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_extra_params">a.PAY_EXTRA_PARAMS = #pay_extra_params:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_ziti">a.IS_ZITI = #is_ziti:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="no_dis_money">a.NO_DIS_MONEY = #no_dis_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="dis_bl">a.DIS_BL = #dis_bl:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="send_user_id">a.SEND_USER_ID = #send_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_platform">a.PAY_PLATFORM = #pay_platform:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="profit_money">a.PROFIT_MONEY = #profit_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="profit_bl">a.PROFIT_BL = #profit_bl:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="daishou_or_haspay">a.DAISHOU_OR_HASPAY = #daishou_or_haspay:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="daishou_profit_bl">a.DAISHOU_PROFIT_BL = #daishou_profit_bl:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="finish_date">a.FINISH_DATE = #finish_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="xiadan_user_sum">a.XIADAN_USER_SUM = #xiadan_user_sum:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="xiadan_user_balance">a.XIADAN_USER_BALANCE = #xiadan_user_balance:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_user_balance">a.ENTP_USER_BALANCE = #entp_user_balance:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_huokuan_bi">a.ENTP_HUOKUAN_BI = #entp_huokuan_bi:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="delay_shouhuo">a.DELAY_SHOUHUO = #delay_shouhuo:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="res_balance">a.RES_BALANCE = #res_balance:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_ruchi">a.IS_RUCHI = #is_ruchi:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="reward_money">a.REWARD_MONEY = #reward_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pre_bigdecimal">a.PRE_BIGDECIMAL = #pre_bigdecimal:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_zhuanyuan">a.IS_ZHUANYUAN = #is_zhuanyuan:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="red_money">a.RED_MONEY = #red_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="device_no">a.DEVICE_NO = #device_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="village_id">a.VILLAGE_ID = #village_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_sync_jd">a.IS_SYNC_JD = #is_sync_jd:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sync_date">a.SYNC_DATE = #sync_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="jd_order_no">a.JD_ORDER_NO = #jd_order_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_confirm_jd">a.IS_CONFIRM_JD = #is_confirm_jd:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="jd_confirm_date">a.JD_CONFIRM_DATE = #jd_confirm_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_comment">a.IS_COMMENT = #is_comment:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fp_state">a.FP_STATE = #fp_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_charge_no">a.ENTP_CHARGE_NO = #entp_charge_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="publish_user_id">a.PUBLISH_USER_ID = #publish_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_sun_money">a.YHQ_SUN_MONEY = #yhq_sun_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_check_id">a.LINK_CHECK_ID = #link_check_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_check">a.IS_CHECK = #is_check:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="real_pay_money">a.real_pay_money = #real_pay_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="welfare_pay_money">a.welfare_pay_money = #welfare_pay_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_pay_money">a.card_pay_money = #card_pay_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mark_order_id">a.MARK_ORDER_ID = #mark_order_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_id">a.AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_id">a.CARD_ID = #card_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_date">a.AUDIT_DATE = #audit_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_desc">a.AUDIT_DESC = #audit_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="leader_order_id">a.LEADER_ORDER_ID = #leader_order_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_leader">a.IS_LEADER = #is_leader:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_group_success">a.IS_GROUP_SUCCESS = #is_group_success:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="jd_oid">a.JD_OID = #jd_oid:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_reload_pay">a.IS_RELOAD_PAY = #is_reload_pay:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="activity_id">a.ACTIVITY_ID = #activity_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="group_number">a.GROUP_NUMBER = #group_number:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.trade_no_like">a.TRADE_NO like '%' #map.trade_no_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.trade_index_like">a.TRADE_INDEX like '%' #map.trade_index_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.trade_merger_index_like">a.TRADE_MERGER_INDEX like '%' #map.trade_merger_index_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.goods_name_like">a.trade_no like '%' #map.goods_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.entp_name_like">a.ENTP_NAME like '%'  #map.entp_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.trade_index_not_like">a.TRADE_INDEX  not like '%'  #map.trade_index_not_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_null_yhq_id">a.YHQ_ID is not null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_null_qdyh_id">a.QDYH_ID is not null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state_not_in">a.ORDER_STATE not in ($map.order_state_not_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pay_type_in">a.pay_type in($map.pay_type_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type_in">a.order_type in($map.order_type_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type_ne_in">a.order_type not in($map.order_type_ne_in$)</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.entp_id_in">a.entp_id in($map.entp_id_in$)</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.entp_name_is_not_null">a.entp_name is not null</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.order_state_in">a.ORDER_STATE in ($map.order_state_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pay_platform_in">a.PAY_PLATFORM in ($map.pay_platform_in$)</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.add_user_name_like">a.add_user_name like '%' #map.add_user_name_like# '%'</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.eq_end_date">
+			DATE_FORMAT(a.END_DATE,'%Y-%m-%d')=DATE_FORMAT(SYSDATE(),'%Y-%m-%d')
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pay_type0_10_or_pay_type2_0">((a.ORDER_STATE =10 and a.pay_type = 0) or (a.ORDER_STATE =0 and a.pay_type != 0))</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			a.add_date <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_pay_date"><![CDATA[
+			a.pay_date >= str_to_date(#map.st_pay_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date"><![CDATA[
+			a.pay_date <= str_to_date(concat(#map.en_pay_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_pay_date_queryNewOrder"><![CDATA[
+			a.pay_date >= str_to_date(#map.st_pay_date_queryNewOrder:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date_queryNewOrder"><![CDATA[
+			a.pay_date <= str_to_date(#map.en_pay_date_queryNewOrder:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_qrsh_date"><![CDATA[
+			a.qrsh_date >= str_to_date(#map.st_qrsh_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_qrsh_date"><![CDATA[
+			a.qrsh_date <= str_to_date(concat(#map.en_qrsh_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		
+		<isNotEmpty prepend=" and " property="map.st_modify_date"><![CDATA[
+			a.price_modify_date >= str_to_date(#map.st_modify_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_modify_date"><![CDATA[
+			a.price_modify_date <= str_to_date(concat(#map.en_modify_date#, '23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.dif_date"><![CDATA[
+			a.add_date < str_to_date(#map.dif_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.order_date_diff_ge_1">
+			<![CDATA[TIMESTAMPDIFF(HOUR,a.ORDER_DATE,str_to_date(#map.order_date_diff_ge_1:VARCHAR#, '%Y-%m-%d %H:%i:%s')) >= 1]]>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.order_date_diff_ge_m_30">
+			<![CDATA[TIMESTAMPDIFF(MINUTE,a.ORDER_DATE,str_to_date(#map.order_date_diff_ge_m_30:VARCHAR#, '%Y-%m-%d %H:%i:%s')) >= 30]]>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.order_date_diff_ge_m_120">
+			<![CDATA[TIMESTAMPDIFF(MINUTE,a.ORDER_DATE,str_to_date(#map.order_date_diff_ge_m_120:VARCHAR#, '%Y-%m-%d %H:%i:%s')) >= 120]]>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.order_date_diff_ge_h_72">
+			<![CDATA[TIMESTAMPDIFF(HOUR,a.ORDER_DATE,str_to_date(#map.order_date_diff_ge_h_72:VARCHAR#, '%Y-%m-%d %H:%i:%s')) >= 72]]>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and" property="map.details_pd_id">
+			id in (select distinct order_id from ORDER_INFO_DETAILS where 1=1				
+				<isNotEmpty prepend=" and " property="map.details_order_type">order_type=#map.details_order_type#</isNotEmpty>		
+				<isNotEmpty prepend=" and " property="map.details_pd_id">pd_id=#map.details_pd_id#</isNotEmpty>)
+		</isNotEmpty> 
+		
+		<isNotEmpty prepend=" and" property="map.details_comm_ids">
+			id in (select distinct order_id from ORDER_INFO_DETAILS where 1=1				
+				<isNotEmpty prepend=" and " property="map.details_order_types">order_type in($map.details_order_types$)</isNotEmpty>		
+				<isNotEmpty prepend=" and " property="map.details_comm_ids">comm_id in ($map.details_comm_ids$)</isNotEmpty>)
+		</isNotEmpty> 
+		<isNotEmpty prepend=" and " property="map.order_state_ne">
+			<![CDATA[a.ORDER_STATE <> #map.order_state_ne#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state_ge">
+			<![CDATA[a.ORDER_STATE >= #map.order_state_ge#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state_le">
+			<![CDATA[a.ORDER_STATE <= #map.order_state_le#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_finish_date"><![CDATA[
+			a.finish_date >= str_to_date(#map.st_finish_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_finish_date"><![CDATA[
+			a.finish_date <= str_to_date(concat(#map.en_finish_date#, '23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.xiadan_user_balance_gt">a.XIADAN_USER_BALANCE > #map.xiadan_user_balance_gt#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_id_in_leiji_money_user_ge">a.ADD_USER_ID in (select ui.id from user_info ui where ui.is_del = 0 and ui.leiji_money_user >= #map.add_user_id_in_leiji_money_user_ge#)</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.my_user_id">
+			(
+			a.ADD_USER_ID = #map.my_user_id#
+			<isNotEmpty prepend=" or " property="map.my_entp_id">
+			a.ENTP_ID = #map.my_entp_id#
+			</isNotEmpty>
+			)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.xiadan_user_sum_gt">a.XIADAN_USER_SUM > #map.xiadan_user_sum_gt#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.judge_entp_huokuan_bi">a.NO_DIS_MONEY - a.XIADAN_USER_SUM != a.ENTP_HUOKUAN_BI</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.settlement_tag">
+			a.LINK_CHECK_ID in 
+			(select edz.id from entp_dui_zhang edz 
+			where edz.is_del = 0 and edz.is_check = 1 
+			<isNotEmpty prepend=" and " property="map.settlement_entp_id">edz.entp_id = #map.settlement_entp_id#</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.settlement_st_add_date"><![CDATA[
+				edz.add_date >= str_to_date(#map.settlement_st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.settlement_en_add_date"><![CDATA[
+				edz.add_date <= str_to_date(#map.settlement_en_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_order_date_fmt"><![CDATA[
+			a.order_date >= str_to_date(#map.st_order_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_order_date_fmt"><![CDATA[
+			a.order_date <= str_to_date(#map.en_order_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_pay_date_fmt"><![CDATA[
+			a.pay_date >= str_to_date(#map.st_pay_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date_fmt"><![CDATA[
+			a.pay_date <= str_to_date(#map.en_pay_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_price_modify_is_null">a.is_price_modify is null</isNotEmpty>
+	</sql>
+
+	<select id="selectOrderInfoByDetailId" resultMap="orderInfoResult" parameterClass="java.util.Map" cacheModel="oneDayCache">
+
+		
+		select a.* from order_info_details b,order_info a  where b.order_id =a.id and b.id =#detailId:INTEGER#
+		
+	</select>
+
+	<select id="selectOrderInfo" resultMap="orderInfoResult" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select * from ORDER_INFO a where 1 = 1
+		<include refid="sf-orderInfo" />
+	</select>
+	
+	<resultMap id="orderInfoWithRealNameResult" class="orderInfo" extends="orderInfoResultForList">
+		<result column="REL_NAME" property="map.rel_name" jdbcType="VARCHAR" />
+		<result column="REL_PHONE" property="map.rel_phone" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="orderInfoWithRealNameResultList" class="orderInfo" extends="orderInfoResultForList">
+		<result column="DISTINCT_TRADE_INDEX" property="map.distinct_trade_index" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="orderInfoWithRealNameAndMobileResultList" class="orderInfo" extends="orderInfoResultForList">
+		<result column="DISTINCT_TRADE_INDEX" property="map.distinct_trade_index" jdbcType="VARCHAR" />
+		<result column="MOBILE" property="map.add_user_mobile" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="OrderInfoStatisticaResult" class="orderInfo" >
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR" />
+		<result column="CNT" property="map.cnt" jdbcType="INTEGER" />
+		<result column="SUM_NUM" property="map.sum_num" jdbcType="INTEGER" />	
+		<result column="SUM_MONEY" property="map.sum_money" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="OrderInfoStatisticaSumResult" class="orderInfo" >
+		<result column="CNT" property="map.cnt" jdbcType="INTEGER" />
+		<result column="SUM_NUM" property="map.sum_num" jdbcType="INTEGER" />	
+		<result column="SUM_MONEY" property="map.sum_money" jdbcType="INTEGER" />
+		<result column="SUM_NO_DIS_MONEY" property="map.sum_no_dis_money" jdbcType="INTEGER" />
+		<result column="SUM_MATFLOW_PRICE" property="map.sum_matflow_price" jdbcType="INTEGER" />
+		<result column="SUM_LR" property="map.sum_lr" jdbcType="INTEGER" />
+		<result column="SUM_YE" property="map.sum_ye" jdbcType="DECIMAL" />
+		<result column="SUM_PAY_MONEY" property="map.sum_pay_money" jdbcType="DECIMAL" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR"/>
+		<result column="ENTP_ID" property="map.entp_id" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="OrderInfoStatisticaListSumResult" class="orderInfo" >
+		<result column="CNT" property="map.cnt" jdbcType="INTEGER" />
+		<result column="SUM_NUM" property="map.sum_num" jdbcType="INTEGER" />	
+		<result column="SUM_MONEY" property="map.sum_money" jdbcType="INTEGER" />
+		<result column="SUM_NO_DIS_MONEY" property="map.sum_no_dis_money" jdbcType="INTEGER" />
+		<result column="SUM_MATFLOW_PRICE" property="map.sum_matflow_price" jdbcType="INTEGER" />
+		<result column="SUM_LR" property="map.sum_lr" jdbcType="INTEGER" />
+		<result column="SUM_YE" property="map.sum_ye" jdbcType="DECIMAL" />
+		<result column="SUM_PAY_MONEY" property="map.sum_pay_money" jdbcType="DECIMAL" />
+		<result column="SUM_WELFARE_PAY_MONEY" property="map.sum_welfare_pay_money" jdbcType="DECIMAL" />
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR"/>
+		<result column="ENTP_ID" property="map.entp_id" jdbcType="INTEGER" />
+		<result column="PRICE_MONEY_1002" property="map.price_money_1002" jdbcType="VARCHAR" />
+		<result column="PRICE_MONEY_1003" property="map.price_money_1003" jdbcType="VARCHAR" />
+		<result column="PRICE_MONEY_1004" property="map.price_money_1004" jdbcType="VARCHAR" />
+		<result column="PRICE_MONEY_1005" property="map.price_money_1005" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="RangPriceSumResult" class="orderInfo" >
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="USER_NUM" property="map.user_num" jdbcType="INTEGER" />	
+		<result column="P_INDEX" property="map.p_index" jdbcType="BIGINT" />
+		<result column="PRICE_MONEY_1002" property="map.price_money_1002" jdbcType="VARCHAR" />
+		<result column="PRICE_MONEY_1003" property="map.price_money_1003" jdbcType="VARCHAR" />
+		<result column="PRICE_MONEY_1004" property="map.price_money_1004" jdbcType="VARCHAR" />
+		<result column="PRICE_MONEY_1005" property="map.price_money_1005" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="VillageInviteUserSumResult" class="orderInfo" >
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+		<result column="USER_NUM" property="map.user_num" jdbcType="INTEGER" />	
+		<result column="P_INDEX" property="map.p_index" jdbcType="BIGINT" />
+		<result column="VILLAGE_NAME" property="map.village_name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="orderInfoForSumBalanceResult" class="orderInfo" >
+		<result column="SUM_BALANCE" property="map.sum_balance" jdbcType="DECIMAL" />
+		<result column="SUM_RES_BALANCE" property="map.sum_res_balance" jdbcType="DECIMAL" />	
+	</resultMap>
+	
+	<resultMap class="orderInfo" id="selectCheckListMap">
+	<result column="COUNT_ENTP_ID" property="map.count_entp_id" jdbcType="INTEGER"/>
+		<result column="SUM_ORDER_NUM" property="map.sum_order_num" jdbcType="INTEGER"/>
+		<result column="SUM_HUOKUAN" property="map.sum_huokuan" jdbcType="DECIMAL"/>
+		<result column="SUM_ORDER_MONEY" property="map.sum_order_money" jdbcType="DECIMAL"/>
+		<result column="ENTP_ID" property="map.entp_id" jdbcType="INTEGER"/>
+		<result column="ENTP_NAME" property="map.entp_name" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap id="selectMembershipFeeMap" class="orderInfo">
+		<result column="USER_NAME" property="map.user_name" jdbcType="VARCHAR"/>
+		<result column="MOBILE" property="map.mobile" jdbcType="VARCHAR"/>
+		<result column="ORDER_MONEY" property="order_money" jdbcType="INTEGER" />
+		<result column="PAY_TYPE" property="pay_type" jdbcType="INTEGER" />
+		<result column="PAY_DATE" property="pay_date" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<select id="selectOrderInfoList" resultMap="orderInfoResultForList" parameterClass="orderInfo" cacheModel="oneDayCache">
+		
+		select * from ORDER_INFO a where 1 = 1
+		<include refid="sf-orderInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectOrderInfoListNew" resultMap="orderInfoResultForList" parameterClass="orderInfo" cacheModel="oneDayCache">
+		
+		select * from order_info a where 1 = 1  
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" and " property="map.orderDate">a.ORDER_DATE = str_to_date(#map.orderDate:VARCHAR#, '%Y-%m-%d %H:%i:%s')</isNotEmpty>
+		<isEmpty prepend=" and " property="map.orderDate">TO_DAYS(a.ORDER_DATE) = TO_DAYS(now())</isEmpty>
+		<isNotEmpty prepend=" and " property="map.last_pay_date">TO_SECONDS(a.PAY_DATE)>TO_SECONDS(#map.last_pay_date#) </isNotEmpty>
+		ORDER BY a.PAY_DATE DESC
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectOrderInfoListNewSumMoney" resultClass="DECIMAL" parameterClass="orderInfo" cacheModel="oneDayCache">
+		
+		select sum(a.MONEY_BI+a.ORDER_MONEY)  from order_info a where 1 = 1  
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" and " property="map.orderDate">a.ORDER_DATE = str_to_date(#map.orderDate:VARCHAR#, '%Y-%m-%d %H:%i:%s')</isNotEmpty>
+		<isEmpty prepend=" and " property="map.orderDate">TO_DAYS(a.ORDER_DATE) = TO_DAYS(now())</isEmpty>
+	</select>
+	
+	<!--author:Wu,Yang 生成订单交易流水号  -->
+	<select id="generateOrderInfoTradeIndex" resultClass="INTEGER" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select SEQ_ORDER_TRADE_INDEX.nextval as TRADE_INDEX from dual
+	</select>
+	
+	<select id="selectOrderInfoWithRealNameList" resultMap="orderInfoWithRealNameAndMobileResultList" parameterClass="orderInfo" cacheModel="oneDayCache">
+		
+		<isNotEmpty property="map.left_join_user_info">
+		select distinct (a.trade_index) as distinct_trade_index,a.*,t3.mobile from ORDER_INFO a 
+		</isNotEmpty>
+		<isEmpty property="map.left_join_user_info">
+		select distinct (a.trade_index) as distinct_trade_index,a.*,'' as mobile from ORDER_INFO a 
+		</isEmpty>
+		
+		<isNotEmpty property="map.comm_name_like">left join order_info_details c on a.id = c.order_id</isNotEmpty>
+		<isNotEmpty property="map.left_join_user_info">left join user_info t3 on a.add_user_id = t3.id</isNotEmpty>
+		
+		where 1 = 1 
+		<isNotEmpty prepend=" and " property="map.comm_name_like">c.comm_name like '%' #map.comm_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_name_like">a.rel_name like '%' #map.rel_name_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_phone_like">a.rel_phone like '%' #map.rel_phone_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_addr_like">a.rel_addr like '%' #map.rel_addr_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type">a.id in (select d.order_id from order_info_details d where d.order_type in ($map.order_types$)
+			<isNotEmpty prepend=" and " property="map.entp_id">d.entp_id = #map.entp_id# </isNotEmpty>
+		)</isNotEmpty>
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" or " property="map.query_pay_type_0_order_state_10">(a.order_state = 10 and a.pay_type=0 and a.entp_id = #map.entp_id#)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.query_pay_type_ne_0_order_state_10"> pay_type != 0</isNotEmpty>
+		order by a.ORDER_DATE desc, a.ID desc
+	</select>
+	
+	<select id="selectOrderInfoWithRealNamePaginatedList" resultMap="orderInfoWithRealNameAndMobileResultList" parameterClass="orderInfo" cacheModel="oneDayCache">
+		
+		<isNotEmpty property="map.left_join_user_info">
+		select distinct (a.trade_index) as distinct_trade_index,a.*,t3.mobile from ORDER_INFO a 
+		</isNotEmpty>
+		<isEmpty property="map.left_join_user_info">
+		select distinct (a.trade_index) as distinct_trade_index,a.*,'' as mobile from ORDER_INFO a 
+		</isEmpty>
+		
+		<isNotEmpty property="map.comm_name_like">left join order_info_details c on a.id = c.order_id</isNotEmpty>
+		<isNotEmpty property="map.left_join_comment_info">left join comment_info t2 on a.id = t2.order_id</isNotEmpty>
+		<isNotEmpty property="map.left_join_user_info">left join user_info t3 on a.add_user_id = t3.id</isNotEmpty>
+		where 1 = 1 
+		<isNotEmpty prepend=" and " property="map.comm_name_like">c.comm_name like '%'  #map.comm_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_name_like">a.rel_name like '%'  #map.rel_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_mobile_like">t3.mobile like #map.add_user_mobile_like# '%'</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.rel_phone_like">a.rel_phone like '%'  #map.rel_phone_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_addr_like">a.rel_addr like '%'  #map.rel_addr_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type">a.id in (select d.order_id from order_info_details d where d.order_type in ($map.order_types$)
+			<isNotEmpty prepend=" and " property="map.entp_id">d.entp_id = #map.entp_id# </isNotEmpty>
+		)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.commentInfo_id_is_not_null">t2.id is not null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.commentInfo_id_is_null">t2.id is null</isNotEmpty>
+		
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" or " property="map.query_pay_type_0_order_state_10">(a.order_state = 10 and a.pay_type=0 and a.entp_id = #map.entp_id#)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.query_pay_type_ne_0_order_state_10"> pay_type != 0</isNotEmpty>
+		order by a.ORDER_DATE desc, a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	<select id="selectBigShowOrderInfoCount" resultClass="int" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select count(DISTINCT a.trade_index) from ORDER_INFO a
+		 
+		<isNotEmpty property="map.comm_name_like">left join order_info_details c on a.id = c.order_id</isNotEmpty>
+		where 1 = 1 
+		<isNotEmpty prepend=" and " property="map.comm_name_like">c.comm_name like '%'  #map.comm_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_name_like">a.rel_name like '%'  #map.rel_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_phone_like">a.rel_phone like '%'  #map.rel_phone_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_addr_like">a.rel_addr like '%'  #map.rel_addr_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type">a.id in (select d.order_id from order_info_details d where d.order_type in ($map.order_types$)
+			<isNotEmpty prepend=" and " property="map.entp_id">d.entp_id = #map.entp_id# </isNotEmpty>
+		)</isNotEmpty>
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" or " property="map.query_pay_type_0_order_state_10">(a.order_state = 10 and a.pay_type=0 and a.entp_id = #map.entp_id#)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.query_pay_type_ne_0_order_state_10"> pay_type != 0</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type_not_in">a.order_type not in($map.order_type_not_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.orderDate">a.ORDER_DATE = str_to_date(#map.orderDate:VARCHAR#, '%Y-%m-%d %H:%i:%s')</isNotEmpty>
+		<isEmpty prepend=" and " property="map.orderDate">TO_DAYS(a.ORDER_DATE) = TO_DAYS(now())</isEmpty>
+	</select>	
+	<select id="selectOrderInfoCount" resultClass="int" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select count(DISTINCT a.trade_index) from ORDER_INFO a
+		 
+		<isNotEmpty property="map.comm_name_like">left join order_info_details c on a.id = c.order_id</isNotEmpty>
+		where 1 = 1 
+		<isNotEmpty prepend=" and " property="map.comm_name_like">c.comm_name like '%'  #map.comm_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_name_like">a.rel_name like '%'  #map.rel_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_phone_like">a.rel_phone like '%'  #map.rel_phone_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.rel_addr_like">a.rel_addr like '%'  #map.rel_addr_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type">a.id in (select d.order_id from order_info_details d where d.order_type in ($map.order_types$)
+			<isNotEmpty prepend=" and " property="map.entp_id">d.entp_id = #map.entp_id# </isNotEmpty>
+		)</isNotEmpty>
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" or " property="map.query_pay_type_0_order_state_10">(a.order_state = 10 and a.pay_type=0 and a.entp_id = #map.entp_id#)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.query_pay_type_ne_0_order_state_10"> pay_type != 0</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type_not_in">a.order_type not in($map.order_type_not_in$)</isNotEmpty>
+	</select>
+
+	<select id="selectOrderInfoPaginatedList" resultMap="orderInfoResult" parameterClass="orderInfo" cacheModel="oneDayCache">
+		
+		select * from ORDER_INFO a where 1 = 1
+		<include refid="sf-orderInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectOrderInfoStatisticaCount" resultClass="int" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select count(*) from
+		(
+		select a.entp_id from order_info a 
+		where 1 = 1 
+		<include refid="sf-orderInfo" />
+		group by a.entp_id
+		) t
+	</select>
+
+	<select id="selectOrderInfoStatisticaPaginatedList" resultMap="OrderInfoStatisticaResult" parameterClass="orderInfo" cacheModel="oneDayCache">
+		
+		select a.entp_id,(select entp_name from entp_info where id=a.entp_id) as entp_name,count(*) as cnt,sum(ORDER_NUM) as sum_num,sum(ORDER_MONEY) as sum_money from order_info a where 1 = 1
+		<include refid="sf-orderInfo" />
+		group by a.entp_id
+		order by a.entp_id asc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectOrderInfoStatisticaSum" resultMap="OrderInfoStatisticaSumResult" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select count(*) as cnt,
+		ifnull(sum(ORDER_NUM),0) as sum_num,
+		ifnull(sum(ORDER_MONEY),0) as sum_money,
+		ifnull(sum(NO_DIS_MONEY),0) as sum_no_dis_money, 
+		ifnull(sum(MATFLOW_PRICE),0) as sum_matflow_price, 
+		ifnull(sum(PROFIT_MONEY),0) as sum_lr,
+		ifnull(sum(MONEY_BI), 0) AS sum_ye,
+		ifnull(sum(ORDER_MONEY),0) + ifnull(sum(MONEY_BI), 0) as sum_pay_money,
+		entp_id,entp_name
+		from order_info a where 1 = 1
+		
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" and " property="map.beside_type_90">a.order_type not in($map.beside_type_90$)</isNotEmpty>
+		
+<!-- 		<isNotEmpty prepend=" and " property="map.order_state_ge"> -->
+<!-- 			<![CDATA[a.ORDER_STATE >= #map.order_state_ge#]]> -->
+<!-- 		</isNotEmpty> -->
+		
+		<isNotEmpty property="map.group_by">group by $map.group_by$</isNotEmpty>
+	</select>
+	
+	<select id="selectOrderInfoStatisticaListSum" resultMap="OrderInfoStatisticaListSumResult" parameterClass="orderInfo" cacheModel="oneDayCache">
+		SELECT
+			count(t.id) AS cnt,
+			ifnull(sum(t.ORDER_NUM), 0) AS sum_num,
+			ifnull(sum(t.ORDER_MONEY), 0) AS sum_money,
+			ifnull(sum(t.NO_DIS_MONEY), 0) AS sum_no_dis_money,
+			ifnull(sum(t.MATFLOW_PRICE), 0) AS sum_matflow_price,
+			ifnull(sum(t.PROFIT_MONEY), 0) AS sum_lr,
+			ifnull(sum(t.MONEY_BI), 0) AS sum_ye,
+			ifnull(
+				sum(t.MONEY_BI + t.ORDER_MONEY),
+				0
+			) AS sum_pay_money,
+			ifnull( sum( t.welfare_pay_money ), 0 ) AS sum_welfare_pay_money,
+			t.entp_id,
+			t.entp_name,
+			sum(o.price_money_1002) AS price_money_1002,
+			sum(o.price_money_1003) AS price_money_1003,
+			sum(o.price_money_1004) AS price_money_1004,
+			sum(o.price_money_1005) AS price_money_1005
+		FROM
+			order_info t
+		LEFT JOIN (
+			SELECT
+				r.id,
+				sum(r.price_money_1002) AS price_money_1002,
+				sum(r.price_money_1003) AS price_money_1003,
+				sum(r.price_money_1004) AS price_money_1004,
+				sum(r.price_money_1005) AS price_money_1005
+			FROM
+				(
+					SELECT
+						a.ID,
+						(
+							CASE
+							WHEN b.bi_get_type = 1002 THEN
+								b.BI_NO
+							ELSE
+								0
+							END
+						) AS price_money_1002,
+						(
+							CASE
+							WHEN b.bi_get_type = 1003 THEN
+								b.BI_NO
+							ELSE
+								0
+							END
+						) AS price_money_1003,
+						(
+							CASE
+							WHEN b.bi_get_type = 1004 THEN
+								b.BI_NO
+							ELSE
+								0
+							END
+						) AS price_money_1004,
+						(
+							CASE
+							WHEN b.bi_get_type = 1005 THEN
+								b.BI_NO
+							ELSE
+								0
+							END
+						) AS price_money_1005
+					FROM
+						order_info a
+					LEFT JOIN user_bi_record b ON a.id = b.ORDER_ID
+					AND b.BI_CHU_OR_RU = 1
+					AND b.BI_TYPE = 100
+					WHERE
+						1 = 1
+					<include refid="sf-orderInfo" />
+				) r
+			GROUP BY
+				r.ID
+		) o ON t.ID = o.id
+		WHERE  
+			1 = 1
+		<isNotEmpty prepend=" and " property="map.st_order_date_fmt"><![CDATA[
+			t.order_date >= str_to_date(#map.st_order_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_order_date_fmt"><![CDATA[
+			t.order_date <= str_to_date(#map.en_order_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_pay_date_fmt"><![CDATA[
+			t.pay_date >= str_to_date(#map.st_pay_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date_fmt"><![CDATA[
+			t.pay_date <= str_to_date(#map.en_pay_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_state">t.ORDER_STATE = #order_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_test">t.IS_TEST = #is_test:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">t.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type_in">t.order_type in($map.order_type_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type_not_in">t.order_type not in($map.order_type_not_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_state_in">t.ORDER_STATE in ($map.order_state_in$)</isNotEmpty>
+		
+		<isNotEmpty property="map.group_by">group by $map.group_by$</isNotEmpty>
+		
+	</select>
+	
+	<select id="selectRangPriceSum" resultMap="RangPriceSumResult" parameterClass="orderInfo" cacheModel="oneDayCache">
+	
+	
+		SELECT
+			b.FULL_NAME,
+			b.p_index,
+			sum(d.user_num) AS user_num,
+			sum(d.price_money_1002) AS price_money_1002,
+			sum(d.price_money_1003) AS price_money_1003,
+			sum(d.price_money_1004) AS price_money_1004,
+			sum(d.price_money_1005) AS price_money_1005
+		FROM
+			(
+				SELECT
+					b1.p_index,
+					b1.FULL_NAME
+				FROM
+					base_province b1
+				WHERE 1 = 1 
+				<isNotEmpty prepend=" and " property="map.p_level">b1.P_LEVEL = #map.p_level:INTEGER#</isNotEmpty>
+				<isNotEmpty prepend=" and " property="map.par_index">b1.par_index = #map.par_index#</isNotEmpty>
+				<isNotEmpty prepend=" " property="map.p_index_province">
+				UNION
+					SELECT
+						'999999' AS p_index,
+						'其他' AS FULL_NAME
+			    </isNotEmpty>
+			) b
+		LEFT JOIN (
+			SELECT
+				CASE
+			WHEN a.p_index IS NULL THEN
+				999999
+			ELSE
+				a.p_index
+			END AS p_index,
+			count(a.ID) AS user_num,
+			sum(
+				CASE
+				WHEN c.bi_get_type = 1002 THEN
+					c.BI_NO
+				ELSE
+					0
+				END
+			) AS price_money_1002,
+			sum(
+				CASE
+				WHEN c.bi_get_type = 1003 THEN
+					c.BI_NO
+				ELSE
+					0
+				END
+			) AS price_money_1003,
+			sum(
+				CASE
+				WHEN c.bi_get_type = 1004 THEN
+					c.BI_NO
+				ELSE
+					0
+				END
+			) AS price_money_1004,
+			sum(
+				CASE
+				WHEN c.bi_get_type = 1005 THEN
+					c.BI_NO
+				ELSE
+					0
+				END
+			) AS price_money_1005
+		FROM
+			user_info a
+		LEFT JOIN user_bi_record c ON c.ADD_USER_ID = a.ID and c.BI_CHU_OR_RU = 1 and c.BI_TYPE = 100
+		WHERE
+			1 = 1
+			<isNotEmpty prepend=" and " property="map.st_add_date_fmt"><![CDATA[
+				c.add_date >= str_to_date(#map.st_add_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.en_add_date_fmt"><![CDATA[
+				c.add_date <= str_to_date(#map.en_add_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+			]]></isNotEmpty>
+		GROUP BY
+			a.P_INDEX
+		) d ON 
+		<isNotEmpty prepend=" " property="map.p_index_province">
+		SUBSTR(b.P_INDEX, 1, 2) = SUBSTR(d.P_INDEX, 1, 2)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" " property="map.p_index_city">
+		SUBSTR(b.P_INDEX, 1, 4) = SUBSTR(d.P_INDEX, 1, 4)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" " property="map.p_index_country">
+		SUBSTR(b.P_INDEX, 1, 6) = SUBSTR(d.P_INDEX, 1, 6)
+		</isNotEmpty> 
+		WHERE
+			1 = 1
+		AND d.p_index IS NOT NULL
+		GROUP BY
+		<isNotEmpty prepend=" " property="map.p_index_province">
+			SUBSTR(d.P_INDEX, 1, 2)
+		</isNotEmpty>
+		<isNotEmpty prepend=" " property="map.p_index_city">
+			SUBSTR(d.P_INDEX, 1, 4)
+		</isNotEmpty>
+		<isNotEmpty prepend=" " property="map.p_index_country">
+			SUBSTR(d.P_INDEX, 1, 6)
+		</isNotEmpty> 
+	
+	</select>
+	
+	<select id="selectVillageInviteUserSum" resultMap="VillageInviteUserSumResult" parameterClass="orderInfo" cacheModel="oneDayCache">
+		SELECT
+			b.FULL_NAME,b.p_index,
+			count(1) AS user_num,
+			a.village_name as village_name
+		FROM
+			(
+				SELECT
+					a.USER_ID as id,
+					c.P_INDEX,
+					c.VILLAGE_NAME
+				FROM
+					user_relation_par a
+				LEFT JOIN user_info b ON a.USER_PAR_ID = b.ID
+				LEFT JOIN village_info c ON c.ID = b.OWN_VILLAGE_ID
+				WHERE
+					1 = 1
+				AND a.USER_PAR_LEVLE = 1
+				AND b.IS_DEL = 0
+				AND b.IS_VILLAGE = 1
+				AND b.USER_TYPE = 4
+				AND c.IS_DEL = 0
+				AND c.IS_VIRTUAL = 0
+				<isNotEmpty prepend=" and " property="map.st_date"><![CDATA[
+					a.add_date >= str_to_date(#map.st_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+				]]></isNotEmpty>
+				<isNotEmpty prepend=" and " property="map.en_date"><![CDATA[
+					a.add_date <= str_to_date(#map.en_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+				]]></isNotEmpty>
+				
+			)  a
+		LEFT JOIN base_province b ON 
+		
+		<isNotEmpty prepend=" " property="map.p_index_province">
+		SUBSTR(b.P_INDEX, 1, 2) = SUBSTR(a.P_INDEX, 1, 2)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" " property="map.p_index_city">
+		SUBSTR(b.P_INDEX, 1, 4) = SUBSTR(a.P_INDEX, 1, 4)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" " property="map.p_index_country">
+		SUBSTR(b.P_INDEX, 1, 6) = SUBSTR(a.P_INDEX, 1, 6)
+		</isNotEmpty> 
+		
+		<isNotEmpty prepend=" " property="map.p_index_town">
+		SUBSTR(b.P_INDEX, 1, 9) = SUBSTR(a.P_INDEX, 1, 9)
+		</isNotEmpty> 
+		
+		<isNotEmpty prepend=" " property="map.p_index_village">
+		SUBSTR(b.P_INDEX, 1, 12) = SUBSTR(a.P_INDEX, 1, 12)
+		</isNotEmpty> 
+		
+		WHERE
+			1 = 1
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" and " property="map.p_level">b.P_LEVEL = #map.p_level:INTEGER#</isNotEmpty>
+<!-- 		<isNotEmpty prepend=" and " property="map.p_index">SUBSTR(b.P_INDEX, 1, 2) = #map.p_index:VARCHAR#</isNotEmpty> -->
+		
+		<isNotEmpty prepend=" and " property="map.p_index_like">
+			b.p_index like #map.p_index_like# '%'
+		</isNotEmpty>
+		<isNotEmpty property="map.group_by">group by $map.group_by$</isNotEmpty>
+	</select>
+	
+	<select id="selectOrderInfoForSumBalance" resultMap="orderInfoForSumBalanceResult" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select 
+		ifnull(sum(a.XIADAN_USER_BALANCE),0) as sum_balance,
+		ifnull(sum(a.RES_BALANCE),0) as sum_res_balance
+		from order_info a where 1 = 1
+		<include refid="sf-orderInfo" />
+	</select>
+	
+	<select id="selectCheckCount" resultClass="int" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select count(*) from (
+		select sum(entp_huokuan_bi) sum_huokuan,entp_id from order_info a
+		where 1=1
+		<include refid="sf-orderInfo" />
+		group by entp_id
+		having sum_huokuan>0
+		) aa
+	</select>
+	<select id="selectCheckList" resultMap="selectCheckListMap" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select count(a.id) count_entp_id,sum(order_num) sum_order_num,sum(entp_huokuan_bi) sum_huokuan,sum(order_money+money_bi) sum_order_money,entp_id,entp_name from order_info a
+		where 1=1
+		<include refid="sf-orderInfo" />
+		group by entp_id
+		having sum_huokuan>0
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectMembershipFeeCount" resultClass="int" parameterClass="orderInfo" cacheModel="oneDayCache">
+		SELECT
+			count(b.id)
+		FROM
+			user_info b
+		LEFT JOIN order_info a ON a.ADD_USER_ID = b.ID
+		AND a.ORDER_TYPE = 20
+		AND a.ORDER_STATE = 50
+		<include refid="sf-orderInfo" />
+		WHERE
+			1 = 1
+		AND b.IS_DEL = 0
+		AND b.USER_LEVEL = 202
+		<![CDATA[AND b.USER_TYPE <> 100]]>
+		<isNotEmpty property="map.fee_pay_type_is_null">
+		and a.PAY_TYPE is null
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_type">a.PAY_TYPE = #pay_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_pay_date_fmt"><![CDATA[
+			a.pay_date >= str_to_date(#map.st_pay_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date_fmt"><![CDATA[
+			a.pay_date <= str_to_date(#map.en_pay_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+	</select>
+	<select id="selectMembershipFeePaginatedList" resultMap="selectMembershipFeeMap" parameterClass="orderInfo" cacheModel="oneDayCache">
+		SELECT
+			b.USER_NAME,
+			b.MOBILE,
+			a.ORDER_MONEY + a.MONEY_BI as ORDER_MONEY,
+			a.PAY_DATE,
+		    a.pay_type
+		FROM
+			user_info b
+		LEFT JOIN order_info a ON a.ADD_USER_ID = b.ID
+		AND a.ORDER_TYPE = 20
+		AND a.ORDER_STATE = 50
+		<include refid="sf-orderInfo" />
+		WHERE
+			1 = 1
+		AND b.IS_DEL = 0
+		AND b.USER_LEVEL = 202
+		<![CDATA[AND b.USER_TYPE <> 100]]>
+		<isNotEmpty property="map.fee_pay_type_is_null">
+		and a.PAY_TYPE is null
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pay_type">a.PAY_TYPE = #pay_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_pay_date_fmt"><![CDATA[
+			a.pay_date >= str_to_date(#map.st_pay_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date_fmt"><![CDATA[
+			a.pay_date <= str_to_date(#map.en_pay_date_fmt:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		order by a.PAY_DATE desc,b.id desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	<select id="selectGroupLeaderOrderInfo" resultMap="orderInfoResultForList" parameterClass="orderInfo" cacheModel="oneDayCache">
+		select a.*
+		from order_info a 
+		LEFT JOIN order_info_details b on b.ORDER_ID = a.ID
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="map.comm_id">b.COMM_ID =  #map.comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_type">b.ORDER_TYPE = #order_type:INTEGER#</isNotEmpty>
+		<include refid="sf-orderInfo" />
+		<isNotEmpty prepend=" and " property="map.current_time">a.END_DATE > SYSDATE()</isNotEmpty>
+	</select>
+
+	<insert id="insertOrderInfo" parameterClass="orderInfo">
+		<![CDATA[insert into ORDER_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="trade_index">TRADE_INDEX</isNotNull>	
+			<isNotNull prepend="," property="trade_merger_index">TRADE_MERGER_INDEX</isNotNull>	
+			<isNotNull prepend="," property="order_num">ORDER_NUM</isNotNull>	
+			<isNotNull prepend="," property="order_money">ORDER_MONEY</isNotNull>	
+			<isNotNull prepend="," property="order_state">ORDER_STATE</isNotNull>	
+			<isNotNull prepend="," property="shipping_address_id">SHIPPING_ADDRESS_ID</isNotNull>	
+			<isNotNull prepend="," property="order_date">ORDER_DATE</isNotNull>	
+			<isNotNull prepend="," property="invoice_type">INVOICE_TYPE</isNotNull>	
+			<isNotNull prepend="," property="invoices_payable">INVOICES_PAYABLE</isNotNull>	
+			<isNotNull prepend="," property="invoices_no">INVOICES_NO</isNotNull>	
+			<isNotNull prepend="," property="delivery_time">DELIVERY_TIME</isNotNull>	
+			<isNotNull prepend="," property="invoice_status">INVOICE_STATUS</isNotNull>	
+			<isNotNull prepend="," property="pay_type">PAY_TYPE</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="end_date">END_DATE</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="entp_name">ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="order_type">ORDER_TYPE</isNotNull>	
+			<isNotNull prepend="," property="matflow_price">MATFLOW_PRICE</isNotNull>	
+			<isNotNull prepend="," property="add_entp_id">ADD_ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="add_entp_name">ADD_ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="pay_date">PAY_DATE</isNotNull>	
+			<isNotNull prepend="," property="confirm_date">CONFIRM_DATE</isNotNull>	
+			<isNotNull prepend="," property="service_price">SERVICE_PRICE</isNotNull>	
+			<isNotNull prepend="," property="order_weight">ORDER_WEIGHT</isNotNull>	
+			<isNotNull prepend="," property="is_freeship">IS_FREESHIP</isNotNull>	
+			<isNotNull prepend="," property="order_state_admin">ORDER_STATE_ADMIN</isNotNull>	
+			<isNotNull prepend="," property="is_price_modify">IS_PRICE_MODIFY</isNotNull>	
+			<isNotNull prepend="," property="price_modify_old">PRICE_MODIFY_OLD</isNotNull>	
+			<isNotNull prepend="," property="price_modify_date">PRICE_MODIFY_DATE</isNotNull>	
+			<isNotNull prepend="," property="price_modify_remark">PRICE_MODIFY_REMARK</isNotNull>	
+			<isNotNull prepend="," property="matflow_price_modify_old">MATFLOW_PRICE_MODIFY_OLD</isNotNull>	
+			<isNotNull prepend="," property="price_modify_user_id">PRICE_MODIFY_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="rel_name">REL_NAME</isNotNull>	
+			<isNotNull prepend="," property="rel_phone">REL_PHONE</isNotNull>	
+			<isNotNull prepend="," property="rel_tel">REL_TEL</isNotNull>	
+			<isNotNull prepend="," property="rel_province">REL_PROVINCE</isNotNull>	
+			<isNotNull prepend="," property="rel_city">REL_CITY</isNotNull>	
+			<isNotNull prepend="," property="rel_region">REL_REGION</isNotNull>	
+			<isNotNull prepend="," property="rel_addr">REL_ADDR</isNotNull>	
+			<isNotNull prepend="," property="rel_email">REL_EMAIL</isNotNull>	
+			<isNotNull prepend="," property="rel_zip">REL_ZIP</isNotNull>	
+			<isNotNull prepend="," property="qdyh_id">QDYH_ID</isNotNull>
+			<isNotNull prepend="," property="qdyh_tip_desc">QDYH_TIP_DESC</isNotNull>
+			<isNotNull prepend="," property="yhq_id">YHQ_ID</isNotNull>
+			<isNotNull prepend="," property="yhq_tip_desc">YHQ_TIP_DESC</isNotNull>
+			<isNotNull prepend="," property="jfdh_money">JFDH_MONEY</isNotNull>
+			<isNotNull prepend="," property="trade_no">TRADE_NO</isNotNull>		
+			<isNotNull prepend="," property="qrsh_date">QRSH_DATE</isNotNull>
+			<isNotNull prepend="," property="is_sq_yj">IS_SQ_YJ</isNotNull>			
+			<isNotNull prepend="," property="is_test">IS_TEST</isNotNull>	
+			<isNotNull prepend="," property="rule_version">RULE_VERSION</isNotNull>	
+			<isNotNull prepend="," property="is_fuxiao">IS_FUXIAO</isNotNull>	
+			<isNotNull prepend="," property="line_type">LINE_TYPE</isNotNull>	
+			<isNotNull prepend="," property="order_money_cost">ORDER_MONEY_COST</isNotNull>	
+			<isNotNull prepend="," property="order_password">ORDER_PASSWORD</isNotNull>	
+			<isNotNull prepend="," property="fahuo_date">FAHUO_DATE</isNotNull>
+			<isNotNull prepend="," property="is_opt">IS_OPT</isNotNull>	
+			<isNotNull prepend="," property="fahuo_remark">FAHUO_REMARK</isNotNull>	
+			<isNotNull prepend="," property="money_cash">MONEY_CASH</isNotNull>	
+			<isNotNull prepend="," property="money_bi">MONEY_BI</isNotNull>	
+			<isNotNull prepend="," property="money_bi_lock">MONEY_BI_LOCK</isNotNull>	
+			<isNotNull prepend="," property="pay_extra_params">PAY_EXTRA_PARAMS</isNotNull>	
+			<isNotNull prepend="," property="is_ziti">IS_ZITI</isNotNull>	
+			<isNotNull prepend="," property="no_dis_money">NO_DIS_MONEY</isNotNull>	
+			<isNotNull prepend="," property="dis_bl">DIS_BL</isNotNull>	
+			<isNotNull prepend="," property="send_user_id">SEND_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="pay_platform">PAY_PLATFORM</isNotNull>	
+			<isNotNull prepend="," property="profit_money">PROFIT_MONEY</isNotNull>	
+			<isNotNull prepend="," property="profit_bl">PROFIT_BL</isNotNull>	
+			<isNotNull prepend="," property="daishou_or_haspay">DAISHOU_OR_HASPAY</isNotNull>	
+			<isNotNull prepend="," property="daishou_profit_bl">DAISHOU_PROFIT_BL</isNotNull>	
+			<isNotNull prepend="," property="finish_date">FINISH_DATE</isNotNull>	
+			<isNotNull prepend="," property="xiadan_user_sum">XIADAN_USER_SUM</isNotNull>
+			<isNotNull prepend="," property="xiadan_user_balance">XIADAN_USER_BALANCE</isNotNull>
+			<isNotNull prepend="," property="entp_user_balance">ENTP_USER_BALANCE</isNotNull>
+			<isNotNull prepend="," property="entp_huokuan_bi">ENTP_HUOKUAN_BI</isNotNull>
+			<isNotNull prepend="," property="delay_shouhuo">DELAY_SHOUHUO</isNotNull>
+			<isNotNull prepend="," property="res_balance">RES_BALANCE</isNotNull>
+			<isNotNull prepend="," property="is_ruchi">IS_RUCHI</isNotNull>
+			<isNotNull prepend="," property="reward_money">REWARD_MONEY</isNotNull>
+			<isNotNull prepend="," property="pre_bigdecimal">PRE_BIGDECIMAL</isNotNull>
+			<isNotNull prepend="," property="is_zhuanyuan">IS_ZHUANYUAN</isNotNull>
+			<isNotNull prepend="," property="red_money">RED_MONEY</isNotNull>
+			<isNotNull prepend="," property="device_no">DEVICE_NO</isNotNull>	
+			<isNotNull prepend="," property="village_id">VILLAGE_ID</isNotNull>
+			<isNotNull prepend="," property="is_sync_jd">IS_SYNC_JD</isNotNull>
+			<isNotNull prepend="," property="sync_date">SYNC_DATE</isNotNull>
+			<isNotNull prepend="," property="jd_order_no">JD_ORDER_NO</isNotNull>
+			<isNotNull prepend="," property="is_confirm_jd">IS_CONFIRM_JD</isNotNull>
+			<isNotNull prepend="," property="jd_confirm_date">JD_CONFIRM_DATE</isNotNull>
+			<isNotNull prepend="," property="is_comment">IS_COMMENT</isNotNull>
+			<isNotNull prepend="," property="fp_state">FP_STATE</isNotNull>
+			<isNotNull prepend="," property="entp_charge_no">ENTP_CHARGE_NO</isNotNull>
+			<isNotNull prepend="," property="publish_user_id">PUBLISH_USER_ID</isNotNull>
+			<isNotNull prepend="," property="yhq_sun_money">YHQ_SUN_MONEY</isNotNull>
+			<isNotNull prepend="," property="link_check_id">LINK_CHECK_ID</isNotNull>
+			<isNotNull prepend="," property="is_check">IS_CHECK</isNotNull>
+			<isNotNull prepend="," property="real_pay_money">REAL_PAY_MONEY</isNotNull>
+			<isNotNull prepend="," property="welfare_pay_money">WELFARE_PAY_MONEY</isNotNull>
+			<isNotNull prepend="," property="card_pay_money">CARD_PAY_MONEY</isNotNull>
+			<isNotNull prepend="," property="mark_order_id">MARK_ORDER_ID</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>	
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="card_id">CARD_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE</isNotNull>	
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC</isNotNull>	
+			<isNotNull prepend="," property="leader_order_id">LEADER_ORDER_ID</isNotNull>	
+			<isNotNull prepend="," property="is_leader">IS_LEADER</isNotNull>	
+			<isNotNull prepend="," property="is_group_success">IS_GROUP_SUCCESS</isNotNull>	
+			<isNotNull prepend="," property="jd_oid">JD_OID</isNotNull>	
+			<isNotNull prepend="," property="is_reload_pay">IS_RELOAD_PAY</isNotNull>	
+			<isNotNull prepend="," property="activity_id">ACTIVITY_ID</isNotNull>	
+			<isNotNull prepend="," property="group_number">GROUP_NUMBER</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="trade_index">#trade_index:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="trade_merger_index">#trade_merger_index:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_num">#order_num:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_money">#order_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_state">#order_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="shipping_address_id">#shipping_address_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_date">#order_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="invoice_type">#invoice_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="invoices_payable">#invoices_payable:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="invoices_no">#invoices_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="delivery_time">#delivery_time:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="invoice_status">#invoice_status:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pay_type">#pay_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="end_date">#end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_name">#entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_type">#order_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="matflow_price">#matflow_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_entp_id">#add_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_entp_name">#add_entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pay_date">#pay_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="confirm_date">#confirm_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="service_price">#service_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_weight">#order_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_freeship">#is_freeship:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_state_admin">#order_state_admin:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_price_modify">#is_price_modify:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_modify_old">#price_modify_old:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_modify_date">#price_modify_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="price_modify_remark">#price_modify_remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="matflow_price_modify_old">#matflow_price_modify_old:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_modify_user_id">#price_modify_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rel_name">#rel_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_phone">#rel_phone:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_tel">#rel_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_province">#rel_province:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rel_city">#rel_city:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rel_region">#rel_region:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rel_addr">#rel_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_email">#rel_email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_zip">#rel_zip:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qdyh_id">#qdyh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qdyh_tip_desc">#qdyh_tip_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_id">#yhq_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_tip_desc">#yhq_tip_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="jfdh_money">#jfdh_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="trade_no">#trade_no:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qrsh_date">#qrsh_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_sq_yj">#is_sq_yj:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_test">#is_test:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rule_version">#rule_version:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_fuxiao">#is_fuxiao:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="line_type">#line_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_money_cost">#order_money_cost:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="order_password">#order_password:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="fahuo_date">#fahuo_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_opt">#is_opt:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fahuo_remark">#fahuo_remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="money_cash">#money_cash:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="money_bi">#money_bi:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="money_bi_lock">#money_bi_lock:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pay_extra_params">#pay_extra_params:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_ziti">#is_ziti:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="no_dis_money">#no_dis_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="dis_bl">#dis_bl:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="send_user_id">#send_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pay_platform">#pay_platform:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="profit_money">#profit_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="profit_bl">#profit_bl:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="daishou_or_haspay">#daishou_or_haspay:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="daishou_profit_bl">#daishou_profit_bl:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="finish_date">#finish_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="xiadan_user_sum">#xiadan_user_sum:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="xiadan_user_balance">#xiadan_user_balance:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="entp_user_balance">#entp_user_balance:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="entp_huokuan_bi">#entp_huokuan_bi:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="delay_shouhuo">#delay_shouhuo:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="res_balance">#res_balance:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_ruchi">#is_ruchi:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="reward_money">#reward_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pre_bigdecimal">#pre_bigdecimal:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_zhuanyuan">#is_zhuanyuan:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="red_money">#red_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="device_no">#device_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_id">#village_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_sync_jd">#is_sync_jd:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sync_date">#sync_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="jd_order_no">#jd_order_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_confirm_jd">#is_confirm_jd:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="jd_confirm_date">#jd_confirm_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_comment">#is_comment:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fp_state">#fp_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_charge_no">#entp_charge_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="publish_user_id">#publish_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_sun_money">#yhq_sun_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="link_check_id">#link_check_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_check">#is_check:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="real_pay_money">#real_pay_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="welfare_pay_money">#welfare_pay_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="card_pay_money">#card_pay_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="mark_order_id">#mark_order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">#audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_id">#card_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">#audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="leader_order_id">#leader_order_id:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="is_leader">#is_leader:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="is_group_success">#is_group_success:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="jd_oid">#jd_oid:VARCHAR#</isNotNull>	
+			<isNotNull prepend="," property="is_reload_pay">#is_reload_pay:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="activity_id">#activity_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="group_number">#group_number:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+	
+	<update id="updateOrderInfo" parameterClass="orderInfo">
+		update ORDER_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="trade_index">TRADE_INDEX = #trade_index:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="trade_merger_index">TRADE_MERGER_INDEX = #trade_merger_index:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_num">ORDER_NUM = #order_num:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_money">ORDER_MONEY = #order_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_state">ORDER_STATE = #order_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="shipping_address_id">SHIPPING_ADDRESS_ID = #shipping_address_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_date">ORDER_DATE = #order_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="invoice_type">INVOICE_TYPE = #invoice_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="invoices_payable">INVOICES_PAYABLE = #invoices_payable:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="invoices_no">INVOICES_NO = #invoices_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="delivery_time">DELIVERY_TIME = #delivery_time:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="invoice_status">INVOICE_STATUS = #invoice_status:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pay_type">PAY_TYPE = #pay_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="end_date">END_DATE = #end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_name">ENTP_NAME = #entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_type">ORDER_TYPE = #order_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="matflow_price">MATFLOW_PRICE = #matflow_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_entp_id">ADD_ENTP_ID = #add_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_entp_name">ADD_ENTP_NAME = #add_entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pay_date">PAY_DATE = #pay_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="confirm_date">CONFIRM_DATE = #confirm_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="service_price">SERVICE_PRICE = #service_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_weight">ORDER_WEIGHT = #order_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_freeship">IS_FREESHIP = #is_freeship:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_state_admin">ORDER_STATE_ADMIN = #order_state_admin:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_price_modify">IS_PRICE_MODIFY = #is_price_modify:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_modify_old">PRICE_MODIFY_OLD = #price_modify_old:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_modify_date">PRICE_MODIFY_DATE = #price_modify_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="price_modify_remark">PRICE_MODIFY_REMARK = #price_modify_remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="matflow_price_modify_old">MATFLOW_PRICE_MODIFY_OLD = #matflow_price_modify_old:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="price_modify_user_id">PRICE_MODIFY_USER_ID = #price_modify_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rel_name">REL_NAME = #rel_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_phone">REL_PHONE = #rel_phone:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_tel">REL_TEL = #rel_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_province">REL_PROVINCE = #rel_province:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rel_city">REL_CITY = #rel_city:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rel_region">REL_REGION = #rel_region:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rel_addr">REL_ADDR = #rel_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_email">REL_EMAIL = #rel_email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="rel_zip">REL_ZIP = #rel_zip:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qdyh_id">QDYH_ID = #qdyh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qdyh_tip_desc">QDYH_TIP_DESC = #qdyh_tip_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_id">YHQ_ID = #yhq_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_tip_desc">YHQ_TIP_DESC = #yhq_tip_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="jfdh_money">JFDH_MONEY = #jfdh_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="trade_no">TRADE_NO = #trade_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qrsh_date">QRSH_DATE = #qrsh_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_sq_yj">IS_SQ_YJ = #is_sq_yj:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_test">IS_TEST = #is_test:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="rule_version">RULE_VERSION = #rule_version:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_fuxiao">IS_FUXIAO = #is_fuxiao:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="line_type">LINE_TYPE = #line_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_money_cost">ORDER_MONEY_COST = #order_money_cost:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="order_password">ORDER_PASSWORD = #order_password:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="fahuo_date">FAHUO_DATE = #fahuo_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_opt">IS_OPT = #is_opt:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fahuo_remark">FAHUO_REMARK = #fahuo_remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="money_cash">MONEY_CASH = #money_cash:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="money_bi">MONEY_BI = #money_bi:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="money_bi_lock">MONEY_BI_LOCK = #money_bi_lock:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pay_extra_params">PAY_EXTRA_PARAMS = #pay_extra_params:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_ziti">IS_ZITI = #is_ziti:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="no_dis_money">NO_DIS_MONEY = #no_dis_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="dis_bl">DIS_BL = #dis_bl:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="send_user_id">SEND_USER_ID = #send_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pay_platform">PAY_PLATFORM = #pay_platform:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="profit_money">PROFIT_MONEY = #profit_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="profit_bl">PROFIT_BL = #profit_bl:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="daishou_or_haspay">DAISHOU_OR_HASPAY = #daishou_or_haspay:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="daishou_profit_bl">DAISHOU_PROFIT_BL = #daishou_profit_bl:DECIMAL#</isNotNull>
+	      	<isNotNull prepend="," property="finish_date">FINISH_DATE = #finish_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="xiadan_user_sum">XIADAN_USER_SUM = #xiadan_user_sum:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="xiadan_user_balance">XIADAN_USER_BALANCE = #xiadan_user_balance:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="entp_user_balance">ENTP_USER_BALANCE = #entp_user_balance:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="entp_huokuan_bi">ENTP_HUOKUAN_BI = #entp_huokuan_bi:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="delay_shouhuo">DELAY_SHOUHUO = #delay_shouhuo:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="res_balance">RES_BALANCE = #res_balance:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_ruchi">IS_RUCHI = #is_ruchi:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="reward_money">REWARD_MONEY = #reward_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pre_bigdecimal">PRE_BIGDECIMAL = #pre_bigdecimal:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="is_zhuanyuan">IS_ZHUANYUAN = #is_zhuanyuan:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="red_money">RED_MONEY = #red_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="device_no">DEVICE_NO = #device_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="village_id">VILLAGE_ID = #village_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_sync_jd">IS_SYNC_JD = #is_sync_jd:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sync_date">SYNC_DATE = #sync_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="jd_order_no">JD_ORDER_NO = #jd_order_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_confirm_jd">IS_CONFIRM_JD = #is_confirm_jd:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="jd_confirm_date">JD_CONFIRM_DATE = #jd_confirm_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_comment">IS_COMMENT = #is_comment:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fp_state">FP_STATE = #fp_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_charge_no">ENTP_CHARGE_NO = #entp_charge_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="publish_user_id">PUBLISH_USER_ID = #publish_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_sun_money">YHQ_SUN_MONEY = #yhq_sun_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="link_check_id">LINK_CHECK_ID = #link_check_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_check">IS_CHECK = #is_check:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="real_pay_money">REAL_PAY_MONEY = #real_pay_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="welfare_pay_money">WELFARE_PAY_MONEY = #welfare_pay_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="card_pay_money">CARD_PAY_MONEY = #card_pay_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="mark_order_id">MARK_ORDER_ID = #mark_order_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="card_id">CARD_ID = #card_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE = #audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc">AUDIT_DESC = #audit_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="leader_order_id">LEADER_ORDER_ID = #leader_order_id:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="is_leader">IS_LEADER = #is_leader:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="is_group_success">IS_GROUP_SUCCESS = #is_group_success:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="jd_oid">JD_OID = #jd_oid:VARCHAR#</isNotNull>	
+			<isNotNull prepend="," property="is_reload_pay">IS_RELOAD_PAY = #is_reload_pay:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="activity_id">ACTIVITY_ID = #activity_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="map.updata_group_number">GROUP_NUMBER = GROUP_NUMBER + #group_number:INTEGER#</isNotNull>
+			
+			<isNotNull prepend="," property="map.delay_shouhuo">finish_date=date_add(finish_date, interval 7 day) </isNotNull>
+			<isNotNull prepend="," property="map.delay_shouhuo15">finish_date=date_add(finish_date, interval 7 day) </isNotNull>
+			<isNotNull prepend="," property="map.sub_xiadan_user_balance">XIADAN_USER_BALANCE = XIADAN_USER_BALANCE - #map.sub_xiadan_user_balance#</isNotNull>
+			<isNotNull prepend="," property="map.sub_entp_user_balance">ENTP_USER_BALANCE = ENTP_USER_BALANCE - #map.sub_entp_user_balance#</isNotNull>
+			<isNotNull prepend="," property="map.set_link_check_id_isnull">LINK_CHECK_ID = null</isNotNull>
+			
+			<isNotNull prepend="," property="map.sub_welfare_pay_money">welfare_pay_money = welfare_pay_money - #map.sub_welfare_pay_money#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_group_count">GROUP_NUMBER + 1 <![CDATA[ <= ]]> #map.comm_group_count#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type">order_type = #map.order_type#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_id">add_user_id = #map.add_user_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+		<isNotEmpty prepend=" and " property="map.opt_order_state">ORDER_STATE = #map.opt_order_state#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.delay_shouhuo">DELAY_SHOUHUO !=1</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.trade_merger_index">TRADE_MERGER_INDEX = #map.trade_merger_index#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.check_entp_id">ENTP_ID = #map.check_entp_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			ORDER_DATE >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			ORDER_DATE <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_finish_date"><![CDATA[
+			finish_date >= str_to_date(#map.st_finish_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_finish_date"><![CDATA[
+			finish_date <= str_to_date(concat(#map.en_finish_date#, '23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_pay_date"><![CDATA[
+			pay_date <= str_to_date(concat(#map.en_pay_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_check">IS_CHECK = #map.not_check#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.is_null_link_check_id">LINK_CHECK_ID is null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type_in">order_type in($map.order_type_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.opt_is_test">is_test = #map.opt_is_test#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.opt_order_type">order_type = #map.opt_order_type#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.leaderOrderId">LEADER_ORDER_ID = #map.leaderOrderId#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.opt_group_state">IS_GROUP_SUCCESS = #map.opt_group_state#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.check_group_state_of_leader">
+				END_DATE > NOW() 
+				<isNotEmpty prepend=" and " property="map.group_count">
+					(
+					select COUNT(*) from (select * from order_info) as o 
+					where 1 = 1
+					and o.ORDER_STATE = 10
+					<isNotEmpty prepend=" and " property="map.check_leader_order_id">o.LEADER_ORDER_ID = #map.check_leader_order_id#</isNotEmpty>
+					)  
+					<![CDATA[ < #map.group_count#]]> 
+				</isNotEmpty>
+		</isNotEmpty>
+	</update>
+
+	<delete id="deleteOrderInfo" parameterClass="orderInfo">
+		delete from ORDER_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.order_type">order_type = #map.order_type#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_id">add_user_id = #map.add_user_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

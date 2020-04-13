@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WL_COMP_INFO">
+
+	<typeAlias alias="wlCompInfo" type="com.ebiz.webapp.domain.WlCompInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertWlCompInfo" />
+		<flushOnExecute statement="updateWlCompInfo" />
+		<flushOnExecute statement="deleteWlCompInfo" />
+	</cacheModel>
+
+	<resultMap id="wlCompInfoResultForList" class="wlCompInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="WL_CODE" property="wl_code" jdbcType="VARCHAR" />
+		<result column="WL_COMP_NAME" property="wl_comp_name" jdbcType="VARCHAR" />
+		<result column="WL_COMP_EN_NAME" property="wl_comp_en_name" jdbcType="VARCHAR" />
+		<result column="P_INDEX" property="p_index" jdbcType="INTEGER" />
+		<result column="ADDR" property="addr" jdbcType="VARCHAR" />
+		<result column="LINK_MAN" property="link_man" jdbcType="VARCHAR" />
+		<result column="TEL" property="tel" jdbcType="VARCHAR" />
+		<result column="FAX" property="fax" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="WL_COMP_URL" property="wl_comp_url" jdbcType="VARCHAR" />
+		<result column="IS_COLLABORATE" property="is_collaborate" jdbcType="INTEGER" />
+		<result column="COMP_TYPE" property="comp_type" jdbcType="INTEGER" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="P_ALPHA" property="p_alpha" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="wlCompInfoResult" class="wlCompInfo" extends="wlCompInfoResultForList">
+	</resultMap>
+	
+	<resultMap id="wlCompInfoResultFullName" class="wlCompInfo" extends="wlCompInfoResultForList">
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<resultMap id="wlCompInfoResultForGroupByPalpha" class="wlCompInfo">
+		<result column="P_ALPHA" property="p_alpha" jdbcType="VARCHAR" />
+	</resultMap>
+	
+
+	<sql id="sf-wlCompInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_code">a.WL_CODE = #wl_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comp_name">a.WL_COMP_NAME = #wl_comp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comp_en_name">a.WL_COMP_EN_NAME = #wl_comp_en_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX = #p_index:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="addr">a.ADDR = #addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_man">a.LINK_MAN = #link_man:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tel">a.TEL = #tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fax">a.FAX = #fax:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lock">a.IS_LOCK = #is_lock:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comp_url">a.WL_COMP_URL = #wl_comp_url:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_collaborate">a.IS_COLLABORATE = #is_collaborate:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comp_type">a.COMP_TYPE = #comp_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">a.REMARK = #remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_alpha">P_ALPHA = #p_alpha:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.wl_comp_name_like">a.wl_comp_name like '%'  #map.wl_comp_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_city">substr(a.p_index,1,4) = #map.p_index_city#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_province">substr(a.p_index,1,2) = #map.p_index_province#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.province_index">a.P_INDEX like '%'  #map.province_index#  '%'</isNotEmpty>
+	</sql>
+
+	<select id="selectWlCompInfo" resultMap="wlCompInfoResultFullName" parameterClass="wlCompInfo" cacheModel="oneDayCache">
+		select a.*, p.full_name from WL_COMP_INFO a left join BASE_PROVINCE p on p.p_index = a.p_index where 1 = 1
+		<include refid="sf-wlCompInfo" />
+		order by a.wl_code
+	</select>
+	
+	
+	<select id="selectWlCompInfoGroupByPalpha" resultMap="wlCompInfoResultForGroupByPalpha" parameterClass="wlCompInfo" cacheModel="oneDayCache">
+		select P_ALPHA from WL_COMP_INFO a where 1 = 1
+		<include refid="sf-wlCompInfo" />
+		group by a.P_ALPHA
+	</select>
+	
+
+	<select id="selectWlCompInfoList" resultMap="wlCompInfoResultForList" parameterClass="wlCompInfo" cacheModel="oneDayCache">
+		
+		select * from WL_COMP_INFO a where 1 = 1
+		<include refid="sf-wlCompInfo" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectWlCompInfoCount" resultClass="int" parameterClass="wlCompInfo" cacheModel="oneDayCache">
+		select count(*) from WL_COMP_INFO a where 1 = 1
+		<include refid="sf-wlCompInfo" />
+	</select>
+
+	<select id="selectWlCompInfoPaginatedList" resultMap="wlCompInfoResultFullName" parameterClass="wlCompInfo" cacheModel="oneDayCache">
+		
+		select a.*,p.full_name from WL_COMP_INFO a 
+		left join BASE_PROVINCE p on p.p_index = a.p_index 
+		where 1 = 1
+		<include refid="sf-wlCompInfo" />
+		order by a.order_value desc,a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertWlCompInfo" parameterClass="wlCompInfo">
+		<![CDATA[insert into WL_COMP_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="wl_code">WL_CODE</isNotNull>	
+			<isNotNull prepend="," property="wl_comp_name">WL_COMP_NAME</isNotNull>	
+			<isNotNull prepend="," property="wl_comp_en_name">WL_COMP_EN_NAME</isNotNull>	
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>	
+			<isNotNull prepend="," property="addr">ADDR</isNotNull>	
+			<isNotNull prepend="," property="link_man">LINK_MAN</isNotNull>	
+			<isNotNull prepend="," property="tel">TEL</isNotNull>	
+			<isNotNull prepend="," property="fax">FAX</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_lock">IS_LOCK</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="wl_comp_url">WL_COMP_URL</isNotNull>	
+			<isNotNull prepend="," property="is_collaborate">IS_COLLABORATE</isNotNull>	
+			<isNotNull prepend="," property="comp_type">COMP_TYPE</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+			<isNotNull prepend="," property="p_alpha">P_ALPHA</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_code">#wl_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">#wl_comp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_en_name">#wl_comp_en_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="addr">#addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="link_man">#link_man:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tel">#tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="fax">#fax:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">#is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_url">#wl_comp_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_collaborate">#is_collaborate:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comp_type">#comp_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_alpha">#p_alpha:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateWlCompInfo" parameterClass="wlCompInfo">
+		update WL_COMP_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_code">WL_CODE = #wl_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">WL_COMP_NAME = #wl_comp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_en_name">WL_COMP_EN_NAME = #wl_comp_en_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="addr">ADDR = #addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="link_man">LINK_MAN = #link_man:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tel">TEL = #tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="fax">FAX = #fax:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_url">WL_COMP_URL = #wl_comp_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_collaborate">IS_COLLABORATE = #is_collaborate:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comp_type">COMP_TYPE = #comp_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_alpha">P_ALPHA = #p_alpha:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteWlCompInfo" parameterClass="wlCompInfo">
+		delete from WL_COMP_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

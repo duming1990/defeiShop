@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="POOR_ZE_REN">
+
+	<typeAlias alias="poorZeRen" type="com.ebiz.webapp.domain.PoorZeRen" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertPoorZeRen" />
+		<flushOnExecute statement="updatePoorZeRen" />
+		<flushOnExecute statement="deletePoorZeRen" />
+	</cacheModel>
+
+	<resultMap id="poorZeRenResultForList" class="poorZeRen">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="LINK_ID" property="link_id" jdbcType="INTEGER" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="DAN_WEI_NAME" property="dan_wei_name" jdbcType="VARCHAR" />
+		<result column="DAN_WEI_RELATION" property="dan_wei_relation" jdbcType="VARCHAR" />
+		<result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_USER_NAME" property="update_user_name" jdbcType="VARCHAR" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="DEL_USER_NAME" property="del_user_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="poorZeRenResult" class="poorZeRen" extends="poorZeRenResultForList">
+	</resultMap>
+
+	<sql id="sf-poorZeRen">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_id">a.LINK_ID = #link_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="name">a.NAME = #name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="dan_wei_name">a.DAN_WEI_NAME = #dan_wei_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="dan_wei_relation">a.DAN_WEI_RELATION = #dan_wei_relation:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mobile">a.MOBILE = #mobile:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_name">a.UPDATE_USER_NAME = #update_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_name">a.DEL_USER_NAME = #del_user_name:VARCHAR#</isNotEmpty>
+	</sql>
+
+	<select id="selectPoorZeRen" resultMap="poorZeRenResult" parameterClass="poorZeRen" cacheModel="oneDayCache">
+		select * from POOR_ZE_REN a where 1 = 1
+		<include refid="sf-poorZeRen" />
+	</select>
+
+	<select id="selectPoorZeRenList" resultMap="poorZeRenResultForList" parameterClass="poorZeRen" cacheModel="oneDayCache">
+		select * from POOR_ZE_REN a where 1 = 1
+		<include refid="sf-poorZeRen" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectPoorZeRenCount" resultClass="int" parameterClass="poorZeRen" cacheModel="oneDayCache">
+		select count(*) from POOR_ZE_REN a where 1 = 1
+		<include refid="sf-poorZeRen" />
+	</select>
+
+	<select id="selectPoorZeRenPaginatedList" resultMap="poorZeRenResult" parameterClass="poorZeRen" cacheModel="oneDayCache">
+		select * from POOR_ZE_REN a where 1 = 1
+		<include refid="sf-poorZeRen" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertPoorZeRen" parameterClass="poorZeRen">
+		<![CDATA[insert into POOR_ZE_REN (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="link_id">LINK_ID</isNotNull>	
+			<isNotNull prepend="," property="name">NAME</isNotNull>	
+			<isNotNull prepend="," property="dan_wei_name">DAN_WEI_NAME</isNotNull>	
+			<isNotNull prepend="," property="dan_wei_relation">DAN_WEI_RELATION</isNotNull>	
+			<isNotNull prepend="," property="mobile">MOBILE</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_user_name">UPDATE_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_user_name">DEL_USER_NAME</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">#link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="name">#name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="dan_wei_name">#dan_wei_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="dan_wei_relation">#dan_wei_relation:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mobile">#mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_user_name">#update_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_user_name">#del_user_name:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updatePoorZeRen" parameterClass="poorZeRen">
+		update POOR_ZE_REN
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">LINK_ID = #link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="name">NAME = #name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="dan_wei_name">DAN_WEI_NAME = #dan_wei_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="dan_wei_relation">DAN_WEI_RELATION = #dan_wei_relation:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mobile">MOBILE = #mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_user_name">UPDATE_USER_NAME = #update_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_user_name">DEL_USER_NAME = #del_user_name:VARCHAR#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deletePoorZeRen" parameterClass="poorZeRen">
+		delete from POOR_ZE_REN where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

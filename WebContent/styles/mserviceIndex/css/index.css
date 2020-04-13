@@ -1,0 +1,115 @@
+.index {
+    width: 100%;
+}
+
+.swiper-container {
+    width: 100%;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    width: 20px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-size: 10px auto;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.index .div1 {
+    width: 100%;
+}
+
+.index .guanStyle {
+    width: 100%;
+    height: auto;
+}
+
+.index .div1 {
+    width: 100%;
+    height: 100px;
+}
+
+.index .div1 .imgs {
+    width: 20%;
+    height: 100px;
+    padding: 10px 0;
+    float: left;
+}
+
+.index .div1 .imgs .img {
+/*     width: 50px; */
+/*     height: 87px; */
+/*     margin: 0 auto; */
+   margin-top: -9px;
+}
+
+.index .div1 .imgs .p1 {
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+}
+
+.index .div2 {
+    width: 100%;
+    height: auto;
+}
+
+.index .div2 img {
+    width: 100%;
+    height: auto;
+}
+
+.index .mr1 {
+    margin-top: 10px;
+}
+
+.index .div3 {
+    width: 100%;
+    display: flex;
+}
+
+.index .div3 .left, .index .div3 .right {
+    width: 50%;
+    padding: 10px;
+}
+
+.index .div3 .left img, .index .div3 .right img {
+    width: 100%;
+    height: auto;
+}
+
+.index .div4 {
+    width: 100%;
+    padding: 0 5px;
+    display: flex;
+}
+
+.index .div4 .style {
+    width: 33.333%;
+    height:100%;
+    padding: 10px 5px;
+}
+
+.index .div5 {
+    width: 100%;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.index .div5 .style {
+    width: 50%;
+    height:100%;
+    padding: 10px 5px;
+}
+.index .mr2{
+    padding:0 10px;
+}

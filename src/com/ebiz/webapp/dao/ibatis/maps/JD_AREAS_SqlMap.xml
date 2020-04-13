@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="JD_AREAS">
+
+	<typeAlias alias="jdAreas" type="com.ebiz.webapp.domain.JdAreas" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertJdAreas" />
+		<flushOnExecute statement="updateJdAreas" />
+		<flushOnExecute statement="deleteJdAreas" />
+	</cacheModel>
+
+	<resultMap id="jdAreasResultForList" class="jdAreas">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="PID" property="pid" jdbcType="INTEGER" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CATCLASS" property="catclass" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="jdAreasResult" class="jdAreas" extends="jdAreasResultForList">
+	</resultMap>
+
+	<sql id="sf-jdAreas">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pid">a.PID = #pid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="name">a.NAME = #name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="catclass">a.CATCLASS = #catclass:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectJdAreas" resultMap="jdAreasResult" parameterClass="jdAreas" cacheModel="oneDayCache">
+		select * from JD_AREAS a where 1 = 1
+		<include refid="sf-jdAreas" />
+	</select>
+
+	<select id="selectJdAreasList" resultMap="jdAreasResultForList" parameterClass="jdAreas" cacheModel="oneDayCache">
+		select * from JD_AREAS a where 1 = 1
+		<include refid="sf-jdAreas" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectJdAreasCount" resultClass="int" parameterClass="jdAreas" cacheModel="oneDayCache">
+		select count(*) from JD_AREAS a where 1 = 1
+		<include refid="sf-jdAreas" />
+	</select>
+
+	<select id="selectJdAreasPaginatedList" resultMap="jdAreasResult" parameterClass="jdAreas" cacheModel="oneDayCache">
+		select * from JD_AREAS a where 1 = 1
+		<include refid="sf-jdAreas" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertJdAreas" parameterClass="jdAreas">
+		<![CDATA[insert into JD_AREAS (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="pid">PID</isNotNull>	
+			<isNotNull prepend="," property="name">NAME</isNotNull>	
+			<isNotNull prepend="," property="catclass">CATCLASS</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pid">#pid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="name">#name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="catclass">#catclass:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateJdAreas" parameterClass="jdAreas">
+		update JD_AREAS
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pid">PID = #pid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="name">NAME = #name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="catclass">CATCLASS = #catclass:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteJdAreas" parameterClass="jdAreas">
+		delete from JD_AREAS where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

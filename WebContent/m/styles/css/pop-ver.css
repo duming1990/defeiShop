@@ -1,0 +1,82 @@
+.pop-warp {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 0.2rem;
+	box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	/*left: 0;*/
+	z-index: 1000;
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+.pop-innr {
+	width: 100%;
+	background-color: #FFF;
+	border-radius: 0.08rem;
+	overflow: hidden;
+	position: relative;
+}
+.pop-innr .title {
+	text-align: center;
+	padding: 0.3rem 0 0.3rem;
+}
+.pop-innr .close,.pop-vali .switch{
+	background: url("../img/pop_icon.png") no-repeat;
+	background-size: 100%;
+}
+.pop-innr .close{
+	position: absolute;
+	display: block;
+	width: 0.4rem;
+	height: 0.4rem;
+	background-position:0 -0.4rem;
+	top: 0.15rem;
+	right: 0.15rem;
+}
+.pop-vali {
+	padding:0 0.2rem;
+	text-align: center;
+	height: 0.8rem;
+	overflow: hidden;
+}
+.pop-vali .vali-input{
+	border: 1px solid #8A8A8A;
+	padding: 0.2rem;
+	border-radius: 0.08rem;
+	height:0.3rem;
+	font-size: 0.24rem;
+	width: 90%;
+	margin-right: 0.08rem;
+	display: block;
+}
+.pop-vali img{
+	height:0.6rem;
+	margin-top: 0.1rem;
+}
+.pop-vali .switch{
+	display: block;
+	width: 0.4rem;
+	height: 0.4rem;
+	margin: 0.15rem 0.1rem 0 0.3rem;
+}
+.pop-vali .switch span{
+	display: none;
+}
+.pop-innr .tips{
+	padding: 0 0.4rem;
+	color: #ec5051;
+	font-size: 0.24rem;
+}
+.pop-bottom{ 
+	padding: 0.2rem 0.2rem 0.3rem;
+}
+.pop-bottom a{
+	text-align: center;
+	background:#ec5051;
+	color: #FFF;
+	padding: 0.2rem;
+	border-radius: 0.08rem;
+}

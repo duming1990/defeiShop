@@ -1,0 +1,8 @@
+<div id="owl-demo">
+      <c:forEach items="${imgsList}" var="cur">
+        <c:set var="imgUrl" value="${cur.image_path_out}"/>
+        <div><a onclick="goUrl('${cur.direct_uri}')" data-ajax="false"><img src="${imgUrl}" title="${fn:escapeXml(cur.title)}" alt="${fn:escapeXml(cur.title)}"></a></div>
+      </c:forEach>
+  </div>
+
+$("#owl-demo").owlCarousel();

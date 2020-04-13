@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ENTP_INFO">
+
+	<typeAlias alias="entpInfo" type="com.ebiz.webapp.domain.EntpInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertEntpInfo" />
+		<flushOnExecute statement="updateEntpInfo" />
+		<flushOnExecute statement="deleteEntpInfo" />
+	</cacheModel>
+
+	<resultMap id="entpInfoResultForList" class="entpInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="UUID" property="uuid" jdbcType="VARCHAR" />
+		<result column="ENTP_TYPE" property="entp_type" jdbcType="INTEGER" />
+		<result column="ENTP_LOGO" property="entp_logo" jdbcType="VARCHAR" />
+		<result column="ENTP_NAME" property="entp_name" jdbcType="VARCHAR" />
+		<result column="ENTP_SNAME" property="entp_sname" jdbcType="VARCHAR" />
+		<result column="ENTP_ENAME" property="entp_ename" jdbcType="VARCHAR" />
+		<result column="MAIN_PD_CLASS_IDS" property="main_pd_class_ids" jdbcType="VARCHAR" />
+		<result column="MAIN_PD_CLASS_NAMES" property="main_pd_class_names" jdbcType="VARCHAR" />
+		<result column="XIANXIA_PD_CLASS_IDS" property="xianxia_pd_class_ids" jdbcType="VARCHAR" />
+		<result column="XIANXIA_PD_CLASS_NAMES" property="xianxia_pd_class_names" jdbcType="VARCHAR" />
+		<result column="ENTP_AREA" property="entp_area" jdbcType="INTEGER" />
+		<result column="ENTP_CORPORATION" property="entp_corporation" jdbcType="VARCHAR" />
+		<result column="ENTP_LICENCE" property="entp_licence" jdbcType="VARCHAR" />
+		<result column="ENTP_LICENCE_IMG" property="entp_licence_img" jdbcType="VARCHAR" />
+		<result column="ENTP_DESC" property="entp_desc" jdbcType="VARCHAR" />
+		<result column="ENTP_REG_MONEY" property="entp_reg_money" jdbcType="INTEGER" />
+		<result column="ENTP_BUILD_DATE" property="entp_build_date" jdbcType="TIMESTAMP" />
+		<result column="ENTP_PERSONS" property="entp_persons" jdbcType="INTEGER" />
+		<result column="ENTP_HONOR" property="entp_honor" jdbcType="VARCHAR" />
+		<result column="ENTP_KIND" property="entp_kind" jdbcType="VARCHAR" />
+		<result column="ENTP_OWN_ORG" property="entp_own_org" jdbcType="VARCHAR" />
+		<result column="P_INDEX" property="p_index" jdbcType="INTEGER" />
+		<result column="ENTP_ADDR" property="entp_addr" jdbcType="VARCHAR" />
+		<result column="ENTP_LATLNG" property="entp_latlng" jdbcType="VARCHAR" />
+		<result column="ENTP_POSTCODE" property="entp_postcode" jdbcType="VARCHAR" />
+		<result column="ENTP_LINKMAN" property="entp_linkman" jdbcType="VARCHAR" />
+		<result column="ENTP_TEL" property="entp_tel" jdbcType="VARCHAR" />
+		<result column="ENTP_FAX" property="entp_fax" jdbcType="VARCHAR" />
+		<result column="ENTP_EMAIL" property="entp_email" jdbcType="VARCHAR" />
+		<result column="ENTP_WWW" property="entp_www" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_COMMEND" property="is_commend" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="ADD_USER_NAME" property="add_user_name" jdbcType="VARCHAR" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="ENTP_TAX_LICENCE" property="entp_tax_licence" jdbcType="VARCHAR" />
+		<result column="ENTP_TAX_LICENCE_IMG" property="entp_tax_licence_img" jdbcType="VARCHAR" />
+		<result column="ENTP_ORG_CODE" property="entp_org_code" jdbcType="VARCHAR" />
+		<result column="ENTP_ORG_CODE_IMG" property="entp_org_code_img" jdbcType="VARCHAR" />
+		<result column="AUDIT_STATE" property="audit_state" jdbcType="INTEGER" />
+		<result column="AUDIT_USER_ID" property="audit_user_id" jdbcType="INTEGER" />
+		<result column="AUDIT_DATE" property="audit_date" jdbcType="TIMESTAMP" />
+		<result column="AUDIT_DESC_ONE" property="audit_desc_one" jdbcType="VARCHAR" />
+		<result column="AUDIT_DESC_TWO" property="audit_desc_two" jdbcType="VARCHAR" />
+		<result column="QQ" property="qq" jdbcType="VARCHAR" />
+		<result column="ENTP_LEVEL" property="entp_level" jdbcType="VARCHAR" />
+		<result column="CUSTOM_URL" property="custom_url" jdbcType="VARCHAR" />
+		<result column="BANK_ACCOUNT" property="bank_account" jdbcType="VARCHAR" />
+		<result column="ALIPAY_ACCOUNT" property="alipay_account" jdbcType="VARCHAR" />
+		<result column="ENTP_TEMPLATE" property="entp_template" jdbcType="INTEGER" />
+		<result column="OWN_BANK" property="own_bank" jdbcType="VARCHAR" />
+		<result column="STORE_TYPE" property="store_type" jdbcType="INTEGER" />
+		<result column="IS_SELF_SUPPORT" property="is_self_support" jdbcType="INTEGER" />
+		<result column="SEO_TITLE" property="seo_title" jdbcType="VARCHAR" />
+		<result column="SEO_KEYWORD" property="seo_keyword" jdbcType="VARCHAR" />
+		<result column="SEO_DESC" property="seo_desc" jdbcType="VARCHAR" />		
+		<result column="SHOP_NAME" property="shop_name" jdbcType="VARCHAR" />		
+		<result column="IS_ZC_HDFK" property="is_zc_hdfk" jdbcType="INTEGER" />
+		<result column="HDFK_PINDEXS" property="hdfk_pindexs" jdbcType="VARCHAR" />
+		<result column="CUSTOMER_CODE" property="customer_code" jdbcType="VARCHAR" />
+		<result column="YY_SJ_BETWEEN" property="yy_sj_between" jdbcType="VARCHAR" />
+		<result column="FANXIAN_RULE" property="fanxian_rule" jdbcType="INTEGER" />
+		<result column="FANXIAN_RULE_NEW" property="fanxian_rule_new" jdbcType="INTEGER" />
+		<result column="FANXIAN_RULE_NEW_DATE" property="fanxian_rule_new_date" jdbcType="TIMESTAMP" />
+		<result column="IS_HAS_YINYE_NO" property="is_has_yinye_no" jdbcType="INTEGER" />
+		<result column="ID_CARD_NO" property="id_card_no" jdbcType="VARCHAR" />
+		<result column="IMG_ID_CARD_ZM" property="img_id_card_zm" jdbcType="VARCHAR" />
+		<result column="IMG_ID_CARD_FM" property="img_id_card_fm" jdbcType="VARCHAR" />
+		<result column="IMG_ENTP_MENTOU" property="img_entp_mentou" jdbcType="VARCHAR" />
+		<result column="ENTP_SERVICE" property="entp_service" jdbcType="VARCHAR" />
+		<result column="ENTP_REFRESH_DATE" property="entp_refresh_date" jdbcType="TIMESTAMP" />
+		<result column="IS_CLOSED" property="is_closed" jdbcType="INTEGER" />
+		<result column="ENTP_CLOSED_DATE" property="entp_closed_date" jdbcType="TIMESTAMP" />
+		<result column="IS_SHOW" property="is_show" jdbcType="INTEGER" />		
+		<result column="P_INDEX_PRO" property="p_index_pro" jdbcType="INTEGER" />	
+		<result column="HY_CLS_ID" property="hy_cls_id" jdbcType="INTEGER" />	
+		<result column="COMMENT_COUNT" property="comment_count" jdbcType="INTEGER" />
+		<result column="XIAOFEI_QIBU_PRICE" property="xiaofei_qibu_price" jdbcType="DECIMAL" />
+		<result column="RENJUN_XIAOFEI_PRICE" property="renjun_xiaofei_price" jdbcType="DECIMAL" />
+		<result column="TAX_REG_CERTIFICATE" property="tax_reg_certificate" jdbcType="VARCHAR" />
+		<result column="ORG_CODE" property="org_code" jdbcType="VARCHAR" />
+		<result column="PRODUCTION_LICENSE" property="production_license" jdbcType="VARCHAR" />
+		<result column="FOOD_LIUTONG_TEXU_LICENSE" property="food_liutong_texu_license" jdbcType="VARCHAR" />
+		<result column="PROXY_AUTHOR_CERTIFICATE" property="proxy_author_certificate" jdbcType="VARCHAR" />
+		<result column="BRAND_REG_LICENSE" property="brand_reg_license" jdbcType="VARCHAR" />
+		<result column="IS_BUY_DALIBAO" property="is_buy_dalibao" jdbcType="INTEGER" />
+		<result column="IS_LIANMENG" property="is_lianmeng" jdbcType="INTEGER" />
+		<result column="ENTP_NO" property="entp_no" jdbcType="VARCHAR" />
+		<result column="VIEW_COUNT" property="view_count" jdbcType="INTEGER" />
+		<result column="SALE_COUNT" property="sale_count" jdbcType="INTEGER" />
+		<result column="IS_NX_ENTP" property="is_nx_entp" jdbcType="INTEGER" />
+		<result column="SUM_SALE_MONEY" property="sum_sale_money" jdbcType="DECIMAL" />
+		<result column="XIANXIA_CLS_ID" property="xianxia_cls_id" jdbcType="INTEGER" />	
+		<result column="IS_HAS_OPEN_ONLINE_SHOP" property="is_has_open_online_shop" jdbcType="INTEGER" />
+		<result column="IS_OPEN_AD" property="is_open_ad" jdbcType="INTEGER" />		
+		<result column="LINK_SERVICE_CENTER_ID" property="link_service_center_id" jdbcType="INTEGER" />		
+		<result column="SOCKET_IP" property="socket_ip" jdbcType="VARCHAR" />		
+		<result column="SOCKET_PORT" property="socket_port" jdbcType="INTEGER" />		
+		<result column="IS_ENTPSTYLE" property="is_entpstyle" jdbcType="INTEGER" />		
+		<result column="IS_COUPONS" property="is_coupons" jdbcType="INTEGER" />	
+		<result column="KEFU_QR_CODE" property="kefu_qr_code" jdbcType="VARCHAR" />
+		<result column="KEFU_TEL" property="kefu_tel" jdbcType="VARCHAR" />
+		<result column="MARK_ENTP_ID" property="mark_entp_id" jdbcType="INTEGER" />	
+	</resultMap>
+
+	<resultMap id="entpInfoResult" class="entpInfo" extends="entpInfoResultForList">
+	</resultMap>
+	
+	<resultMap id="entpInfoResultForFullName" class="entpInfo" extends="entpInfoResultForList">
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="entpInfoResultForDistance" class="entpInfo" extends="entpInfoResultForList">
+		<result column="DISTANCE" property="map.distance" jdbcType="VARCHAR" />
+<!-- 		<result column="X" property="map.x" jdbcType="VARCHAR" /> -->
+<!-- 		<result column="Y" property="map.y" jdbcType="VARCHAR" /> -->
+	</resultMap>
+
+	<sql id="sf-entpInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="uuid">a.UUID = #uuid:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_type">a.ENTP_TYPE = #entp_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_logo">a.ENTP_LOGO = #entp_logo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_name">a.ENTP_NAME = #entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_sname">a.ENTP_SNAME = #entp_sname:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_ename">a.ENTP_ENAME = #entp_ename:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="main_pd_class_ids">a.MAIN_PD_CLASS_IDS = #main_pd_class_ids:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="main_pd_class_names">a.MAIN_PD_CLASS_NAMES = #main_pd_class_names:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="xianxia_pd_class_ids">a.XIANXIA_PD_CLASS_IDS = #xianxia_pd_class_ids:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="xianxia_pd_class_names">a.XIANXIA_PD_CLASS_NAMES = #xianxia_pd_class_names:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_area">a.ENTP_AREA = #entp_area:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_corporation">a.ENTP_CORPORATION = #entp_corporation:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_licence">a.ENTP_LICENCE = #entp_licence:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_licence_img">a.ENTP_LICENCE_IMG = #entp_licence_img:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_desc">a.ENTP_DESC = #entp_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_reg_money">a.ENTP_REG_MONEY = #entp_reg_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_build_date">a.ENTP_BUILD_DATE = #entp_build_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_persons">a.ENTP_PERSONS = #entp_persons:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_honor">a.ENTP_HONOR = #entp_honor:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_kind">a.ENTP_KIND = #entp_kind:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_own_org">a.ENTP_OWN_ORG = #entp_own_org:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX = #p_index:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_addr">a.ENTP_ADDR = #entp_addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_latlng">a.ENTP_LATLNG = #entp_latlng:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_postcode">a.ENTP_POSTCODE = #entp_postcode:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_linkman">a.ENTP_LINKMAN = #entp_linkman:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_tel">a.ENTP_TEL = #entp_tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_fax">a.ENTP_FAX = #entp_fax:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_email">a.ENTP_EMAIL = #entp_email:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_www">a.ENTP_WWW = #entp_www:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_commend">a.IS_COMMEND = #is_commend:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:DATE#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_name">a.ADD_USER_NAME = #add_user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_tax_licence">a.ENTP_TAX_LICENCE = #entp_tax_licence:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_tax_licence_img">a.ENTP_TAX_LICENCE_IMG = #entp_tax_licence_img:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_org_code">a.ENTP_ORG_CODE = #entp_org_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_org_code_img">a.ENTP_ORG_CODE_IMG = #entp_org_code_img:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_state">a.AUDIT_STATE = #audit_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_user_id">a.AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_date">a.AUDIT_DATE = #audit_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_desc_one">a.AUDIT_DESC_ONE = #audit_desc_one:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_desc_two">a.AUDIT_DESC_TWO = #audit_desc_two:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qq">a.QQ = #qq:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_level">a.ENTP_LEVEL = #entp_level:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="custom_url">a.CUSTOM_URL = #custom_url:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bank_account">a.BANK_ACCOUNT = #bank_account:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="alipay_account">a.ALIPAY_ACCOUNT = #alipay_account:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_template">a.ENTP_TEMPLATE = #entp_template:INTEGER#</isNotEmpty>
+	    <isNotEmpty prepend=" and " property="own_bank">a.OWN_BANK = #own_bank:VARCHAR#</isNotEmpty>
+	    <isNotEmpty prepend=" and " property="store_type">a.STORE_TYPE = #store_type:INTEGER#</isNotEmpty>
+        <isNotEmpty prepend=" and " property="is_self_support">a.IS_SELF_SUPPORT = #IS_SELF_SUPPORT:INTEGER#</isNotEmpty>
+	    <isNotEmpty prepend=" and " property="seo_title">a.SEO_TITLE = #seo_title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="seo_keyword">a.SEO_KEYWORD = #seo_keyword:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="seo_desc">a.SEO_DESC = #seo_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="shop_name">a.SHOP_NAME = #shop_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_zc_hdfk">a.IS_ZC_HDFK = #is_zc_hdfk:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hdfk_pindexs">a.HDFK_PINDEXS = #hdfk_pindexs:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="customer_code">a.CUSTOMER_CODE = #customer_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yy_sj_between">a.YY_SJ_BETWEEN = #yy_sj_between:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fanxian_rule">a.FANXIAN_RULE = #fanxian_rule:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fanxian_rule_new">a.FANXIAN_RULE_NEW = #fanxian_rule_new:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fanxian_rule_new_date">a.FANXIAN_RULE_NEW_DATE = #fanxian_rule_new_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_has_yinye_no">a.IS_HAS_YINYE_NO = #is_has_yinye_no:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="id_card_no">a.ID_CARD_NO = #id_card_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="img_id_card_zm">a.IMG_ID_CARD_ZM = #img_id_card_zm:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="img_id_card_fm">a.IMG_ID_CARD_FM = #img_id_card_fm:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="img_entp_mentou">a.IMG_ENTP_MENTOU = #img_entp_mentou:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_service">a.ENTP_SERVICE = #entp_service:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_refresh_date">a.ENTP_REFRESH_DATE = #entp_refresh_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_closed">a.IS_CLOSED = #is_closed:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_closed_date">a.ENTP_CLOSED_DATE = #entp_closed_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_show">a.IS_SHOW = #is_show:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index_pro">a.P_INDEX_PRO = #p_index_pro:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="hy_cls_id">a.HY_CLS_ID = #hy_cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comment_count">a.COMMENT_COUNT = #comment_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="xiaofei_qibu_price">a.XIAOFEI_QIBU_PRICE = #xiaofei_qibu_price:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="renjun_xiaofei_price">a.RENJUN_XIAOFEI_PRICE = #renjun_xiaofei_price:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tax_reg_certificate">a.TAX_REG_CERTIFICATE = #tax_reg_certificate:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="org_code">a.ORG_CODE = #org_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="production_license">a.PRODUCTION_LICENSE = #production_license:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="food_liutong_texu_license">a.FOOD_LIUTONG_TEXU_LICENSE = #food_liutong_texu_license:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="proxy_author_certificate">a.PROXY_AUTHOR_CERTIFICATE = #proxy_author_certificate:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="brand_reg_license">a.BRAND_REG_LICENSE = #brand_reg_license:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_buy_dalibao">a.IS_BUY_DALIBAO = #is_buy_dalibao:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lianmeng">a.IS_LIANMENG = #is_lianmeng:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_no">a.ENTP_NO = #entp_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="view_count">a.VIEW_COUNT = #view_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sale_count">a.SALE_COUNT = #sale_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_nx_entp">a.IS_NX_ENTP = #is_nx_entp:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sum_sale_money">a.SUM_SALE_MONEY = #sum_sale_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="xianxia_cls_id">a.XIANXIA_CLS_ID = #xianxia_cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_has_open_online_shop">a.IS_HAS_OPEN_ONLINE_SHOP = #is_has_open_online_shop:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_open_ad">a.IS_OPEN_AD = #is_open_ad:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_service_center_id">a.LINK_SERVICE_CENTER_ID = #link_service_center_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="socket_ip">a.SOCKET_IP = #SOCKET_IP:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="socket_port">a.SOCKET_PORT = #SOCKET_PORT:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_entpstyle">a.IS_ENTPSTYLE = #IS_ENTPSTYLE:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_coupons">a.IS_COUPONS = #IS_COUPONS:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="kefu_qr_code">a.KEFU_QR_CODE = #KEFU_QR_CODE:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="kefu_tel">a.KEFU_TEL = #kefu_tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mark_entp_id">a.MARK_ENTP_ID = #mark_entp_id:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like #map.p_index_like#  '%'</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.p_index_pro">
+			a.p_index_pro in
+			<iterate close=")" open="(" conjunction="," property="map.p_index_pro">#map.p_index_pro[]#</iterate>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_pro_or">(
+			a.p_index_pro in
+			<iterate close=")" open="(" conjunction="," property="map.p_index_pro_or">#map.p_index_pro_or[]#</iterate>
+			<isNotEmpty prepend=" or " property="map.p_index_or_like">a.P_INDEX like #map.p_index_or_like#  '%'</isNotEmpty>
+			<isNotEmpty prepend=" or " property="map.p_index_or_eq">a.P_INDEX = #map.p_index_or_eq#</isNotEmpty>
+			)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.audit_state_in">
+		<![CDATA[a.audit_state in ($map.audit_state_in$)]]></isNotEmpty>
+		
+	    
+	    <isNotEmpty prepend=" and " property="map.order_id_js">
+	    a.id in (select ENTP_ID from order_info where id in (select ORDER_ID from ORDER_PAYMENT_DETAIL
+	     where is_del = 0 and is_pay = 0 and audit_status =0
+	     
+	     <isNotEmpty prepend=" and " property="map.en_date"><![CDATA[
+	     ADD_DATE <= str_to_date(concat(#map.en_date:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	     
+	     <isNotEmpty prepend=" and " property="map.begin_date"><![CDATA[
+			ADD_DATE >= str_to_date(#map.begin_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+	     ))
+	     </isNotEmpty>
+	     
+	    <isNotEmpty prepend=" and " property="map.order_id_base_js">
+	    a.id in (select ENTP_ID from order_info where id in (select ORDER_ID from BASE_PAYMENT_JS_DETAILS
+	     where is_del = 0 and is_pay = 0 
+	     
+	     <isNotEmpty prepend=" and " property="map.js_type"><![CDATA[
+	    	JS_TYPE = #map.js_type:INTEGER#
+	     ]]></isNotEmpty>
+	     
+	     <isNotEmpty prepend=" and " property="map.en_date"><![CDATA[
+	     ADD_DATE <= str_to_date(concat(#map.en_date:VARCHAR# , '23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	     
+	        
+	     <isNotEmpty prepend=" and " property="map.begin_date"><![CDATA[
+			ADD_DATE >= str_to_date(#map.begin_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+	     ))
+	     </isNotEmpty>
+	    
+		<isNotEmpty prepend=" and " property="map.entp_name_like">a.ENTP_NAME like '%'  #map.entp_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.add_user_name_like">a.ADD_USER_NAME like '%'  #map.add_user_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.main_pd_class_ids_like">concat(',' , a.MAIN_PD_CLASS_IDS ,',') like '%'  #map.main_pd_class_ids_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.xianxia_pd_class_ids_like">concat(',' , a.XIANXIA_PD_CLASS_IDS ,',') like '%'  #map.xianxia_pd_class_ids_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.par_main_pd_class_ids"> 
+			<iterate prepend="  " close=")" open="(" conjunction=" or " property="map.par_main_pd_class_ids">
+			(concat(',' , a.MAIN_PD_CLASS_IDS , ',') like '%'  #map.par_main_pd_class_ids[]#  '%')
+			</iterate>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.today_date"><![CDATA[
+		str_to_date(#map.today_date:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= a.add_date  
+		and a.add_date <= str_to_date(concat(#map.today_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.audit_today_date"><![CDATA[
+		str_to_date(#map.audit_today_date:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= a.audit_date  
+		and a.audit_date <= str_to_date(concat(#map.audit_today_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+	     
+		<isNotEmpty prepend=" and " property="map.carts_of_entp">
+			a.ID in(select ENTP_ID from CART_INFO where USER_ID = #map.carts_of_entp#
+			<isNotEmpty prepend=" and " property="map.cart_types">cart_type in <iterate close=")" open="(" conjunction="," property="map.cart_types">#map.cart_types[]#</iterate></isNotEmpty>
+ 			<isNotEmpty prepend=" and " property="map.cart_ids">id in <iterate close=")" open="(" conjunction="," property="map.cart_ids">#map.cart_ids[]#</iterate></isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.cart_ids_in">id in ($map.cart_ids_in$)</isNotEmpty>
+			)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.is_not_id"><![CDATA[
+			a.id <> #map.is_not_id:INTEGER#
+		]]></isNotEmpty>
+		
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				a.ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+		
+		<isNotEmpty property="map.join_js_flow_son">
+			<isNotEmpty  prepend=" and " property="map.js_flow_son_audit_status">
+			c.audit_status in
+				<iterate close=")" open="(" conjunction="," property="map.js_flow_son_audit_status">#map.js_flow_son_audit_status[]#</iterate>
+			</isNotEmpty> 
+			
+			<isNotEmpty prepend=" and " property="map.js_flow_son_audit_status_not">
+				c.audit_status not in
+				<iterate close=")" open="(" conjunction="," property="map.js_flow_son_audit_status_not">#map.js_flow_son_audit_status_not[]#</iterate>
+			</isNotEmpty>
+			
+		
+		<isNotEmpty prepend=" and " property="map.join_audit_status"><![CDATA[
+	     c.audit_status in ($map.join_audit_status$)
+	     ]]></isNotEmpty>
+	     
+		<isNotEmpty prepend=" and " property="map.js_end_date_s"><![CDATA[
+	     c.js_end_date <= str_to_date(concat(#map.js_end_date_s# , '23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	     
+	        
+	     <isNotEmpty prepend=" and " property="map.js_begin_date_s"><![CDATA[
+			c.js_begin_date >= str_to_date(#map.js_begin_date_s:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		
+		<isNotEmpty prepend=" and " property="map.apply_state_s"><![CDATA[
+			c.apply_state =#map.apply_state_s:INTEGER#
+		]]></isNotEmpty>
+		
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.fanxian_rule_new_date_le">
+			<![CDATA[a.FANXIAN_RULE_NEW_DATE <= str_to_date(#map.fanxian_rule_new_date_le:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.fanxian_rule_new_is_not_null">
+			a.FANXIAN_RULE_NEW is not null
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.fanxian_rule_new_ne_fanxian_rule">
+			a.FANXIAN_RULE_NEW != a.FANXIAN_RULE
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.entp_closed_date_le">
+			<![CDATA[a.ENTP_CLOSED_DATE <= str_to_date(#map.entp_closed_date_le:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.update_date_eq"><![CDATA[
+		str_to_date(#map.update_date_eq:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= a.update_date  
+		and a.update_date <= str_to_date(concat(#map.update_date_eq# , '23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+	    <isNotEmpty prepend=" and " property="map.add_date_st"><![CDATA[a.ADD_DATE >= str_to_date(#map.add_date_st:VARCHAR#, '%Y-%m-%d')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.add_date_en"><![CDATA[a.ADD_DATE <= str_to_date(concat(#map.add_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	     
+	    <isNotEmpty prepend=" and " property="map.update_date_st"><![CDATA[a.update_date >= str_to_date(#map.update_date_st:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.update_date_en"><![CDATA[a.update_date <= str_to_date(concat(#map.update_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	     
+	    <isNotEmpty prepend=" and " property="map.audit_date_st"><![CDATA[a.audit_date >= str_to_date(#map.audit_date_st:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.audit_date_en"><![CDATA[a.audit_date <= str_to_date(concat(#map.audit_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.id_not_in">a.id not in($map.id_not_in$)</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.p_index_city">substr(a.p_index,1,4) = #map.p_index_city#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.p_index_province">substr(a.p_index,1,2) = #map.p_index_province#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.xianxiaEntp">a.XIANXIA_CLS_ID is not null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.id_in">a.id in ($map.id_in$)</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</sql>
+
+	<select id="selectEntpInfo" resultMap="entpInfoResultForFullName" parameterClass="entpInfo" cacheModel="oneDayCache">
+		select  distinct a.* ,b.full_name from ENTP_INFO a 
+			left join BASE_PROVINCE b 
+			on b.p_index = a.p_index
+			<isNotEmpty property="map.join_js_flow_son">
+			 right join ORDER_JS_FLOW_SON c on a.id =c.entp_id
+		</isNotEmpty>
+		where 1 = 1
+		<include refid="sf-entpInfo" />
+	</select>
+
+	<select id="selectEntpInfoList" resultMap="entpInfoResultForFullName" parameterClass="entpInfo" cacheModel="oneDayCache">
+		
+		select distinct  a.* ,b.full_name 
+		
+		
+		from ENTP_INFO a 
+			left join BASE_PROVINCE b 
+			on b.p_index = a.p_index
+			<isNotEmpty property="map.join_js_flow_son">
+			 right join ORDER_JS_FLOW_SON c on a.id =c.entp_id
+		</isNotEmpty>
+			
+		where 1 = 1
+		<isNotEmpty property="map.sy_select_entp">
+			
+		</isNotEmpty>
+		<include refid="sf-entpInfo" />
+		order by 
+		<isNotEmpty property="map.orderByInfo">$map.orderByInfo$</isNotEmpty>
+		<isNotEmpty property="map.is_latest">a.ADD_DATE desc,</isNotEmpty>
+		a.ORDER_VALUE desc, a.ADD_DATE desc, a.ID desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectEntpInfoCount" resultClass="int" parameterClass="entpInfo" cacheModel="oneDayCache">
+		select count(*) from  ( select distinct a.* from ENTP_INFO a 
+		left join BASE_PROVINCE b 
+			on b.p_index = a.p_index
+			<isNotEmpty property="map.join_js_flow_son">
+			 right join ORDER_JS_FLOW_SON c on a.id =c.entp_id
+		</isNotEmpty>
+		
+		<isNotEmpty property="map.join_yhq_entp_apply_info">
+			 left join YHQ_ENTP_APPLY_INFO d on a.id = d.own_entp_id
+		</isNotEmpty>
+			
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="map.surpass_sum_sale_money"><![CDATA[
+			a.sum_sale_money > $map.surpass_sum_sale_money$
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.topic_news">
+			a.id not in (select t.link_id from topic_config t where t.link_id_type = #map.link_id_type#  and t.topic_id = #map.topic_id# and t.is_del = 0)
+		</isNotEmpty>
+		<isNotEmpty property="map.join_yhq_entp_apply_info">
+			and d.is_del = 0 and d.audit_state = 1
+			
+		<isNotEmpty prepend=" and " property="map.end_date"><![CDATA[
+	     d.add_date <= str_to_date(concat(#map.end_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	        
+	     <isNotEmpty prepend=" and " property="map.begin_date"><![CDATA[
+			d.add_date >= str_to_date(#map.begin_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+	     <isNotEmpty prepend=" and " property="map.js_state"><![CDATA[
+			d.js_state = $map.js_state$
+		]]></isNotEmpty>
+		
+		</isNotEmpty>
+				
+		<include refid="sf-entpInfo" />
+		) count_t
+	</select>
+
+	<select id="selectEntpInfoPaginatedList" resultMap="entpInfoResultForFullName" parameterClass="entpInfo" cacheModel="oneDayCache">
+		
+		select distinct a.*,b.full_name from ENTP_INFO a 
+			left join BASE_PROVINCE b 
+			on b.p_index = a.p_index
+			
+		<isNotEmpty property="map.join_js_flow_son">
+			 right join ORDER_JS_FLOW_SON c on a.id =c.entp_id
+		</isNotEmpty>
+		
+		<isNotEmpty property="map.join_yhq_entp_apply_info">
+			 left join YHQ_ENTP_APPLY_INFO d on a.id = d.own_entp_id
+		</isNotEmpty>
+			
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="map.surpass_sum_sale_money"><![CDATA[
+			a.sum_sale_money > $map.surpass_sum_sale_money$
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.topic_news">
+			a.id not in (select t.link_id from topic_config t where t.link_id_type = #map.link_id_type#  and t.topic_id = #map.topic_id# and t.is_del = 0)
+		</isNotEmpty>
+		
+		<isNotEmpty property="map.join_yhq_entp_apply_info">
+			and d.is_del = 0 and d.audit_state = 1
+			
+			<isNotEmpty prepend=" and " property="map.end_date"><![CDATA[
+	     d.add_date <= str_to_date(concat(#map.end_date# , '23:59:59'), '%Y-%m-%d %H:%i:%s')
+	     ]]></isNotEmpty>
+	        
+	     <isNotEmpty prepend=" and " property="map.begin_date"><![CDATA[
+			d.add_date >= str_to_date(#map.begin_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+	     <isNotEmpty prepend=" and " property="map.js_state"><![CDATA[
+			d.js_state = $map.js_state$
+		]]></isNotEmpty>
+		
+		</isNotEmpty>
+		
+		<include refid="sf-entpInfo" />
+		 order by 
+		 
+		 <isNotEmpty property="map.orderByAddDateDesc"><![CDATA[a.add_date desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByCommentDesc"><![CDATA[a.comment_count desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByCommentAsc"><![CDATA[a.comment_count asc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderBySaleAsc"><![CDATA[a.sale_count asc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderBySaleDesc"><![CDATA[a.sale_count desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByViewCountDesc"><![CDATA[a.view_count desc,]]></isNotEmpty>
+		 
+		 <isNotEmpty property="map.orderBysumSaleMoneyAsc"><![CDATA[a.sum_sale_money asc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderBysumSaleMoneyDesc"><![CDATA[a.sum_sale_money desc,]]></isNotEmpty>
+		 
+		 
+		 
+		 <isNotEmpty property="map.orderByInfo">$map.orderByInfo$</isNotEmpty>
+		 <isNotEmpty prepend=" " property="map.is_new">a.ADD_DATE desc nulls last,</isNotEmpty>
+		 a.ORDER_VALUE desc, a.ID desc 
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	
+	<select id="selectEntpInfoDistance" resultMap="entpInfoResultForDistance" parameterClass="entpInfo" cacheModel="oneDayCache">
+		select c.*,
+			ROUND(
+			6378.138 * 2 * ASIN(
+				SQRT(
+					POW(
+						SIN(
+							(
+								<isNotEmpty prepend=" " property="map.x">#map.x#</isNotEmpty> * PI() / 180 - c.y * PI() / 180
+							) / 2
+						),
+						2
+					) + COS(<isNotEmpty prepend=" " property="map.x">#map.x#</isNotEmpty> * PI() / 180) * COS(c.y * PI() / 180) * POW(
+						SIN(
+							(
+								<isNotEmpty prepend="" property="map.y">#map.y#</isNotEmpty> * PI() / 180 - c.x * PI() / 180
+							) / 2
+						),
+						2
+					)
+				)
+			) * 1000
+		) as distance
+		FROM
+		(
+		SELECT
+			a.*,
+			SUBSTRING_INDEX(a.ENTP_LATLNG, ',', 1) AS x,
+			SUBSTRING_INDEX(a.ENTP_LATLNG, ',' ,- 1) AS y
+		FROM
+			entp_info a
+		WHERE
+			a.ENTP_LATLNG IS NOT NULL
+		AND a.ENTP_LATLNG != ""
+		 
+		 <include refid="sf-entpInfo" />
+		 
+		 
+		 <isNotEmpty prepend=" " property="map.is_new">a.ADD_DATE desc nulls last,</isNotEmpty>
+		
+		ORDER BY 
+		<isNotEmpty property="map.orderByAddDateDesc"><![CDATA[a.add_date desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByCommentDesc"><![CDATA[a.comment_count desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByCommentAsc"><![CDATA[a.comment_count asc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderBySaleAsc"><![CDATA[a.sale_count asc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderBySaleDesc"><![CDATA[a.sale_count desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByViewCountDesc"><![CDATA[a.view_count desc,]]></isNotEmpty>
+		  <isNotEmpty property="map.orderBysumSaleMoneyAsc"><![CDATA[a.sum_sale_money asc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderBysumSaleMoneyDesc"><![CDATA[a.sum_sale_money desc,]]></isNotEmpty>
+		 <isNotEmpty property="map.orderByInfo">$map.orderByInfo$</isNotEmpty>
+		 a.ORDER_VALUE desc, a.ID desc 
+		
+		) c 
+		
+		 
+		 <isNotEmpty property="map.orderBydistanceDesc"><![CDATA[ORDER BY  distance]]></isNotEmpty>
+		
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertEntpInfo" parameterClass="entpInfo">
+		<![CDATA[insert into ENTP_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="uuid">UUID</isNotNull>	
+			<isNotNull prepend="," property="entp_type">ENTP_TYPE</isNotNull>	
+			<isNotNull prepend="," property="entp_logo">ENTP_LOGO</isNotNull>	
+			<isNotNull prepend="," property="entp_name">ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="entp_sname">ENTP_SNAME</isNotNull>	
+			<isNotNull prepend="," property="entp_ename">ENTP_ENAME</isNotNull>	
+			<isNotNull prepend="," property="main_pd_class_ids">MAIN_PD_CLASS_IDS</isNotNull>	
+			<isNotNull prepend="," property="main_pd_class_names">MAIN_PD_CLASS_NAMES</isNotNull>	
+			<isNotNull prepend="," property="xianxia_pd_class_ids">XIANXIA_PD_CLASS_IDS</isNotNull>	
+			<isNotNull prepend="," property="xianxia_pd_class_names">XIANXIA_PD_CLASS_NAMES</isNotNull>	
+			<isNotNull prepend="," property="entp_area">ENTP_AREA</isNotNull>	
+			<isNotNull prepend="," property="entp_corporation">ENTP_CORPORATION</isNotNull>	
+			<isNotNull prepend="," property="entp_licence">ENTP_LICENCE</isNotNull>	
+			<isNotNull prepend="," property="entp_licence_img">ENTP_LICENCE_IMG</isNotNull>	
+			<isNotNull prepend="," property="entp_desc">ENTP_DESC</isNotNull>	
+			<isNotNull prepend="," property="entp_reg_money">ENTP_REG_MONEY</isNotNull>	
+			<isNotNull prepend="," property="entp_build_date">ENTP_BUILD_DATE</isNotNull>	
+			<isNotNull prepend="," property="entp_persons">ENTP_PERSONS</isNotNull>	
+			<isNotNull prepend="," property="entp_honor">ENTP_HONOR</isNotNull>	
+			<isNotNull prepend="," property="entp_kind">ENTP_KIND</isNotNull>	
+			<isNotNull prepend="," property="entp_own_org">ENTP_OWN_ORG</isNotNull>	
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>	
+			<isNotNull prepend="," property="entp_addr">ENTP_ADDR</isNotNull>	
+			<isNotNull prepend="," property="entp_latlng">ENTP_LATLNG</isNotNull>	
+			<isNotNull prepend="," property="entp_postcode">ENTP_POSTCODE</isNotNull>	
+			<isNotNull prepend="," property="entp_linkman">ENTP_LINKMAN</isNotNull>	
+			<isNotNull prepend="," property="entp_tel">ENTP_TEL</isNotNull>	
+			<isNotNull prepend="," property="entp_fax">ENTP_FAX</isNotNull>	
+			<isNotNull prepend="," property="entp_email">ENTP_EMAIL</isNotNull>	
+			<isNotNull prepend="," property="entp_www">ENTP_WWW</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_commend">IS_COMMEND</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="entp_tax_licence">ENTP_TAX_LICENCE</isNotNull>	
+			<isNotNull prepend="," property="entp_tax_licence_img">ENTP_TAX_LICENCE_IMG</isNotNull>	
+			<isNotNull prepend="," property="entp_org_code">ENTP_ORG_CODE</isNotNull>	
+			<isNotNull prepend="," property="entp_org_code_img">ENTP_ORG_CODE_IMG</isNotNull>	
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE</isNotNull>	
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE</isNotNull>	
+			<isNotNull prepend="," property="audit_desc_one">AUDIT_DESC_ONE</isNotNull>	
+			<isNotNull prepend="," property="audit_desc_two">AUDIT_DESC_TWO</isNotNull>	
+			<isNotNull prepend="," property="qq">QQ</isNotNull>
+			<isNotNull prepend="," property="entp_level">ENTP_LEVEL</isNotNull>	
+			<isNotNull prepend="," property="custom_url">CUSTOM_URL</isNotNull>	
+			<isNotNull prepend="," property="bank_account">BANK_ACCOUNT</isNotNull>	
+			<isNotNull prepend="," property="alipay_account">ALIPAY_ACCOUNT</isNotNull>	
+			<isNotNull prepend="," property="entp_template">ENTP_TEMPLATE</isNotNull>	
+			<isNotNull prepend="," property="own_bank">OWN_BANK</isNotNull>
+			<isNotNull prepend="," property="store_type">STORE_TYPE</isNotNull>		
+			<isNotNull prepend="," property="is_self_support">IS_SELF_SUPPORT</isNotNull>	
+			<isNotNull prepend="," property="seo_title">SEO_TITLE</isNotNull>	
+			<isNotNull prepend="," property="seo_keyword">SEO_KEYWORD</isNotNull>	
+			<isNotNull prepend="," property="seo_desc">SEO_DESC</isNotNull>	
+			<isNotNull prepend="," property="shop_name">SHOP_NAME</isNotNull>	
+			<isNotNull prepend="," property="is_zc_hdfk">IS_ZC_HDFK</isNotNull>	
+			<isNotNull prepend="," property="hdfk_pindexs">HDFK_PINDEXS</isNotNull>	
+			<isNotNull prepend="," property="customer_code">CUSTOMER_CODE</isNotNull>	
+			<isNotNull prepend="," property="yy_sj_between">YY_SJ_BETWEEN</isNotNull>	
+			<isNotNull prepend="," property="fanxian_rule">FANXIAN_RULE</isNotNull>	
+			<isNotNull prepend="," property="fanxian_rule_new">FANXIAN_RULE_NEW</isNotNull>	
+			<isNotNull prepend="," property="fanxian_rule_new_date">FANXIAN_RULE_NEW_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_has_yinye_no">IS_HAS_YINYE_NO</isNotNull>	
+			<isNotNull prepend="," property="id_card_no">ID_CARD_NO</isNotNull>	
+			<isNotNull prepend="," property="img_id_card_zm">IMG_ID_CARD_ZM</isNotNull>	
+			<isNotNull prepend="," property="img_id_card_fm">IMG_ID_CARD_FM</isNotNull>	
+			<isNotNull prepend="," property="img_entp_mentou">IMG_ENTP_MENTOU</isNotNull>	
+			<isNotNull prepend="," property="entp_service">ENTP_SERVICE</isNotNull>	
+			<isNotNull prepend="," property="entp_refresh_date">ENTP_REFRESH_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_closed">IS_CLOSED</isNotNull>	
+			<isNotNull prepend="," property="entp_closed_date">ENTP_CLOSED_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_show">IS_SHOW</isNotNull>	
+			<isNotNull prepend="," property="p_index_pro">P_INDEX_PRO</isNotNull>	
+			<isNotNull prepend="," property="hy_cls_id">HY_CLS_ID</isNotNull>
+			<isNotNull prepend="," property="comment_count">COMMENT_COUNT</isNotNull>	
+			<isNotNull prepend="," property="xiaofei_qibu_price">XIAOFEI_QIBU_PRICE</isNotNull>	
+			<isNotNull prepend="," property="renjun_xiaofei_price">RENJUN_XIAOFEI_PRICE</isNotNull>	
+			<isNotNull prepend="," property="tax_reg_certificate">TAX_REG_CERTIFICATE</isNotNull>	
+			<isNotNull prepend="," property="org_code">ORG_CODE</isNotNull>	
+			<isNotNull prepend="," property="production_license">PRODUCTION_LICENSE</isNotNull>	
+			<isNotNull prepend="," property="food_liutong_texu_license">FOOD_LIUTONG_TEXU_LICENSE</isNotNull>	
+			<isNotNull prepend="," property="proxy_author_certificate">PROXY_AUTHOR_CERTIFICATE</isNotNull>	
+			<isNotNull prepend="," property="brand_reg_license">BRAND_REG_LICENSE</isNotNull>	
+			<isNotNull prepend="," property="is_buy_dalibao">IS_BUY_DALIBAO</isNotNull>	
+			<isNotNull prepend="," property="is_lianmeng">IS_LIANMENG</isNotNull>	
+			<isNotNull prepend="," property="entp_no">ENTP_NO</isNotNull>	
+			<isNotNull prepend="," property="view_count">VIEW_COUNT</isNotNull>	
+			<isNotNull prepend="," property="sale_count">SALE_COUNT</isNotNull>	
+			<isNotNull prepend="," property="is_nx_entp">IS_NX_ENTP</isNotNull>	
+			<isNotNull prepend="," property="sum_sale_money">SUM_SALE_MONEY</isNotNull>	
+			<isNotNull prepend="," property="xianxia_cls_id">XIANXIA_CLS_ID</isNotNull>	
+			<isNotNull prepend="," property="is_has_open_online_shop">IS_HAS_OPEN_ONLINE_SHOP</isNotNull>
+			<isNotNull prepend="," property="is_open_ad">IS_OPEN_AD</isNotNull>	
+			<isNotNull prepend="," property="link_service_center_id">LINK_SERVICE_CENTER_ID</isNotNull>	
+			<isNotNull prepend="," property="socket_ip">SOCKET_IP</isNotNull>	
+			<isNotNull prepend="," property="socket_port">SOCKET_PORT</isNotNull>	
+			<isNotNull prepend="," property="is_entpstyle">IS_ENTPSTYLE</isNotNull>	
+			<isNotNull prepend="," property="is_coupons">IS_COUPONS</isNotNull>	
+			<isNotNull prepend="," property="kefu_qr_code">KEFU_QR_CODE</isNotNull>	
+			<isNotNull prepend="," property="kefu_tel">KEFU_TEL</isNotNull>	
+			<isNotNull prepend="," property="mark_entp_id">MARK_ENTP_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="uuid">#uuid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_type">#entp_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_logo">#entp_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_name">#entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_sname">#entp_sname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_ename">#entp_ename:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="main_pd_class_ids">#main_pd_class_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="main_pd_class_names">#main_pd_class_names:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="xianxia_pd_class_ids">#xianxia_pd_class_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="xianxia_pd_class_names">#xianxia_pd_class_names:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_area">#entp_area:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_corporation">#entp_corporation:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_licence">#entp_licence:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_licence_img">#entp_licence_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_desc">#entp_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_reg_money">#entp_reg_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_build_date">#entp_build_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="entp_persons">#entp_persons:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_honor">#entp_honor:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_kind">#entp_kind:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_own_org">#entp_own_org:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_addr">#entp_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_latlng">#entp_latlng:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_postcode">#entp_postcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_linkman">#entp_linkman:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_tel">#entp_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_fax">#entp_fax:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_email">#entp_email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_www">#entp_www:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_commend">#is_commend:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">#add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_tax_licence">#entp_tax_licence:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_tax_licence_img">#entp_tax_licence_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_org_code">#entp_org_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_org_code_img">#entp_org_code_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_state">#audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">#audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">#audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc_one">#audit_desc_one:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_desc_two">#audit_desc_two:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qq">#qq:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_level">#entp_level:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="custom_url">#custom_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_account">#bank_account:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="alipay_account">#alipay_account:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_template">#entp_template:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_bank">#own_bank:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="store_type">#store_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_self_support">#is_self_support:INTEGER#</isNotNull>		
+			<isNotNull prepend="," property="seo_title">#seo_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_keyword">#seo_keyword:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_desc">#seo_desc:VARCHAR#</isNotNull>	
+			<isNotNull prepend="," property="shop_name">#shop_name:VARCHAR#</isNotNull>	
+			<isNotNull prepend="," property="is_zc_hdfk">#is_zc_hdfk:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hdfk_pindexs">#hdfk_pindexs:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="customer_code">#customer_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yy_sj_between">#yy_sj_between:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule">#fanxian_rule:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule_new">#fanxian_rule_new:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule_new_date">#fanxian_rule_new_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_has_yinye_no">#is_has_yinye_no:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="id_card_no">#id_card_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_zm">#img_id_card_zm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_fm">#img_id_card_fm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_entp_mentou">#img_entp_mentou:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_service">#entp_service:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_refresh_date">#entp_refresh_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_closed">#is_closed:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_closed_date">#entp_closed_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_show">#is_show:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_index_pro">#p_index_pro:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hy_cls_id">#hy_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comment_count">#comment_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="xiaofei_qibu_price">#xiaofei_qibu_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="renjun_xiaofei_price">#renjun_xiaofei_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tax_reg_certificate">#tax_reg_certificate:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="org_code">#org_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="production_license">#production_license:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="food_liutong_texu_license">#food_liutong_texu_license:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="proxy_author_certificate">#proxy_author_certificate:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brand_reg_license">#brand_reg_license:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_buy_dalibao">#is_buy_dalibao:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lianmeng">#is_lianmeng:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_no">#entp_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="view_count">#view_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sale_count">#sale_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_nx_entp">#is_nx_entp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sum_sale_money">#sum_sale_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="xianxia_cls_id">#xianxia_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_has_open_online_shop">#is_has_open_online_shop:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_open_ad">#is_open_ad:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_service_center_id">#link_service_center_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="socket_ip">#socket_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="socket_port">#socket_port:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_entpstyle">#is_entpstyle:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_coupons">#is_coupons:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="kefu_qr_code">#kefu_qr_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="kefu_tel">#kefu_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mark_entp_id">#mark_entp_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateEntpInfo" parameterClass="entpInfo">
+		update ENTP_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="uuid">UUID = #uuid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_type">ENTP_TYPE = #entp_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_logo">ENTP_LOGO = #entp_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_name">ENTP_NAME = #entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_sname">ENTP_SNAME = #entp_sname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_ename">ENTP_ENAME = #entp_ename:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="main_pd_class_ids">MAIN_PD_CLASS_IDS = #main_pd_class_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="main_pd_class_names">MAIN_PD_CLASS_NAMES = #main_pd_class_names:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="xianxia_pd_class_ids">XIANXIA_PD_CLASS_IDS = #xianxia_pd_class_ids:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="xianxia_pd_class_names">XIANXIA_PD_CLASS_NAMES = #xianxia_pd_class_names:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_area">ENTP_AREA = #entp_area:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_corporation">ENTP_CORPORATION = #entp_corporation:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_licence">ENTP_LICENCE = #entp_licence:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_licence_img">ENTP_LICENCE_IMG = #entp_licence_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_desc">ENTP_DESC = #entp_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_reg_money">ENTP_REG_MONEY = #entp_reg_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_build_date">ENTP_BUILD_DATE = #entp_build_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="entp_persons">ENTP_PERSONS = #entp_persons:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_honor">ENTP_HONOR = #entp_honor:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_kind">ENTP_KIND = #entp_kind:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_own_org">ENTP_OWN_ORG = #entp_own_org:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_addr">ENTP_ADDR = #entp_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_latlng">ENTP_LATLNG = #entp_latlng:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_postcode">ENTP_POSTCODE = #entp_postcode:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_linkman">ENTP_LINKMAN = #entp_linkman:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_tel">ENTP_TEL = #entp_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_fax">ENTP_FAX = #entp_fax:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_email">ENTP_EMAIL = #entp_email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_www">ENTP_WWW = #entp_www:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_commend">IS_COMMEND = #is_commend:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_user_name">ADD_USER_NAME = #add_user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_tax_licence">ENTP_TAX_LICENCE = #entp_tax_licence:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_tax_licence_img">ENTP_TAX_LICENCE_IMG = #entp_tax_licence_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_org_code">ENTP_ORG_CODE = #entp_org_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_org_code_img">ENTP_ORG_CODE_IMG = #entp_org_code_img:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_state">AUDIT_STATE = #audit_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_user_id">AUDIT_USER_ID = #audit_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="audit_date">AUDIT_DATE = #audit_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="audit_desc_one">AUDIT_DESC_ONE = #audit_desc_one:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_desc_two">AUDIT_DESC_TWO = #audit_desc_two:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="qq">QQ = #qq:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_level">ENTP_LEVEL = #entp_level:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="custom_url">CUSTOM_URL = #custom_url:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_account">BANK_ACCOUNT = #bank_account:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="alipay_account">ALIPAY_ACCOUNT = #alipay_account:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_template">ENTP_TEMPLATE = #entp_template:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_bank">OWN_BANK = #own_bank:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="map.clear_image_path">ENTP_LOGO = null</isNotNull>
+			
+			<isNotNull prepend="," property="store_type">STORE_TYPE = #store_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_self_support">IS_SELF_SUPPORT = #is_self_support:INTEGER#</isNotNull>		
+			<isNotNull prepend="," property="seo_title">SEO_TITLE = #seo_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_keyword">SEO_KEYWORD = #seo_keyword:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="seo_desc">SEO_DESC = #seo_desc:VARCHAR#</isNotNull>	
+			<isNotNull prepend="," property="shop_name">SHOP_NAME = #shop_name:VARCHAR#</isNotNull>	
+			
+			<isNotNull prepend="," property="is_zc_hdfk">IS_ZC_HDFK = #is_zc_hdfk:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hdfk_pindexs">HDFK_PINDEXS = #hdfk_pindexs:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="customer_code">CUSTOMER_CODE = #customer_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yy_sj_between">YY_SJ_BETWEEN = #yy_sj_between:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule">FANXIAN_RULE = #fanxian_rule:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule_new">FANXIAN_RULE_NEW = #fanxian_rule_new:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fanxian_rule_new_date">FANXIAN_RULE_NEW_DATE = #fanxian_rule_new_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_has_yinye_no">IS_HAS_YINYE_NO = #is_has_yinye_no:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="id_card_no">ID_CARD_NO = #id_card_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_zm">IMG_ID_CARD_ZM = #img_id_card_zm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_fm">IMG_ID_CARD_FM = #img_id_card_fm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_entp_mentou">IMG_ENTP_MENTOU = #img_entp_mentou:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_service">ENTP_SERVICE = #entp_service:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="entp_refresh_date">ENTP_REFRESH_DATE = #entp_refresh_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_closed">IS_CLOSED = #is_closed:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_closed_date">ENTP_CLOSED_DATE = #entp_closed_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_show">IS_SHOW = #is_show:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="p_index_pro">P_INDEX_PRO = #p_index_pro:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="hy_cls_id">HY_CLS_ID = #hy_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comment_count">COMMENT_COUNT = #comment_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="xiaofei_qibu_price">XIAOFEI_QIBU_PRICE = #xiaofei_qibu_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="renjun_xiaofei_price">RENJUN_XIAOFEI_PRICE = #renjun_xiaofei_price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tax_reg_certificate">TAX_REG_CERTIFICATE = #tax_reg_certificate:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="org_code">ORG_CODE = #org_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="production_license">PRODUCTION_LICENSE = #production_license:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="food_liutong_texu_license">FOOD_LIUTONG_TEXU_LICENSE = #food_liutong_texu_license:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="proxy_author_certificate">PROXY_AUTHOR_CERTIFICATE = #proxy_author_certificate:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="brand_reg_license">BRAND_REG_LICENSE = #brand_reg_license:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_buy_dalibao">IS_BUY_DALIBAO = #is_buy_dalibao:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lianmeng">IS_LIANMENG = #is_lianmeng:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_no">ENTP_NO = #entp_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="view_count">VIEW_COUNT = #view_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sale_count">SALE_COUNT = #sale_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_nx_entp">IS_NX_ENTP = #is_nx_entp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sum_sale_money">SUM_SALE_MONEY = #sum_sale_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="xianxia_cls_id">XIANXIA_CLS_ID = #xianxia_cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_has_open_online_shop">IS_HAS_OPEN_ONLINE_SHOP = #is_has_open_online_shop:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_open_ad">IS_OPEN_AD = #is_open_ad:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_service_center_id">LINK_SERVICE_CENTER_ID = #link_service_center_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="socket_ip">SOCKET_IP = #socket_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="socket_port">SOCKET_PORT = #socket_port:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_entpstyle">IS_ENTPSTYLE = #is_entpstyle:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_coupons">IS_COUPONS = #is_coupons:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="kefu_qr_code">KEFU_QR_CODE = #kefu_qr_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="kefu_tel">KEFU_TEL = #kefu_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mark_entp_id">MARK_ENTP_ID = #mark_entp_id:INTEGER#</isNotNull>
+			
+			<isNotNull prepend="," property="map.add_view_count">VIEW_COUNT = VIEW_COUNT + #map.add_view_count#</isNotNull>
+			<isNotNull prepend="," property="map.add_comment_count">COMMENT_COUNT = COMMENT_COUNT + #map.add_comment_count#</isNotNull>
+			<isNotNull prepend="," property="map.add_sale_count">SALE_COUNT = SALE_COUNT + #map.add_sale_count#</isNotNull>
+			<isNotNull prepend="," property="map.sub_sale_count">SALE_COUNT = SALE_COUNT - #map.sub_sale_count#</isNotNull>
+			<isNotNull prepend="," property="map.add_sum_sale_money">SUM_SALE_MONEY = SUM_SALE_MONEY + #map.add_sum_sale_money#</isNotNull>
+			<isNotNull prepend="," property="map.sub_sum_sale_money">SUM_SALE_MONEY = SUM_SALE_MONEY - #map.sub_sum_sale_money#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.link_service_center_id">LINK_SERVICE_CENTER_ID = #map.link_service_center_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_sale_count">SALE_COUNT >= #map.sub_sale_count#</isNotEmpty>
+	</update>
+
+	<delete id="deleteEntpInfo" parameterClass="entpInfo">
+		delete from ENTP_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="YHQ_LINK">
+
+	<typeAlias alias="yhqLink" type="com.ebiz.webapp.domain.YhqLink" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertYhqLink" />
+		<flushOnExecute statement="updateYhqLink" />
+		<flushOnExecute statement="deleteYhqLink" />
+	</cacheModel>
+
+	<resultMap id="yhqLinkResultForList" class="yhqLink">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="YHQ_ID" property="yhq_id" jdbcType="INTEGER" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="yhqLinkResult" class="yhqLink" extends="yhqLinkResultForList">
+	</resultMap>
+
+	<sql id="sf-yhqLink">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_id">a.YHQ_ID = #yhq_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectYhqLink" resultMap="yhqLinkResult" parameterClass="yhqLink" cacheModel="oneDayCache">
+		select * from YHQ_LINK a where 1 = 1
+		<include refid="sf-yhqLink" />
+	</select>
+
+	<select id="selectYhqLinkList" resultMap="yhqLinkResultForList" parameterClass="yhqLink" cacheModel="oneDayCache">
+		select * from YHQ_LINK a where 1 = 1
+		<include refid="sf-yhqLink" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectYhqLinkCount" resultClass="int" parameterClass="yhqLink" cacheModel="oneDayCache">
+		select count(*) from YHQ_LINK a where 1 = 1
+		<include refid="sf-yhqLink" />
+	</select>
+
+	<select id="selectYhqLinkPaginatedList" resultMap="yhqLinkResult" parameterClass="yhqLink" cacheModel="oneDayCache">
+		select * from YHQ_LINK a where 1 = 1
+		<include refid="sf-yhqLink" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertYhqLink" parameterClass="yhqLink">
+		<![CDATA[insert into YHQ_LINK (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="yhq_id">YHQ_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_id">#yhq_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateYhqLink" parameterClass="yhqLink">
+		update YHQ_LINK
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_id">YHQ_ID = #yhq_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteYhqLink" parameterClass="yhqLink">
+		delete from YHQ_LINK where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.yhq_delete">YHQ_ID = #map.yhq_delete#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

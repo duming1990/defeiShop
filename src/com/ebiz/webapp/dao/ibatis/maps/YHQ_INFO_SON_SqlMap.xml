@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="YHQ_INFO_SON">
+
+	<typeAlias alias="yhqInfoSon" type="com.ebiz.webapp.domain.YhqInfoSon" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertYhqInfoSon" />
+		<flushOnExecute statement="updateYhqInfoSon" />
+		<flushOnExecute statement="deleteYhqInfoSon" />
+	</cacheModel>
+
+	<resultMap id="yhqInfoSonResultForList" class="yhqInfoSon">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="LINK_ID" property="link_id" jdbcType="INTEGER" />
+		<result column="YHQ_STATE" property="yhq_state" jdbcType="INTEGER" />
+		<result column="GET_DATE" property="get_date" jdbcType="TIMESTAMP" />
+		<result column="USE_DATE" property="use_date" jdbcType="TIMESTAMP" />
+		<result column="LINK_TRADE_INDEX" property="link_trade_index" jdbcType="VARCHAR" />
+		<result column="LINK_USER_ID" property="link_user_id" jdbcType="INTEGER" />
+		<result column="IS_USED" property="is_used" jdbcType="INTEGER" />
+		<result column="OWN_ENTP_ID" property="own_entp_id" jdbcType="INTEGER" />
+		<result column="OWN_ENTP_NAME" property="own_entp_name" jdbcType="VARCHAR" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="YHQ_END_DATE" property="yhq_end_date" jdbcType="TIMESTAMP" />
+		<result column="YHQ_START_DATE" property="yhq_start_date" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="yhqInfoSonResult" class="yhqInfoSon" extends="yhqInfoSonResultForList">
+	</resultMap>
+	
+	<resultMap id="yhqInfoSonResultGroupByUserId" class="yhqInfoSon">
+	  <result column="OWN_ENTP_ID" property="own_entp_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="sf-yhqInfoSon">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_id">a.LINK_ID = #link_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_state">a.YHQ_STATE = #yhq_state:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="get_date">a.GET_DATE = #get_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="use_date">a.USE_DATE = #use_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_trade_index">a.LINK_TRADE_INDEX = #link_trade_index:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_user_id">a.LINK_USER_ID = #link_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_used">a.IS_USED = #is_used:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_entp_id">a.OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_entp_name">a.OWN_ENTP_NAME = #own_entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_end_date">a.YHQ_END_DATE = #YHQ_END_DATE:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_start_date">a.YHQ_START_DATE = #YHQ_START_DATE:TIMESTAMP#</isNotEmpty>
+	    
+	    
+	    <isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.use_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			a.use_date <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.link_id_in">a.LINK_ID in ($map.link_id_in$)</isNotEmpty>
+	    
+	    <isNotEmpty prepend=" and " property="map.yhq_start_time"><![CDATA[
+			a.YHQ_START_DATE <= str_to_date(now(), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.yhq_end_time"><![CDATA[
+			a.YHQ_END_DATE >= str_to_date(now(), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+<!-- 		<isNotEmpty prepend=" and " property="map.yhq_end_time"><![CDATA[ -->
+<!-- 			a.YHQ_END_DATE >= str_to_date(now(), '%Y-%m-%d %H:%i:%s') -->
+<!-- 		]]></isNotEmpty> -->
+		
+	</sql>
+
+	<select id="selectYhqInfoSon" resultMap="yhqInfoSonResult" parameterClass="yhqInfoSon" cacheModel="oneDayCache">
+		select * from YHQ_INFO_SON a where 1 = 1
+		<include refid="sf-yhqInfoSon" />
+	</select>
+
+	<select id="selectYhqInfoSonList" resultMap="yhqInfoSonResultForList" parameterClass="yhqInfoSon" cacheModel="oneDayCache">
+		select * from YHQ_INFO_SON a where 1 = 1
+		<include refid="sf-yhqInfoSon" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectYhqInfoSonCount" resultClass="int" parameterClass="yhqInfoSon" cacheModel="oneDayCache">
+		select count(*) from YHQ_INFO_SON a where 1 = 1
+		<include refid="sf-yhqInfoSon" />
+	</select>
+
+	<select id="selectYhqInfoSonPaginatedList" resultMap="yhqInfoSonResult" parameterClass="yhqInfoSon" cacheModel="oneDayCache">
+		select * from YHQ_INFO_SON a where 1 = 1
+		<include refid="sf-yhqInfoSon" />
+		order by
+		<isNotEmpty property="map.order_by_asc">a.ID asc,</isNotEmpty>
+		 a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectEntpIdGroupByUserIdList" resultMap="yhqInfoSonResultGroupByUserId" parameterClass="yhqInfoSon" cacheModel="oneDayCache">
+		select t.OWN_ENTP_ID from yhq_info_son t 
+		left join cart_info t2 ON t.OWN_ENTP_ID = t2.ENTP_ID
+		where 1=1 
+		<isNotEmpty prepend=" and " property="link_user_id">t.LINK_USER_ID = #link_user_id:INTEGER# and t2.USER_ID = #link_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.cart_ids">t2.ID in ($map.cart_ids$)</isNotEmpty>
+			GROUP BY t.OWN_ENTP_ID;
+	</select>
+	
+
+	<insert id="insertYhqInfoSon" parameterClass="yhqInfoSon">
+		<![CDATA[insert into YHQ_INFO_SON (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="link_id">LINK_ID</isNotNull>	
+			<isNotNull prepend="," property="yhq_state">YHQ_STATE</isNotNull>	
+			<isNotNull prepend="," property="get_date">GET_DATE</isNotNull>	
+			<isNotNull prepend="," property="use_date">USE_DATE</isNotNull>	
+			<isNotNull prepend="," property="link_trade_index">LINK_TRADE_INDEX</isNotNull>	
+			<isNotNull prepend="," property="link_user_id">LINK_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="is_used">IS_USED</isNotNull>	
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="own_entp_name">OWN_ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="yhq_start_date">YHQ_START_DATE</isNotNull>	
+			<isNotNull prepend="," property="yhq_end_date">YHQ_END_DATE</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">#link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_state">#yhq_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="get_date">#get_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="use_date">#use_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="link_trade_index">#link_trade_index:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="link_user_id">#link_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_used">#is_used:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">#own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_name">#own_entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_start_date">#yhq_start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="yhq_end_date">#yhq_end_date:TIMESTAMP#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateYhqInfoSon" parameterClass="yhqInfoSon">
+		update YHQ_INFO_SON
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">LINK_ID = #link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_state">YHQ_STATE = #yhq_state:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="get_date">GET_DATE = #get_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="use_date">USE_DATE = #use_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="link_trade_index">LINK_TRADE_INDEX = #link_trade_index:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="link_user_id">LINK_USER_ID = #link_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_used">IS_USED = #is_used:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_name">OWN_ENTP_NAME = #own_entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_start_date">YHQ_START_DATE = #yhq_start_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="yhq_end_date">YHQ_END_DATE = #yhq_end_date:TIMESTAMP#</isNotNull>
+			
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.yhq_state_opt">YHQ_STATE = #map.yhq_state_opt#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.link_id">LINK_ID = #map.link_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteYhqInfoSon" parameterClass="yhqInfoSon">
+		delete from YHQ_INFO_SON where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BASE_FILES">
+
+	<typeAlias alias="baseFiles" type="com.ebiz.webapp.domain.BaseFiles" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertBaseFiles" />
+		<flushOnExecute statement="updateBaseFiles" />
+		<flushOnExecute statement="deleteBaseFiles" />
+	</cacheModel>
+
+	<resultMap id="baseFilesResultForList" class="baseFiles">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="LINK_ID" property="link_id" jdbcType="INTEGER" />
+		<result column="TYPE" property="type" jdbcType="INTEGER" />
+		<result column="LINK_TAB" property="link_tab" jdbcType="VARCHAR" />
+		<result column="FILE_NAME" property="file_name" jdbcType="VARCHAR" />
+		<result column="FILE_TYPE" property="file_type" jdbcType="VARCHAR" />
+		<result column="FILE_SIZE" property="file_size" jdbcType="INTEGER" />
+		<result column="SAVE_PATH" property="save_path" jdbcType="VARCHAR" />
+		<result column="SAVE_NAME" property="save_name" jdbcType="VARCHAR" />
+		<result column="FILE_DESC" property="file_desc" jdbcType="VARCHAR" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="baseFilesResult" class="baseFiles" extends="baseFilesResultForList">
+	</resultMap>
+
+	<sql id="sf-baseFiles">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_id">a.LINK_ID = #link_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="type">a.TYPE = #type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_tab">a.LINK_TAB = #link_tab:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="file_name">a.FILE_NAME = #file_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="file_type">a.FILE_TYPE = #file_type:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="file_size">a.FILE_SIZE = #file_size:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="save_path">a.SAVE_PATH = #save_path:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="save_name">a.SAVE_NAME = #save_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="file_desc">a.FILE_DESC = #file_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:DATE#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		
+		
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.LINK_ID like #map.p_index_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.file_name_like">a.file_name like '%'  #map.file_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.file_desc_like">a.file_desc like '%'  #map.file_desc_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			a.add_date <= str_to_date(concat(#map.en_add_date:VARCHAR# , '23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.id_not_in">a.id not in ($map.id_not_in$)</isNotEmpty>
+		
+	</sql>
+
+	<select id="selectBaseFiles" resultMap="baseFilesResult" parameterClass="baseFiles" cacheModel="oneDayCache">
+		select * from BASE_FILES a where 1 = 1
+		<include refid="sf-baseFiles" />
+	</select>
+
+	<select id="selectBaseFilesList" resultMap="baseFilesResultForList" parameterClass="baseFiles" cacheModel="oneDayCache">
+		
+		select * from BASE_FILES a where 1 = 1
+		<include refid="sf-baseFiles" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectBaseFilesCount" resultClass="int" parameterClass="baseFiles" cacheModel="oneDayCache">
+		select count(*) from BASE_FILES a where 1 = 1
+		<include refid="sf-baseFiles" />
+	</select>
+
+	<select id="selectBaseFilesPaginatedList" resultMap="baseFilesResult" parameterClass="baseFiles" cacheModel="oneDayCache">
+		
+		select * from BASE_FILES a where 1 = 1
+		<include refid="sf-baseFiles" />
+		order by a.ID desc,a.order_value desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertBaseFiles" parameterClass="baseFiles">
+		
+		<![CDATA[insert into BASE_FILES (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="link_id">LINK_ID</isNotNull>	
+			<isNotNull prepend="," property="type">TYPE</isNotNull>	
+			<isNotNull prepend="," property="link_tab">LINK_TAB</isNotNull>	
+			<isNotNull prepend="," property="file_name">FILE_NAME</isNotNull>	
+			<isNotNull prepend="," property="file_type">FILE_TYPE</isNotNull>	
+			<isNotNull prepend="," property="file_size">FILE_SIZE</isNotNull>	
+			<isNotNull prepend="," property="save_path">SAVE_PATH</isNotNull>	
+			<isNotNull prepend="," property="save_name">SAVE_NAME</isNotNull>	
+			<isNotNull prepend="," property="file_desc">FILE_DESC</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">#link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">#type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_tab">#link_tab:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="file_name">#file_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="file_type">#file_type:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="file_size">#file_size:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="save_path">#save_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="save_name">#save_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="file_desc">#file_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateBaseFiles" parameterClass="baseFiles">
+		update BASE_FILES
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_id">LINK_ID = #link_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">TYPE = #type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="link_tab">LINK_TAB = #link_tab:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="file_name">FILE_NAME = #file_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="file_type">FILE_TYPE = #file_type:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="file_size">FILE_SIZE = #file_size:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="save_path">SAVE_PATH = #save_path:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="save_name">SAVE_NAME = #save_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="file_desc">FILE_DESC = #file_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.link_id">LINK_ID = #map.link_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.link_tab">LINK_TAB = #map.link_tab#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteBaseFiles" parameterClass="baseFiles">
+		delete from BASE_FILES where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

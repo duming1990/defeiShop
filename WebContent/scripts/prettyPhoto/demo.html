@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>jQuery lightbox clone - prettyPhoto - by Stephane Caron</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+		<script src="jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+		
+		<style type="text/css" media="screen">
+			* { margin: 0; padding: 0; }
+			ul li { display: inline; }
+			#main {
+				background: #fff;
+				margin: 0 auto;
+				padding: 30px;
+				width: 1000px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<h1>prettyPhoto</h1>
+
+			<h2>Gallery 3</h2>
+			<ul id="Gallery3">
+				<li><a href="images/fullscreen/3.jpg" rel="prettyPhoto[gallery2]"><img src="images/thumbnails/t_3.jpg" width="60" height="60"/></a></li>
+				<li><a href="images/fullscreen/4.jpg" rel="prettyPhoto[gallery2]"><img src="images/thumbnails/t_4.jpg" width="60" height="60"/></a></li>
+				<li><a href="images/fullscreen/5.jpg" rel="prettyPhoto[gallery2]"><img src="images/thumbnails/t_5.jpg" width="60" height="60"/></a></li>
+			</ul>
+			
+	
+			<script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				$("#Gallery3 a[rel^='prettyPhoto']").prettyPhoto();
+	
+			});
+			</script>
+	
+		
+	</div>
+	</body>
+</html>

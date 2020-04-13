@@ -1,0 +1,238 @@
+/*
+ * Swiper - Mobile Touch Slider CSS
+ * http://www.idangero.us/sliders/swiper
+ *
+ * Vladimir Kharlampidi, The iDangero.us
+ * http://www.idangero.us/
+ * 
+ * Copyright 2012-2013, Vladimir Kharlampidi
+ * The iDangero.us
+ * http://www.idangero.us
+ *
+ * Licensed under GPL & MIT
+ *
+*/
+
+/* ===============================================================
+Basic Swiper Styles 
+================================================================*/
+.swiper-container {
+	margin:0 auto;
+	position:relative;
+	overflow:hidden;
+	-webkit-backface-visibility:hidden;
+	-moz-backface-visibility:hidden;
+	-ms-backface-visibility:hidden;
+	-o-backface-visibility:hidden;
+	backface-visibility:hidden;
+	/* Fix of Webkit flickering */
+	z-index:1;
+	height: 100%;
+}
+.swiper-wrapper {
+	position:relative;
+	width:100%;
+	-webkit-transition-property:-webkit-transform, left, top;
+	-webkit-transition-duration:0s;
+	-webkit-transform:translate3d(0px,0,0);
+	-webkit-transition-timing-function:ease;
+	
+	-moz-transition-property:-moz-transform, left, top;
+	-moz-transition-duration:0s;
+	-moz-transform:translate3d(0px,0,0);
+	-moz-transition-timing-function:ease;
+	
+	-o-transition-property:-o-transform, left, top;
+	-o-transition-duration:0s;
+	-o-transform:translate3d(0px,0,0);
+	-o-transition-timing-function:ease;
+	-o-transform:translate(0px,0px);
+	
+	-ms-transition-property:-ms-transform, left, top;
+	-ms-transition-duration:0s;
+	-ms-transform:translate3d(0px,0,0);
+	-ms-transition-timing-function:ease;
+	
+	transition-property:transform, left, top;
+	transition-duration:0s;
+	transform:translate3d(0px,0,0);
+	transition-timing-function:ease;
+
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+.swiper-free-mode > .swiper-wrapper {
+	-webkit-transition-timing-function: ease-out;
+	-moz-transition-timing-function: ease-out;
+	-ms-transition-timing-function: ease-out;
+	-o-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+	margin: 0 auto;
+}
+.swiper-slide {
+	float: left;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	display: -moz-box;
+	display: -webkit-box;     /*另加样式*/
+}
+
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal {
+	-ms-touch-action: pan-y;
+}
+.swiper-wp8-vertical {
+	-ms-touch-action: pan-x;
+}
+
+/* ===============================================================
+Your custom styles, here you need to specify container's and slide's
+sizes, pagination, etc.
+================================================================*/
+.swiper-container {
+	/* Specify Swiper's Size: */
+
+	/*width:200px;
+	height: 100px;*/
+}
+.swiper-slide {
+	/* Specify Slides's Size: */
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+	-moz-box-align: center;
+	-moz-box-pack: center;
+	/*width: 100%;
+	height: 100%;*/
+}
+.swiper-slide-active {
+	/* Specific active slide styling: */
+	
+}
+.swiper-slide-visible {
+	/* Specific visible slide styling: */	
+
+}
+/* ===============================================================
+Pagination Styles
+================================================================*/
+.swiper-pagination-switch {
+	/* Stylize pagination button: */	
+
+}
+.swiper-active-switch {
+	/* Specific active button style: */	
+	
+}
+.swiper-visible-switch {
+	/* Specific visible button style: */	
+	
+}
+
+
+
+
+
+
+/*另加*/
+.pic_li{
+	border:solid 0.02rem #c9c9c9;
+	height:0.86rem;
+	width:0.86rem;
+}
+.pic_li .pic_c{
+	width:80%;
+	margin:0 auto;
+	height:0.1rem; 
+	background:#ccc;
+	border-radius:0.1rem;
+	margin-top:0.35rem; 
+	margin-bottom:0.05rem;
+}
+.pic_c .progress{
+	width:0%;
+	background:rgb(9, 203, 9);
+	border-radius:0.1rem;
+	height:0.1rem;
+}
+.pic_li .progressText{
+	text-align:center;
+	font-size:0.15rem;
+}
+.wish-pic img.del_pic{
+	position:absolute;
+	right:0.05rem;
+	top:0.05rem;
+	height:0.15rem;
+	width:0.15rem;
+	z-index:2;
+}
+.pic_box{
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background: #000;
+	left: 0;
+	top: 0;
+	-webkit-transform-origin: 0px 0px;
+	opacity: 1;
+	-webkit-transform: scale(1, 1);
+}
+.pic_box_title{
+	color:white;
+	/*background: #ccc;*/
+	z-index: 11;
+	text-align: center;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	font-size: 0.45rem;
+}
+
+.swiper-slide img{
+	width: 100%;
+	display: block;
+	margin: auto;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	position: absolute;
+}
+.delbig{
+	background: url('delbig.png') no-repeat center center;
+	width: 0.9rem;
+	height: 0.9rem;
+	background-size: 0.5rem 0.5rem ;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+
+.swiper-container .swiper-loading {
+	position: absolute;
+	top: 50%;left: 50%;
+	width: 40px;
+	height: 40px;
+	margin-top: -20px;
+	margin-left: -20px;
+	cursor: pointer;
+	overflow: hidden;
+	z-index: 1104;
+	display: none;
+}
+
+.swiper-container .swiper-loading div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 480px;
+	background-image: url('loading.png');
+}

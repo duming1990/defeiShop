@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="USER_RELATION_PAR">
+
+	<typeAlias alias="userRelationPar" type="com.ebiz.webapp.domain.UserRelationPar" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertUserRelationPar" />
+		<flushOnExecute statement="updateUserRelationPar" />
+		<flushOnExecute statement="deleteUserRelationPar" />
+	</cacheModel>
+
+	<resultMap id="userRelationParResultForList" class="userRelationPar">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="USER_ID" property="user_id" jdbcType="INTEGER" />
+		<result column="USER_PAR_ID" property="user_par_id" jdbcType="INTEGER" />
+		<result column="USER_PAR_LEVLE" property="user_par_levle" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		
+		
+	</resultMap>
+
+	<resultMap id="userRelationParResult" class="userRelationPar" extends="userRelationParResultForList">
+	</resultMap>
+	
+	<resultMap id="userRelationParResultListWithScore" class="userRelationPar" extends="userRelationParResultForList">
+		<result column="TOTAL_SCORE" property="map.total_score" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="userRelationParResultWithLevel" class="userRelationPar" extends="userRelationParResultForList">
+		<result column="USER_LEVEL" property="map.user_level" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="userRelationParResultWithTeamCount" class="userRelationPar" extends="userRelationParResultForList">
+		<result column="TEAM_COUNT" property="map.team_count" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="SpeciaPaginated" class="userRelationPar">
+		<result column="TEAM_COUNT" property="map.team_count" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="map.user_id" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="sf-userRelationPar">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">a.USER_ID = #user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_par_id">a.USER_PAR_ID = #user_par_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_par_levle">a.USER_PAR_LEVLE = #user_par_levle:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.is_entp">a.USER_PAR_ID in (select u.id from user_info u where u.IS_DEL = 0 and u.IS_ACTIVE = 1 and u.IS_ENTP = 1 and u.OWN_ENTP_ID is not null)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.lianMengOrEntp">a.USER_PAR_ID in (select u.id from user_info u where u.IS_DEL = 0 and u.IS_ACTIVE = 1 and (u.IS_ENTP = 1 or u.IS_LIANMENG = 1))</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.iSLianMeng">a.USER_PAR_ID in (select u.id from user_info u where u.IS_DEL = 0 and u.IS_ACTIVE = 1 and u.IS_LIANMENG = 1)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.iSLianMengOrFuWu">a.USER_PAR_ID in (select u.id from user_info u where u.IS_DEL = 0 and u.IS_ACTIVE = 1 and (u.IS_FUWU = 1 or u.IS_LIANMENG = 1))</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.iSFuWu">a.USER_PAR_ID in (select u.id from user_info u where u.IS_DEL = 0 and u.IS_ACTIVE = 1 and u.IS_FUWU = 1)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.iSCityManager">a.USER_PAR_ID in (select u.id from user_info u where u.IS_DEL = 0 and u.IS_ACTIVE = 1 and u.IS_CITY_MANAGER = 1)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.iSCityManagerOrFuWu">a.USER_PAR_ID in (select u.id from user_info u where u.IS_DEL = 0 and u.IS_ACTIVE = 1 and (u.IS_CITY_MANAGER = 1 or u.IS_FUWU = 1))</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.isVillage">a.USER_PAR_ID in (select u.id from user_info u where u.IS_DEL = 0 and u.IS_ACTIVE = 1 and u.IS_VILLAGE = 1 and u.USER_TYPE = 4)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			a.add_date <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		
+		<isNotEmpty  prepend=" and "  property="map.user_info_not_null">  b.is_del = 0		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.my_lower_by_user_par_id">
+			a.USER_PAR_ID = #map.my_lower_by_user_par_id# and a.USER_PAR_LEVLE in (1,2,3)
+			<isNotEmpty prepend=" and " property="map.my_lower_by_level">
+				a.USER_PAR_LEVLE = #map.my_lower_by_level#
+			</isNotEmpty>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.real_name_like">
+			a.USER_ID in (select ui.id from user_info ui where ui.real_name like '%' #map.real_name_like# '%')
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_par_levle_le">
+			<![CDATA[a.USER_PAR_LEVLE <= #map.user_par_levle_le#]]>
+		</isNotEmpty>
+	</sql>
+
+	<select id="selectUserRelationPar" resultMap="userRelationParResult" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		select * from USER_RELATION_PAR a where 1 = 1
+		<include refid="sf-userRelationPar" />
+	</select>
+
+	<select id="selectUserRelationParList" resultMap="userRelationParResultWithTeamCount" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		
+		<isNotEmpty property="map.updateData">
+		select  a.*,(select count(*) from USER_RELATION_PAR_BAK where user_par_id=a.id) as team_count from USER_RELATION_PAR_BAK a where 1 = 1
+		</isNotEmpty>
+		
+		<isEmpty property="map.updateData">
+		select a.*,(select count(*) from USER_RELATION_PAR where user_par_id=a.id) as team_count from USER_RELATION_PAR a where 1 = 1
+		</isEmpty>
+		
+		<include refid="sf-userRelationPar" />
+		order by 
+		<isNotEmpty property="map.orderByUserParLevleAsc"> a.USER_PAR_LEVLE asc,</isNotEmpty>
+		<isNotEmpty property="map.orderByCommon"> $map.orderByCommon$</isNotEmpty>
+		a.ID asc
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectUserRelationParCount" resultClass="int" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		select COUNT(a.ID) from USER_RELATION_PAR a 
+		<isNotEmpty property="map.user_info_not_null"> 
+		LEFT JOIN user_info b ON a.USER_ID = b.ID AND b.IS_DEL = 0
+		</isNotEmpty>
+		where 1 = 1
+		<include refid="sf-userRelationPar" />
+	</select>
+
+	<select id="selectUserRelationParPaginatedList" resultMap="userRelationParResultWithTeamCount" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		select a.*,(select count(*) from USER_RELATION_PAR where user_par_id=a.id) as team_count from USER_RELATION_PAR a where 1 = 1
+		<include refid="sf-userRelationPar" />
+		order by 
+		<isNotEmpty property="map.orderByCommon"> $map.orderByCommon$</isNotEmpty>
+		a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectUserRelationParListWithScore" resultMap="userRelationParResultListWithScore" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		select c.*
+		from 
+		(
+		select a.*,IFNULL((b.CUR_SCORE + b.USER_SCORE_UNION),0) as total_score from USER_RELATION_PAR a left join user_info b on a.user_id = b.id where b.is_del = 0 
+		<include refid="sf-userRelationPar" />
+		) c order by c.total_score desc
+	</select>
+	
+	<select id="selectUserRelationParListWithAssessScore" resultMap="userRelationParResultListWithScore" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		select c.*
+		from 
+		(
+		select a.*,IFNULL((b.CUR_SCORE + b.USER_SCORE_UNION),0) as total_score from USER_RELATION_PAR a left join user_info_assess b on a.user_id = b.id where 1 = 1
+		<include refid="sf-userRelationPar" />
+		) c order by c.total_score desc
+	</select>
+	
+	<select id="selectUserRelationParWithMaxLevel" resultClass="string" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		
+		select max(b.user_level) from USER_RELATION_PAR a left join user_info b on a.user_id = b.id where b.is_del = 0 
+		<include refid="sf-userRelationPar" />
+		 
+	</select>
+	
+	<select id="selectUserRelationParCountByBrotherLevel" resultClass="int" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		
+		select count(a.ID) from USER_RELATION_PAR a left join user_info b on a.user_id = b.id where b.is_del = 0 
+		<include refid="sf-userRelationPar" />
+		<isNotEmpty prepend=" and " property="map.brother_level_eq">b.user_level = #map.brother_level_eq#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.brother_level_gt">b.user_level > #map.brother_level_gt#</isNotEmpty>
+	</select>
+	
+	<select id="selectUserRelationParListForParam" resultMap="userRelationParResultForList" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		SELECT
+			a.*,(select count(*) from USER_RELATION_PAR where user_par_id=a.id) as team_count
+		FROM
+			USER_RELATION_PAR a
+		LEFT JOIN user_info b ON a.USER_PAR_ID = b.ID
+		where b.IS_DEL = 0 and b.IS_ACTIVE = 1 
+		<include refid="sf-userRelationPar" />
+		<isNotEmpty prepend=" and " property="map._isEntp">b.IS_ENTP = 1 and b.OWN_ENTP_ID is not null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map._lianMengOrEntp">(b.IS_ENTP = 1 or b.IS_LIANMENG = 1)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map._iSLianMeng">b.IS_LIANMENG = 1</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map._iSFuWu">b.IS_FUWU = 1</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map._iSLianMengOrFuWu">(b.IS_FUWU = 1 or b.IS_LIANMENG = 1)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map._iSCityManagerOrFuWu">(b.IS_FUWU = 1 or b.IS_CITY_MANAGER = 1)</isNotEmpty>
+		order by 
+		<isNotEmpty property="map.orderByUserParLevleAsc"> a.USER_PAR_LEVLE asc,</isNotEmpty>
+		<isNotEmpty property="map.orderByCommon"> $map.orderByCommon$</isNotEmpty>
+		a.ID asc
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectUserRelationParWithMaxLevelByUserParId" resultClass="string" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		
+		select max(b.user_level) from USER_RELATION_PAR a left join user_info b on a.user_par_id = b.id and b.is_del = 0 where 1 = 1
+		<include refid="sf-userRelationPar" /> 
+		 
+	</select>
+	
+	<select id="selectSpeciaPaginatedList" resultMap="SpeciaPaginated" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		 SELECT DISTINCT a.user_id,(SELECT count(*) FROM USER_RELATION_PAR WHERE user_par_id = a.USER_ID) AS team_count
+		FROM
+			USER_RELATION_PAR a
+		WHERE
+			1 = 1
+		<include refid="sf-userRelationPar" />
+		<isNotEmpty prepend=" and " property="map.user_par_id_special">a.USER_PAR_ID in ($map.user_par_id_special$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_me">a.user_id != #map.not_me#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_par_id">a.USER_PAR_ID = #map.user_par_id#</isNotEmpty>
+		order by 
+		a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectSpeciaCount" resultClass="int" parameterClass="userRelationPar" cacheModel="oneDayCache">
+		 SELECT COUNT(DISTINCT a.USER_ID)
+		FROM
+			USER_RELATION_PAR a
+		WHERE
+			1 = 1
+		<include refid="sf-userRelationPar" />
+		<isNotEmpty prepend=" and " property="map.user_par_id_special">a.USER_PAR_ID in ($map.user_par_id_special$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_me">a.user_id != #map.not_me#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_par_id">a.USER_PAR_ID = #map.user_par_id#</isNotEmpty>
+	</select>
+
+	<insert id="insertUserRelationPar" parameterClass="userRelationPar">
+		<![CDATA[insert into USER_RELATION_PAR (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="user_id">USER_ID</isNotNull>	
+			<isNotNull prepend="," property="user_par_id">USER_PAR_ID</isNotNull>	
+			<isNotNull prepend="," property="user_par_levle">USER_PAR_LEVLE</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">#user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_par_id">#user_par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_par_levle">#user_par_levle:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateUserRelationPar" parameterClass="userRelationPar">
+		update USER_RELATION_PAR
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">USER_ID = #user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_par_id">USER_PAR_ID = #user_par_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_par_levle">USER_PAR_LEVLE = #user_par_levle:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteUserRelationPar" parameterClass="userRelationPar">
+		delete from USER_RELATION_PAR where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_id">USER_ID = #map.user_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

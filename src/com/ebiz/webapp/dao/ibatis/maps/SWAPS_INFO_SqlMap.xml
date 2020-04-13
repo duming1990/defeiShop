@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SWAPS_INFO">
+
+	<typeAlias alias="swapsInfo" type="com.ebiz.webapp.domain.SwapsInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertSwapsInfo" />
+		<flushOnExecute statement="updateSwapsInfo" />
+		<flushOnExecute statement="deleteSwapsInfo" />
+	</cacheModel>
+
+	<resultMap id="swapsInfoResultForList" class="swapsInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ORDER_INFO_DETAILS_ID" property="order_info_details_id" jdbcType="INTEGER" />
+		<result column="APPLY_TYPE" property="apply_type" jdbcType="INTEGER" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="COMM_COUNT" property="comm_count" jdbcType="INTEGER" />
+		<result column="APPLY_PROOF" property="apply_proof" jdbcType="VARCHAR" />
+		<result column="WL_CODE" property="wl_code" jdbcType="VARCHAR" />
+		<result column="WL_COMP" property="wl_comp" jdbcType="VARCHAR" />
+		<result column="WAYBILL_NO" property="waybill_no" jdbcType="VARCHAR" />
+		<result column="RETURN_DESC" property="return_desc" jdbcType="VARCHAR" />
+		<result column="PROM_DESC" property="prom_desc" jdbcType="VARCHAR" />
+		<result column="RETURN_ADDR" property="return_addr" jdbcType="VARCHAR" />
+		<result column="AUDIT_STATUS" property="audit_status" jdbcType="INTEGER" />
+		<result column="USER_ID" property="user_id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="TOTAL_PRICE" property="total_price" jdbcType="INTEGER" />
+		<result column="RETURN_WL_PRICE" property="return_wl_price" jdbcType="INTEGER" />
+		<result column="RETURN_WL" property="return_wl" jdbcType="INTEGER" />
+		<result column="SEND_WL_PRICE" property="send_wl_price" jdbcType="INTEGER" />
+		<result column="SEND_WL" property="send_wl" jdbcType="INTEGER" />
+		<result column="IS_CONFIRM" property="is_confirm" jdbcType="INTEGER" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="RETURN_TYPE" property="return_type" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="swapsInfoResult" class="swapsInfo" extends="swapsInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-swapsInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_info_details_id">a.ORDER_INFO_DETAILS_ID = #order_info_details_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="apply_type">a.APPLY_TYPE = #apply_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME = #comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_count">a.COMM_COUNT = #comm_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="apply_proof">a.APPLY_PROOF = #apply_proof:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_code">a.WL_CODE = #wl_code:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comp">a.WL_COMP = #wl_comp:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="waybill_no">a.WAYBILL_NO = #waybill_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_desc">a.RETURN_DESC = #return_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="prom_desc">a.PROM_DESC = #prom_desc:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_addr">a.RETURN_ADDR = #return_addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="audit_status">a.AUDIT_STATUS = #audit_status:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">a.USER_ID = #user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_name">a.USER_NAME = #user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="total_price">a.TOTAL_PRICE = #total_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_wl_price">a.RETURN_WL_PRICE = #return_wl_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_wl">a.RETURN_WL = #return_wl:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="send_wl_price">a.SEND_WL_PRICE = #send_wl_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="send_wl">a.SEND_WL = #send_wl:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_confirm">a.IS_CONFIRM = #is_confirm:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="memo">a.MEMO = #memo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="return_type">a.RETURN_TYPE = #return_type:INTEGER#</isNotEmpty>
+	
+	
+	
+	
+		<!--  add by chenzhen  begin -->
+		<isNotEmpty prepend=" and " property="map.comm_name_like">a.COMM_NAME  like '%'  #map.comm_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.audit_state_check">a.AUDIT_STATUS	=#map.audit_state_check#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.trade_index">d.TRADE_INDEX  = #map.trade_index#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_date"><![CDATA[
+			a.ADD_DATE >= str_to_date(#map.st_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_date"><![CDATA[
+			a.ADD_DATE <= str_to_date(concat(#map.en_date# , ' 23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isEmpty prepend=" and " property="audit_status">
+			<isNotEmpty prepend=" " property="map.has_audit_status">
+				a.AUDIT_STATUS in
+				<iterate close=")" open="(" conjunction="," property="map.has_audit_status">#map.has_audit_status[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+		
+		
+		
+		<isNotEmpty prepend=" and " property="map.entp_id_equal">
+		(
+			exists ( select * from order_info b  where b.id =a.order_info_details_id and b.entp_id =#map.entp_id_equal# )
+			<isNotEmpty prepend=" or " property="map.owner_id_equal">
+				a.USER_ID = #map.owner_id_equal#
+			</isNotEmpty>
+			)
+		
+		</isNotEmpty>
+		
+		<isEmpty prepend="  " property="map.entp_id_equal">
+		<isNotEmpty prepend=" and " property="map.owner_id_equal">
+			a.USER_ID = #map.owner_id_equal#
+			</isNotEmpty>
+		</isEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.audit_status_notequals">a.AUDIT_STATUS  != #map.audit_status_notequals#</isNotEmpty>
+		
+		<!--  add by chenzhen  end  -->
+	
+	
+	</sql>
+
+	<select id="selectSwapsInfo" resultMap="swapsInfoResult" parameterClass="swapsInfo" cacheModel="oneDayCache">
+		select * from SWAPS_INFO a where 1 = 1
+		<include refid="sf-swapsInfo" />
+	</select>
+
+	<select id="selectSwapsInfoList" resultMap="swapsInfoResultForList" parameterClass="swapsInfo" cacheModel="oneDayCache">
+		
+		select * from SWAPS_INFO a where 1 = 1
+		<include refid="sf-swapsInfo" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectSwapsInfoCount" resultClass="int" parameterClass="swapsInfo" cacheModel="oneDayCache">
+		select count(*) from SWAPS_INFO a 
+		left join order_info d on d.id = a.order_info_details_id 
+		where 1 = 1
+		<include refid="sf-swapsInfo" />
+	</select>
+
+	<select id="selectSwapsInfoPaginatedList" resultMap="swapsInfoResult" parameterClass="swapsInfo" cacheModel="oneDayCache">
+		
+		select a.* from SWAPS_INFO a 
+		left join order_info d on d.id = a.order_info_details_id 
+		where 1 = 1
+		<include refid="sf-swapsInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertSwapsInfo" parameterClass="swapsInfo">
+		
+		<![CDATA[insert into SWAPS_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="order_info_details_id">ORDER_INFO_DETAILS_ID</isNotNull>	
+			<isNotNull prepend="," property="apply_type">APPLY_TYPE</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>	
+			<isNotNull prepend="," property="comm_count">COMM_COUNT</isNotNull>	
+			<isNotNull prepend="," property="apply_proof">APPLY_PROOF</isNotNull>	
+			<isNotNull prepend="," property="wl_code">WL_CODE</isNotNull>	
+			<isNotNull prepend="," property="wl_comp">WL_COMP</isNotNull>	
+			<isNotNull prepend="," property="waybill_no">WAYBILL_NO</isNotNull>	
+			<isNotNull prepend="," property="return_desc">RETURN_DESC</isNotNull>	
+			<isNotNull prepend="," property="prom_desc">PROM_DESC</isNotNull>	
+			<isNotNull prepend="," property="return_addr">RETURN_ADDR</isNotNull>	
+			<isNotNull prepend="," property="audit_status">AUDIT_STATUS</isNotNull>	
+			<isNotNull prepend="," property="user_id">USER_ID</isNotNull>	
+			<isNotNull prepend="," property="user_name">USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="total_price">TOTAL_PRICE</isNotNull>	
+			<isNotNull prepend="," property="return_wl_price">RETURN_WL_PRICE</isNotNull>	
+			<isNotNull prepend="," property="return_wl">RETURN_WL</isNotNull>	
+			<isNotNull prepend="," property="send_wl_price">SEND_WL_PRICE</isNotNull>	
+			<isNotNull prepend="," property="send_wl">SEND_WL</isNotNull>	
+			<isNotNull prepend="," property="is_confirm">IS_CONFIRM</isNotNull>	
+			<isNotNull prepend="," property="memo">MEMO</isNotNull>	
+			<isNotNull prepend="," property="return_type">RETURN_TYPE</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_info_details_id">#order_info_details_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="apply_type">#apply_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_count">#comm_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="apply_proof">#apply_proof:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_code">#wl_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp">#wl_comp:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="waybill_no">#waybill_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_desc">#return_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="prom_desc">#prom_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_addr">#return_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_status">#audit_status:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">#user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">#user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="total_price">#total_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_wl_price">#return_wl_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_wl">#return_wl:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="send_wl_price">#send_wl_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="send_wl">#send_wl:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_confirm">#is_confirm:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="memo">#memo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_type">#return_type:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateSwapsInfo" parameterClass="swapsInfo">
+		update SWAPS_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_info_details_id">ORDER_INFO_DETAILS_ID = #order_info_details_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="apply_type">APPLY_TYPE = #apply_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME = #comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_count">COMM_COUNT = #comm_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="apply_proof">APPLY_PROOF = #apply_proof:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_code">WL_CODE = #wl_code:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="wl_comp">WL_COMP = #wl_comp:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="waybill_no">WAYBILL_NO = #waybill_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_desc">RETURN_DESC = #return_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="prom_desc">PROM_DESC = #prom_desc:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_addr">RETURN_ADDR = #return_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="audit_status">AUDIT_STATUS = #audit_status:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">USER_ID = #user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">USER_NAME = #user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="total_price">TOTAL_PRICE = #total_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_wl_price">RETURN_WL_PRICE = #return_wl_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="return_wl">RETURN_WL = #return_wl:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="send_wl_price">SEND_WL_PRICE = #send_wl_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="send_wl">SEND_WL = #send_wl:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_confirm">IS_CONFIRM = #is_confirm:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="memo">MEMO = #memo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="return_type">RETURN_TYPE = #return_type:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteSwapsInfo" parameterClass="swapsInfo">
+		delete from SWAPS_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

@@ -1,0 +1,42 @@
+@charset "utf-8";
+/*--head--*/
+.ttop {width:100%;height:29px;background:#f9f9f9;border:1px solid #e1e1e1;}
+.ttoptab {width:960px;margin:0 auto;clear:both;height:23px;padding-top:6px;}
+.ttoptab span {float:right;font:bold 14px"Microsoft YaHei","宋体";color:#1a72b3;letter-spacing:1px;}
+.headtab {width:960px;height:100px;margin:0 auto;clear:both;border-bottom:2px solid #fb3312;overflow:hidden;}
+.logo {float:left;padding:14px 77px 0 39px;display:inline;}
+.search {float:left;width:600px;margin:11px 0 8px 84px;*margin:11px 0 1px 84px;_margin:11px 0 0 84px;display:inline;}
+.search h3 {float:left;}
+.search h3 em {float:right;padding-left:3px;}
+.search .botkeyw {width:585px;margin:0 auto;clear:both;padding:3px 5px;}
+.search .botkeyw h4 {float:left;font:bold 16px "Microsoft YaHei","宋体";color:#b9b9b9;}
+.search .botkeyw span {float:left;padding:5px 0 0 10px;}
+.search .botkeyw span a,.search .botkeyw span a:visited,.search .botkeyw span a:hover {padding-right:10px;}
+.topnav {float:left;width:684px;height:26px;background:url(../images/navbg1.gif) repeat-x bottom;}
+.topnav ul {margin:0 auto;clear:both;}
+.topnav ul li {float:left;height:22px;padding:4px 15px 0 15px;font-size:14px;color:#fff;display:inline;cursor:pointer;}
+.topnav ul li a,.topnav ul li a:visited {color:#fff;}
+.topnav ul li a:hover {color:#fff;text-decoration:underline;}
+.topnav .navcur1 {float:left;width:68px;height:22px;background:url(../images/nav_cur.gif) no-repeat bottom;padding:4px 0 0 0;color:#fff;text-align:center;}
+
+/* footer */
+.footer {width:960px;margin:0 auto;clear:both;margin-top:10px;padding-bottom:30px;}
+.footer1 {height:25px;background:#ff3c00;clear:both;text-align:center;line-height:25px;color:#fff;margin-bottom:10px;}
+.footer1 a,.footer1 a:visited {color:#fff;padding:0 10px;}
+.footer1 a:hover {color:#fff;text-decoration:underline;padding:0 10px;}
+.footer2 {margin:0 auto;clear:both;font:normal 12px/22px "宋体";text-align:center;}
+.footer2 span {font:normal 12px Arial, Helvetica, sans-serif;color:#333;}
+
+
+
+
+
+
+
+
+
+
+
+
+.headtab1 .logo span { font-weight: bold; float: right; padding-right: 30px; color: #FFF; }
+.guanggao { font-weight: normal; width: 980px; margin: 0 auto; top:; *top:; _top:-80px; z-index: 1006; position: relative; }

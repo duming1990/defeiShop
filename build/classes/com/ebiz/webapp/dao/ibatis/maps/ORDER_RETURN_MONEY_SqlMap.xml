@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="ORDER_RETURN_MONEY">
+
+	<typeAlias alias="orderReturnMoney" type="com.ebiz.webapp.domain.OrderReturnMoney" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertOrderReturnMoney" />
+		<flushOnExecute statement="updateOrderReturnMoney" />
+		<flushOnExecute statement="deleteOrderReturnMoney" />
+	</cacheModel>
+
+	<resultMap id="orderReturnMoneyResultForList" class="orderReturnMoney">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ORDER_RETURN_ID" property="order_return_id" jdbcType="INTEGER" />
+		<result column="USER_ID" property="user_id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ORDER_DETAIL_ID" property="order_detail_id" jdbcType="BIGINT" />
+		<result column="COMM_ID" property="comm_id" jdbcType="BIGINT" />
+		<result column="PRICE" property="price" jdbcType="DECIMAL" />
+		<result column="NUM" property="num" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="TK_MONEY" property="tk_money" jdbcType="DECIMAL" />
+		<result column="TK_REMARK" property="tk_remark" jdbcType="VARCHAR" />
+		<result column="TK_TYPE" property="tk_type" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="orderReturnMoneyResult" class="orderReturnMoney" extends="orderReturnMoneyResultForList">
+	</resultMap>
+
+	<sql id="sf-orderReturnMoney">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_return_id">a.ORDER_RETURN_ID = #order_return_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">a.USER_ID = #user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_name">a.USER_NAME = #user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_detail_id">a.ORDER_DETAIL_ID = #order_detail_id:BIGINT#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:BIGINT#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="price">a.PRICE = #price:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="num">a.NUM = #num:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME = #comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tk_money">a.TK_MONEY = #tk_money:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tk_remark">a.TK_REMARK = #tk_remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="tk_type">a.TK_TYPE = #tk_type:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectOrderReturnMoney" resultMap="orderReturnMoneyResult" parameterClass="orderReturnMoney" cacheModel="oneDayCache">
+		select * from ORDER_RETURN_MONEY a where 1 = 1
+		<include refid="sf-orderReturnMoney" />
+	</select>
+
+	<select id="selectOrderReturnMoneyList" resultMap="orderReturnMoneyResultForList" parameterClass="orderReturnMoney" cacheModel="oneDayCache">
+		select * from ORDER_RETURN_MONEY a where 1 = 1
+		<include refid="sf-orderReturnMoney" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectOrderReturnMoneyCount" resultClass="int" parameterClass="orderReturnMoney" cacheModel="oneDayCache">
+		select count(*) from ORDER_RETURN_MONEY a where 1 = 1
+		<include refid="sf-orderReturnMoney" />
+	</select>
+
+	<select id="selectOrderReturnMoneyPaginatedList" resultMap="orderReturnMoneyResult" parameterClass="orderReturnMoney" cacheModel="oneDayCache">
+		select * from ORDER_RETURN_MONEY a where 1 = 1
+		<include refid="sf-orderReturnMoney" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertOrderReturnMoney" parameterClass="orderReturnMoney">
+		<![CDATA[insert into ORDER_RETURN_MONEY (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="order_return_id">ORDER_RETURN_ID</isNotNull>	
+			<isNotNull prepend="," property="user_id">USER_ID</isNotNull>	
+			<isNotNull prepend="," property="user_name">USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="order_detail_id">ORDER_DETAIL_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="price">PRICE</isNotNull>	
+			<isNotNull prepend="," property="num">NUM</isNotNull>	
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>	
+			<isNotNull prepend="," property="tk_money">TK_MONEY</isNotNull>	
+			<isNotNull prepend="," property="tk_remark">TK_REMARK</isNotNull>	
+			<isNotNull prepend="," property="tk_type">TK_TYPE</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_return_id">#order_return_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">#user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">#user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_detail_id">#order_detail_id:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="price">#price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="num">#num:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tk_money">#tk_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tk_remark">#tk_remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tk_type">#tk_type:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateOrderReturnMoney" parameterClass="orderReturnMoney">
+		update ORDER_RETURN_MONEY
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="order_return_id">ORDER_RETURN_ID = #order_return_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_id">USER_ID = #user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">USER_NAME = #user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_detail_id">ORDER_DETAIL_ID = #order_detail_id:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:BIGINT#</isNotNull>
+			<isNotNull prepend="," property="price">PRICE = #price:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="num">NUM = #num:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME = #comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tk_money">TK_MONEY = #tk_money:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="tk_remark">TK_REMARK = #tk_remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="tk_type">TK_TYPE = #tk_type:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteOrderReturnMoney" parameterClass="orderReturnMoney">
+		delete from ORDER_RETURN_MONEY where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CART_INFO">
+
+	<typeAlias alias="cartInfo" type="com.ebiz.webapp.domain.CartInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertCartInfo" />
+		<flushOnExecute statement="updateCartInfo" />
+		<flushOnExecute statement="deleteCartInfo" />
+	</cacheModel>
+
+	<resultMap id="cartInfoResultForList" class="cartInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="CART_TYPE" property="cart_type" jdbcType="INTEGER" />
+		<result column="PD_ID" property="pd_id" jdbcType="INTEGER" />
+		<result column="PD_NAME" property="pd_name" jdbcType="VARCHAR" />
+		<result column="CLS_ID" property="cls_id" jdbcType="INTEGER" />
+		<result column="CLS_NAME" property="cls_name" jdbcType="VARCHAR" />
+		<result column="PD_PRICE" property="pd_price" jdbcType="INTEGER" />
+		<result column="PD_COUNT" property="pd_count" jdbcType="INTEGER" />
+		<result column="ENTP_ID" property="entp_id" jdbcType="INTEGER" />
+		<result column="ENTP_NAME" property="entp_name" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="user_id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="MATFLOW_PRICE" property="matflow_price" jdbcType="INTEGER" />
+		<result column="WL_COMP_NAME" property="wl_comp_name" jdbcType="VARCHAR" />
+		<result column="COMM_ID" property="comm_id" jdbcType="INTEGER" />
+		<result column="COMM_NAME" property="comm_name" jdbcType="VARCHAR" />
+		<result column="COMM_TCZH_ID" property="comm_tczh_id" jdbcType="INTEGER" />
+		<result column="COMM_TCZH_NAME" property="comm_tczh_name" jdbcType="VARCHAR" />
+		<result column="SERVICE_SINGLE_MONEY" property="service_single_money" jdbcType="INTEGER" />
+		<result column="COMM_WEIGHT" property="comm_weight" jdbcType="INTEGER" />
+		<result column="FRE_ID" property="fre_id" jdbcType="INTEGER" />
+		<result column="GN_TYPE" property="gn_type" jdbcType="INTEGER" />
+		<result column="DELIVERY_P_INDEX" property="delivery_p_index" jdbcType="INTEGER" />
+		<result column="DELIVERY_WAY" property="delivery_way" jdbcType="INTEGER" />
+		<result column="ACTIVITY_PRICE_ID" property="activity_price_id" jdbcType="INTEGER" />
+		<result column="QDYH_ID" property="qdyh_id" jdbcType="INTEGER" />
+		<result column="DISCOUNT_TJ" property="discount_tj" jdbcType="INTEGER" />
+		<result column="DISCOUNT_METHOD" property="discount_method" jdbcType="INTEGER" />
+		<result column="DISCOUNT_TYPE_CONTENT" property="discount_type_content" jdbcType="VARCHAR" />
+		<result column="DISCOUNT_TJ_CONTENT" property="discount_tj_content" jdbcType="VARCHAR" />
+		
+		<result column="YHQ_ID" property="yhq_id" jdbcType="INTEGER" />
+		<result column="YHQ_TJ" property="yhq_tj" jdbcType="INTEGER" />
+		<result column="YHQ_TJ_MONEY" property="yhq_tj_money" jdbcType="VARCHAR" />
+		<result column="YHQ_MONEY" property="yhq_money" jdbcType="VARCHAR" />
+		
+		<result column="FLAG_QDYH" property="flag_qdyh" jdbcType="INTEGER" />
+		<result column="FLAG_YHQ" property="flag_yhq" jdbcType="INTEGER" />
+		
+		<result column="COMM_TG_ID" property="comm_tg_id" jdbcType="INTEGER" />
+		<result column="RED_MONEY" property="red_money" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="cartInfoResult" class="cartInfo" extends="cartInfoResultForList">
+	</resultMap>
+	
+	<resultMap id="cartInfoResultForSumCount" class="cartInfo" >
+		<result column="SUMPDPRICE" property="map.sumPdPrice" jdbcType="INTEGER" />
+		<result column="SUMPDCOUNT" property="map.sumPdCount" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="cartInfoGroupByEntp" class="cartInfo">
+		<result column="FRE_ID" property="fre_id" jdbcType="INTEGER" />
+		<result column="SUM_COMM_WEIGHT" property="map.sum_comm_weight" jdbcType="VARCHAR" />
+		<result column="SUM_PD_COUNT" property="map.sum_pd_count" jdbcType="INTEGER" />
+		<result column="SUM_PD_PRICE" property="map.sum_pd_price" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<sql id="sf-cartInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cart_type">a.CART_TYPE = #cart_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_id">a.PD_ID = #pd_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_name">a.PD_NAME = #pd_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_id">a.CLS_ID = #cls_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cls_name">a.CLS_NAME = #cls_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_price">a.PD_PRICE = #pd_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pd_count">a.PD_COUNT = #pd_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_id">a.ENTP_ID = #entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="entp_name">a.ENTP_NAME = #entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">a.USER_ID = #user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_name">a.USER_NAME = #user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="matflow_price">a.MATFLOW_PRICE = #matflow_price:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="wl_comp_name">a.WL_COMP_NAME = #wl_comp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_id">a.COMM_ID = #comm_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_name">a.COMM_NAME = #comm_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_id">a.COMM_TCZH_ID = #comm_tczh_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_tczh_name">a.COMM_TCZH_NAME = #comm_tczh_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="service_single_money">a.SERVICE_SINGLE_MONEY = #service_single_money:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="comm_weight">a.COMM_WEIGHT = #comm_weight:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fre_id">a.FRE_ID = #fre_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="gn_type">a.GN_TYPE = #gn_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="delivery_p_index">a.DELIVERY_P_INDEX = #delivery_p_index:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="delivery_way">a.DELIVERY_WAY = #delivery_way:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="activity_price_id">a.ACTIVITY_PRICE_ID = #activity_price_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qdyh_id">a.QDYH_ID = #qdyh_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_tj">a.DISCOUNT_TJ = #discount_tj:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_method">a.DISCOUNT_METHOD = #discount_method:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_type_content">a.DISCOUNT_TYPE_CONTENT = #discount_type_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="discount_tj_content">a.DISCOUNT_TJ_CONTENT = #discount_tj_content:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="yhq_id">a.YHQ_ID = #yhq_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_tj">a.YHQ_TJ = #yhq_tj:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_tj_money">a.YHQ_TJ_MONEY = #yhq_tj_money:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="yhq_money">a.YHQ_MONEY = #yhq_money:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="flag_qdyh">a.FLAG_QDYH = #flag_qdyh:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="flag_yhq">a.FLAG_YHQ = #flag_yhq:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="comm_tg_id">a.COMM_TG_ID = #comm_tg_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="red_money">a.RED_MONEY = #red_money:DECIMAL#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.entp_id_not_in">a.ENTP_ID not in ($map.entp_id_not_in$)</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.cart_types_not_in">a.cart_type not  in <iterate close=")" open="(" conjunction="," property="map.cart_types_not_in">#map.cart_types_not_in[]#</iterate></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.cart_types">a.cart_type in <iterate close=")" open="(" conjunction="," property="map.cart_types">#map.cart_types[]#</iterate></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.cart_ids">a.id in <iterate close=")" open="(" conjunction="," property="map.cart_ids">#map.cart_ids[]#</iterate></isNotEmpty>
+		 <isNotEmpty prepend=" and " property="map.cart_ids_in">a.id in ($map.cart_ids_in$)</isNotEmpty>
+	</sql>
+
+	<select id="selectCartInfo" resultMap="cartInfoResult" parameterClass="cartInfo" cacheModel="oneDayCache">
+		select * from CART_INFO a where 1 = 1
+		<include refid="sf-cartInfo" />
+	</select>
+	
+    <select id="selectCartInfoCountForSumCount" resultMap="cartInfoResultForSumCount" parameterClass="cartInfo" cacheModel="oneDayCache">
+		select ifnull(sum(a.pd_price * a.pd_count),0) as sumPdPrice,ifnull(sum(a.PD_COUNT),0) as sumPdCount from cart_info a where 1 = 1
+		<include refid="sf-cartInfo" />
+	</select>
+	
+	<select id="selectCartInfoList" resultMap="cartInfoResultForList" parameterClass="cartInfo" cacheModel="oneDayCache">
+		
+		select * from CART_INFO a where 1 = 1
+		<include refid="sf-cartInfo" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectCartInfoCount" resultClass="int" parameterClass="cartInfo" cacheModel="oneDayCache">
+		select count(*) from CART_INFO a where 1 = 1
+		<include refid="sf-cartInfo" />
+	</select>
+	
+	<select id="selectFreIdCartInfoGroupByEntp" resultMap="cartInfoGroupByEntp" parameterClass="cartInfo" cacheModel="oneDayCache">
+		select fre_id,
+		sum(t.COMM_WEIGHT) as sum_comm_weight,
+		sum(t.PD_COUNT) as sum_pd_count,
+		sum(t.PD_PRICE * t.PD_COUNT) as sum_pd_price,
+		t.id
+		from cart_info t 
+		<isNotEmpty property="map.left_join_comm_info"> 
+		left join comm_info t2 on t.COMM_ID  = t2.ID where t2.IS_ZITI = 0
+		</isNotEmpty>
+		
+		group by t.ENTP_ID,t.FRE_ID,t.USER_ID having t.USER_ID=#map.user_id:INTEGER#
+	    <isNotEmpty prepend=" and " property="map.entp_id">t.entp_id = #map.entp_id:INTEGER#</isNotEmpty>
+	    <isNotEmpty prepend=" and " property="map.cart_ids_in">t.id in ($map.cart_ids_in$)</isNotEmpty>
+	</select>
+
+	<select id="selectCartInfoPaginatedList" resultMap="cartInfoResult" parameterClass="cartInfo" cacheModel="oneDayCache">
+		
+		select * from CART_INFO a where 1 = 1
+		<include refid="sf-cartInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertCartInfo" parameterClass="cartInfo">
+		<![CDATA[insert into CART_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="cart_type">CART_TYPE</isNotNull>	
+			<isNotNull prepend="," property="pd_id">PD_ID</isNotNull>	
+			<isNotNull prepend="," property="pd_name">PD_NAME</isNotNull>	
+			<isNotNull prepend="," property="cls_id">CLS_ID</isNotNull>	
+			<isNotNull prepend="," property="cls_name">CLS_NAME</isNotNull>	
+			<isNotNull prepend="," property="pd_price">PD_PRICE</isNotNull>	
+			<isNotNull prepend="," property="pd_count">PD_COUNT</isNotNull>	
+			<isNotNull prepend="," property="entp_id">ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="entp_name">ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="user_id">USER_ID</isNotNull>	
+			<isNotNull prepend="," property="user_name">USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="matflow_price">MATFLOW_PRICE</isNotNull>	
+			<isNotNull prepend="," property="wl_comp_name">WL_COMP_NAME</isNotNull>	
+			<isNotNull prepend="," property="comm_id">COMM_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_name">COMM_NAME</isNotNull>	
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID</isNotNull>	
+			<isNotNull prepend="," property="comm_tczh_name">COMM_TCZH_NAME</isNotNull>	
+			<isNotNull prepend="," property="service_single_money">SERVICE_SINGLE_MONEY</isNotNull>	
+			<isNotNull prepend="," property="comm_weight">COMM_WEIGHT</isNotNull>	
+			<isNotNull prepend="," property="fre_id">FRE_ID</isNotNull>
+			<isNotNull prepend="," property="gn_type">GN_TYPE</isNotNull>
+			<isNotNull prepend="," property="delivery_p_index">DELIVERY_P_INDEX</isNotNull>
+			<isNotNull prepend="," property="delivery_way">DELIVERY_WAY</isNotNull>
+			<isNotNull prepend="," property="activity_price_id">ACTIVITY_PRICE_ID</isNotNull>
+			<isNotNull prepend="," property="qdyh_id">QDYH_ID</isNotNull>
+			<isNotNull prepend="," property="discount_tj">DISCOUNT_TJ</isNotNull>	
+			<isNotNull prepend="," property="discount_method">DISCOUNT_METHOD</isNotNull>	
+			<isNotNull prepend="," property="discount_type_content">DISCOUNT_TYPE_CONTENT</isNotNull>
+			<isNotNull prepend="," property="discount_tj_content">DISCOUNT_TJ_CONTENT</isNotNull>
+			<isNotNull prepend="," property="yhq_id">YHQ_ID</isNotNull>	
+			<isNotNull prepend="," property="yhq_tj">YHQ_TJ</isNotNull>	
+			<isNotNull prepend="," property="yhq_tj_money">YHQ_TJ_MONEY</isNotNull>	
+			<isNotNull prepend="," property="yhq_money">YHQ_MONEY</isNotNull>
+			<isNotNull prepend="," property="flag_qdyh">FLAG_QDYH</isNotNull>	
+			<isNotNull prepend="," property="flag_yhq">FLAG_YHQ</isNotNull>	
+			<isNotNull prepend="," property="comm_tg_id">COMM_TG_ID</isNotNull>
+			<isNotNull prepend="," property="red_money">RED_MONEY</isNotNull>
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cart_type">#cart_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_id">#pd_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_name">#pd_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cls_id">#cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">#cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pd_price">#pd_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_count">#pd_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_id">#entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_name">#entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_id">#user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">#user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="matflow_price">#matflow_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">#wl_comp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_id">#comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">#comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">#comm_tczh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_name">#comm_tczh_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="service_single_money">#service_single_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_weight">#comm_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fre_id">#fre_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gn_type">#gn_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="delivery_p_index">#delivery_p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="delivery_way">#delivery_way:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="activity_price_id">#activity_price_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qdyh_id">#qdyh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_tj">#discount_tj:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_method">#discount_method:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_type_content">#discount_type_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_tj_content">#discount_tj_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_id">#yhq_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_tj">#yhq_tj:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_tj_money">#yhq_tj_money:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_money">#yhq_money:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="flag_qdyh">#flag_qdyh:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="flag_yhq">#flag_yhq:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tg_id">#comm_tg_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="red_money">#red_money:DECIMAL#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateCartInfo" parameterClass="cartInfo">
+		update CART_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cart_type">CART_TYPE = #cart_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_id">PD_ID = #pd_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_name">PD_NAME = #pd_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="cls_id">CLS_ID = #cls_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cls_name">CLS_NAME = #cls_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pd_price">PD_PRICE = #pd_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pd_count">PD_COUNT = #pd_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_id">ENTP_ID = #entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="entp_name">ENTP_NAME = #entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_id">USER_ID = #user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">USER_NAME = #user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="matflow_price">MATFLOW_PRICE = #matflow_price:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="wl_comp_name">WL_COMP_NAME = #wl_comp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_id">COMM_ID = #comm_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_name">COMM_NAME = #comm_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_id">COMM_TCZH_ID = #comm_tczh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_tczh_name">COMM_TCZH_NAME = #comm_tczh_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="service_single_money">SERVICE_SINGLE_MONEY = #service_single_money:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="comm_weight">COMM_WEIGHT = #comm_weight:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fre_id">FRE_ID = #fre_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="gn_type">GN_TYPE = #gn_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="delivery_p_index">DELIVERY_P_INDEX = #delivery_p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="delivery_way">DELIVERY_WAY = #delivery_way:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="activity_price_id">ACTIVITY_PRICE_ID = #activity_price_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qdyh_id">QDYH_ID = #qdyh_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_tj">DISCOUNT_TJ = #discount_tj:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_method">DISCOUNT_METHOD = #discount_method:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="discount_type_content">DISCOUNT_TYPE_CONTENT = #discount_type_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="discount_tj_content">DISCOUNT_TJ_CONTENT = #discount_tj_content:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="yhq_id">YHQ_ID = #yhq_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_tj">YHQ_TJ = #yhq_tj:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="yhq_tj_money">YHQ_TJ_MONEY = #yhq_tj_money:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="yhq_money">YHQ_MONEY = #yhq_money:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="red_money">RED_MONEY = #red_money:DECIMAL#</isNotNull>
+			
+			
+			<isNotNull prepend="," property="map.set_qdyh_id_null">QDYH_ID = null</isNotNull>
+			<isNotNull prepend="," property="map.set_discount_tj_null">DISCOUNT_TJ = null</isNotNull>
+			<isNotNull prepend="," property="map.set_discount_method_null">DISCOUNT_METHOD = null</isNotNull>
+			<isNotNull prepend="," property="map.set_discount_type_content_null">DISCOUNT_TYPE_CONTENT = null</isNotNull>
+			<isNotNull prepend="," property="map.set_discount_tj_content_null">DISCOUNT_TJ_CONTENT = null</isNotNull>
+			
+			<isNotNull prepend="," property="map.set_yhq_id_null">YHQ_ID = null</isNotNull>
+			<isNotNull prepend="," property="map.set_yhq_tj_null">YHQ_TJ = null</isNotNull>
+			<isNotNull prepend="," property="map.set_yhq_tj_money_null">YHQ_TJ_MONEY = null</isNotNull>
+			<isNotNull prepend="," property="map.set_yhq_money_null">YHQ_MONEY = null</isNotNull>
+			
+			<isNotNull prepend="," property="flag_qdyh">FLAG_QDYH = #flag_qdyh:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="flag_yhq">FLAG_YHQ = #flag_yhq:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.entp_id">entp_id = #map.entp_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_id">user_id = #map.user_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.comm_id">comm_id = #map.comm_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.yhq_id">yhq_id = #map.yhq_id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteCartInfo" parameterClass="cartInfo">
+		delete from CART_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_id">USER_ID = #user_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.cart_type">CART_TYPE = #map.cart_type#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.remove_pd_count_le_0"><![CDATA[ PD_COUNT <= 0 ]]></isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

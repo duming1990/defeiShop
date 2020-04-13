@@ -1,0 +1,56 @@
+/*
+YUI 3.16.0 (build 76f0e08)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+.yui3-widget-hidden { display: none }
+.yui3-widget-content { overflow: hidden }
+.yui3-widget-content-expanded { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; height: 100% }
+.yui3-widget-tmp-forcesize { overflow: hidden!important }
+#yui3-css-stamp.skin-sam-widget-base { display: none }
+#yui3-css-stamp.skin-sam-w-slider { display: none }
+.mt-slider { position: relative }
+.mt-slider-content { overflow: hidden }
+.mt-slider-sheet-container { position: relative; overflow: hidden; height: 400px }
+.mt-slider-sheet { position: absolute; top: 0; left: 0 }
+.mt-slider-next, .mt-slider-previous { left: 0; top: 0; background: url(http://s0.meituan.net/fecore/w-slider/assets/skins/img/left.ve469f47a.png) no-repeat; -webkit-transition: opacity .2s ease-out; -moz-transition: opacity .2s ease-out; -o-transition: opacity .2s ease-out; transition: opacity .2s ease-out }
+.mt-slider-next { left: auto; right: 0; top: 0; background: url(http://s0.meituan.net/fecore/w-slider/assets/skins/img/right.v1f992ee2.png) no-repeat }
+.mt-slider-next:hover, .mt-slider-previous:hover { opacity: 1!important; _filter: alpha(opacity=90)!important; cursor: pointer }
+.mt-slider-trigger-container { position: absolute; bottom: -20px; left: 0; width: 100%; font-size: 0; text-align: center; background: #CEDCDD; height: 20px; zoom: 1 }
+.mt-slider-trigger { position: relative; top: 0; display: inline-block; margin-top: 5px; margin-left: 10px; height: 11px; width: 11px; background: url(http://s0.meituan.net/fecore/w-slider/assets/skins/img/slider-dot.vf3a50db8.png) no-repeat; cursor: pointer; *display:inline;
+zoom: 1 }
+.mt-slider-current-trigger { background-position: -12px 0 }
+
+.common-sprite, .lift-nav i, .lift-nav--feedback i, .lift-nav--help i, .lift-nav--vote i { background-image: url(../images/si/common.ve827c4d9.png); background-repeat: no-repeat }
+.lift-nav { display: block; position: relative; width: 41px; height: 41px; overflow: hidden!important; border: 1px solid #eee; background: #fff; outline: 0; text-decoration: none }
+.lift-nav i { position: absolute; top: 0; left: 0; width: 41px; height: 41px; background-position: 0 -88px }
+.lift-nav span { display: none; position: absolute; width: 36px; top: 4px; left: 3px; line-height: 16px }
+.lift-nav:hover { background: #bbb }
+.lift-nav:hover i { display: none; *display:block
+}
+.lift-nav:hover span { display: block; *display:none;
+color: #fff }
+.lift-nav--help i { background-position: 0 -44px }
+.lift-nav--feedback i { background-position: 0 0 }
+.lift-nav--vote i { background-position: 0 -132px }
+.new-index-triffle-w { position: fixed; _position: absolute; left: 50%; margin-left: 500px; font-size: 12px; letter-spacing: 2px; z-index: 2; display: block; height: auto }
+.new-index-triffle { display: block; background: #fff; margin-bottom: -1px; width: 37px; height: 37px; padding: 2px; border: 1px solid #eee; color: #999; text-align: center }
+.new-index-triffle--stack { margin-bottom: 10px }
+.new-index-triffle:hover { text-decoration: none; color: #2bb8aa }
+.component-side-deals .inner-blk { padding-bottom: 0; background: #fff }
+.component-side-deals h3 { margin-bottom: 12px }
+.component-side-deals .deal { margin-bottom: 20px; border-bottom: 1px dashed #ddd; font-size: 12px }
+.component-side-deals .last-deal { margin-bottom: 0; border: none }
+.component-side-deals .last-deal .info { margin-bottom: 0 }
+.component-side-deals .deal .pic { display: block; margin: 0 auto 6px }
+.component-side-deals .deal h4 { margin-bottom: 4px }
+.component-side-deals .deal h4 a { font-weight: 400; color: #666 }
+.component-side-deals .info { position: relative; margin-bottom: 12px; color: #666; zoom: 1 }
+.component-side-deals .info strong { margin-right: 5px; font-size: 16px }
+.component-side-deals .total { position: absolute; top: 3px; right: 0 }
+.component-side-deals .total span { color: #f76120 }
+.component-side-deals .around-deal-distance { margin-bottom: 4px; font-size: 12px; font-weight: 700; color: #000; *zoom:1
+}
+.component-side-deals .around-deal-distance .F-glob-position { color: #f76120 }

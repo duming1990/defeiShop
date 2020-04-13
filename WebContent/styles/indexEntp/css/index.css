@@ -1,0 +1,78 @@
+@charset "UTF-8";    
+        /*===首页===*/
+/*banner*/
+.index_banner{width: 100%;position: relative;}
+.index_banner .item{width: 100%;height: 1080px;background-repeat: no-repeat;background-position: center top;  }
+/*轮播条*/
+.index_banner .hd{  position:absolute;  bottom:140px; z-index:1;left: 50%;margin-left: -150px; }
+.index_banner .hd ul{ overflow:hidden; zoom:1;}
+.index_banner .hd ul li{ float:left; cursor: pointer;width: 60px;height: 4px;background: rgba(255,255,255,0.3);margin: 0 20px;
+ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4Cffffff,endColorstr=#4Cffffff);}
+.index_banner .hd ul li span{width: 0%;height: 100%;background: #fff;display: block;}
+.index_banner .hd ul li.on span{width: 100%;animation:width 6s linear 0s;-webkit-animation:width 6s linear 0s;
+-moz-animation:width 6s linear 0s;-ms-animation:width 6s linear 0s;-o-animation:width 6s linear 0s;}
+:root .index_banner .hd ul li{filter:none;}
+:root .index_banner .item{filter:none;}
+/*向下按钮*/
+.bannerWrap{position: relative;}
+.bannerWrap .down{position: absolute;width: 26px;height:60px;cursor: pointer;bottom:10px;left:50%;margin-left: -13px;}
+.bannerWrap .down img{width: 100%;position: absolute;}
+.bannerWrap .down .img1{left: 0;bottom:34px;animation:fulldown1 1s linear 0s infinite;-webkit-animation:fulldown1 1s linear 0s infinite;-moz-animation:fulldown1 1s linear 0s infinite;
+  -ms-animation:fulldown1 1s linear 0s infinite;-o-animation:fulldown1 1s linear 0s infinite;}
+.bannerWrap .down .img2{left: 0;bottom:40px;animation:fulldown2 1s linear 0.2s infinite;-webkit-animation:fulldown2 1s linear 0.2s infinite;-moz-animation:fulldown2 1s linear 0.2s infinite;
+ -ms-animation:fulldown2 1s linear 0.2s infinite;-o-animation:fulldown2 1s linear 0.2s infinite;}
+/*banner图*/
+.index_banner .item a{display: block;width: 100%;height: 100%;position: relative;cursor: default;}
+.index_banner .item a img{display: block;position: absolute;}
+.index_banner .item .banner01 .img1{left: 18.96%;top:45.31%;
+    animation:banner1_right 1.5s ease-out 0.5s;-webkit-animation:banner1_right 1.5s ease-out 0.5s;
+    animation-fill-mode: both;-webkit-animation-fill-mode: both;}
+.index_banner .item .banner01 .img2{left: 18.96%;top:55.13%;
+    animation:banner1_left 1.6s ease-out 2s;-webkit-animation:banner1_left 1.6s ease-out 2s;
+    animation-fill-mode: both;-webkit-animation-fill-mode: both;}
+
+.index_t{font-size: 24px;color: #ccc;line-height: 30px;text-align: center;}
+.index_t h3{font-size: 48px;font-weight: 800;color: #000;line-height: 56px;text-align: center;}
+
+/*轮播条动画*/
+@keyframes width{0%{width: 0%;}100%{width: 100%;}}
+@-webkit-keyframes width{0%{width: 0%;}100%{width: 100%;}}
+@-moz-keyframes width{0%{width: 0%;}100%{width: 100%;}}
+/*向下按钮*/
+@keyframes fulldown1{0%{transform:scale(.5);opacity:0;bottom:34px;}
+50%{transform:scale(.7);opacity:1;bottom:24px;}
+100%{transform:scale(1);opacity:0;bottom:14px;}}
+@-webkit-keyframes fulldown1{0%{transform:scale(.5);opacity:0;bottom:34px;}
+50%{transform:scale(.7);opacity:1;bottom:24px;}
+100%{transform:scale(1);opacity:0;bottom:14px;}}
+@-moz-keyframes fulldown1{0%{transform:scale(.5);opacity:0;bottom:34px;}
+50%{transform:scale(.7);opacity:1;bottom:24px;}
+100%{transform:scale(1);opacity:0;bottom:14px;}}
+
+@keyframes fulldown2{0%{transform:scale(.4);opacity:0;bottom:40px;}
+50%{transform:scale(.6);opacity:1;bottom:30px;}
+100%{transform:scale(.9);opacity:0;bottom:20px;}}
+@-webkit-keyframes fulldown2{0%{transform:scale(.4);opacity:0;bottom:40px;}
+50%{transform:scale(.6);opacity:1;bottom:30px;}
+100%{transform:scale(.9);opacity:0;bottom:20px;}}
+@-moz-keyframes fulldown2{0%{transform:scale(.4);opacity:0;bottom:40px;}
+50%{transform:scale(.6);opacity:1;bottom:30px;}
+100%{transform:scale(.9);opacity:0;bottom:20px;}}
+/*banner1*/
+@keyframes banner1_right{
+    from{opacity:0;left:5%;}
+    to{opacity:1;left:18.96%;}
+}
+@-webkit-keyframes banner1_right{
+    from{opacity:0;left:5%;}
+    to{opacity:1;left:18.96%;}
+}
+@keyframes banner1_left{
+    from{opacity:0;left:35%;}
+    to{opacity:1;left:18.96%;}
+}
+@-webkit-keyframes banner1_left{
+    from{opacity:0;left:35%;}
+    to{opacity:1;left:18.96%;}
+}
+      

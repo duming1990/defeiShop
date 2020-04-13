@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="USER_INFO">
+
+	<typeAlias alias="userInfo" type="com.ebiz.webapp.domain.UserInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertUserInfo" />
+		<flushOnExecute statement="updateUserInfo" />
+		<flushOnExecute statement="deleteUserInfo" />
+	</cacheModel>
+
+	<resultMap id="userInfoResultForList" class="userInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="LINK_AREA" property="link_area" jdbcType="VARCHAR" />
+		<result column="REAL_NAME" property="real_name" jdbcType="VARCHAR" />
+		<result column="USER_TYPE" property="user_type" jdbcType="INTEGER" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="SEX" property="sex" jdbcType="INTEGER" />
+		<result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+		<result column="POSITIONS" property="positions" jdbcType="VARCHAR" />
+		<result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+		<result column="OFFICE_TEL" property="office_tel" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="LOGIN_COUNT" property="login_count" jdbcType="INTEGER" />
+		<result column="LAST_LOGIN_IP" property="last_login_ip" jdbcType="VARCHAR" />
+		<result column="LAST_LOGIN_TIME" property="last_login_time" jdbcType="TIMESTAMP" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="IS_AUDIT" property="is_audit" jdbcType="INTEGER" />
+		<result column="IS_ACTIVE" property="is_active" jdbcType="INTEGER" />
+		<result column="OWN_ENTP_ID" property="own_entp_id" jdbcType="INTEGER" />
+		<result column="OWN_ENTP_NAME" property="own_entp_name" jdbcType="VARCHAR" />
+		<result column="IS_ACTIVATE" property="is_activate" jdbcType="INTEGER" />
+		<result column="SIGN" property="sign" jdbcType="VARCHAR" />
+		<result column="ID_CARD" property="id_card" jdbcType="VARCHAR" />
+		<result column="USER_LEVEL" property="user_level" jdbcType="INTEGER" />
+		<result column="KEY_IS_ACTIVE" property="key_is_active" jdbcType="INTEGER" />
+		<result column="CUR_SCORE" property="cur_score" jdbcType="DECIMAL" />
+		<result column="BANK_PINDEX" property="bank_pindex" jdbcType="INTEGER" />
+		<result column="BANK_PNAME" property="bank_pname" jdbcType="VARCHAR" />
+		<result column="BANK_BRANCH_NAME" property="bank_branch_name" jdbcType="VARCHAR" />		
+		<result column="BANK_NAME" property="bank_name" jdbcType="VARCHAR" />
+		<result column="BANK_ACCOUNT" property="bank_account" jdbcType="VARCHAR" />
+		<result column="BANK_ACCOUNT_NAME" property="bank_account_name" jdbcType="VARCHAR" />
+		<result column="USER_LOGO" property="user_logo" jdbcType="VARCHAR" />
+		<result column="APPID_WEIXIN" property="appid_weixin" jdbcType="VARCHAR" />
+		<result column="APPID_WEIXIN_UNIONID" property="appid_weixin_unionid" jdbcType="VARCHAR" />
+		<result column="APPID_WEIXIN_IS_FOLLOW" property="appid_weixin_is_follow" jdbcType="INTEGER" />
+		<result column="APPID_QQ" property="appid_qq" jdbcType="VARCHAR" />
+		<result column="APPID_WEIBO" property="appid_weibo" jdbcType="VARCHAR" />
+		<result column="P_INDEX" property="p_index" jdbcType="INTEGER" />
+		<result column="USER_NO" property="user_no" jdbcType="VARCHAR" />
+		<result column="IS_ENTP" property="is_entp" jdbcType="INTEGER" />
+		<result column="IS_FUWU" property="is_fuwu" jdbcType="INTEGER" />
+		<result column="IS_LIANMENG" property="is_lianmeng" jdbcType="INTEGER" />
+		<result column="IS_LIANMENG_DATE" property="is_lianmeng_date" jdbcType="TIMESTAMP" />
+		<result column="IS_LIANMENG_CANCELED_DATE" property="is_lianmeng_canceled_date" jdbcType="TIMESTAMP" />
+		<result column="IS_DAQU" property="is_daqu" jdbcType="INTEGER" />
+		<result column="BI_DIANZI" property="bi_dianzi" jdbcType="DECIMAL" />
+		<result column="BI_DIANZI_LOCK" property="bi_dianzi_lock" jdbcType="DECIMAL" />
+		<result column="BI_DIANZI_LOST" property="bi_dianzi_lost" jdbcType="DECIMAL" />
+		<result column="BI_XIAOFEI" property="bi_xiaofei" jdbcType="DECIMAL" />
+		<result column="BI_HUOKUAN" property="bi_huokuan" jdbcType="DECIMAL" />
+		<result column="LEIJI_MONEY_USER" property="leiji_money_user" jdbcType="DECIMAL" />
+		<result column="LEIJI_MONEY_ENTP" property="leiji_money_entp" jdbcType="DECIMAL" />
+		<result column="LEIJI_MONEY_TUIGUANG" property="leiji_money_tuiguang" jdbcType="DECIMAL" />
+		<result column="YMID" property="ymid" jdbcType="VARCHAR" />
+		<result column="USER_SCORE_UNION" property="user_score_union" jdbcType="DECIMAL" />
+		<result column="PASSWORD_PAY" property="password_pay" jdbcType="VARCHAR" />
+		<result column="IS_SET_SECURITY" property="is_set_security" jdbcType="INTEGER" />
+		<result column="BI_DIANZI_LOCK_TUIGUAN" property="bi_dianzi_lock_tuiguan" jdbcType="DECIMAL" />
+		<result column="SCORE_UPDATE_DATE" property="score_update_date" jdbcType="TIMESTAMP" />
+		<result column="IS_CLOSED" property="is_closed" jdbcType="INTEGER" />
+		<result column="DEVICE_TOKEN" property="device_token" jdbcType="VARCHAR" />
+		<result column="DEVICE_TOKEN_APP" property="device_token_app" jdbcType="VARCHAR" />
+		<result column="IS_RENZHENG" property="is_renzheng" jdbcType="INTEGER" />
+		<result column="IS_CITY_MANAGER" property="is_city_manager" jdbcType="INTEGER" />
+		<result column="IS_START" property="is_start" jdbcType="INTEGER" />
+		<result column="IS_HAS_UPDATE_PASS" property="is_has_update_pass" jdbcType="INTEGER" />
+		<result column="BI_FUXIAO" property="bi_fuxiao" jdbcType="DECIMAL" />
+		<result column="IMG_ID_CARD_ZM" property="img_id_card_zm" jdbcType="VARCHAR" />
+		<result column="IMG_ID_CARD_FM" property="img_id_card_fm" jdbcType="VARCHAR" />
+		<result column="IS_VILLAGE" property="is_village" jdbcType="INTEGER" />
+		<result column="OWN_VILLAGE_ID" property="own_village_id" jdbcType="INTEGER" />
+		<result column="OWN_VILLAGE_NAME" property="own_village_name" jdbcType="VARCHAR" />
+		<result column="IS_POOR" property="is_poor" jdbcType="INTEGER" />
+		<result column="POOR_ID" property="poor_id" jdbcType="INTEGER" />
+		<result column="BI_HUOKUAN_LOCK" property="bi_huokuan_lock" jdbcType="DECIMAL" />
+		<result column="BI_AID" property="bi_aid" jdbcType="DECIMAL" />
+		<result column="BI_AID_SENDED" property="bi_aid_sended" jdbcType="DECIMAL" />
+		<result column="BI_AID_LOCK" property="bi_aid_lock" jdbcType="DECIMAL" />
+		<result column="CARD_END_DATE" property="card_end_date" jdbcType="TIMESTAMP" />
+		<result column="AUTOGRAPH" property="autograph" jdbcType="VARCHAR" />
+		<result column="APP_KEY" property="app_key" jdbcType="VARCHAR" />
+		<result column="IS_SHUADAN" property="is_shuadan" jdbcType="INTEGER" />
+		<result column="DOMAIN_SITE" property="domain_site" jdbcType="VARCHAR" />
+		<result column="MARK_USER_ID" property="mark_user_id" jdbcType="INTEGER" />
+		<result column="BI_WELFARE" property="bi_welfare" jdbcType="DECIMAL" />
+		
+	</resultMap>
+
+	<resultMap id="userInfoResult" class="userInfo" extends="userInfoResultForList">
+	</resultMap>
+	
+	<resultMap id="userInfoResultListWithPName" class="userInfo" extends="userInfoResultForList">
+		<result column="FULL_NAME" property="map.full_name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="userInfoResultWithSum" class="userInfo">
+		<result column="SUM_LEIJI_MONEY_TUIGUANG" property="map.sum_leiji_money_tuiguang" jdbcType="VARCHAR" />
+		<result column="SUM_BI_DIANZI_LOCK_TUIGUAN" property="map.sum_bi_dianzi_lock_tuiguan" jdbcType="VARCHAR" />
+		<result column="SUM_BI_DIANZI_LOST" property="map.sum_bi_dianzi_lost" jdbcType="VARCHAR" />
+		<result column="SUM_BI_DIANZI_LOCK" property="map.sum_bi_dianzi_lock" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="spokesmanRankingList" class="userInfo" extends="userInfoResultForList">
+		<result column="sum_money" property="map.sum_money" jdbcType="DECIMAL" />
+		<result column="user_num" property="map.user_num" jdbcType="INTEGER" />
+		<result column="full_name" property="map.full_name" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="sf-userInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_name">a.USER_NAME = #user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="link_area">a.LINK_AREA = #link_area:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="real_name">a.REAL_NAME = #real_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_type">a.USER_TYPE = #user_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="password">a.PASSWORD = #password:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sex">a.SEX = #sex:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="birthday">a.BIRTHDAY = #birthday:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="positions">a.POSITIONS = #positions:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mobile">a.MOBILE = #mobile:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="office_tel">a.OFFICE_TEL = #office_tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="email">a.EMAIL = #email:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="login_count">a.LOGIN_COUNT = #login_count:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="last_login_ip">a.LAST_LOGIN_IP = #last_login_ip:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="last_login_time">a.LAST_LOGIN_TIME = #last_login_time:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lock">a.IS_LOCK = #is_lock:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">a.ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">a.UPDATE_DATE = #update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">a.UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">a.DEL_DATE = #del_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">a.DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_audit">a.IS_AUDIT = #is_audit:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_active">a.IS_ACTIVE = #is_active:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_entp_id">a.OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_entp_name">a.OWN_ENTP_NAME = #own_entp_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_activate">a.IS_ACTIVATE = #is_activate:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="sign">a.SIGN = #sign:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="id_card">a.ID_CARD = #id_card:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_level">a.USER_LEVEL = #user_level:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="key_is_active">a.KEY_IS_ACTIVE = #key_is_active:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="cur_score">a.CUR_SCORE = #cur_score:DECIMAL#</isNotEmpty>
+	    <isNotEmpty prepend=" and " property="bank_pindex">a.BANK_PINDEX = #bank_pindex:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bank_pname">a.BANK_PNAME = #bank_pname:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bank_branch_name">a.BANK_BRANCH_NAME = #bank_branch_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bank_name">a.BANK_NAME = #bank_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bank_account">a.BANK_ACCOUNT = #bank_account:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bank_account_name">a.BANK_ACCOUNT_NAME = #bank_account_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_logo">a.USER_LOGO = #user_logo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="appid_weixin">a.APPID_WEIXIN = #appid_weixin:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="appid_weixin_unionid">a.APPID_WEIXIN_UNIONID = #appid_weixin_unionid:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="appid_weixin_is_follow">a.APPID_WEIXIN_IS_FOLLOW = #appid_weixin_is_follow:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="appid_qq">a.APPID_QQ = #appid_qq:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="appid_weibo">a.APPID_WEIBO = #appid_weibo:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="p_index">a.P_INDEX = #p_index:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_no">a.USER_NO = #user_no:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_entp">a.IS_ENTP = #is_entp:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_fuwu">a.IS_FUWU = #is_fuwu:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lianmeng">a.IS_LIANMENG = #is_lianmeng:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lianmeng_date">a.IS_LIANMENG_DATE = #is_lianmeng_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lianmeng_canceled_date">a.IS_LIANMENG_CANCELED_DATE = #is_lianmeng_canceled_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_daqu">a.IS_DAQU = #is_daqu:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_dianzi">a.BI_DIANZI = #bi_dianzi:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_dianzi_lock">a.BI_DIANZI_LOCK = #bi_dianzi_lock:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_dianzi_lost">a.BI_DIANZI_LOST = #bi_dianzi_lost:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_xiaofei">a.BI_XIAOFEI = #bi_xiaofei:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_huokuan">a.BI_HUOKUAN = #bi_huokuan:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="leiji_money_user">a.LEIJI_MONEY_USER = #leiji_money_user:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="leiji_money_entp">a.LEIJI_MONEY_ENTP = #leiji_money_entp:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="leiji_money_tuiguang">a.LEIJI_MONEY_TUIGUANG = #leiji_money_tuiguang:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="ymid">a.YMID = #ymid:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_score_union">a.USER_SCORE_UNION = #user_score_union:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="password_pay">a.PASSWORD_PAY = #password_pay:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_set_security">a.IS_SET_SECURITY = #is_set_security:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_dianzi_lock_tuiguan">a.BI_DIANZI_LOCK_TUIGUAN = #bi_dianzi_lock_tuiguan:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="score_update_date">a.SCORE_UPDATE_DATE = #score_update_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_closed">a.IS_CLOSED = #is_closed:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="device_token">a.DEVICE_TOKEN = #device_token:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="device_token_app">a.DEVICE_TOKEN_APP = #device_token_app:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="is_renzheng">a.IS_RENZHENG = #is_renzheng:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_city_manager">a.IS_CITY_MANAGER = #is_city_manager:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_start">a.IS_START = #is_start:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_has_update_pass">a.IS_HAS_UPDATE_PASS = #is_has_update_pass:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_fuxiao">a.BI_FUXIAO = #bi_fuxiao:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="img_id_card_zm">a.IMG_ID_CARD_ZM = #img_id_card_zm:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="img_id_card_fm">a.IMG_ID_CARD_FM = #img_id_card_fm:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_village">a.IS_VILLAGE = #is_village:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_village_id">a.OWN_VILLAGE_ID = #own_village_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="own_village_name">a.OWN_VILLAGE_NAME = #own_village_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_poor">a.IS_POOR = #is_poor:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="poor_id">a.POOR_ID = #poor_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_huokuan_lock">a.BI_HUOKUAN_LOCK = #bi_huokuan_lock:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_aid">a.BI_AID = #bi_aid:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_aid_sended">a.BI_AID_SENDED = #bi_aid_sended:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_aid_lock">a.BI_AID_LOCK = #bi_aid_lock:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="card_end_date">a.CARD_END_DATE = #card_end_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="autograph">a.AUTOGRAPH = #autograph:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="app_key">a.APP_KEY = #app_key:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_shuadan">a.IS_SHUADAN = #is_shuadan:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="domain_site">a.DOMAIN_SITE = #domain_site:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="mark_user_id">a.MARK_USER_ID = #mark_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="bi_welfare">a.BI_WELFARE = #bi_welfare:DECIMAL#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.user_name_like">a.USER_NAME like '%'  #map.user_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.real_name_like">a.REAL_NAME like '%'  #map.real_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.mobile_like">a.mobile like '%'  #map.mobile_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.own_entp_name_like">a.OWN_ENTP_NAME like '%'  #map.own_entp_name_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_in_id">a.id not in($map.not_in_id$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_level_in">a.USER_LEVEL not in($map.user_level_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_level_gt">a.USER_LEVEL > #map.user_level_gt:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_type_not_in">a.USER_TYPE not in($map.user_type_not_in$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.bi_lock_tuiguang_gt_0"><![CDATA[a.BI_DIANZI_LOCK_TUIGUAN > 0]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.leiji_money_user_ge">a.LEIJI_MONEY_USER >= #map.leiji_money_user_ge#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.last_login_time_ge">
+		<![CDATA[
+			a.LAST_LOGIN_TIME>=date_sub(NOW(), interval 1 month) 
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.bi_dianzi_lock_ge">a.BI_DIANZI_LOCK >= #map.bi_dianzi_lock_ge#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.ym_id_is_null">a.YMID is null</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.ym_id">
+		(a.USER_NAME = #map.ym_id#
+		or a.mobile = #map.ym_id# 
+		or a.user_no =#map.ym_id# )
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.par_user_id">
+		a.id in(SELECT distinct USER_ID FROM  user_relation_par where USER_PAR_ID = #map.par_user_id#)
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_ids_in">a.id in($map.user_ids_in$)</isNotEmpty>
+		
+	    <isNotEmpty prepend=" and " property="map.today_date"><![CDATA[
+		str_to_date(#map.today_date:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= a.add_date  
+		and a.add_date <= str_to_date(concat(#map.today_date# , ' 23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+
+	    <isNotEmpty prepend=" and " property="map.today_date_audit"><![CDATA[
+		str_to_date(#map.today_date:VARCHAR#, '%Y-%m-%d %H:%i:%s') <= t2.audit_date  
+		and t2.audit_date <= str_to_date(concat(#map.today_date# , ' 23:59:59'), '%Y-%m-%d %H:%i:%s') 
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_add_date"><![CDATA[
+			a.add_date >= str_to_date(#map.st_add_date:VARCHAR#, '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_add_date"><![CDATA[
+			a.add_date <= str_to_date(concat(#map.en_add_date#,'23:59:59'), '%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.card_end_date_ge">
+			a.card_end_date >= str_to_date(#map.card_end_date_ge#, '%Y-%m-%d %H:%i:%s')
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.card_end_date_le">
+			<![CDATA[ a.card_end_date <= str_to_date(concat(#map.card_end_date_le#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]>
+		</isNotEmpty>
+		
+			
+		<isNotEmpty prepend=" and " property="map.brother_rebate_user_id">
+			a.ID not in (
+			select urp.USER_PAR_ID from user_relation_par urp where urp.USER_PAR_LEVLE = 1
+			)
+			and #map.brother_rebate_user_id# in (select urp.USER_PAR_ID from user_relation_par urp where urp.user_id = a.ID)
+		</isNotEmpty>	
+		
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like #map.p_index_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.entp_p_index_like">t2.P_INDEX like #map.entp_p_index_like#  '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.audit_date_st"><![CDATA[t2.audit_date >= str_to_date(#map.audit_date_st:VARCHAR#, '%Y-%m-%d %H:%i:%s')]]>	   	 </isNotEmpty>
+		
+    	<isNotEmpty prepend=" and " property="map.audit_date_en"><![CDATA[t2.audit_date <= str_to_date(concat(#map.audit_date_en:VARCHAR#,'23:59:59'), '%Y-%m-%d %H:%i:%s')]]></isNotEmpty>
+    	
+		<isNotEmpty prepend=" and " property="map.servicecenter_level">
+		
+
+	
+		
+		
+		id in (select distinct ADD_USER_ID from SERVICE_CENTER_INFO b where EFFECT_STATE = 1 and 
+		b.SERVICECENTER_LEVEL = #map.servicecenter_level#)
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.eq_is_lianmeng_date">
+			DATE_FORMAT(a.IS_LIANMENG_DATE,'%Y-%m-%d')=DATE_FORMAT(SYSDATE(),'%Y-%m-%d')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.my_lower_by_user_par_id">
+		    a.id in (select urp.user_id from USER_RELATION_PAR urp where urp.USER_PAR_ID = #map.my_lower_by_user_par_id# and urp.USER_PAR_LEVLE in (1,2,3))
+		</isNotEmpty>
+
+		<isNotEmpty property="map.left_join_user_relation_par">
+			<isNotEmpty prepend=" and " property="map.user_par_id">urp.USER_PAR_ID = #map.user_par_id#</isNotEmpty>
+			<isNotEmpty prepend=" and " property="map.user_par_levle_le">
+				<![CDATA[urp.USER_PAR_LEVLE <= #map.user_par_levle_le#]]>
+			</isNotEmpty>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.p_index_pro">
+			<iterate close=")" open="(" conjunction=" or " property="map.p_index_pro">a.P_INDEX like #map.p_index_pro[]#  '%'</iterate>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.user_type_ne">
+			<![CDATA[a.USER_TYPE <> #map.user_type_ne#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_type_in">
+			<![CDATA[a.USER_TYPE in ($map.user_type_ne$)]]>
+		</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.device_token_not_empty">a.DEVICE_TOKEN is not null</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.img_id_card_zm_not_empty">a.IMG_ID_CARD_ZM is not null</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.appid_weixin_is_not_null">a.APPID_WEIXIN is not null</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.card_end_date_eq">
+			a.card_end_date = str_to_date(#map.card_end_date_eq#, '%Y-%m-%d %H:%i:%s')
+		</isNotEmpty>
+	</sql>
+
+	<select id="selectUserInfo" resultMap="userInfoResult" parameterClass="userInfo" cacheModel="oneDayCache">
+		select * from USER_INFO a where 1 = 1
+		<include refid="sf-userInfo" />
+	</select>
+
+	<select id="selectUserInfoList" resultMap="userInfoResultForList" parameterClass="userInfo" cacheModel="oneDayCache">
+	    <!--用户下级列表查询  -->
+		<isNotEmpty property="map.left_join_user_relation_par">
+		SELECT a.* from user_relation_par urp 
+		LEFT JOIN user_info a on urp.USER_ID = a.ID
+		</isNotEmpty>
+		<isEmpty property="map.left_join_user_relation_par">
+		select * from USER_INFO a 
+			<isNotEmpty property="map.right_join_entp_info">
+			 right join entp_info t2 on t2.id =  a.own_entp_id
+			</isNotEmpty>
+			
+		</isEmpty>
+		
+
+		where 1 = 1
+		<include refid="sf-userInfo" />
+		order by a.ORDER_VALUE desc,a.ID desc
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectUserInfoCount" resultClass="int" parameterClass="userInfo" cacheModel="oneDayCache">
+		select count(*) from USER_INFO a 
+		
+		<isNotEmpty property="map.right_join_entp_info">
+		 right join entp_info t2 on t2.id =  a.own_entp_id
+		</isNotEmpty>
+		
+		where 1 = 1
+		<include refid="sf-userInfo" />
+	</select>
+
+	<select id="selectUserInfoPaginatedList" resultMap="userInfoResultListWithPName" parameterClass="userInfo" cacheModel="oneDayCache">
+		select a.*,(select bp.full_name from base_province bp where bp.p_index = a.p_index) as full_name from USER_INFO a
+		
+		<isNotEmpty property="map.right_join_entp_info">
+		 right join entp_info t2 on t2.id =  a.own_entp_id
+		</isNotEmpty>
+		
+		 where 1 = 1
+		<include refid="sf-userInfo" />
+		order by 
+		<isNotEmpty property="map.order_by_info">$map.order_by_info$</isNotEmpty>
+		ORDER_VALUE desc, ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectUserInfoWithSum" resultMap="userInfoResultWithSum" parameterClass="userInfo" cacheModel="oneDayCache">
+		select 
+			ifnull(sum(a.leiji_money_tuiguang),0) as sum_leiji_money_tuiguang,
+			ifnull(sum(a.bi_dianzi_lock_tuiguan),0) as sum_bi_dianzi_lock_tuiguan,
+			ifnull(sum(a.bi_dianzi_lost),0) as sum_bi_dianzi_lost,
+			ifnull(sum(a.bi_dianzi_lock),0) as sum_bi_dianzi_lock from USER_INFO a where 1 = 1 
+		<include refid="sf-userInfo" />
+	</select>
+	
+	<select id="proUnionscoreGet" parameterClass="userInfo" cacheModel="oneDayCache">
+	
+		{call unionscoreGet(#map.p_user_id#,#map.p_link_id#,#map.p_card_no#,#map.p_add_dianzibi#,#map.p_add_score#)}
+		
+	</select>
+	
+	
+	<select id="selectSpokesmanRankingListCount" resultClass="int" parameterClass="userinfo" cacheModel="oneDayCache">
+		select count(1) from(
+		SELECT a.ID,
+		a.USER_NAME, IFNULL(b.user_num, 0) as user_num,
+		IFNULL(c.sum_money, 0) as sum_money,d.FULL_NAME as full_name
+		FROM
+		user_info a
+		LEFT JOIN (
+		SELECT count(1) AS user_num, urp.USER_PAR_ID
+		FROM user_relation_par urp
+		WHERE urp.USER_PAR_LEVLE = 1
+		GROUP BY urp.USER_PAR_ID
+		) b ON a.ID = b.USER_PAR_ID
+		LEFT JOIN (
+		SELECT ubr.ADD_USER_ID, SUM(ubr.bi_no) AS sum_money
+		FROM user_bi_record ubr
+		WHERE ubr.is_del = 0
+		AND ubr.BI_CHU_OR_RU = 1
+		AND ubr.BI_TYPE = 100
+		AND ubr.BI_GET_TYPE = 1002
+		GROUP BY ubr.ADD_USER_ID
+		) c ON a.id = c.ADD_USER_ID
+		left join BASE_PROVINCE d on a.P_INDEX=d.P_INDEX
+		WHERE 1 = 1
+		<include refid="sf-userInfo" />
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like #map.p_index_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_num">user_num >#map.user_num#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sum_money">sum_money >#map.sum_money#</isNotEmpty>
+		order by IFNULL(c.sum_money, 0) desc,IFNULL(b.user_num, 0)desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+		) aa
+	</select>
+
+	<select id="selectSpokesmanRankingList" resultMap="spokesmanRankingList" parameterClass="userinfo" cacheModel="oneDayCache">
+		SELECT a.*,
+		IFNULL(b.user_num, 0) as user_num,
+		IFNULL(c.sum_money, 0) as sum_money,d.FULL_NAME as full_name
+		FROM
+		user_info a
+		LEFT JOIN (
+		SELECT count(1) AS user_num, urp.USER_PAR_ID
+		FROM user_relation_par urp
+		WHERE urp.USER_PAR_LEVLE = 1
+		GROUP BY urp.USER_PAR_ID
+		) b ON a.ID = b.USER_PAR_ID
+		LEFT JOIN (
+		SELECT ubr.ADD_USER_ID, SUM(ubr.bi_no) AS sum_money
+		FROM user_bi_record ubr
+		WHERE ubr.is_del = 0
+		AND ubr.BI_CHU_OR_RU = 1
+		AND ubr.BI_TYPE = 100
+		AND ubr.BI_GET_TYPE = 1002
+		GROUP BY ubr.ADD_USER_ID
+		) c ON a.id = c.ADD_USER_ID
+		left join BASE_PROVINCE d on a.P_INDEX=d.P_INDEX
+		WHERE 1 = 1
+		<include refid="sf-userInfo" />
+		<isNotEmpty prepend=" and " property="map.p_index_like">a.P_INDEX like #map.p_index_like# '%'</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_num">user_num >#map.user_num#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sum_money">sum_money >#map.sum_money#</isNotEmpty>
+		order by IFNULL(c.sum_money, 0) desc,IFNULL(b.user_num, 0)desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+	
+	<select id="selectUserSpeciaList" resultMap="userInfoResultForList" parameterClass="userInfo" cacheModel="oneDayCache">
+		SELECT DISTINCT
+			a.*
+		FROM
+			user_relation_par urp
+		LEFT JOIN user_info a ON urp.USER_ID = a.ID
+		where 1 = 1
+		<include refid="sf-userInfo" />
+		<isNotEmpty prepend=" and " property="map.user_par_id_special">urp.USER_PAR_ID in ($map.user_par_id_special$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_par_levle_special">urp.USER_PAR_LEVLE =#map.user_par_levle_special#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_me">a.id != #map.not_me#</isNotEmpty>
+		order by a.ORDER_VALUE desc,a.ID desc
+		<isNotEmpty property="row.count">
+			<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+		</isNotEmpty>
+	</select>
+	<select id="selectUserSpeciaCount" resultClass="int" parameterClass="userInfo" cacheModel="oneDayCache">
+	SELECT COUNT(DISTINCT a.ID)
+		FROM
+			user_relation_par urp
+		LEFT JOIN user_info a ON urp.USER_ID = a.ID
+		where 1 = 1
+		<include refid="sf-userInfo" />
+		<isNotEmpty prepend=" and " property="map.user_par_id_special">urp.USER_PAR_ID in ($map.user_par_id_special$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.user_par_levle_special">urp.USER_PAR_LEVLE =#map.user_par_levle_special#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.not_me">a.id != #map.not_me#</isNotEmpty>
+	</select>
+	
+	
+	<insert id="insertUserInfo" parameterClass="userInfo">
+		<![CDATA[insert into USER_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="user_name">USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="link_area">LINK_AREA</isNotNull>
+			<isNotNull prepend="," property="real_name">REAL_NAME</isNotNull>	
+			<isNotNull prepend="," property="user_type">USER_TYPE</isNotNull>	
+			<isNotNull prepend="," property="password">PASSWORD</isNotNull>	
+			<isNotNull prepend="," property="sex">SEX</isNotNull>	
+			<isNotNull prepend="," property="birthday">BIRTHDAY</isNotNull>	
+			<isNotNull prepend="," property="positions">POSITIONS</isNotNull>	
+			<isNotNull prepend="," property="mobile">MOBILE</isNotNull>	
+			<isNotNull prepend="," property="office_tel">OFFICE_TEL</isNotNull>	
+			<isNotNull prepend="," property="email">EMAIL</isNotNull>	
+			<isNotNull prepend="," property="login_count">LOGIN_COUNT</isNotNull>	
+			<isNotNull prepend="," property="last_login_ip">LAST_LOGIN_IP</isNotNull>	
+			<isNotNull prepend="," property="last_login_time">LAST_LOGIN_TIME</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_lock">IS_LOCK</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="is_audit">IS_AUDIT</isNotNull>	
+			<isNotNull prepend="," property="is_active">IS_ACTIVE</isNotNull>	
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID</isNotNull>	
+			<isNotNull prepend="," property="own_entp_name">OWN_ENTP_NAME</isNotNull>	
+			<isNotNull prepend="," property="is_activate">IS_ACTIVATE</isNotNull>	
+			<isNotNull prepend="," property="sign">SIGN</isNotNull>	
+			<isNotNull prepend="," property="id_card">ID_CARD</isNotNull>	
+			<isNotNull prepend="," property="user_level">USER_LEVEL</isNotNull>	
+			<isNotNull prepend="," property="key_is_active">KEY_IS_ACTIVE</isNotNull>	
+			<isNotNull prepend="," property="cur_score">CUR_SCORE</isNotNull>	
+			<isNotNull prepend="," property="bank_pindex">BANK_PINDEX</isNotNull>	
+			<isNotNull prepend="," property="bank_pname">BANK_PNAME</isNotNull>	
+			<isNotNull prepend="," property="bank_branch_name">BANK_BRANCH_NAME</isNotNull>	
+			<isNotNull prepend="," property="bank_name">BANK_NAME</isNotNull>	
+			<isNotNull prepend="," property="bank_account">BANK_ACCOUNT</isNotNull>	
+			<isNotNull prepend="," property="bank_account_name">BANK_ACCOUNT_NAME</isNotNull>	
+			<isNotNull prepend="," property="user_logo">USER_LOGO</isNotNull>	
+			<isNotNull prepend="," property="appid_weixin">APPID_WEIXIN</isNotNull>	
+			<isNotNull prepend="," property="appid_weixin_unionid">APPID_WEIXIN_UNIONID</isNotNull>	
+			<isNotNull prepend="," property="appid_weixin_is_follow">APPID_WEIXIN_IS_FOLLOW</isNotNull>	
+			<isNotNull prepend="," property="appid_qq">APPID_QQ</isNotNull>	
+			<isNotNull prepend="," property="appid_weibo">APPID_WEIBO</isNotNull>	
+			<isNotNull prepend="," property="p_index">P_INDEX</isNotNull>	
+			<isNotNull prepend="," property="user_no">USER_NO</isNotNull>	
+			<isNotNull prepend="," property="is_entp">IS_ENTP</isNotNull>	
+			<isNotNull prepend="," property="is_fuwu">IS_FUWU</isNotNull>	
+			<isNotNull prepend="," property="is_lianmeng">IS_LIANMENG</isNotNull>	
+			<isNotNull prepend="," property="is_lianmeng_date">IS_LIANMENG_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_lianmeng_canceled_date">IS_LIANMENG_CANCELED_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_daqu">IS_DAQU</isNotNull>	
+			<isNotNull prepend="," property="bi_dianzi">BI_DIANZI</isNotNull>	
+			<isNotNull prepend="," property="bi_dianzi_lock">BI_DIANZI_LOCK</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi_lost">BI_DIANZI_LOST</isNotNull>
+			<isNotNull prepend="," property="bi_xiaofei">BI_XIAOFEI</isNotNull>	
+			<isNotNull prepend="," property="bi_huokuan">BI_HUOKUAN</isNotNull>	
+			<isNotNull prepend="," property="leiji_money_user">LEIJI_MONEY_USER</isNotNull>	
+			<isNotNull prepend="," property="leiji_money_entp">LEIJI_MONEY_ENTP</isNotNull>	
+			<isNotNull prepend="," property="leiji_money_tuiguang">LEIJI_MONEY_TUIGUANG</isNotNull>	
+			<isNotNull prepend="," property="ymid">YMID</isNotNull>	
+			<isNotNull prepend="," property="user_score_union">USER_SCORE_UNION</isNotNull>	
+			<isNotNull prepend="," property="password_pay">PASSWORD_PAY</isNotNull>	
+			<isNotNull prepend="," property="is_set_security">IS_SET_SECURITY</isNotNull>	
+			<isNotNull prepend="," property="bi_dianzi_lock_tuiguan">BI_DIANZI_LOCK_TUIGUAN</isNotNull>	
+			<isNotNull prepend="," property="score_update_date">SCORE_UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_closed">IS_CLOSED</isNotNull>
+			<isNotNull prepend="," property="device_token">DEVICE_TOKEN</isNotNull>	
+			<isNotNull prepend="," property="device_token_app">DEVICE_TOKEN_APP</isNotNull>	
+			
+			<isNotNull prepend="," property="is_renzheng">IS_RENZHENG</isNotNull>	
+			<isNotNull prepend="," property="is_city_manager">IS_CITY_MANAGER</isNotNull>
+			<isNotNull prepend="," property="is_start">IS_START</isNotNull>		
+			<isNotNull prepend="," property="is_has_update_pass">IS_HAS_UPDATE_PASS</isNotNull>	
+			<isNotNull prepend="," property="bi_fuxiao">BI_FUXIAO</isNotNull>		
+			<isNotNull prepend="," property="img_id_card_zm">IMG_ID_CARD_ZM</isNotNull>	
+			<isNotNull prepend="," property="img_id_card_fm">IMG_ID_CARD_FM</isNotNull>
+			<isNotNull prepend="," property="is_village">IS_VILLAGE</isNotNull>	
+			<isNotNull prepend="," property="own_village_id">OWN_VILLAGE_ID</isNotNull>	
+			<isNotNull prepend="," property="own_village_name">OWN_VILLAGE_NAME</isNotNull>	
+			<isNotNull prepend="," property="is_poor">IS_POOR</isNotNull>
+			<isNotNull prepend="," property="poor_id">POOR_ID</isNotNull>	
+			<isNotNull prepend="," property="bi_huokuan_lock">BI_HUOKUAN_LOCK</isNotNull>	
+			<isNotNull prepend="," property="bi_aid">BI_AID</isNotNull>		
+			<isNotNull prepend="," property="bi_aid_sended">BI_AID_SENDED</isNotNull>		
+			<isNotNull prepend="," property="bi_aid_lock">BI_AID_LOCK</isNotNull>	
+			<isNotNull prepend="," property="card_end_date">CARD_END_DATE</isNotNull>
+			<isNotNull prepend="," property="autograph">AUTOGRAPH</isNotNull>
+			<isNotNull prepend="," property="app_key">APP_KEY</isNotNull>			
+			<isNotNull prepend="," property="is_shuadan">IS_SHUADAN</isNotNull>	
+			<isNotNull prepend="," property="domain_site">DOMAIN_SITE</isNotNull>			
+			<isNotNull prepend="," property="mark_user_id">MARK_USER_ID</isNotNull>		
+			<isNotNull prepend="," property="bi_welfare">BI_WELFARE</isNotNull>		
+			
+			<isNull property="user_name">
+				<isNotNull prepend="," property="map.createUserNo">USER_NAME</isNotNull>
+			</isNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">#user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="link_area">#link_area:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="real_name">#real_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_type">#user_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="password">#password:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="sex">#sex:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="birthday">#birthday:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="positions">#positions:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mobile">#mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="office_tel">#office_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="email">#email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="login_count">#login_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="last_login_ip">#last_login_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="last_login_time">#last_login_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">#is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_audit">#is_audit:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_active">#is_active:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">#own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_name">#own_entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_activate">#is_activate:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sign">#sign:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="id_card">#id_card:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_level">#user_level:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="key_is_active">#key_is_active:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cur_score">#cur_score:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bank_pindex">#bank_pindex:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bank_pname">#bank_pname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_branch_name">#bank_branch_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_name">#bank_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_account">#bank_account:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_account_name">#bank_account_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_logo">#user_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_weixin">#appid_weixin:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_weixin_unionid">#appid_weixin_unionid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_weixin_is_follow">#appid_weixin_is_follow:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="appid_qq">#appid_qq:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_weibo">#appid_weibo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">#p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_no">#user_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_entp">#is_entp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_fuwu">#is_fuwu:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lianmeng">#is_lianmeng:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lianmeng_date">#is_lianmeng_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_lianmeng_canceled_date">#is_lianmeng_canceled_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_daqu">#is_daqu:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi">#bi_dianzi:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi_lock">#bi_dianzi_lock:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi_lost">#bi_dianzi_lost:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_xiaofei">#bi_xiaofei:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_huokuan">#bi_huokuan:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="leiji_money_user">#leiji_money_user:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="leiji_money_entp">#leiji_money_entp:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="leiji_money_tuiguang">#leiji_money_tuiguang:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="ymid">#ymid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_score_union">#user_score_union:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="password_pay">#password_pay:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_set_security">#is_set_security:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi_lock_tuiguan">#bi_dianzi_lock_tuiguan:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="score_update_date">#score_update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_closed">#is_closed:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="device_token">#device_token:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="device_token_app">#device_token_app:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="is_renzheng">#is_renzheng:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_city_manager">#is_city_manager:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_start">#is_start:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_has_update_pass">#is_has_update_pass:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_fuxiao">#bi_fuxiao:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_zm">#img_id_card_zm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_fm">#img_id_card_fm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_village">#is_village:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_village_id">#own_village_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_village_name">#own_village_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_poor">#is_poor:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="poor_id">#poor_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_huokuan_lock">#bi_huokuan_lock:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_aid">#bi_aid:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_aid_sended">#bi_aid_sended:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_aid_lock">#bi_aid_lock:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="card_end_date">#card_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="autograph">#autograph:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="app_key">#app_key:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_shuadan">#is_shuadan:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="domain_site">#domain_site:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mark_user_id">#mark_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_welfare">#bi_welfare:DECIMAL#</isNotNull>
+			
+			<isNull property="user_name">
+				<isNotNull prepend="," property="map.createUserNo">createUserNo(#map.createUserNo#)</isNotNull>
+			</isNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+			
+	</insert>
+
+	<update id="updateUserInfo" parameterClass="userInfo">
+		update USER_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_name">USER_NAME = #user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="link_area">LINK_AREA = #link_area:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="real_name">REAL_NAME = #real_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_type">USER_TYPE = #user_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="password">PASSWORD = #password:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="sex">SEX = #sex:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="birthday">BIRTHDAY = #birthday:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="positions">POSITIONS = #positions:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mobile">MOBILE = #mobile:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="office_tel">OFFICE_TEL = #office_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="email">EMAIL = #email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="login_count">LOGIN_COUNT = #login_count:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="last_login_ip">LAST_LOGIN_IP = #last_login_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="last_login_time">LAST_LOGIN_TIME = #last_login_time:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_audit">IS_AUDIT = #is_audit:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_active">IS_ACTIVE = #is_active:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_id">OWN_ENTP_ID = #own_entp_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_entp_name">OWN_ENTP_NAME = #own_entp_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_activate">IS_ACTIVATE = #is_activate:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="sign">SIGN = #sign:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="id_card">ID_CARD = #id_card:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_level">USER_LEVEL = #user_level:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="key_is_active">KEY_IS_ACTIVE = #key_is_active:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="cur_score">CUR_SCORE = #cur_score:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bank_pindex">BANK_PINDEX = #bank_pindex:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bank_pname">BANK_PNAME = #bank_pname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_branch_name">BANK_BRANCH_NAME = #bank_branch_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_name">BANK_NAME = #bank_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_account">BANK_ACCOUNT = #bank_account:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="bank_account_name">BANK_ACCOUNT_NAME = #bank_account_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_logo">USER_LOGO = #user_logo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_weixin">APPID_WEIXIN = #appid_weixin:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_weixin_unionid">APPID_WEIXIN_UNIONID = #appid_weixin_unionid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_weixin_is_follow">APPID_WEIXIN_IS_FOLLOW = #appid_weixin_is_follow:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="appid_qq">APPID_QQ = #appid_qq:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="appid_weibo">APPID_WEIBO = #appid_weibo:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="p_index">P_INDEX = #p_index:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="user_no">USER_NO = #user_no:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_entp">IS_ENTP = #is_entp:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_fuwu">IS_FUWU = #is_fuwu:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lianmeng">IS_LIANMENG = #is_lianmeng:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lianmeng_date">IS_LIANMENG_DATE = #is_lianmeng_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_lianmeng_canceled_date">IS_LIANMENG_CANCELED_DATE = #is_lianmeng_canceled_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_daqu">IS_DAQU = #is_daqu:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi">BI_DIANZI = #bi_dianzi:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi_lock">BI_DIANZI_LOCK = #bi_dianzi_lock:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi_lost">BI_DIANZI_LOST = #bi_dianzi_lost:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_xiaofei">BI_XIAOFEI = #bi_xiaofei:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_huokuan">BI_HUOKUAN = #bi_huokuan:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="leiji_money_user">LEIJI_MONEY_USER = #leiji_money_user:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="leiji_money_entp">LEIJI_MONEY_ENTP = #leiji_money_entp:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="leiji_money_tuiguang">LEIJI_MONEY_TUIGUANG = #leiji_money_tuiguang:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="ymid">YMID = #ymid:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_score_union">USER_SCORE_UNION = #user_score_union:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="password_pay">PASSWORD_PAY = #password_pay:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_set_security">IS_SET_SECURITY = #is_set_security:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi_lock_tuiguan">BI_DIANZI_LOCK_TUIGUAN = #bi_dianzi_lock_tuiguan:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="score_update_date">SCORE_UPDATE_DATE = #score_update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_closed">IS_CLOSED = #is_closed:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="device_token">DEVICE_TOKEN = #device_token:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="device_token_app">DEVICE_TOKEN_APP = #device_token_app:VARCHAR#</isNotNull>
+			
+			<isNotNull prepend="," property="is_renzheng">IS_RENZHENG = #is_renzheng:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_city_manager">IS_CITY_MANAGER = #is_city_manager:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_start">IS_START = #is_start:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_has_update_pass">IS_HAS_UPDATE_PASS = #is_has_update_pass:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_dianzi">BI_FUXIAO = #bi_fuxiao:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_zm">IMG_ID_CARD_ZM = #img_id_card_zm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_id_card_fm">IMG_ID_CARD_FM = #img_id_card_fm:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_village">IS_VILLAGE = #is_village:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_village_id">OWN_VILLAGE_ID = #own_village_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="own_village_name">OWN_VILLAGE_NAME = #own_village_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_poor">IS_POOR = #is_poor:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="poor_id">POOR_ID = #poor_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_huokuan_lock">BI_HUOKUAN_LOCK = #bi_huokuan_lock:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_aid">BI_AID = #bi_aid:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_aid_sended">BI_AID_SENDED = #bi_aid_sended:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="bi_aid_lock">BI_AID_LOCK = #bi_aid_lock:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="card_end_date">CARD_END_DATE = #card_end_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="autograph">AUTOGRAPH = #autograph:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="app_key">APP_KEY = #app_key:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_shuadan">IS_SHUADAN = #is_shuadan:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="domain_site">DOMAIN_SITE = #domain_site:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="mark_user_id">MARK_USER_ID = #mark_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="bi_welfare">BI_WELFARE = #bi_welfare:DECIMAL#</isNotNull>
+			
+			<isNotNull prepend="," property="map.sub_bi_xiaofei">BI_XIAOFEI = BI_XIAOFEI - #map.sub_bi_xiaofei#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_xiaofei">BI_XIAOFEI = BI_XIAOFEI + #map.add_bi_xiaofei#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_dianzi">BI_DIANZI = BI_DIANZI + #map.add_bi_dianzi#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_dianzi_lock">BI_DIANZI_LOCK = BI_DIANZI_LOCK + #map.add_bi_dianzi_lock#</isNotNull>
+			<isNotNull prepend="," property="map.sub_bi_dianzi">BI_DIANZI = BI_DIANZI - #map.sub_bi_dianzi#</isNotNull>
+			<isNotNull prepend="," property="map.sub_bi_dianzi_lock">BI_DIANZI_LOCK = BI_DIANZI_LOCK - #map.sub_bi_dianzi_lock#</isNotNull>
+			<isNotNull prepend="," property="map.add_cur_score">CUR_SCORE = CUR_SCORE + #map.add_cur_score#</isNotNull>
+			<isNotNull prepend="," property="map.sub_cur_score">CUR_SCORE = CUR_SCORE - #map.sub_cur_score#</isNotNull>
+			<isNotNull prepend="," property="map.add_leiji_money_entp">LEIJI_MONEY_ENTP = LEIJI_MONEY_ENTP + #map.add_leiji_money_entp#</isNotNull>
+			<isNotNull prepend="," property="map.sub_leiji_money_entp">LEIJI_MONEY_ENTP = LEIJI_MONEY_ENTP - #map.sub_leiji_money_entp#</isNotNull>
+			<isNotNull prepend="," property="map.add_leiji_money_user">LEIJI_MONEY_USER = LEIJI_MONEY_USER + #map.add_leiji_money_user#</isNotNull>
+			<isNotNull prepend="," property="map.sub_leiji_money_user">LEIJI_MONEY_USER = LEIJI_MONEY_USER - #map.sub_leiji_money_user#</isNotNull>
+			<isNotNull prepend="," property="map.eq_leiji_money_user">LEIJI_MONEY_USER = #map.eq_leiji_money_user#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_huokuan">BI_HUOKUAN = BI_HUOKUAN + #map.add_bi_huokuan#</isNotNull>
+			<isNotNull prepend="," property="map.sub_bi_huokuan">BI_HUOKUAN = BI_HUOKUAN - #map.sub_bi_huokuan#</isNotNull>
+			<isNotNull prepend="," property="map.add_user_score_union">USER_SCORE_UNION = USER_SCORE_UNION+#map.add_user_score_union#</isNotNull>
+			<isNotNull prepend="," property="map.sum_bi_dianzi_and_bi_huokuan">BI_DIANZI = BI_DIANZI+BI_HUOKUAN</isNotNull>
+			<isNotNull prepend="," property="map.add_leiji_money_tuiguang">LEIJI_MONEY_TUIGUANG = LEIJI_MONEY_TUIGUANG + #map.add_leiji_money_tuiguang#</isNotNull>
+			<isNotNull prepend="," property="map.sub_leiji_money_tuiguang">LEIJI_MONEY_TUIGUANG = LEIJI_MONEY_TUIGUANG - #map.sub_leiji_money_tuiguang#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_dianzi_lost">BI_DIANZI_LOST = BI_DIANZI_LOST + #map.add_bi_dianzi_lost#</isNotNull>
+			<isNotNull prepend="," property="map.sub_bi_dianzi_lost">BI_DIANZI_LOST = BI_DIANZI_LOST - #map.sub_bi_dianzi_lost#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_dianzi_lock_tuiguan">BI_DIANZI_LOCK_TUIGUAN = BI_DIANZI_LOCK_TUIGUAN + #map.add_bi_dianzi_lock_tuiguan#</isNotNull>
+			<isNotNull prepend="," property="map.sub_bi_dianzi_lock_tuiguan">BI_DIANZI_LOCK_TUIGUAN = BI_DIANZI_LOCK_TUIGUAN - #map.sub_bi_dianzi_lock_tuiguan#</isNotNull>
+			
+			<isNotNull prepend="," property="map.sub_bi_fuxiao">BI_FUXIAO = BI_FUXIAO - #map.sub_bi_fuxiao#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_fuxiao">BI_FUXIAO = BI_FUXIAO + #map.add_bi_fuxiao#</isNotNull>
+			<isNotNull prepend="," property="map.sub_bi_welfare">BI_WELFARE = BI_WELFARE - #map.sub_bi_welfare#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_welfare">BI_WELFARE = BI_WELFARE + #map.add_bi_welfare#</isNotNull>
+			
+			<isNotNull prepend="," property="map.sub_bi_huokuan_lock">BI_HUOKUAN_LOCK = BI_HUOKUAN_LOCK - #map.sub_bi_huokuan_lock#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_huokuan_lock">BI_HUOKUAN_LOCK = BI_HUOKUAN_LOCK + #map.add_bi_huokuan_lock#</isNotNull>
+			
+			<isNotNull prepend="," property="map.sub_bi_aid">BI_AID = BI_AID - #map.sub_bi_aid#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_aid">BI_AID = BI_AID + #map.add_bi_aid#</isNotNull>
+			
+			<isNotNull prepend="," property="map.sub_bi_aid_sended">BI_AID_SENDED = BI_AID_SENDED - #map.sub_bi_aid_sended#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_aid_sended">BI_AID_SENDED = BI_AID_SENDED + #map.add_bi_aid_sended#</isNotNull>
+			
+			<isNotNull prepend="," property="map.sub_bi_aid_lock">BI_AID_LOCK = BI_AID_LOCK - #map.sub_bi_aid_lock#</isNotNull>
+			<isNotNull prepend="," property="map.add_bi_aid_lock">BI_AID_LOCK = BI_AID_LOCK + #map.add_bi_aid_lock#</isNotNull>
+			
+			<isNotNull prepend="," property="map.add_user_send_count">USER_SEND_COUNT = USER_SEND_COUNT + #map.add_user_send_count#</isNotNull>
+			
+			<isNotNull prepend="," property="map.clear_device_token">DEVICE_TOKEN = null</isNotNull>
+			
+			
+			<isNotNull prepend="," property="map.clear_link_weixin_info">APPID_WEIXIN = null,APPID_WEIXIN_UNIONID = null,APPID_WEIXIN_IS_FOLLOW = 0</isNotNull>
+			
+			
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.own_entp_id">OWN_ENTP_ID = #map.own_entp_id#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.mobile">MOBILE = #map.mobile#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.link_id">ID = #map.link_id#</isNotEmpty>
+		<isNotNull prepend=" and " property="map.device_token">DEVICE_TOKEN = #map.device_token#</isNotNull>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_xiaofei">BI_XIAOFEI >= #map.sub_bi_xiaofei#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_xiaofei">#map.sub_bi_xiaofei# >= 0</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.sub_bi_welfare">BI_WELFARE >= #map.sub_bi_welfare#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_welfare">#map.sub_bi_welfare# >= 0</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.sub_bi_huokuan">BI_HUOKUAN >= #map.sub_bi_huokuan#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_huokuan">#map.sub_bi_huokuan# >= 0</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.sub_bi_dianzi">BI_DIANZI >= #map.sub_bi_dianzi#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_dianzi">#map.sub_bi_dianzi# >= 0</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.sub_bi_dianzi_lock">BI_DIANZI_LOCK >= #map.sub_bi_dianzi_lock#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_dianzi_lock">#map.sub_bi_dianzi_lock# >= 0</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.sub_bi_dianzi_lock_tuiguan">BI_DIANZI_LOCK_TUIGUAN >= #map.sub_bi_dianzi_lock_tuiguan#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_dianzi_lock_tuiguan">#map.sub_bi_dianzi_lock_tuiguan# >= 0</isNotEmpty>
+	
+		<isNotEmpty prepend=" and " property="map.sub_bi_huokuan_lock">BI_HUOKUAN_LOCK >= #map.sub_bi_huokuan_lock#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_huokuan_lock">#map.sub_bi_huokuan_lock# >= 0</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.sub_bi_aid">BI_AID >= #map.sub_bi_aid#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_aid">#map.sub_bi_aid# >= 0</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.sub_bi_aid_lock">BI_AID_LOCK >= #map.sub_bi_aid_lock#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.sub_bi_aid_lock">#map.sub_bi_aid_lock# >= 0</isNotEmpty>
+	</update>
+
+	<delete id="deleteUserInfo" parameterClass="userInfo">
+		delete from USER_INFO where
+		<isNotEmpty prepend=" " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

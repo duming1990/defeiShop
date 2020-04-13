@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="QA_INFO">
+
+	<typeAlias alias="qaInfo" type="com.ebiz.webapp.domain.QaInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertQaInfo" />
+		<flushOnExecute statement="updateQaInfo" />
+		<flushOnExecute statement="deleteQaInfo" />
+	</cacheModel>
+
+	<resultMap id="qaInfoResultForList" class="qaInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="Q_TYPE" property="q_type" jdbcType="INTEGER" />
+		<result column="IS_NX" property="is_nx" jdbcType="INTEGER" />
+		<result column="Q_USER_ID" property="q_user_id" jdbcType="INTEGER" />
+		<result column="Q_NAME" property="q_name" jdbcType="VARCHAR" />
+		<result column="Q_TEL" property="q_tel" jdbcType="VARCHAR" />
+		<result column="Q_EMAIL" property="q_email" jdbcType="VARCHAR" />
+		<result column="Q_ADDR" property="q_addr" jdbcType="VARCHAR" />
+		<result column="Q_IP" property="q_ip" jdbcType="VARCHAR" />
+		<result column="Q_TITLE" property="q_title" jdbcType="VARCHAR" />
+		<result column="Q_CONTENT" property="q_content" jdbcType="VARCHAR" />
+		<result column="Q_DATE" property="q_date" jdbcType="TIMESTAMP" />
+		<result column="A_CONTENT" property="a_content" jdbcType="LONGVARCHAR" />
+		<result column="A_UID" property="a_uid" jdbcType="INTEGER" />
+		<result column="A_UNAME" property="a_uname" jdbcType="VARCHAR" />
+		<result column="A_DATE" property="a_date" jdbcType="TIMESTAMP" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="QA_STATE" property="qa_state" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="qaInfoResult" class="qaInfo" extends="qaInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-qaInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_type">a.Q_TYPE = #q_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_nx">a.IS_NX = #is_nx:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_user_id">a.Q_USER_ID = #q_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_name">a.Q_NAME = #q_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_tel">a.Q_TEL = #q_tel:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_email">a.Q_EMAIL = #q_email:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_addr">a.Q_ADDR = #q_addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_ip">a.Q_IP = #q_ip:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_title">a.Q_TITLE = #q_title:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_content">a.Q_CONTENT = #q_content:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="q_date">a.Q_DATE = #q_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="a_content">a.A_CONTENT = #a_content:LONGVARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="a_uid">a.A_UID = #a_uid:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="a_uname">a.A_UNAME = #a_uname:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="a_date">a.A_DATE = #a_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">a.ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="qa_state">a.QA_STATE = #qa_state:INTEGER#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_q_date"><![CDATA[
+			q_date >= str_to_date(#map.st_q_date:VARCHAR#,'%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_q_date"><![CDATA[
+			q_date <= str_to_date(concat(#map.en_q_date:VARCHAR# , '23:59:59'),'%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.st_a_date"><![CDATA[
+			a_date >= str_to_date(#map.st_a_date:VARCHAR#,'%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.en_a_date"><![CDATA[
+			a_date <= str_to_date(concat(#map.en_a_date:VARCHAR# , '23:59:59'),'%Y-%m-%d %H:%i:%s')
+		]]></isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.qa_state">QA_STATE > -1</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.q_title_like">Q_TITLE like '%'  #map.q_title_like#  '%'</isNotEmpty>
+	</sql>
+
+	<select id="selectQaInfo" resultMap="qaInfoResult" parameterClass="qaInfo" cacheModel="oneDayCache">
+		select * from QA_INFO a where 1 = 1
+		<include refid="sf-qaInfo" />
+	</select>
+
+	<select id="selectQaInfoList" resultMap="qaInfoResultForList" parameterClass="qaInfo" cacheModel="oneDayCache">
+		
+		select * from QA_INFO a where 1 = 1
+		<include refid="sf-qaInfo" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectQaInfoCount" resultClass="int" parameterClass="qaInfo" cacheModel="oneDayCache">
+		select count(*) from QA_INFO a where 1 = 1
+		<include refid="sf-qaInfo" />
+	</select>
+
+	<select id="selectQaInfoPaginatedList" resultMap="qaInfoResult" parameterClass="qaInfo" cacheModel="oneDayCache">
+		
+		select * from QA_INFO a where 1 = 1
+		<include refid="sf-qaInfo" />
+		<!-- order by ID asc -->
+		order by a.order_value desc, a.q_date desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertQaInfo" parameterClass="qaInfo">
+		
+		<![CDATA[insert into QA_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="q_type">Q_TYPE</isNotNull>	
+			<isNotNull prepend="," property="is_nx">IS_NX</isNotNull>	
+			<isNotNull prepend="," property="q_user_id">Q_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="q_name">Q_NAME</isNotNull>	
+			<isNotNull prepend="," property="q_tel">Q_TEL</isNotNull>	
+			<isNotNull prepend="," property="q_email">Q_EMAIL</isNotNull>	
+			<isNotNull prepend="," property="q_addr">Q_ADDR</isNotNull>	
+			<isNotNull prepend="," property="q_ip">Q_IP</isNotNull>	
+			<isNotNull prepend="," property="q_title">Q_TITLE</isNotNull>	
+			<isNotNull prepend="," property="q_content">Q_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="q_date">Q_DATE</isNotNull>	
+			<isNotNull prepend="," property="a_content">A_CONTENT</isNotNull>	
+			<isNotNull prepend="," property="a_uid">A_UID</isNotNull>	
+			<isNotNull prepend="," property="a_uname">A_UNAME</isNotNull>	
+			<isNotNull prepend="," property="a_date">A_DATE</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="qa_state">QA_STATE</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="q_type">#q_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_nx">#is_nx:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="q_user_id">#q_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="q_name">#q_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_tel">#q_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_email">#q_email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_addr">#q_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_ip">#q_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_title">#q_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_content">#q_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_date">#q_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="a_content">#a_content:LONGVARCHAR#</isNotNull>
+			<isNotNull prepend="," property="a_uid">#a_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="a_uname">#a_uname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="a_date">#a_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qa_state">#qa_state:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateQaInfo" parameterClass="qaInfo">
+		update QA_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="q_type">Q_TYPE = #q_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_nx">IS_NX = #is_nx:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="q_user_id">Q_USER_ID = #q_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="q_name">Q_NAME = #q_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_tel">Q_TEL = #q_tel:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_email">Q_EMAIL = #q_email:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_addr">Q_ADDR = #q_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_ip">Q_IP = #q_ip:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_title">Q_TITLE = #q_title:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_content">Q_CONTENT = #q_content:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="q_date">Q_DATE = #q_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="a_content">A_CONTENT = #a_content:LONGVARCHAR#</isNotNull>
+			<isNotNull prepend="," property="a_uid">A_UID = #a_uid:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="a_uname">A_UNAME = #a_uname:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="a_date">A_DATE = #a_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="qa_state">QA_STATE = #qa_state:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteQaInfo" parameterClass="qaInfo">
+		delete from QA_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

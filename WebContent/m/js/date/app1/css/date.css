@@ -1,0 +1,139 @@
+* { touch-action: none; }
+#datePlugin {
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1111111;
+  width: 100%;
+  height: 100%;
+  font-family: helvetica,sans-serif;
+}
+#datePlugin * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-clip: padding-box;
+}
+#datePlugin .hide {
+display: none;
+}
+#datePlugin .d-date-box {
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+  width: 100%;
+}
+#datePlugin .d-date-title {
+  text-align: left;
+  font-weight: 700;
+  padding: 10px;
+  color: #e84c3d;
+}
+#datePlugin .d-date-info {
+  color: #333;
+  text-align: center;
+  font-size: 14px;
+}
+#datePlugin .d-date-wrap {
+  margin-top: 10px;
+  width: 100%;
+  height: 120px;
+  position: relative;
+}
+#datePlugin .d-time-wrap {
+  border-top: 1px solid #e84c3d;
+}
+#datePlugin .d-time-wrap .d-date-cell {
+  width: 50%;
+}
+#datePlugin .d-date-mark {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+}
+#datePlugin .d-date-cell {
+  float: left;
+  width: 33.33333%;
+  height: 100%;
+  overflow: hidden;
+}
+#datePlugin .d-date-cell li {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+#datePlugin .d-date-btns .d-btn {
+  background: #e84c3d;
+  display: inline-block;
+  width: 50%;
+  margin-top: 10px;
+  border: none;
+  border-top: 1px solid #ddd;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 0;
+}
+#datePlugin .d-date-btns #d-okBtn {
+  /*    background: #e84c3d;*/
+  /*border-bottom-left-radius: 5px;*/
+  border-right: 1px solid #ddd;
+}
+#datePlugin .d-date-btns #d-cancleBtn {
+  background: #f77;
+  /* border-bottom-right-radius: 5px;*/
+}
+
+#datePlugin .d-time-wrap-car {
+/*   border-top: 2px solid #e84c3d; */
+}
+#datePlugin .d-time-wrap-car .d-date-cell {
+  width: 33%;
+}
+
+.app-dateField-top{
+    height: 40px;
+    border-top: 2px solid #e84c3d;
+     background-color: #e8e8e8;
+}
+.app-dateField-top::after{
+    content: " ";
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+.app-dateField-top b{font-weight: normal;}
+.app-dateField-top span{
+    display: inline-block;
+    width: 33%;
+    height: 39px;
+    line-height: 39px;
+    font-size: 1.1em;
+    text-align: center;
+/*     color: rgb(0, 152, 206); */
+    color: #e84c3d;
+/*     background: rgba(252, 252, 252, 1); */
+    position: relative;
+}
+.app-dateField-top span:hover,
+.app-dateField-top span:active{
+    color: #111;
+    background: rgba(240, 240, 240, 0.6);
+}
+.app-dateField-top .app-dateField-btnCancel{
+    float: left;
+    /*margin-left: 20px;*/
+}
+.app-dateField-top .app-dateField-btnOk{
+    float: right;
+    /*margin-right: 20px;*/
+}
+.app-dateField-top .app-dateField-title{
+    float: left;
+    color: #333;
+    font-weight: 700;
+}

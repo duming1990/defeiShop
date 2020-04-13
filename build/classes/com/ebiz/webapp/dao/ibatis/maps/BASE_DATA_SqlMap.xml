@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BASE_DATA">
+
+	<typeAlias alias="baseData" type="com.ebiz.webapp.domain.BaseData" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertBaseData" />
+		<flushOnExecute statement="updateBaseData" />
+		<flushOnExecute statement="deleteBaseData" />
+	</cacheModel>
+
+	<resultMap id="baseDataResultForList" class="baseData">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TYPE" property="type" jdbcType="INTEGER" />
+		<result column="TYPE_NAME" property="type_name" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ORDER_VALUE" property="order_value" jdbcType="INTEGER" />
+		<result column="IS_LOCK" property="is_lock" jdbcType="INTEGER" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="ADD_USER_ID" property="add_user_id" jdbcType="INTEGER" />
+		<result column="UPDATE_DATE" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="update_user_id" jdbcType="INTEGER" />
+		<result column="DEL_DATE" property="del_date" jdbcType="TIMESTAMP" />
+		<result column="DEL_USER_ID" property="del_user_id" jdbcType="INTEGER" />
+		<result column="PRE_NUMBER" property="pre_number" jdbcType="INTEGER" />
+		<result column="PRE_NUMBER2" property="pre_number2" jdbcType="INTEGER" />
+		<result column="PRE_NUMBER3" property="pre_number3" jdbcType="INTEGER" />
+		<result column="PRE_DECIMAL1" property="pre_decimal1" jdbcType="DECIMAL" />
+		<result column="PRE_DECIMAL2" property="pre_decimal2" jdbcType="DECIMAL" />
+		<result column="PRE_VARCHAR_1" property="pre_varchar_1" jdbcType="VARCHAR" />
+		<result column="PRE_VARCHAR_2" property="pre_varchar_2" jdbcType="VARCHAR" />
+		<result column="PRE_VARCHAR_3" property="pre_varchar_3" jdbcType="VARCHAR" />
+		<result column="IMG_PATH" property="img_path" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="baseDataResult" class="baseData" extends="baseDataResultForList">
+	</resultMap>
+
+	<sql id="sf-baseData">
+		<isNotEmpty prepend=" and " property="id">ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="type">TYPE = #type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="type_name">TYPE_NAME = #type_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="remark">REMARK = #remark:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">IS_DEL = #is_del:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">ADD_DATE = #add_date:DATE#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_user_id">ADD_USER_ID = #add_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_date">UPDATE_DATE = #update_date:DATE#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_date">DEL_DATE = #del_date:DATE#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pre_number">PRE_NUMBER = #pre_number:INTEGER#</isNotEmpty>		
+		<isNotEmpty prepend=" and " property="pre_number2">PRE_NUMBER2 = #pre_number2:INTEGER#</isNotEmpty>		
+		<isNotEmpty prepend=" and " property="pre_number3">PRE_NUMBER3 = #pre_number3:INTEGER#</isNotEmpty>		
+		<isNotEmpty prepend=" and " property="pre_decimal1">a.PRE_DECIMAL1 = #pre_decimal1:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pre_decimal2">a.PRE_DECIMAL2 = #pre_decimal2:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pre_varchar_1">PRE_VARCHAR_1 = #pre_varchar_1:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pre_varchar_2">PRE_VARCHAR_2 = #pre_varchar_2:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="pre_varchar_3">PRE_VARCHAR_3 = #pre_varchar_3:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="img_path">IMG_PATH = #img_path:VARCHAR#</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.not_in_id">id not in($map.not_in_id$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.link_id">
+		id in(select  t.dish_series from entp_repast_dish t where t.link_id = $map.link_id$)</isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.type_name_like">TYPE_NAME like '%'  #map.type_name_like#  '%'</isNotEmpty>
+		
+		<isNotEmpty prepend=" and " property="map.now_date"><![CDATA[
+		  str_to_date(pre_varchar_2, '%H:%i:%s') >= str_to_date(#map.now_date:VARCHAR#, '%H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.now_date"><![CDATA[
+		  str_to_date(pre_varchar_1, '%H:%i:%s') <= str_to_date(#map.now_date:VARCHAR#, '%H:%i:%s')
+		]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.level_id_le"><![CDATA[ id <= #map.level_id_le#]]></isNotEmpty>
+		<isNotEmpty prepend=" and " property="map.pre_number2_like">PRE_NUMBER2 like #map.pre_number2_like#  '%'</isNotEmpty>
+	</sql>
+
+	<select id="selectBaseData" resultMap="baseDataResult" parameterClass="baseData" cacheModel="oneDayCache">
+		select * from BASE_DATA  where 1 = 1
+		<include refid="sf-baseData" />
+	</select>
+
+	<select id="selectBaseDataList" resultMap="baseDataResultForList" parameterClass="baseData" cacheModel="oneDayCache">
+		
+		select 
+		<isNotEmpty prepend="" property="map.distinct_type_name">distinct a.type_name,</isNotEmpty>
+		a.* from 
+		BASE_DATA a
+		where 1 = 1
+		<include refid="sf-baseData" />
+		<isNotEmpty prepend="" property="map.distinct_type_name">GROUP BY type_name</isNotEmpty>
+		order by 
+        <!-- pre_number, -->
+		<isNotEmpty prepend="" property="map.order_by_info">$map.order_by_info$</isNotEmpty>
+		ORDER_VALUE desc, ID 
+		
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectBaseDataCount" resultClass="int" parameterClass="baseData" cacheModel="oneDayCache">
+		select count(*) from BASE_DATA where 1 = 1
+		<include refid="sf-baseData" />
+	</select>
+
+	<select id="selectBaseDataPaginatedList" resultMap="baseDataResult" parameterClass="baseData" cacheModel="oneDayCache">
+		
+		select * from BASE_DATA where 1 = 1
+		<include refid="sf-baseData" />
+		order by ORDER_VALUE desc, ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertBaseData" parameterClass="baseData">
+		
+		<![CDATA[insert into BASE_DATA (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="type">TYPE</isNotNull>	
+			<isNotNull prepend="," property="type_name">TYPE_NAME</isNotNull>	
+			<isNotNull prepend="," property="remark">REMARK</isNotNull>	
+			<isNotNull prepend="," property="order_value">ORDER_VALUE</isNotNull>	
+			<isNotNull prepend="," property="is_lock">IS_LOCK</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="add_user_id">ADD_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="update_date">UPDATE_DATE</isNotNull>	
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="del_date">DEL_DATE</isNotNull>	
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID</isNotNull>	
+			<isNotNull prepend="," property="pre_number">PRE_NUMBER</isNotNull>		
+			<isNotNull prepend="," property="pre_number2">PRE_NUMBER2</isNotNull>		
+			<isNotNull prepend="," property="pre_number3">PRE_NUMBER3</isNotNull>		
+			<isNotNull prepend="," property="pre_decimal1">PRE_DECIMAL1</isNotNull>	
+			<isNotNull prepend="," property="pre_decimal2">PRE_DECIMAL2</isNotNull>	
+			<isNotNull prepend="," property="pre_varchar_1">PRE_VARCHAR_1</isNotNull>		
+			<isNotNull prepend="," property="pre_varchar_2">PRE_VARCHAR_2</isNotNull>
+			<isNotNull prepend="," property="pre_varchar_3">PRE_VARCHAR_3</isNotNull>
+			<isNotNull prepend="," property="img_path">IMG_PATH</isNotNull>			
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">#type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type_name">#type_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="remark">#remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">#order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">#is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="add_user_id">#add_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">#update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">#update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">#del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">#del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pre_number">#pre_number:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pre_number2">#pre_number2:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pre_number3">#pre_number3:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pre_decimal1">#pre_decimal1:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pre_decimal2">#pre_decimal2:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pre_varchar_1">#pre_varchar_1:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pre_varchar_2">#pre_varchar_2:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pre_varchar_3">#pre_varchar_3:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_path">#img_path:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateBaseData" parameterClass="baseData">
+		update BASE_DATA
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type">TYPE = #type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="type_name">TYPE_NAME = #type_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="remark">REMARK = #remark:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="order_value">ORDER_VALUE = #order_value:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_lock">IS_LOCK = #is_lock:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="update_date">UPDATE_DATE = #update_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="update_user_id">UPDATE_USER_ID = #update_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="del_date">DEL_DATE = #del_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="del_user_id">DEL_USER_ID = #del_user_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="pre_number">PRE_NUMBER = #pre_number:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="pre_number2">PRE_NUMBER2 = #pre_number2:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="pre_number3">PRE_NUMBER3 = #pre_number3:INTEGER#</isNotNull>	
+			<isNotNull prepend="," property="pre_decimal1">PRE_DECIMAL1 = #pre_decimal1:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pre_decimal2">PRE_DECIMAL2 = #pre_decimal2:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="pre_varchar_1">PRE_VARCHAR_1 = #pre_varchar_1:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pre_varchar_2">PRE_VARCHAR_2 = #pre_varchar_2:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="pre_varchar_3">PRE_VARCHAR_3 = #pre_varchar_3:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="img_path">IMG_PATH = #img_path:VARCHAR#</isNotNull>
+		</dynamic>
+		where
+		<isNotEmpty prepend=" " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteBaseData" parameterClass="baseData">
+		delete from BASE_DATA where
+		<isNotEmpty prepend=" " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

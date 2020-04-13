@@ -1,0 +1,88 @@
+html,
+body,
+ul,
+li,
+ol,
+dl,
+dd,
+dt,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+div,
+input,
+img {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    font-family: "微软雅黑";
+    color: #333;
+    font-size: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+img {
+    display: block;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+input,
+select,
+textarea,
+button {
+    outline: none;
+}
+
+a,
+button,
+input {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a {
+    text-decoration: none;
+}
+
+.mui-bar .mui-btn-link {
+    color: #666666;
+}
+
+.mui-bar-tab .mui-tab-item.mui-active {
+    color: #333;
+}
+
+body, html {
+    height: 100vh;
+}
+
+.mui-bar {
+    background-color: #fff;
+}
+
+.mui-content {
+    height: calc(100vh);
+    overflow-y: scroll;
+    background-color: #fff;
+}

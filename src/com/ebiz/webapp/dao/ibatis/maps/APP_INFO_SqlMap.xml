@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<!-- @author Wu,Yang -->
+<sqlMap namespace="APP_INFO">
+
+	<typeAlias alias="appInfo" type="com.ebiz.webapp.domain.AppInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertAppInfo" />
+		<flushOnExecute statement="updateAppInfo" />
+		<flushOnExecute statement="deleteAppInfo" />
+	</cacheModel>
+
+	<resultMap id="appInfoResultForList" class="appInfo">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="APP_KEY" property="app_key" jdbcType="VARCHAR" />
+		<result column="APP_NAME" property="app_name" jdbcType="VARCHAR" />
+		<result column="APP_SECRET" property="app_secret" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="IS_DEL" property="is_del" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="appInfoResult" class="appInfo" extends="appInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-appInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="app_key">a.APP_KEY = #app_key:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="app_name">a.APP_NAME = #app_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="app_secret">a.APP_SECRET = #app_secret:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_del">a.IS_DEL = #is_del:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectAppInfo" resultMap="appInfoResult" parameterClass="appInfo" cacheModel="oneDayCache">
+		select * from APP_INFO a where 1 = 1
+		<include refid="sf-appInfo" />
+	</select>
+
+	<select id="selectAppInfoList" resultMap="appInfoResultForList" parameterClass="appInfo" cacheModel="oneDayCache">
+		select * from APP_INFO a where 1 = 1
+		<include refid="sf-appInfo" />
+		<!-- order by a.ID asc -->
+		<isNotEmpty property="row.count">limit 0, #row.count#</isNotEmpty>
+	</select>
+
+	<select id="selectAppInfoCount" resultClass="int" parameterClass="appInfo" cacheModel="oneDayCache">
+		select count(*) from APP_INFO a where 1 = 1
+		<include refid="sf-appInfo" />
+	</select>
+
+	<select id="selectAppInfoPaginatedList" resultMap="appInfoResult" parameterClass="appInfo" cacheModel="oneDayCache">
+		select * from APP_INFO a where 1 = 1
+		<include refid="sf-appInfo" />
+		order by a.ID desc
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertAppInfo" parameterClass="appInfo">
+		<![CDATA[insert into APP_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="app_key">APP_KEY</isNotNull>	
+			<isNotNull prepend="," property="app_name">APP_NAME</isNotNull>	
+			<isNotNull prepend="," property="app_secret">APP_SECRET</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="is_del">IS_DEL</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="app_key">#app_key:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="app_name">#app_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="app_secret">#app_secret:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">#is_del:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateAppInfo" parameterClass="appInfo">
+		update APP_INFO
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="app_key">APP_KEY = #app_key:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="app_name">APP_NAME = #app_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="app_secret">APP_SECRET = #app_secret:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="is_del">IS_DEL = #is_del:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteAppInfo" parameterClass="appInfo">
+		delete from APP_INFO where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

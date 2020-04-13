@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="RETURNS_INFO_FJ">
+
+	<typeAlias alias="returnsInfoFj" type="com.ebiz.webapp.domain.ReturnsInfoFj" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertReturnsInfoFj" />
+		<flushOnExecute statement="updateReturnsInfoFj" />
+		<flushOnExecute statement="deleteReturnsInfoFj" />
+	</cacheModel>
+
+	<resultMap id="returnsInfoFjResultForList" class="returnsInfoFj">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="RETURNS_INFO_ID" property="returns_info_id" jdbcType="INTEGER" />
+		<result column="FJ_TYPE" property="fj_type" jdbcType="INTEGER" />
+		<result column="FJ_ADDR" property="fj_addr" jdbcType="VARCHAR" />
+		<result column="ADD_DATE" property="add_date" jdbcType="TIMESTAMP" />
+		<result column="C_RETURNS_INFO_ID" property="c_returns_info_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="returnsInfoFjResult" class="returnsInfoFj" extends="returnsInfoFjResultForList">
+	</resultMap>
+
+	<sql id="sf-returnsInfoFj">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="returns_info_id">a.RETURNS_INFO_ID = #returns_info_id:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fj_type">a.FJ_TYPE = #fj_type:INTEGER#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="fj_addr">a.FJ_ADDR = #fj_addr:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="add_date">a.ADD_DATE = #add_date:TIMESTAMP#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="c_returns_info_id">a.C_RETURNS_INFO_ID = #c_returns_info_id:INTEGER#</isNotEmpty>
+	</sql>
+
+	<select id="selectReturnsInfoFj" resultMap="returnsInfoFjResult" parameterClass="returnsInfoFj" cacheModel="oneDayCache">
+		select * from RETURNS_INFO_FJ a where 1 = 1
+		<include refid="sf-returnsInfoFj" />
+	</select>
+
+	<select id="selectReturnsInfoFjList" resultMap="returnsInfoFjResultForList" parameterClass="returnsInfoFj" cacheModel="oneDayCache">
+		
+		select * from RETURNS_INFO_FJ a where 1 = 1
+		<include refid="sf-returnsInfoFj" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">
+			limit 0, #row.count#
+		</isNotEmpty>
+	</select>
+
+	<select id="selectReturnsInfoFjCount" resultClass="int" parameterClass="returnsInfoFj" cacheModel="oneDayCache">
+		select count(*) from RETURNS_INFO_FJ a where 1 = 1
+		<include refid="sf-returnsInfoFj" />
+	</select>
+
+	<select id="selectReturnsInfoFjPaginatedList" resultMap="returnsInfoFjResult" parameterClass="returnsInfoFj" cacheModel="oneDayCache">
+		
+		select * from RETURNS_INFO_FJ a where 1 = 1
+		<include refid="sf-returnsInfoFj" />
+		<!-- order by ID asc -->
+		<isNotEmpty property="row.count">limit #row.first#, #row.count#</isNotEmpty>
+	</select>
+
+	<insert id="insertReturnsInfoFj" parameterClass="returnsInfoFj">
+		
+		<![CDATA[insert into RETURNS_INFO_FJ (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="returns_info_id">RETURNS_INFO_ID</isNotNull>	
+			<isNotNull prepend="," property="fj_type">FJ_TYPE</isNotNull>	
+			<isNotNull prepend="," property="fj_addr">FJ_ADDR</isNotNull>	
+			<isNotNull prepend="," property="add_date">ADD_DATE</isNotNull>	
+			<isNotNull prepend="," property="c_returns_info_id">C_RETURNS_INFO_ID</isNotNull>	
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull prepend="," property="id">#id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="returns_info_id">#returns_info_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fj_type">#fj_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fj_addr">#fj_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">#add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="c_returns_info_id">#c_returns_info_id:INTEGER#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID()</selectKey>
+	</insert>
+
+	<update id="updateReturnsInfoFj" parameterClass="returnsInfoFj">
+		update RETURNS_INFO_FJ
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id">ID = #id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="returns_info_id">RETURNS_INFO_ID = #returns_info_id:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fj_type">FJ_TYPE = #fj_type:INTEGER#</isNotNull>
+			<isNotNull prepend="," property="fj_addr">FJ_ADDR = #fj_addr:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="add_date">ADD_DATE = #add_date:TIMESTAMP#</isNotNull>
+			<isNotNull prepend="," property="c_returns_info_id">C_RETURNS_INFO_ID = #c_returns_info_id:INTEGER#</isNotNull>
+		</dynamic>
+		where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteReturnsInfoFj" parameterClass="returnsInfoFj">
+		delete from RETURNS_INFO_FJ where 1 = 1
+		<isNotEmpty prepend=" and " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" and " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>
